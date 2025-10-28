@@ -1,0 +1,82 @@
+<section id="precios" class="pricing">
+  <div class="pricing-container">
+    <div class="section-header">
+      <div class="section-badge">
+        <span class="badge-text">Precios Transparentes</span>
+      </div>
+      <h2 class="section-title">
+        Planes que se adaptan a<br>
+        <span class="title-gradient">tu negocio</span>
+      </h2>
+      <p class="section-subtitle">
+        Empieza gratis y escala cuando lo necesites. Sin sorpresas, sin costos ocultos.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Bucle actualizado a @for -->
+      @for (plan of plans; track plan.name) {
+        <article
+          class="pricing-card"
+          [class.popular]="plan.popular">
+
+          <!-- Condicional actualizado a @if -->
+          @if (plan.popular) {
+            <div class="popular-badge">
+              ⭐ Más Popular
+            </div>
+          }
+
+          <header class="plan-header">
+            <h3 class="plan-name">{{ plan.name }}</h3>
+            <div class="plan-price">
+              <span class="price">{{ plan.price }}</span>
+              <span class="period">{{ plan.period }}</span>
+            </div>
+            <p class="plan-description">{{ plan.description }}</p>
+          </header>
+
+          <ul class="plan-features">
+            <!-- Bucle actualizado a @for -->
+            @for (feature of plan.features; track $index) {
+              <li class="feature-item">
+                <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                {{ feature }}
+              </li>
+            }
+          </ul>
+
+          <button class="plan-cta" [class.primary]="plan.popular">
+            {{ plan.cta }}
+          </button>
+        </article>
+      }
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h3 class="faq-title">Preguntas Frecuentes</h3>
+      <dl class="faq-grid">
+        <!-- Puedes actualizar este @for si tienes la lista 'faqs' en tu .ts -->
+        <div class="faq-item">
+          <dt class="faq-question">¿Necesito tarjeta de crédito para la demo?</dt>
+          <dd class="faq-answer">No. La demo es completamente gratuita y sin límite de tiempo.</dd>
+        </div>
+        <div class="faq-item">
+          <dt class="faq-question">¿Puedo cambiar de plan después?</dt>
+          <dd class="faq-answer">Sí, puedes actualizar o cambiar tu plan en cualquier momento.</dd>
+        </div>
+        <div class="faq-item">
+          <dt class="faq-question">¿Qué incluyen las actualizaciones?</dt>
+          <dd class="faq-answer">Nuevas funcionalidades, mejoras de seguridad y correcciones de bugs.</dd>
+        </div>
+        <div class="faq-item">
+          <dt class="faq-question">¿Ofrecen capacitación?</dt>
+          <dd class="faq-answer">Por supuesto, con cualquier plan te capacito agendando una reunion.</dd>
+        </div>
+      </dl>
+    </section>
+  </div>
+</section>

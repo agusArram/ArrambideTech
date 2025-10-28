@@ -1,0 +1,64 @@
+<section id="beneficios" class="benefits">
+  <div class="benefits-container">
+    <div class="section-header">
+      <h2 class="section-title">
+        ¿Por qué elegir <span class="title-gradient">SortProject?</span>
+      </h2>
+      <p class="section-subtitle">
+        Diseñado específicamente para negocios que necesitan más que un simple contador de stock
+      </p>
+    </div>
+
+    <div class="benefits-grid">
+      <!-- Bucle actualizado a @for -->
+      @for (benefit of benefits; track $index) {
+        <article class="benefit-card">
+          <!-- *** CONTENIDO ACTUALIZADO *** -->
+          <!-- Agrupamos ícono y título en un nuevo 'benefit-header' -->
+          <div class="benefit-header">
+            <span class="benefit-icon">{{ benefit.icon }}</span>
+            <h3 class="benefit-title">{{ benefit.title }}</h3>
+          </div>
+          <p class="benefit-description">{{ benefit.description }}</p>
+          <!-- El div de ícono separado se elimina -->
+        </article>
+      }
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="comparison-section">
+      <h3 class="comparison-title"> <span class="title-gradient">SortProject</span> vs. Métodos Tradicionales</h3>
+      <table class="comparison-table">
+        <thead>
+        <tr class="comparison-row header">
+          <th class="comparison-cell"></th>
+          <th class="comparison-cell">Excel / Papel</th>
+          <th class="comparison-cell highlight">SortProject</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="comparison-row">
+          <td class="comparison-cell feature">Gestión de Variantes</td>
+          <td class="comparison-cell">❌ Manual y confuso</td>
+          <td class="comparison-cell highlight">✅ Automático y preciso</td>
+        </tr>
+        <tr class="comparison-row">
+          <td class="comparison-cell feature">Control de Stock</td>
+          <td class="comparison-cell">❌ Propenso a errores</td>
+          <td class="comparison-cell highlight">✅ Transaccional</td>
+        </tr>
+        <tr class="comparison-row">
+          <td class="comparison-cell feature">Análisis de Rentabilidad</td>
+          <td class="comparison-cell">❌ Requiere cálculos manuales</td>
+          <td class="comparison-cell highlight">✅ En tiempo real</td>
+        </tr>
+        <tr class="comparison-row">
+          <td class="comparison-cell feature">Reportes Profesionales</td>
+          <td class="comparison-cell">❌ Difícil de generar</td>
+          <td class="comparison-cell highlight">✅ PDF y Excel en 1 clic</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,139 @@
+<app-header></app-header>
+
+<main class="contacto-page">
+  <!-- Hero Section -->
+  <section class="contacto-hero">
+    <div class="container">
+      <div class="badge">
+        <span class="badge-icon">💬</span>
+        <span>Contacto</span>
+      </div>
+      <h1 class="page-title">¿Tienes alguna pregunta?</h1>
+      <p class="page-subtitle">
+        Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos lo antes posible.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content Grid -->
+  <section class="contacto-content">
+    <div class="container">
+      <div class="content-grid">
+        <!-- Formulario de Contacto -->
+        <article class="formulario-section">
+          <h2 class="section-title">Envíanos un mensaje</h2>
+
+          <!-- Mensaje de estado con @if -->
+          @if (mensajeEstado(); as estado) {
+            <div class="mensaje-estado" [class.success]="estado.tipo === 'success'" [class.error]="estado.tipo === 'error'">
+              {{ estado.texto }}
+            </div>
+          }
+
+          <form class="contacto-form" (submit)="enviarFormulario($event)" id="contactForm">
+            <!-- Hidden fields for Web3Forms -->
+            <input type="hidden" name="access_key" value="87e1a14e-ccf0-4851-8dcd-c6ef81bc4507">
+            <input type="hidden" name="subject" value="Nuevo mensaje desde Sort Proyects">
+            <input type="hidden" name="from_name" value="Sort Proyects - Formulario Web">
+            <input type="checkbox" name="botcheck" style="display: none;">
+
+            <div class="form-group">
+              <label for="nombre" class="form-label">Nombre completo</label>
+              <input
+                type="text"
+                id="nombre"
+                name="name"
+                class="form-input"
+                placeholder="Tu nombre"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="tu@email.com"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="mensaje" class="form-label">Mensaje</label>
+              <textarea
+                id="mensaje"
+                name="message"
+                class="form-textarea"
+                placeholder="Cuéntanos en qué podemos ayudarte..."
+                rows="6"
+                required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit" [disabled]="enviando()">
+              <!-- Uso de @if/@else para el texto del botón -->
+              @if (!enviando()) {
+                <span>
+                  Enviar Mensaje
+                  <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+              } @else {
+                <span>
+                  Enviando...
+                </span>
+              }
+            </button>
+          </form>
+        </article>
+
+        <!-- Información de Contacto -->
+        <aside class="info-section">
+          <h2 class="section-title">Información de contacto</h2>
+
+          <ul class="contact-methods">
+            <!-- Bucle con @for -->
+            @for (info of contactInfo; track $index) {
+              <li class="contact-item">
+                <div class="contact-icon">{{ info.icono }}</div>
+                <div class="contact-details">
+                  <h3 class="contact-title">{{ info.titulo }}</h3>
+                  <a [href]="info.link" class="contact-link" target="_blank" rel="noopener">
+                    {{ info.valor }}
+                  </a>
+                </div>
+              </li>
+            }
+          </ul>
+
+          <div class="info-card">
+            <h3 class="info-card-title">Desarrollado por</h3>
+            <p class="info-card-text">
+              <strong>Agustín Arrambide</strong><br>
+              Fundador de Sort Proyects
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="section-title">Preguntas Frecuentes</h2>
+      <dl class="faq-list">
+        <!-- Bucle con @for -->
+        @for (faq of faqs; track $index) {
+          <div class="faq-item">
+            <dt class="faq-pregunta">{{ faq.pregunta }}</dt>
+            <dd class="faq-respuesta">{{ faq.respuesta }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>

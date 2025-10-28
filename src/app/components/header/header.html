@@ -1,0 +1,142 @@
+<header class="header">
+  <nav class="nav-container">
+    <div class="nav-content">
+      <!-- Logo -->
+      <div class="logo">
+        <a routerLink="/" class="logo-link">
+          <span class="logo-text">ARRAMBIDE</span>
+          <span class="logo-accent">TECH</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <ul class="nav-links">
+        <li><a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+        <li><a routerLink="/servicios" class="nav-link" routerLinkActive="active">Servicios</a></li>
+        <li><a routerLink="/portafolio" class="nav-link" routerLinkActive="active">Portafolio</a></li>
+        <li><a routerLink="/contacto" class="nav-link" routerLinkActive="active">Contacto</a></li>
+      </ul>
+
+      <!-- Right Side: Theme Toggle + CTA -->
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button
+          class="theme-toggle"
+          (click)="toggleTheme()"
+          [attr.aria-label]="isDarkMode() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'">
+          <!-- Condicional actualizado a @if/@else -->
+          @if (isDarkMode()) {
+            <!-- Sun Icon (Light Mode) -->
+            <svg
+              class="theme-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+          } @else {
+            <!-- Moon Icon (Dark Mode) -->
+            <svg
+              class="theme-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          }
+        </button>
+
+        <!-- CTA Button -->
+
+        <div class="nav-cta">
+          <a routerLink="/contacto" class="btn-primary">
+            Pedir Cotización
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="mobile-menu-btn"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="isMenuOpen()"
+        aria-label="Toggle menu">
+        <!-- Condicional actualizado a @if/@else -->
+        @if (!isMenuOpen()) {
+          <svg
+            class="menu-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        } @else {
+          <svg
+            class="menu-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        }
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" [class.open]="isMenuOpen()">
+      <ul>
+        <li><a routerLink="/" (click)="toggleMenu()" class="mobile-link">Inicio</a></li>
+        <li><a routerLink="/servicios" (click)="toggleMenu()" class="mobile-link">Servicios</a></li>
+        <li><a routerLink="/portafolio" (click)="toggleMenu()" class="mobile-link">Portafolio</a></li>
+        <li><a routerLink="/contacto" (click)="toggleMenu()" class="mobile-link">Contacto</a></li>
+      </ul>
+
+      <!-- Theme Toggle in Mobile -->
+      <button
+        class="mobile-theme-toggle"
+        (click)="toggleTheme()">
+        <!-- Condicional actualizado a @if/@else -->
+        @if (isDarkMode()) {
+          <svg
+            class="theme-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+        } @else {
+          <svg
+            class="theme-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        }
+        <span>{{ isDarkMode() ? 'Tema Claro' : 'Tema Oscuro' }}</span>
+      </button>
+
+      <a routerLink="/contacto" (click)="toggleMenu()" class="btn-primary mobile-cta">
+        Pedir Cotización
+      </a>
+    </nav>
+  </nav>
+</header>
+

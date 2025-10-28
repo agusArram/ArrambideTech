@@ -1,0 +1,49 @@
+<section id="caracteristicas" class="features">
+  <div class="features-container">
+    <!-- Section Header (igual) -->
+    <div class="section-header">
+      <span class="section-badge">
+        <span class="badge-dot"></span>
+        SortProject v2.3
+      </span>
+      <h2 class="section-title">
+        Tu negocio <span class="title-gradient">merece</span> una gestión simple y potente
+      </h2>
+      <p class="section-subtitle">
+        Desde el control de stock hasta el análisis de ganancias, SortProject reemplaza tus planillas por una solución moderna que entiende a los comercios.
+      </p>
+    </div>
+
+    <!-- Features Grid (igual) -->
+    <div class="features-grid">
+      @for (feature of features; track feature.title) {
+        <article
+          class="feature-card"
+          [class.star-feature]="feature.isStarFeature">
+          @if (feature.isStarFeature) {
+            <div class="star-badge">
+              ⭐ Diferenciador
+            </div>
+          }
+          <div class="feature-content">
+            <div class="feature-header">
+              <span class="feature-icon">
+                {{ feature.icon }}
+              </span>
+              <h3 class="feature-title">{{ feature.title }}</h3>
+            </div>
+            <p class="feature-description">{{ feature.description }}</p>
+            <div class="feature-benefit">
+              <svg class="benefit-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>{{ feature.benefit }}</span>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+
+  </div>
+</section>
+
