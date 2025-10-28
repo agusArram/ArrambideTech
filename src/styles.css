@@ -11,11 +11,11 @@
   --bg-card: #ffffff;
   --bg-elevated: #f1f5f9;
 
-  /* Acento Azul */
-  --accent-primary: #3b82f6;
-  --accent-primary-dark: #2563eb;
-  --accent-primary-light: #60a5fa;
-  --accent-glow: rgba(59, 130, 246, 0.4);
+  /* Acento Indigo Profesional */
+  --accent-primary: #4f46e5;
+  --accent-primary-dark: #4338ca;
+  --accent-primary-light: #6366f1;
+  --accent-glow: rgba(79, 70, 229, 0.35);
 
   /* Texto Light */
   --text-primary: #0f172a;
@@ -42,11 +42,11 @@
   --bg-card: #1e1e1e;
   --bg-elevated: #252525;
 
-  /* Acento Celeste Brillante */
-  --accent-primary: #00d9ff;
-  --accent-primary-dark: #00b8db;
-  --accent-primary-light: #33e3ff;
-  --accent-glow: rgba(0, 217, 255, 0.4);
+  /* Acento Violeta Sofisticado */
+  --accent-primary: #a78bfa;
+  --accent-primary-dark: #8b5cf6;
+  --accent-primary-light: #c4b5fd;
+  --accent-glow: rgba(167, 139, 250, 0.35);
 
   /* Texto Dark */
   --text-primary: #ffffff;

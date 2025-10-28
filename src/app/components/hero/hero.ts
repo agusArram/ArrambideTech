@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -22,4 +22,10 @@ export class HeroComponent {
   navegarContacto(): void {
     this.router.navigate(['/contacto']);
   }
+  // Trust indicators
+  protected readonly trustItems = signal([
+    { text: 'Sin costos iniciales de desarrollo' },
+    { text: 'Soluciones escalables y mantenibles' },
+    { text: 'Soporte técnico continuo' }
+  ]);
 }

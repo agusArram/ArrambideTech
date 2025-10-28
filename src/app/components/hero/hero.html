@@ -3,92 +3,68 @@
     <div class="hero-content">
       <!-- Badge -->
       <div class="hero-badge">
-        <span class="badge-icon">☁️</span>
-        <span class="badge-text">Sistema Híbrido - Versión 2.3.3</span>
+        <span class="badge-icon">💻</span>
+        <span class="badge-text">Soluciones Web & Software</span>
       </div>
 
       <!-- Main Heading -->
       <h1 class="hero-title">
-        Control Total sobre<br>
-        <span class="hero-gradient">Stock, Ventas y Precios</span>
+        Transformo Ideas en<br>
+        <span class="hero-gradient">Realidad Digital</span>
       </h1>
 
       <!-- Subtitle -->
       <p class="hero-subtitle">
-        La solución de gestión diseñada para pequeños y medianos comercios.
-        Reemplace planillas y anotadores por una aplicación moderna que le muestra
-        toda la información de su negocio en tiempo real.
+        Desarrollo web profesional y aplicaciones de escritorio para negocios que buscan crecer.
+        Desde sitios corporativos hasta sistemas de gestión completos.
       </p>
 
       <!-- CTA Buttons -->
       <div class="hero-cta">
-        <!--
-        <a (click)="scrollToSection('caracteristicas')" class="btn-primary-large">
-          <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-          </svg>
-          Descargar Demo Gratis
-        </a>
-        COMENTADO HASTA IMPLEMENTAR LA FUNCION Y ZONA DE DESCARGAS
-        -->
-        <a (click)="scrollToSection('caracteristicas')" class="btn-secondary-large">
+        <button (click)="scrollToSection('sortproject')" class="btn-primary-large">
           <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
-          Ver Características
-        </a>
+          Conocé SortProject
+        </button>
+        <button (click)="scrollToSection('servicios')" class="btn-secondary-large">
+          <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Ver Servicios
+        </button>
       </div>
 
       <!-- Trust Indicators -->
       <ul class="hero-trust">
-        <li class="trust-item">
-          <svg class="trust-icon" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-          </svg>
-          <span>Demo gratuita sin límite de tiempo</span>
-        </li>
-        <li class="trust-item">
-          <svg class="trust-icon" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-          </svg>
-          <span>Funciona en la nube y modo local</span>
-        </li>
-        <li class="trust-item">
-          <svg class="trust-icon" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-          </svg>
-          <span>Desde USD 40/mes</span>
-        </li>
+        @for (item of trustItems(); track $index) {
+          <li class="trust-item">
+            <svg class="trust-icon" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>{{ item.text }}</span>
+          </li>
+        }
       </ul>
     </div>
 
-    <!-- Hero Image/Illustration -->
+    <!-- Hero Visual - Servicios -->
     <div class="hero-visual">
-      <div class="visual-card">
-        <div class="card-header">
-          <div class="card-dots">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
-          </div>
-          <span class="card-title">SortProject</span>
+      <div class="hero-services-grid">
+        <div class="hero-service-box">
+          <div class="service-box-icon">🌐</div>
+          <h3 class="service-box-title">Sitios Web</h3>
+          <p class="service-box-text">Landing pages y sitios corporativos</p>
         </div>
-        <div class="card-content">
-          <div class="stat-item">
-            <div class="stat-label">Productos en Stock</div>
-            <div class="stat-value">1,247</div>
-            <div class="stat-trend positive">+12.5%</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-label">Ventas Hoy</div>
-            <div class="stat-value">$45,890</div>
-            <div class="stat-trend positive">+8.3%</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-label">Margen Promedio</div>
-            <div class="stat-value">32.4%</div>
-            <div class="stat-trend positive">+2.1%</div>
-          </div>
+        <div class="hero-service-box">
+          <div class="service-box-icon">⚡</div>
+          <h3 class="service-box-title">Apps Web</h3>
+          <p class="service-box-text">Sistemas y aplicaciones a medida</p>
+        </div>
+        <div class="hero-service-box">
+          <div class="service-box-icon">🛒</div>
+          <h3 class="service-box-title">E-commerce</h3>
+          <p class="service-box-text">Tiendas online completas</p>
         </div>
       </div>
     </div>

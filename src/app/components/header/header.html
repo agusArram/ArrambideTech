@@ -11,10 +11,10 @@
 
       <!-- Desktop Navigation -->
       <ul class="nav-links">
-        <li><a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
-        <li><a routerLink="/servicios" class="nav-link" routerLinkActive="active">Servicios</a></li>
-        <li><a routerLink="/portafolio" class="nav-link" routerLinkActive="active">Portafolio</a></li>
-        <li><a routerLink="/contacto" class="nav-link" routerLinkActive="active">Contacto</a></li>
+        <li><a (click)="scrollToSection('inicio')" class="nav-link">Inicio</a></li>
+        <li><a (click)="scrollToSection('proyectos')" class="nav-link">Proyectos</a></li>
+        <li><a (click)="scrollToSection('servicios')" class="nav-link">Servicios</a></li>
+        <li><a (click)="scrollToSection('contacto')" class="nav-link">Contacto</a></li>
       </ul>
 
       <!-- Right Side: Theme Toggle + CTA -->
@@ -94,10 +94,10 @@
     <!-- Mobile Menu -->
     <nav class="mobile-menu" [class.open]="isMenuOpen()">
       <ul>
-        <li><a routerLink="/" (click)="toggleMenu()" class="mobile-link">Inicio</a></li>
-        <li><a routerLink="/servicios" (click)="toggleMenu()" class="mobile-link">Servicios</a></li>
-        <li><a routerLink="/portafolio" (click)="toggleMenu()" class="mobile-link">Portafolio</a></li>
-        <li><a routerLink="/contacto" (click)="toggleMenu()" class="mobile-link">Contacto</a></li>
+        <li><a (click)="scrollToSection('inicio')" class="mobile-link">Inicio</a></li>
+        <li><a (click)="scrollToSection('proyectos')" class="mobile-link">Proyectos</a></li>
+        <li><a (click)="scrollToSection('servicios')" class="mobile-link">Servicios</a></li>
+        <li><a (click)="scrollToSection('contacto')" class="mobile-link">Contacto</a></li>
       </ul>
 
       <!-- Theme Toggle in Mobile -->

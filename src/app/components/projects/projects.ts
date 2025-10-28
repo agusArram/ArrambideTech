@@ -15,8 +15,8 @@ interface PricingPlan {
   selector: 'app-pricing',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './pricing.html',
-  styleUrl: './pricing.css'
+  templateUrl: './projects.html',
+  styleUrl: './projects.css'
 })
 export class PricingComponent {
   protected readonly plans: PricingPlan[] = [
