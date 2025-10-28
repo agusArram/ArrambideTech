@@ -286,4 +286,6 @@ img, video, iframe {
   /* overflow-wrap y word-wrap ya están en la regla p, li, ... */
   /* hyphens: auto; /* Permitir guiones automáticos SÓLO en móvil y si keep-all falla */
   /* } */
+
+
 }

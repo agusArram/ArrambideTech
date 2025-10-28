@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header';
 import { HeroComponent } from '../../components/hero/hero';
+import { ProjectsComponent } from '../../components/projects/projects';
+import { ServiciosComponent } from '../../components/servicios/servicios';
 import { FooterComponent } from '../../components/footer/footer';
 
 @Component({
@@ -9,6 +11,8 @@ import { FooterComponent } from '../../components/footer/footer';
   imports: [
     HeaderComponent,
     HeroComponent,
+    ProjectsComponent,
+    ServiciosComponent,
     FooterComponent
   ],
   templateUrl: './home.html',

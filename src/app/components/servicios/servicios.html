@@ -1,1 +1,70 @@
-<p>servicios works!</p>
+<section id="servicios" class="section servicios">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">
+        <span class="badge-dot"></span>
+        ¿Qué ofrezco?
+      </span>
+      <h2 class="section-title">
+        Servicios de <span class="title-gradient">Desarrollo Web</span>
+      </h2>
+      <p class="section-subtitle">
+        Soluciones web a medida con tecnologías modernas y precios transparentes
+      </p>
+    </div>
+
+    <div class="services-grid">
+      @for (service of webServices(); track service.title) {
+        <article class="service-card">
+          <div class="service-icon">{{ service.icon }}</div>
+          <h3 class="service-title">{{ service.title }}</h3>
+          <p class="service-description">{{ service.description }}</p>
+
+          <ul class="service-features">
+            @for (feature of service.features; track feature) {
+              <li class="service-feature">
+                <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>{{ feature }}</span>
+              </li>
+            }
+          </ul>
+
+          <button (click)="scrollToSection('contacto')" class="btn-service">
+            Consultar
+          </button>
+        </article>
+      }
+    </div>
+
+    <!-- Why Choose Me -->
+    <div class="why-section">
+      <h3 class="why-title">
+        ¿Por qué <span class="title-gradient">Arrambide Tech</span>?
+      </h3>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">⚡</div>
+          <h4 class="why-item-title">Tecnologías Modernas</h4>
+          <p class="why-item-text">Angular 20+, TypeScript y las últimas herramientas del mercado</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🎯</div>
+          <h4 class="why-item-title">Código de Calidad</h4>
+          <p class="why-item-text">Mejores prácticas, código limpio y mantenible a largo plazo</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">💬</div>
+          <h4 class="why-item-title">Comunicación Directa</h4>
+          <p class="why-item-text">Sin intermediarios, contacto directo con el desarrollador</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🔧</div>
+          <h4 class="why-item-title">Soporte Continuo</h4>
+          <p class="why-item-text">Mantenimiento y actualizaciones post-lanzamiento</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
