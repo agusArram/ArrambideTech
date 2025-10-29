@@ -66,12 +66,11 @@
   line-height: 1.7;
 }
 
-
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  max-width: 1100px;
+  max-width: 1280px; /* Ampliado para que quepan 4 tarjetas si hay espacio */
   margin: 0 auto 4rem;
 }
 
@@ -79,98 +78,63 @@
   background-color: var(--bg-card);
   padding: 2rem;
   border-radius: 12px;
-  border: 1px solid var(--border-default);
-  transition: all 0.3s ease;
+  /* Reemplazamos el borde por un borde superior más elegante */
+  border-top: 3px solid var(--accent-primary);
+  border-left: 1px solid var(--border-default);
+  border-right: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--border-default);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
 }
 
 .service-card:hover {
   border-color: var(--accent-primary);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+  /* Sombra más suave pero con el color de acento */
+  box-shadow: 0 4px 25px var(--accent-glow);
 }
 
 .service-icon {
-  font-size: 3rem;
+  font-size: 2.5rem; /* Un poco más pequeño para dar espacio */
   margin-bottom: 1.5rem;
   line-height: 1;
 }
 
-.service-header {
-  margin-bottom: 1rem;
-}
-
 .service-title {
   font-size: 1.35rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: var(--text-primary);
   font-weight: 700;
 }
 
+/* --- FIX DE CSS --- */
+/* Este era el problema: la clase de descripción en tu HTML es para el texto principal */
 .service-description {
-  color: var(--accent-primary);
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0;
-}
-
-.service-details {
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
+  /* Hacemos que la lista de features empuje el botón hacia abajo */
+  flex-grow: 1;
 }
 
-.service-pricing {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: var(--bg-elevated);
-  border-radius: 8px;
-}
-
-.price-tag {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.price {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--accent-primary);
-}
-
-.delivery-time {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-.service-includes {
-  margin-bottom: 1.5rem;
-  flex: 1;
-}
-
-.includes-title {
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-}
-
-.includes-list {
+/* --- FIX DE CSS --- */
+/* Apuntamos a las clases correctas de tu HTML */
+.service-features {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 2rem 0; /* Añadimos más margen inferior antes del botón */
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
-.include-item {
+.service-feature {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   color: var(--text-secondary);
   font-size: 0.9rem;
 }
@@ -181,12 +145,16 @@
   color: var(--accent-primary);
   flex-shrink: 0;
 }
-
-.service-action {
-  margin-top: auto;
-}
+/* --- FIN DE FIXES --- */
 
 .btn-service {
+  /* --- LÍNEAS CLAVE AÑADIDAS/MODIFICADAS --- */
+  display: block;         /* Hace que el <a> ocupe todo el ancho */
+  text-align: center;     /* Centra el texto "Consultar" */
+  text-decoration: none;  /* Saca el subrayado de link */
+  box-sizing: border-box; /* Asegura que el padding no rompa el ancho */
+
+  /* --- Tus estilos (que están perfectos) --- */
   width: 100%;
   background: transparent;
   color: var(--accent-primary);
@@ -197,16 +165,19 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: auto;
 }
 
+/* (El estilo :hover que ya tenías sigue funcionando igual) */
 .btn-service:hover {
-  background: var(--accent-primary);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-light) 100%);
   color: var(--bg-primary);
+  border-color: transparent;
   transform: translateY(-2px);
   box-shadow: 0 0 20px var(--accent-glow);
 }
 
-/* Why Section */
+/* Why Section (Sin cambios, ya estaba bien) */
 .why-section {
   max-width: 1000px;
   margin: 4rem auto 0;

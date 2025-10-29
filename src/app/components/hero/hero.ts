@@ -25,7 +25,7 @@ export class HeroComponent {
   // Trust indicators
   protected readonly trustItems = signal([
     { text: 'Sin costos iniciales de desarrollo' },
-    { text: 'Soluciones escalables y mantenibles' },
-    { text: 'Soporte técnico continuo' }
+    { text: 'Adaptado 100% a tus necesidades' },
+    { text: 'Contacto directo por WPP' }
   ]);
 }

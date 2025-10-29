@@ -269,6 +269,7 @@
   height: 400px;
   background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
   animation: pulse 4s ease-in-out infinite;
+  z-index: 1;
 }
 
 .floating-card {
@@ -280,6 +281,7 @@
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
   animation: float 6s ease-in-out infinite;
+  z-index: 2;
 }
 
 .card-1 {
@@ -416,4 +418,31 @@
   .features-list {
     grid-template-columns: 1fr;
   }
+
+  .hero-visual {
+    display: none;
+  }
+  /* --- FIN DE LA SOLUCIÓN --- */
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .features-list {
+    grid-template-columns: 1fr;
+  }
 }
+
+/* --- NUEVA ANIMACIÓN PARA LAS TARJETAS FLOTANTES --- */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(1deg); } /* Sube un poco y gira levemente */
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(5px) rotate(-1deg); } /* Baja un poco y gira en la otra dirección */
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+/* --- FIN NUEVA ANIMACIÓN --- */

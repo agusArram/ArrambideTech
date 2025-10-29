@@ -1,5 +1,6 @@
 import {Component, signal} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 interface ProjectsPlan {
   name: string;
@@ -24,7 +25,7 @@ export class ProjectsComponent {
       title: 'SortProject',
       description: 'Sistema híbrido de gestión para pequeños y medianos comercios. Control total sobre stock, ventas y precios en una aplicación de escritorio moderna.',
       image: '📦', // Icono de caja/paquete
-      category: 'App de Escritorio',
+      category: 'App de Escritorio y web',
       tech: ['Java', 'PostrgeSQL', 'SQLite'],
       link: 'https://sortproject.arrambidetech.com',
       features: [

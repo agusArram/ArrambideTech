@@ -245,3 +245,27 @@
   margin-top: 3rem;
 }
 
+
+/* --- RESPONSIVE PARA MÓVILES --- */
+@media (max-width: 767px) {
+  /* Hacemos que el grid sea de 1 columna */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem; /* Reducimos un poco el espacio entre tarjetas */
+  }
+
+  /* Reducimos el padding en pantallas chicas */
+  .project-card {
+    padding: 1.5rem;
+  }
+
+  /* Ajustamos el tamaño del título del proyecto */
+  .project-title {
+    font-size: 1.5rem;
+  }
+
+  /* Hacemos que la lista de features sea de 1 columna */
+  .features-list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -16,7 +16,6 @@
     <div class="services-grid">
       @for (service of webServices(); track service.title) {
         <article class="service-card">
-          <div class="service-icon">{{ service.icon }}</div>
           <h3 class="service-title">{{ service.title }}</h3>
           <p class="service-description">{{ service.description }}</p>
 
@@ -31,9 +30,9 @@
             }
           </ul>
 
-          <button (click)="scrollToSection('contacto')" class="btn-service">
+          <a routerLink="/contacto" class="btn-service">
             Consultar
-          </button>
+          </a>
         </article>
       }
     </div>
