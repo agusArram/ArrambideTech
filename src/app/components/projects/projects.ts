@@ -23,9 +23,9 @@ export class ProjectsComponent {
     {
       title: 'SortProject',
       description: 'Sistema híbrido de gestión para pequeños y medianos comercios. Control total sobre stock, ventas y precios en una aplicación de escritorio moderna.',
-      image: '📦',
+      image: '📦', // Icono de caja/paquete
       category: 'App de Escritorio',
-      tech: ['Angular', 'Electron', 'TypeScript', 'SQLite'],
+      tech: ['Java', 'PostrgeSQL', 'SQLite'],
       link: 'https://sortproject.arrambidetech.com',
       features: [
         'Control de stock transaccional',
@@ -33,6 +33,21 @@ export class ProjectsComponent {
         'Reportes en PDF y Excel',
         'Sistema híbrido (nube + local)',
         'Soporte para variantes de productos'
+      ]
+    },
+    {
+      title: 'Mezuri maderera',
+      description: 'Página web corporativa y portfolio digital para una carpintería de diseño a medida. El sitio destaca sus proyectos, servicios y método de trabajo.',
+      image: '', // Icono de herramienta/construcción
+      category: 'Pagina web',
+      tech: ['Angular', 'Css', 'TypeScript'],
+      link: 'https://mezuricarpinteria.arrambidetech.com',
+      features: [
+        'Diseño moderno y 100% responsive',
+        'Galería de proyectos filtrable por categoría',
+        'Secciones de servicios detallados (cocinas, livings, etc.)',
+        'Formulario de contacto para cotizaciones',
+        'Optimizado con Lazy Loading de Angular'
       ]
     }
   ]);
