@@ -1,6 +1,6 @@
-import { Component, signal, OnInit, effect, Renderer2, Inject, HostListener } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { Component, signal, OnInit, effect, Renderer2, Inject, HostListener, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
-    public router: Router
+    public router: Router,
+  private el: ElementRef
   ) {
     // Efecto para aplicar el tema cuando cambia
     effect(() => {
@@ -67,12 +68,13 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/']).then(() => {
         setTimeout(() => {
           this.scrollToElement(sectionId);
-        }, 100);
+        }, 70);
       });
     } else {
       this.scrollToElement(sectionId);
     }
   }
+
 
   private scrollToElement(sectionId: string): void {
     // Si es "inicio", hacer scroll al top
@@ -80,10 +82,26 @@ export class HeaderComponent implements OnInit {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-
     // Para otras secciones, buscar el elemento
     const element = document.getElementById(sectionId);
-    if (element) {
+
+    // Buscamos '.nav-content' en lugar de 'header'.
+    // Este elemento siempre mide 70px.
+    const navContentElement = this.el.nativeElement.querySelector('.nav-content');
+
+    if (element && navContentElement) {
+      // Medimos la altura del .nav-content
+      const headerHeight = navContentElement.offsetHeight;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerHeight; // Resta siempre 70px
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+
+    } else if (element) {
+      // Fallback si no encuentra el header
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
