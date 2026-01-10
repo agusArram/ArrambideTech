@@ -3,7 +3,8 @@
     "allow": [
       "Bash(find:*)",
       "Bash(npm run build:*)",
-      "Bash(ng generate:*)"
+      "Bash(ng generate:*)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

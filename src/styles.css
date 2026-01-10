@@ -31,7 +31,42 @@
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
   --shadow-accent: 0 0 20px var(--accent-glow);
+
+  /* === SISTEMA DE DISEÑO (Design System) === */
+  
+  /* Espaciado (Spacing) - Consistente y Escalable */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 1rem;     /* 16px */
+  --space-md: 2rem;     /* 32px */
+  --space-lg: 4rem;     /* 64px - Estándar para secciones */
+  --space-xl: 6rem;     /* 96px - Estándar para Hero en desktop grande */
+  
+  /* Tipografía (Typography) - Escala Modular Moderada */
+  /* Hero H1 */
+  --fs-display: clamp(2rem, 4vw, 3rem); 
+  /* Títulos de Sección H2 */
+  --fs-h1: clamp(1.75rem, 3vw, 2.5rem);
+  --fs-h2: clamp(1.5rem, 2.5vw, 2rem);
+  /* Subtítulos H3 */
+  --fs-h3: 1.25rem;
+  
+  /* Textos Específicos */
+  --fs-subtitle: 1.125rem; /* Hero subtitles, intro text */
+  --fs-card-title: 1.25rem; /* Card headers */
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  
+  /* Componentes (Botones, Iconos) */
+  --btn-padding: 1rem 2rem;
+  --btn-fs: 1rem;
+  --icon-size-lg: 2.5rem; /* Hero visual icons */
+  --icon-size-md: 2rem;   /* Section icons */
+
+  /* Layout */
+  --container-width: 1200px; /* Ancho máximo optimizado para lectura */
+  --header-height: 70px;
 }
+
 
 /* Dark Theme Variables
    ========================================================================== */
@@ -133,7 +168,7 @@ button {
    ========================================================================== */
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--container-width);
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -141,6 +176,12 @@ button {
 .text-center {
   text-align: center;
 }
+
+/* Typography Defaults using Variables */
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+p { font-size: var(--fs-body); color: var(--text-secondary); }
 
 .hidden {
   display: none;
@@ -255,36 +296,329 @@ img, video, iframe {
 
 /* Responsive Utilities
    ========================================================================== */
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS - Global Typography & Spacing
+   ========================================================================== */
+
+/* Small Desktop: 1280x800, 1366x768 (13-14" laptops) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 1.75rem); }
+  h3 { font-size: clamp(1rem, 2.5vw, 1.125rem); }
+  h4 { font-size: 0.9375rem; }
+  h5 { font-size: 0.875rem; }
+  h6 { font-size: 0.8125rem; }
+
+  p { font-size: 0.875rem; }
+
+  .container { max-width: 1200px; }
+}
+
+/* Medium Desktop: 1366x768 specific */
+@media (min-width: 1280px) and (max-width: 1400px) {
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 0.9375rem; }
+  p { font-size: 0.8125rem; line-height: 1.5; }
+}
+
+/* Medium-Large Desktop: 1440x900 */
+@media (min-width: 1400px) and (max-width: 1500px) {
+  h1 { font-size: clamp(2rem, 4.5vw, 2.5rem); }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+}
+
+/* Large Desktop: 1600x900 */
+@media (min-width: 1500px) and (max-width: 1680px) {
+  h1 { font-size: clamp(2rem, 4.5vw, 2.5rem); }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+  p { font-size: 1rem; }
+}
+
+/* Full HD and above: 1920x1080+ */
+@media (min-width: 1681px) {
+  h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(2rem, 4vw, 2.5rem); }
+  h3 { font-size: 1.25rem; }
+  p { font-size: 1rem; }
+
+  .container { max-width: 1400px; }
+}
+
+/* Tablets Landscape: 768px - 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  h1 { font-size: clamp(1.75rem, 5vw, 2.25rem); }
+  h2 { font-size: clamp(1.5rem, 4vw, 1.875rem); }
+  h3 { font-size: 1.125rem; }
+  p { font-size: 0.9375rem; }
+}
+
+/* Mobile and Tablets Portrait: < 768px */
 @media (max-width: 767px) {
   .container {
     padding: 0 1rem;
   }
 
-  /* Reduce padding on mobile */
   section {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
 
-  /* Smaller text on mobile */
-  h1 {
-    font-size: clamp(1.75rem, 8vw, 3rem);
-  }
-
-  h2 {
-    font-size: clamp(1.5rem, 6vw, 2.5rem);
-  }
-
-  h3 {
-    font-size: clamp(1.25rem, 5vw, 2rem);
-  }
-
-  /* === AJUSTE: Quitamos 'hyphens: auto;' para mantener la regla global === */
-  /* Prevent text overflow (Hyphens en auto SÓLO en móvil si es necesario) */
-  /* body { */
-  /* Mantenemos word-break: keep-all de arriba */
-  /* overflow-wrap y word-wrap ya están en la regla p, li, ... */
-  /* hyphens: auto; /* Permitir guiones automáticos SÓLO en móvil y si keep-all falla */
-  /* } */
+  h1 { font-size: clamp(1.75rem, 8vw, 3rem); }
+  h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); }
+  h3 { font-size: clamp(1.25rem, 5vw, 2rem); }
+  h4 { font-size: 1rem; }
+  p { font-size: 0.9375rem; }
 }
+
+/* Small Mobile: < 480px */
+@media (max-width: 480px) {
+  h1 { font-size: clamp(1.5rem, 7vw, 2.5rem); }
+  h2 { font-size: clamp(1.25rem, 6vw, 2rem); }
+  h3 { font-size: clamp(1.125rem, 5vw, 1.75rem); }
+  p { font-size: 0.875rem; }
+}
+
+/* ==========================================================================
+   COMPONENT RESPONSIVE OVERRIDES
+   ========================================================================== */
+
+/* 1. Mobile (Phones) - < 768px
+   Covers: iPhone SE, XR/11/12, Android Common (360x640)
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* Global Typography Override for Small Screens */
+  h1 { font-size: clamp(1.75rem, 8vw, 3rem); }
+  h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); }
+  h3 { font-size: clamp(1.25rem, 5vw, 2rem); }
+  h4 { font-size: 1rem; }
+  p { font-size: 0.9375rem; }
+
+  /* Container */
+  .container { padding: 0 1rem; }
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+
+  /* Header Logic Moved back to header.css due to Angular Encapsulation */
+
+  /* Home Page & Components */
+  .hero-container, .services-grid, .featured-project, .products-grid, .benefits-grid { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .hero-stats, .hero-actions, .project-actions, .cta-buttons { flex-direction: column; }
+  .stat-divider { width: 100%; height: 1px; }
+  .btn-primary-hero, .btn-secondary-hero, .btn-project-primary, .btn-project-secondary, .btn-whatsapp-large, .btn-secondary-large { width: 100%; justify-content: center; }
+  .service-card.featured { transform: scale(1); }
+  .product-card.featured { order: -1; }
+
+  /* Servicios Page */
+  .servicios-grid { grid-template-columns: 1fr; }
+  .paso-item { grid-template-columns: 60px 1fr; }
+
+  /* Portafolio Page */
+  .filter-section { position: relative; top: 0; }
+  .proyectos-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .proyecto-overlay { transform: translateY(0); background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 100%); }
+
+  /* Benefits Component (Tables) */
+  .comparison-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .comparison-table thead, .comparison-table tbody, .comparison-table tr, .comparison-table th, .comparison-table td { display: block; }
+  .comparison-table thead { display: none; }
+  .comparison-table tr { margin-bottom: 1.5rem; border: 1px solid var(--border-default); border-radius: 8px; overflow: hidden; }
+  .comparison-cell { text-align: left; padding: 0.8rem 1rem; border-bottom: 1px solid var(--border-default); }
+  .comparison-cell:last-child { border-bottom: none; }
+  .comparison-cell.feature { background: var(--bg-elevated); font-weight: 700; font-size: 1rem; }
+  .comparison-cell.highlight { background: rgba(0, 217, 255, 0.1); color: var(--accent-primary); }
+
+  /* Contacto Page */
+  .contact-link { word-break: break-all; }
+
+  /* Modal */
+  .modal-backdrop { align-items: flex-start; }
+  .modal-close { top: 1rem; right: 1rem; }
+  .btn-modal-primary { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  /* Extra Small Mobile Overrides */
+  h1 { font-size: clamp(1.5rem, 7vw, 2.5rem); }
+  h2 { font-size: clamp(1.25rem, 6vw, 2rem); }
+  h3 { font-size: clamp(1.125rem, 5vw, 1.75rem); }
+  p { font-size: 0.875rem; }
+  .proyecto-header { flex-direction: column; }
+  .proyecto-anio { align-self: flex-start; }
+}
+
+/* 2. Tablet Portrait - 768px to 1023px
+   Covers: iPad Portrait
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  h1 { font-size: clamp(1.75rem, 5vw, 2.25rem); }
+  h2 { font-size: clamp(1.5rem, 4vw, 1.875rem); }
+  h3 { font-size: 1.125rem; }
+  p { font-size: 0.9375rem; }
+
+  /* Layout Adjustments */
+  .hero-container { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .featured-project { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Hide Logo in Header for Space */
+  .logo { display: none; }
+}
+
+/* 3. Tablet Landscape / Small Laptop - 768px to 1279px
+   Covers: iPad Landscape, Old 1024x768 screens, Small Laptops
+   ========================================================================== */
+@media (min-width: 768px) {
+  /* Restore Multi-Column Layouts for Tablets & Up */
+  .footer-content { grid-template-columns: 2fr 1fr 1fr 1fr; }
+  .content-grid { grid-template-columns: 2fr 1fr; } /* Contact Page */
+  
+  /* Shared Layout Logic */
+  .hero-cta, .hero-trust { flex-direction: row; justify-content: flex-start; }
+  .hero-actions { flex-direction: row; justify-content: flex-start; } /* Aligned Left */
+
+  .footer-bottom-content { flex-direction: row; justify-content: center; text-align: center; }
+  
+  /* Grids - Start expanding at Tablet */
+  .faq-grid { grid-template-columns: repeat(2, 1fr); }
+  .plan-price { flex-direction: row; align-items: baseline; gap: 0.25rem; }
+  .price { font-size: 2.5rem; }
+  .period { margin-top: 0; }
+  
+  /* Features & Benefits can stay 2 cols here, expand later */
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .benefits-grid { grid-template-columns: repeat(3, 1fr); }
+  .caracteristicas-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  /* Header Logic Moved back to header.css due to Angular Encapsulation */
+  
+  /* Hero Layout - Scoped to Split Layouts */
+  .hero-container { grid-template-columns: 1fr 1fr; }
+  .hero-container .hero-content { text-align: left; } /* Only left-align if in split container */
+  .hero-container .hero-badge { margin-left: 0; margin-right: 0; } /* Only align badge left if in split container */
+  
+  .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 1023px) {
+  /* Specific Constraints for Tablets & Mobile */
+  .servicios-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .servicio-card.popular { transform: scale(1); }
+  .servicio-card.popular:hover { transform: scale(1) translateY(-8px); }
+  .proyectos-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  
+  /* Header Logic Moved back to header.css */
+}
+
+/* 4. Desktop Standard - 1280px to 1599px
+   Covers: 1280x800, 1366x768, 1440x900, 1536x864 (Zoom 125%)
+   ========================================================================== */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  /* === LAPTOP DIET: Force smaller base variables for this specific range === */
+  :root {
+    --fs-display: 2.5rem;      /* Reduced from clamp(2rem, 4vw, 3rem) */
+    --fs-h1: 2rem;             /* Reduced */
+    --fs-h2: 1.75rem;          /* Reduced */
+    --space-lg: 3rem;          /* Reduced padding */
+    --container-width: 1000px; /* Tighter container */
+  }
+
+  /* Specific Adjustments */
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  p { font-size: 0.9rem; }
+  
+  .container { max-width: 1000px; }
+  
+  /* Grid tweaks for cramped screens */
+  .products-grid { grid-template-columns: repeat(3, 1fr); } /* 4 is too crowded here */
+}
+
+@media (min-width: 1280px) and (max-width: 1400px) {
+  /* Targeted tweak for 1366x768 screens */
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 0.9375rem; }
+  p { font-size: 0.8125rem; line-height: 1.5; }
+}
+
+/* 5. Large Desktop - 1600px+
+   Covers: Full HD (1920x1080), 2K, 4K
+   ========================================================================== */
+@media (min-width: 1600px) {
+  :root {
+    /* Scale up body and card text for large monitors */
+    --fs-subtitle: 1.25rem;   /* Larger subtitles */
+    --fs-card-title: 1.4rem;  /* Larger card headers */
+    --fs-body: 1.1rem;        /* Larger body text */
+    --fs-small: 0.95rem;      /* Larger small text (links, labels) */
+    
+    --container-width: 1400px;
+    --space-lg: 5rem;         /* More breathing room on big screens */
+  }
+
+  h1 { font-size: clamp(2rem, 4.5vw, 2.5rem); }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); } /* Stays the same as per user request */
+  p { font-size: var(--fs-body); }
+  .container { max-width: var(--container-width); }
+}
+
+
+/* ==========================================================================
+   FINAL OVERRIDES (Must be at the end to win Cascade)
+   ========================================================================== */
+
+/* Fix: Ensure Footer and Contact are Multi-Column on Tablets & Laptops */
+@media (min-width: 768px) {
+  .footer-content { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
+  .content-grid { grid-template-columns: 2fr 1fr !important; }
+}
+
+/* Fix: Force "Laptop Diet" to prevent huge fonts in the 1024px - 1440px range */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  :root {
+    --fs-display: 2rem !important;    /* Hero Title */
+    --fs-h1: 1.75rem !important;      /* Section Title */
+    --fs-h2: 1.5rem !important;       /* Section Title Small */
+    --fs-h3: 1rem !important;         /* Subheadings */
+    
+    --fs-subtitle: 0.95rem !important; /* Subtitles */
+    --fs-card-title: 1.05rem !important; /* Card Titles -> Reduced slightly */
+    --fs-body: 0.9rem !important;      /* Body text */
+    --fs-small: 0.8rem !important;     /* Small text */
+    
+    /* Components Scaled Down */
+    --btn-padding: 0.6rem 1.2rem !important; 
+    --btn-fs: 0.85rem !important;
+    --icon-size-lg: 1.75rem !important;
+    --icon-size-md: 1.2rem !important; /* Smaller icons for cards */
+    
+    --space-md: 1.25rem !important;    /* Card padding (Compact) */
+    --space-lg: 2rem !important;       /* Section padding -> Reduced from 2.5rem */
+    --container-width: 960px !important;
+  }
+
+
+  /* Target specific elements to override previous clamps/fixed values */
+  .hero-title { font-size: var(--fs-display) !important; }
+  .section-title, .cta-title { font-size: var(--fs-h2) !important; }
+  .hero-subtitle, .section-description { font-size: var(--fs-subtitle) !important; }
+  
+  /* Layout adjustments for this specific range */
+  .hero-container { gap: 1.5rem !important; }
+  /* Restore 100dvh for Impact, but manage padding */
+  .new-hero, .hero { min-height: 100dvh !important; padding-top: 5rem !important; padding-bottom: 2rem !important; }
+  
+  /* FORCE 2x2 GRID for Products on Laptop to avoid 3-1 split and cramped text */
+  .products-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+
+
+
+
+
 

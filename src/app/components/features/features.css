@@ -3,12 +3,12 @@
 }
 
 .features {
-  padding: 6rem 1.5rem;
+  padding: var(--space-lg) 1.5rem; /* Standardized Padding */
   background: var(--bg-secondary);
   position: relative;
 }
 .features-container {
-  max-width: 1280px;
+  max-width: var(--container-width);
   margin: 0 auto;
 }
 
@@ -16,7 +16,7 @@
 /* (Los estoy omitiendo porque ya los tenés en tu archivo) */
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem; /* Reduced from 4rem */
 }
 .section-badge {
   display: inline-flex;
@@ -43,7 +43,7 @@
   50% { opacity: 0.5; box-shadow: 0 0 5px var(--accent-glow); }
 }
 .section-title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--fs-h2); /* Standardized Size */
   font-weight: 800;
   line-height: 1.2;
   color: var(--text-primary);
@@ -174,21 +174,5 @@
 /* Todos los estilos .features-cta, .cta-final-card, .cta-title, etc. se eliminaron */
 
 
-/* ========================================================================
-   Responsive
-   ======================================================================== */
 
-@media (min-width: 768px) {
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Se eliminaron las reglas de .cta-benefit-list de aquí */
-}
-
-@media (min-width: 1024px) {
-  .features-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
 

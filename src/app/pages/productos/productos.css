@@ -10,7 +10,7 @@
 
 /* Hero Section */
 .producto-hero {
-  padding: 8rem 1.5rem 4rem;
+  padding: 8rem 1.5rem 4rem; /* Adjusted */
   background: var(--bg-primary);
   text-align: center;
 }
@@ -42,7 +42,7 @@
 }
 
 .page-title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: var(--fs-display); /* Standardized Size */
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0.5rem;
@@ -57,7 +57,7 @@
 }
 
 .descripcion {
-  font-size: 1.25rem;
+  font-size: 1.125rem; /* Standardized Body Large */
   line-height: 1.7;
   color: var(--text-secondary);
   margin-bottom: 2rem;
@@ -111,16 +111,16 @@
 
 /* Características Detalladas */
 .caracteristicas-detalladas {
-  padding: 6rem 1.5rem;
+  padding: var(--space-lg) 1.5rem; /* Standardized Padding */
   background: var(--bg-secondary);
 }
 
 .section-title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--fs-h2); /* Standardized Size */
   font-weight: 800;
   color: var(--text-primary);
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem; /* Reduced from 4rem */
   font-family: 'Inter Tight', sans-serif;
 }
 
@@ -167,7 +167,7 @@
 
 /* Requisitos */
 .requisitos {
-  padding: 6rem 1.5rem;
+  padding: var(--space-lg) 1.5rem; /* Standardized Padding */
   background: var(--bg-primary);
 }
 
@@ -219,7 +219,7 @@
 
 /* CTA Final */
 .cta-final {
-  padding: 6rem 1.5rem;
+  padding: var(--space-lg) 1.5rem; /* Standardized Padding */
   background: var(--bg-secondary);
 }
 
@@ -228,14 +228,14 @@
   margin: 0 auto;
   text-align: center;
   background: var(--bg-card);
-  padding: 4rem 2rem;
+  padding: 3rem 2rem; /* Reduced from 4rem */
   border-radius: 20px;
   border: 2px solid var(--accent-primary);
   box-shadow: 0 0 40px var(--accent-glow);
 }
 
 .cta-title {
-  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-size: var(--fs-h2); /* Standardized Size */
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 1rem;
@@ -271,20 +271,4 @@
   box-shadow: 0 0 40px var(--accent-glow);
 }
 
-/* Responsive */
-@media (min-width: 768px) {
-  .hero-actions {
-    flex-direction: row;
-    justify-content: center;
-  }
 
-  .caracteristicas-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .caracteristicas-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}

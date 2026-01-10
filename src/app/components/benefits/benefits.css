@@ -1,20 +1,20 @@
 .benefits {
-  padding: 6rem 1.5rem;
+  padding: var(--space-lg) 1.5rem; /* Standardized Padding */
   background: var(--bg-primary);
 }
 
 .benefits-container {
-  max-width: 1280px;
+  max-width: var(--container-width);
   margin: 0 auto;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem; /* Reduced from 4rem */
 }
 
 .section-title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--fs-h2); /* Standardized Size */
   font-weight: 800;
   line-height: 1.2;
   color: var(--text-primary);
@@ -96,12 +96,12 @@
 /* ====================================================== */
 
 .comparison-section {
-  margin-top: 4rem; /* <-- Reducido de 5rem */
+  margin-top: 3rem; /* <-- Reduced from 4rem */
 }
 
 .comparison-title {
   text-align: center;
-  font-size: clamp(1.75rem, 4vw, 2rem); /* <-- Reducido de 2rem */
+  font-size: 1.5rem; /* Standardized H2/H3 hybrid */
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 2rem;
@@ -161,66 +161,5 @@ thead .comparison-cell.highlight {
   color: var(--accent-primary);
 }
 
-/* Responsive */
-@media (min-width: 768px) {
-  .benefits-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 
-  .benefit-title {
-    font-size: 1.4rem;
-  }
-
-  .benefit-description {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .comparison-table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .comparison-table thead,
-  .comparison-table tbody,
-  .comparison-table tr,
-  .comparison-table th,
-  .comparison-table td {
-    display: block;
-  }
-
-  .comparison-table thead {
-    display: none;
-  }
-
-  .comparison-table tr {
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--border-default);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .comparison-cell {
-    text-align: left;
-    padding: 0.8rem 1rem; /* <-- Reducido de 1rem */
-    border-bottom: 1px solid var(--border-default);
-  }
-
-  .comparison-cell:last-child {
-    border-bottom: none;
-  }
-
-  .comparison-cell.feature {
-    background: var(--bg-elevated);
-    font-weight: 700;
-    font-size: 1rem; /* <-- Reducido de 1.1rem */
-  }
-
-  .comparison-cell.highlight {
-    background: rgba(0, 217, 255, 0.1);
-    color: var(--accent-primary);
-  }
-}
 

@@ -144,11 +144,11 @@
 .btn-primary {
   background: var(--accent-primary);
   color: var(--bg-primary);
-  padding: 0.75rem 1.5rem;
+  padding: 0.625rem 1.25rem;
   border-radius: 8px;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 0.875rem;
   transition: all 0.3s ease;
   box-shadow: 0 0 20px var(--accent-glow);
   cursor: pointer;
@@ -259,8 +259,12 @@
   text-align: center;
 }
 
-/* Tablet and Desktop */
-@media (min-width: 768px) {
+/* ==========================================================================
+   RESPONSIVE BEHAVIOR (Restored for Angular Encapsulation)
+   ========================================================================== */
+
+/* Tablet Landscape / Laptop / Desktop (≥ 1024px) */
+@media (min-width: 1024px) {
   .nav-links {
     display: flex;
   }
@@ -278,12 +282,13 @@
   }
 
   .mobile-menu {
-    display: none;
+    display: none !important; /* Force hide even if open state exists */
   }
 }
 
-@media (min-width: 1024px) {
-  .nav-links {
-    gap: 2.5rem;
-  }
+/* Hide Logo in middle range if needed, or adjust spacing */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Optional: Keep hamburger but maybe adjust layout */
 }
+
+

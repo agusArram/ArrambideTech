@@ -4,7 +4,7 @@
 
 /* Hero Section */
 .portafolio-hero {
-  padding: 10rem 2rem 6rem;
+  padding: 8rem 2rem 4rem; /* Adjusted: Top padding accounts for fixed header */
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   text-align: center;
   position: relative;
@@ -46,7 +46,7 @@
 }
 
 .hero-title {
-  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-size: var(--fs-display); /* Standardized Size */
   font-weight: 800;
   line-height: 1.1;
   color: var(--text-primary);
@@ -61,7 +61,7 @@
 }
 
 .hero-description {
-  font-size: 1.125rem;
+  font-size: 1.125rem; /* Reduced from 1.125rem (keep consistent) */
   line-height: 1.7;
   color: var(--text-secondary);
   max-width: 600px;
@@ -114,16 +114,16 @@
 
 /* Proyectos Section */
 .proyectos-section {
-  padding: 6rem 2rem;
+  padding: var(--space-lg) 2rem; /* Standardized Padding */
   background: var(--bg-primary);
   min-height: 60vh;
 }
 
 .proyectos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Optimized min-width */
   gap: 2.5rem;
-  max-width: 1400px;
+  max-width: var(--container-width);
   margin: 0 auto;
 }
 
@@ -486,86 +486,4 @@
   }
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .proyectos-grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2rem;
-  }
-}
 
-@media (max-width: 768px) {
-  .portafolio-hero {
-    padding: 8rem 1.5rem 4rem;
-  }
-
-  .filter-section {
-    padding: 2rem 1.5rem;
-    position: relative;
-    top: 0;
-  }
-
-  .filter-buttons {
-    gap: 0.5rem;
-  }
-
-  .filter-btn {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.8125rem;
-  }
-
-  .proyectos-section {
-    padding: 4rem 1.5rem;
-  }
-
-  .proyectos-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .stats-section {
-    padding: 4rem 1.5rem;
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .stat-card {
-    padding: 2rem;
-  }
-
-  .cta-section {
-    padding: 4rem 1.5rem;
-  }
-
-  .proyecto-overlay {
-    transform: translateY(0);
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 100%);
-  }
-}
-
-@media (max-width: 480px) {
-  .proyecto-content {
-    padding: 1.5rem;
-  }
-
-  .proyecto-header {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .proyecto-anio {
-    align-self: flex-start;
-  }
-
-  .propio-badge {
-    font-size: 0.75rem;
-    padding: 0.375rem 0.75rem;
-  }
-
-  .stat-number {
-    font-size: 2rem;
-  }
-}

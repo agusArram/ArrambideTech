@@ -67,7 +67,7 @@ export class PortafolioComponent {
     {
       titulo: 'SortProject',
       descripcion: 'Sistema de gestión híbrido (Desktop + Web). Control completo de stock, ventas, compras, gastos y reportes. Funciona offline con sincronización en la nube. Versión web para vender desde el celular.',
-      imagenUrl: '',
+      imagenUrl: '/assets/App/Menu.png',
       url: 'https://sortproject.arrambidetech.com',
       esProductoPropio: true,
       tecnologias: ['JavaFX', 'SQLite', 'Angular', 'PostgreSQL (Supabase)'],
