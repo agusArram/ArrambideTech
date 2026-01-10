@@ -133,30 +133,27 @@
 .caracteristica-card {
   background: var(--bg-card);
   border-radius: 16px;
-  padding: 2.5rem;
+  padding: var(--space-md); /* Scalable padding */
   border: 1px solid var(--border-default);
   transition: all 0.3s ease;
 }
 
-.caracteristica-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 30px var(--accent-glow);
-  border-color: var(--accent-primary);
-}
+/* ... */
 
 .caracteristica-icono {
-  font-size: 4rem;
+  font-size: var(--icon-size-lg); /* Scalable Icon */
   margin-bottom: 1.5rem;
   filter: drop-shadow(0 0 15px rgba(0, 217, 255, 0.3));
 }
 
 .caracteristica-titulo {
-  font-size: 1.5rem;
+  font-size: var(--fs-card-title); /* Scalable Title */
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 1rem;
   font-family: 'Inter Tight', sans-serif;
 }
+
 
 .caracteristica-descripcion {
   font-size: 1.1rem;
@@ -176,9 +173,10 @@
   margin: 0 auto;
   background: var(--bg-card);
   border-radius: 16px;
-  padding: 2.5rem;
+  padding: var(--space-md); /* Scalable Padding */
   border: 1px solid var(--border-default);
 }
+
 
 .requisito-item {
   padding: 1.5rem 0;
@@ -243,7 +241,7 @@
 }
 
 .cta-text {
-  font-size: 1.2rem;
+  font-size: var(--fs-subtitle); /* Scalable */
   line-height: 1.7;
   color: var(--text-secondary);
   margin-bottom: 2rem;
@@ -253,10 +251,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem 2.5rem;
+  padding: var(--btn-padding); /* Scalable */
   border-radius: 12px;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: var(--btn-fs); /* Scalable */
   text-decoration: none;
   background: var(--accent-primary);
   color: var(--bg-primary);
@@ -264,6 +262,7 @@
   box-shadow: 0 0 30px var(--accent-glow);
   transition: all 0.3s ease;
 }
+
 
 .btn-primary-large:hover {
   background: var(--accent-primary-light);

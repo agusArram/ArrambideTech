@@ -89,7 +89,76 @@
 .modal-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Show the whole image */
+  background: var(--bg-elevated); /* Subtle background for empty areas */
+}
+
+/* Modal Gallery (Multiple Images) */
+.modal-gallery {
+  margin-bottom: 2rem;
+  background: var(--bg-elevated);
+  border-radius: 1rem;
+  padding: 1rem; /* Padding around images */
+}
+
+.gallery-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  height: 450px; /* Fixed height for consistency */
+  cursor: grab;
+}
+
+.gallery-scroll.active {
+  cursor: grabbing;
+  scroll-snap-type: none; /* Disable snap while dragging for smoothness */
+}
+
+.gallery-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gallery-scroll::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+}
+
+.gallery-scroll::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 10px;
+}
+
+.gallery-item {
+  flex: 0 0 auto; /* Allow image to size itself based on height */
+  width: auto;    /* Natural width based on aspect ratio */
+  height: 100%;   /* Fill container height */
+  max-width: 100%; /* Safety cap */
+  object-fit: contain;
+  border-radius: 0.5rem;
+  scroll-snap-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.modal-image.clickable {
+  cursor: pointer;
+}
+
+.gallery-tip {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-weight: 500;
 }
 
 .modal-features {

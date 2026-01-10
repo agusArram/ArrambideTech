@@ -472,10 +472,13 @@ img, video, iframe {
    ========================================================================== */
 @media (min-width: 768px) {
   /* Restore Multi-Column Layouts for Tablets & Up */
-  .footer-content { grid-template-columns: 2fr 1fr 1fr 1fr; }
-  .content-grid { grid-template-columns: 2fr 1fr; } /* Contact Page */
+  .footer-content { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
+  .content-grid { grid-template-columns: 2fr 1fr !important; } /* Contact Page */
   
-  /* Shared Layout Logic */
+  /* FORCE 2x2 for Services to avoid stretching on wide screens */
+  .servicios-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  
+  /* Shared Logic */
   .hero-cta, .hero-trust { flex-direction: row; justify-content: flex-start; }
   .hero-actions { flex-direction: row; justify-content: flex-start; } /* Aligned Left */
 
@@ -506,7 +509,7 @@ img, video, iframe {
 
 @media (max-width: 1023px) {
   /* Specific Constraints for Tablets & Mobile */
-  .servicios-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .servicios-grid { grid-template-columns: 1fr; } /* Stack on smaller tablets if needed, or keep 2x2. Let's go 1fr for safety on portrait. */
   .servicio-card.popular { transform: scale(1); }
   .servicio-card.popular:hover { transform: scale(1) translateY(-8px); }
   .proyectos-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }

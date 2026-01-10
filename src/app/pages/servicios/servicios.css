@@ -47,11 +47,17 @@
 }
 
 .hero-title {
-  font-size: var(--fs-display); /* Standardized Size */
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem); /* Slightly smaller than global */
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.2;
   color: var(--text-primary);
   margin-bottom: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    white-space: nowrap; /* Force single line on large screens */
+  }
 }
 
 .hero-highlight {
@@ -59,7 +65,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  display: inline; /* Ensure it stays in the same line */
 }
+
 
 .hero-description {
   font-size: 1.125rem; /* Reduced from 1.25rem */
@@ -80,10 +88,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Optimized min-width */
   gap: 2rem;
-  max-width: var(--container-width);
+  max-width: 1100px; /* Limited width for better balance on Full HD */
   margin: 0 auto;
   overflow: visible;
 }
+
 
 .servicio-card {
   background: var(--bg-card);
@@ -139,102 +148,229 @@
   white-space: nowrap;
 }
 
-.servicio-header {
-  margin-bottom: 1.5rem;
+/* Card Header Layout */
+
+.card-header-row {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-bottom: 1rem;
+
 }
+
+
 
 .servicio-icon {
-  display: none;
+
+  width: 48px;
+
+  height: 48px;
+
+  background: var(--bg-secondary);
+
+  border-radius: 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: var(--accent-primary);
+
+  flex-shrink: 0;
+
+  margin-bottom: 0; /* Override old margin */
+
 }
+
+
 
 .servicio-titulo {
-  font-size: var(--fs-card-title); /* Scalable */
+
+  font-size: 1.1rem; /* Balanced title */
+
   font-weight: 700;
+
   color: var(--text-primary);
-  margin-bottom: 1rem;
+
+  line-height: 1.2;
+
+  margin-bottom: 0; /* Remove margin, handled by gap */
+
 }
 
+
+
 .servicio-descripcion {
-  font-size: var(--fs-body); /* Scalable */
+
+  font-size: var(--fs-small); /* Crisp description */
+
   line-height: 1.6;
+
   color: var(--text-secondary);
+
+  margin-bottom: 1.5rem;
+
+  min-height: 3rem; /* Visual alignment */
+
 }
+
+
+
+/* Feature Grid (Dashboard Style) */
+
+.features-grid-container {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 0.75rem;
+
+  margin-bottom: 1.5rem;
+
+}
+
+
+
+.feature-pill {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  font-size: 0.8rem;
+
+  font-weight: 500;
+
+  color: var(--text-secondary);
+
+  background: var(--bg-secondary);
+
+  padding: 0.4rem 0.75rem;
+
+  border-radius: 6px;
+
+  border: 1px solid var(--border-default);
+
+}
+
+
+
+.check-mini {
+
+  width: 14px;
+
+  height: 14px;
+
+  color: var(--accent-primary);
+
+  flex-shrink: 0;
+
+}
+
+
+
+/* Popular Card Adjustments */
+
+.servicio-card.popular .feature-pill {
+
+  background: rgba(255, 255, 255, 0.1);
+
+  border-color: rgba(255, 255, 255, 0.1);
+
+  color: white;
+
+}
+
+
+
+.servicio-card.popular .check-mini {
+
+  color: white;
+
+}
+
 
 
 .servicio-body {
-  flex: 1;
-  margin-bottom: 2rem;
+
+  flex: 1; /* Pushes footer down */
+
+  margin-bottom: 0; /* Remove old margin */
+
 }
 
-.caracteristicas-lista {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
-.caracteristica-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.75rem 0;
-  border-top: 1px solid var(--border-default);
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-}
-
-.servicio-card.popular .caracteristica-item {
-  border-color: var(--border-default);
-}
-
-.caracteristica-item:first-child {
-  border-top: none;
-}
-
-.check-icon {
-  flex-shrink: 0;
-  color: var(--accent-primary);
-  margin-top: 2px;
-}
-
-.servicio-card.popular .check-icon {
-  color: var(--accent-primary);
-}
 
 .servicio-footer {
+
   display: flex;
+
   flex-direction: column;
+
   gap: 1rem;
+
   padding-top: 1.5rem;
-  border-top: 2px solid var(--border-default);
+
+  border-top: 1px solid var(--border-default);
+
+  margin-top: auto;
+
 }
+
+
 
 .servicio-card.popular .servicio-footer {
-  border-color: var(--border-default);
+
+  border-color: rgba(255, 255, 255, 0.2);
+
 }
 
-.precio-tag {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--accent-primary);
-  text-align: center;
-}
+
 
 .btn-cotizar {
+
   display: inline-flex;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 0.5rem;
-  padding: 1rem 1.5rem;
+
+  padding: 0.75rem 1.5rem; /* Compact padding */
+
   background: var(--accent-primary);
+
   color: white;
+
   border: none;
+
   border-radius: 0.75rem;
-  font-size: 1rem;
+
+  font-size: 0.95rem;
+
   font-weight: 600;
+
   text-decoration: none;
+
   transition: all 0.3s ease;
+
   cursor: pointer;
+
+  width: 100%; /* Full Width Button */
+
 }
+
+
 
 .btn-cotizar:hover {
   background: var(--accent-primary-dark);
@@ -291,77 +427,123 @@
   margin: 0 auto;
 }
 
+/* Proceso Flow (Horizontal Layout) */
+
 .proceso-timeline {
-  max-width: 900px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 2rem;
+
+  max-width: var(--container-width);
+
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem; /* Reduced from 3rem */
+
+  position: relative;
+
 }
+
+
 
 .paso-item {
-  display: grid;
-  grid-template-columns: 80px 1fr; /* Optimized column width */
-  gap: 2rem;
-  position: relative;
-}
 
+  display: flex;
 
-.paso-item::after {
-  content: '';
-  position: absolute;
-  left: 50px;
-  top: 100px;
-  bottom: -50px;
-  width: 2px;
-  background: var(--border-default);
-}
+  flex-direction: column;
 
-.paso-item:last-child::after {
-  display: none;
-}
+  align-items: center; /* Center everything horizontally */
 
-.paso-numero {
-  font-size: 2.5rem; /* Reduced from 3rem */
-  font-weight: 800;
-  color: var(--accent-primary);
-  opacity: 0.3;
+  justify-content: flex-start;
+
   text-align: center;
+
+  position: relative;
+
+  z-index: 1; 
+
+  gap: 1rem;
+
 }
+
+
+
+
+
+
+/* Final cleanup of legacy vertical lines */
+.paso-item::after {
+  display: none !important;
+}
+
 
 .paso-content {
-  background: var(--bg-card);
-  border: 1px solid var(--border-default);
-  border-radius: 1.5rem;
-  padding: var(--space-md); /* Scalable */
-  transition: all 0.3s ease;
+  background: transparent; /* Open layout, no card bg */
+  border: none;
+  padding: 0;
+  box-shadow: none;
 }
 
 .paso-icon {
-  width: 50px; /* Standardized */
+  width: 50px;
   height: 50px;
-  background: var(--bg-secondary);
-  border-radius: 1rem;
+  background: var(--bg-card); /* White/Dark bg to hide line behind */
+  border: 2px solid var(--accent-primary); /* Accent border */
+  border-radius: 50%; /* Circular */
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent-primary);
-  margin-bottom: 1rem;
-  font-size: var(--icon-size-md); /* Scalable Icon */
+  margin-bottom: 0.5rem;
+  margin-left: auto; /* Force Center */
+  margin-right: auto; /* Force Center */
+  font-size: var(--icon-size-md);
+  box-shadow: 0 0 0 8px var(--bg-secondary); /* "Margin" to cut line visually */
+}
+
+
+.paso-numero {
+  display: none; /* Hide big number, implied by order */
 }
 
 .paso-titulo {
-  font-size: var(--fs-card-title); /* Scalable */
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
 .paso-descripcion {
-  font-size: var(--fs-body); /* Scalable */
-  line-height: 1.7;
+  font-size: var(--fs-small);
+  line-height: 1.6;
   color: var(--text-secondary);
 }
+
+/* Responsive: Stack on Tablet/Mobile */
+@media (max-width: 1023px) {
+  .proceso-timeline {
+    grid-template-columns: 1fr;
+    gap: 3.5rem; /* Increased gap between items */
+  }
+  
+  .paso-item {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    gap: 2rem; /* Significantly increased gap for mobile */
+  }
+  
+  .paso-icon {
+    margin-bottom: 15px; /* Added spacing below icon */
+    margin-left: 20px;   /* Added spacing from the left edge */
+    margin-right: 0; 
+    flex-shrink: 0;
+    box-shadow: none;
+  }
+
+}
+
 
 
 /* CTA Section */

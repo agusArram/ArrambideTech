@@ -26,27 +26,31 @@
             <div class="popular-badge">MÁS SOLICITADO</div>
           }
 
-          <div class="servicio-header">
+          <div class="card-header-row">
             <div class="servicio-icon">
-              <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="servicio.icono"/>
               </svg>
             </div>
-            <h3 class="servicio-titulo">{{ servicio.titulo }}</h3>
-            <p class="servicio-descripcion">{{ servicio.descripcion }}</p>
+            <div>
+              <h3 class="servicio-titulo">{{ servicio.titulo }}</h3>
+              <!-- Optional subtitle could go here -->
+            </div>
           </div>
 
+          <p class="servicio-descripcion">{{ servicio.descripcion }}</p>
+
           <div class="servicio-body">
-            <ul class="caracteristicas-lista">
+            <div class="features-grid-container">
               @for (caracteristica of servicio.caracteristicas; track caracteristica) {
-                <li class="caracteristica-item">
-                  <svg class="check-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                <div class="feature-pill">
+                  <svg class="check-mini" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
                   </svg>
                   <span>{{ caracteristica }}</span>
-                </li>
+                </div>
               }
-            </ul>
+            </div>
           </div>
 
           <div class="servicio-footer">
@@ -62,6 +66,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- Proceso de Trabajo -->
 <section class="proceso-section">

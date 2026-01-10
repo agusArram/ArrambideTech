@@ -1,5 +1,5 @@
 @if (isOpen && content) {
-  <div class="modal-backdrop" (click)="onBackdropClick($event)">
+  <div class="modal-backdrop" (click)="onBackdropClick($event)" (mousedown)="onBackdropMouseDown($event)">
     <div class="modal-container">
       <button class="modal-close" (click)="closeModal()" aria-label="Cerrar modal">
         <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -13,9 +13,21 @@
           <p class="modal-description">{{ content.description }}</p>
         </div>
 
-        @if (content.imageUrl) {
-          <div class="modal-image">
-            <img [src]="content.imageUrl" [alt]="content.title">
+        @if (content.imageUrl || (content.images && content.images.length > 0)) {
+          <div class="modal-gallery">
+            @if (content.images && content.images.length > 0) {
+              <div class="gallery-scroll" #scrollContainer 
+                   (mousedown)="onMouseDown($event)">
+                @for (img of content.images; track img; let i = $index) {
+                  <img [src]="img" [alt]="content.title" class="gallery-item clickable" (click)="onImageClick(i)">
+                }
+              </div>
+              <p class="gallery-tip">⬅️ Desliza para ver más fotos ➡️ (Toca para ampliar)</p>
+            } @else {
+              <div class="modal-image clickable" (click)="onImageClick(0)">
+                <img [src]="content.imageUrl" [alt]="content.title">
+              </div>
+            }
           </div>
         }
 

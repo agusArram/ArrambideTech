@@ -38,23 +38,28 @@
     <div class="proyectos-grid">
       @for (proyecto of proyectosFiltrados; track proyecto.titulo) {
         <article class="proyecto-card">
-          <!-- Badge para productos propios -->
-          @if (proyecto.esProductoPropio) {
-            <div class="propio-badge">⭐ Producto Propio</div>
-          }
-
           <!-- Imagen del proyecto -->
           <div class="proyecto-imagen">
-            @if (proyecto.imagenUrl) {
-              <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo">
-            } @else {
-              <div class="imagen-placeholder">
-                <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                </svg>
-                <p class="placeholder-text">{{ proyecto.categoria }}</p>
+            @if (proyecto.orientacion === 'vertical' && proyecto.imagenes && proyecto.imagenes.length >= 2) {
+              <!-- Layout para móviles: Dos imágenes verticales -->
+              <div class="dual-image-container">
+                <img [src]="proyecto.imagenes[0]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy">
+                <img [src]="proyecto.imagenes[1]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy">
               </div>
+            } @else {
+              <!-- Layout estándar horizontal -->
+              @if (proyecto.imagenUrl) {
+                <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo" loading="lazy">
+              } @else {
+                <div class="imagen-placeholder">
+                  <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
+                  <p class="placeholder-text">{{ proyecto.categoria }}</p>
+                </div>
+              }
             }
+            
             <div class="proyecto-overlay">
               <div class="overlay-content">
                 <h3 class="overlay-titulo">{{ proyecto.titulo }}</h3>
@@ -66,7 +71,14 @@
           <!-- Contenido del proyecto -->
           <div class="proyecto-content">
             <div class="proyecto-header">
-              <h3 class="proyecto-titulo">{{ proyecto.titulo }}</h3>
+              <h3 class="proyecto-titulo">
+                {{ proyecto.titulo }}
+                @if (proyecto.esProductoPropio) {
+                  <svg class="exclusive-icon" title="Producto Exclusivo" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                }
+              </h3>
               <span class="proyecto-anio">{{ proyecto.anio }}</span>
             </div>
 
@@ -182,7 +194,44 @@
 <app-modal
   [isOpen]="isModalOpen()"
   [content]="modalContent()"
-  (close)="closeModal()">
+  (close)="closeModal()"
+  (imageClick)="openLightbox($event.images, $event.index)">
 </app-modal>
+
+<!-- Image Lightbox (Restored) -->
+@if (isLightboxOpen()) {
+  <div class="lightbox-backdrop" 
+       (click)="closeLightbox()"
+       (mousedown)="onDragStart($event)"
+       (mouseup)="onDragEnd($event)"
+       (touchstart)="onDragStart($event)"
+       (touchend)="onDragEnd($event)">
+    <button class="lightbox-close" (click)="closeLightbox()">
+      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <button class="lightbox-nav prev" (click)="prevImage($event)">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+
+      <img [src]="currentProjectImages()[currentImageIndex()]" alt="Project Screenshot" class="lightbox-image">
+
+      <button class="lightbox-nav next" (click)="nextImage($event)">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+      
+      <div class="lightbox-counter">
+        {{ currentImageIndex() + 1 }} / {{ currentProjectImages().length }}
+      </div>
+    </div>
+  </div>
+}
 
 <app-footer></app-footer>
