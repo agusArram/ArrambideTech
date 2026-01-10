@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
+import { ModalComponent, ModalContent } from '../../components/modal/modal';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -12,7 +13,7 @@ interface Proyecto {
   esProductoPropio: boolean;
   tecnologias: string[];
   categoria: string;
-  anio: number;
+  anio: string;
 }
 
 @Component({
@@ -22,76 +23,90 @@ interface Proyecto {
     CommonModule,
     RouterLink,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ModalComponent
   ],
   templateUrl: './portafolio.html',
   styleUrl: './portafolio.css'
 })
 export class PortafolioComponent {
+  protected readonly isModalOpen = signal(false);
+  protected modalContent = signal<ModalContent | null>(null);
+
+  protected readonly gestionEmpleadosContent: ModalContent = {
+    title: 'Gestión de Empleados',
+    description: 'Sistema de control de asistencia inteligente para empresas. Automatiza el registro de entradas y salidas de tu personal con tecnología Arduino.',
+    features: [
+      'Control de asistencia con PIN personalizado por empleado',
+      'Integración con Arduino y control remoto',
+      'Reportes automáticos por email mensuales',
+      'Registro de licencias, vacaciones y cubiertas',
+      'Próximamente: Lectura de huella dactilar',
+      'Base de datos segura en la nube'
+    ],
+    ctaText: 'Me interesa',
+    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Me%20interesa%20el%20sistema%20de%20Gestión%20de%20Empleados'
+  };
+
+  protected readonly habitTrackerContent: ModalContent = {
+    title: 'HabitTracker',
+    description: 'Aplicación nativa Android para seguimiento de hábitos y rutinas diarias con sistema de rachas y recordatorios personalizables.',
+    features: [
+      'Seguimiento de hábitos diarios y semanales',
+      'Gráficos de progreso visual',
+      'Sistema de rachas para mantener la motivación',
+      'Recordatorios personalizables',
+      'Estadísticas mensuales y anuales',
+      'Interfaz moderna con Material Design'
+    ],
+    ctaText: 'Hablemos de tu app',
+    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Tengo%20una%20idea%20para%20una%20app%20Android'
+  };
+
   proyectos: Proyecto[] = [
     {
       titulo: 'SortProject',
-      descripcion: 'Sistema completo de gestion de stock, ventas y facturacion para comercios. Software desktop desarrollado con Electron, incluyendo base de datos SQLite, sistema de reportes avanzado, control de inventario en tiempo real, modulo de facturacion integrado y panel de estadisticas.',
+      descripcion: 'Sistema de gestión híbrido (Desktop + Web). Control completo de stock, ventas, compras, gastos y reportes. Funciona offline con sincronización en la nube. Versión web para vender desde el celular.',
       imagenUrl: '',
       url: 'https://sortproject.arrambidetech.com',
       esProductoPropio: true,
-      tecnologias: ['Electron', 'Angular', 'SQLite', 'TypeScript'],
+      tecnologias: ['JavaFX', 'SQLite', 'Angular', 'PostgreSQL (Supabase)'],
       categoria: 'Desktop App',
-      anio: 2024
+      anio: '2025-2026'
     },
     {
-      titulo: 'Sistema Administrativo Empresarial',
-      descripcion: 'Plataforma web integral para la administracion de empresas. Incluye gestion de recursos humanos, control de proyectos, sistema de documentacion, facturacion y reportes avanzados. Desarrollado con tecnologias modernas y escalables.',
+      titulo: 'Gestión de Empleados',
+      descripcion: 'Sistema de control de asistencia con integración de Hardware (Control remoto/Arduino). Reportes automáticos por email, gestión de licencias, vacaciones y cubiertas. Próximamente: huella dactilar.',
       imagenUrl: '',
       url: '#',
+      esProductoPropio: true,
+      tecnologias: ['Java', 'Arduino', 'Serial Communication'],
+      categoria: 'Desktop App',
+      anio: '2025-2026'
+    },
+    {
+      titulo: 'Mezuri Carpintería',
+      descripcion: 'Landing page profesional con catálogo para carpintería a medida. Diseño moderno con galerías de fotos, efectos visuales y formulario de contacto integrado con WhatsApp.',
+      imagenUrl: '',
+      url: 'https://mezuricarpinteria.arrambidetech.com/',
       esProductoPropio: false,
-      tecnologias: ['Angular', 'Node.js', 'PostgreSQL', 'Material UI'],
+      tecnologias: ['Angular', 'TypeScript', 'CSS'],
       categoria: 'Web App',
-      anio: 2024
+      anio: '2025'
     },
     {
-      titulo: 'Tienda Online MultiProducto',
-      descripcion: 'E-commerce completo con sistema de pagos integrado, gestion de inventario en tiempo real, panel de administracion, sistema de envios y seguimiento de pedidos. Diseno responsive optimizado para conversion y ventas.',
+      titulo: 'HabitTracker',
+      descripcion: 'Aplicación nativa Android para seguimiento de hábitos y rutinas diarias. Gráficos de progreso semanal y mensual, sistema de rachas y recordatorios personalizables.',
       imagenUrl: '',
       url: '#',
-      esProductoPropio: false,
-      tecnologias: ['Next.js', 'React', 'Stripe', 'MongoDB'],
-      categoria: 'E-commerce',
-      anio: 2023
-    },
-    {
-      titulo: 'App Mobile de Servicios',
-      descripcion: 'Aplicacion movil multiplataforma para servicios bajo demanda. Incluye geolocalizacion en tiempo real, sistema de pagos integrado, chat en vivo, calificaciones y notificaciones push para usuarios y proveedores.',
-      imagenUrl: '',
-      url: '#',
-      esProductoPropio: false,
-      tecnologias: ['React Native', 'Firebase', 'Google Maps API'],
+      esProductoPropio: true,
+      tecnologias: ['Kotlin', 'Jetpack Compose', 'Android'],
       categoria: 'Mobile App',
-      anio: 2023
-    },
-    {
-      titulo: 'Software POS Comercial',
-      descripcion: 'Software desktop para punto de venta comercial. Gestion de ventas, impresion de tickets, control de stock, reportes de ventas diarias y mensuales. Funciona offline con sincronizacion automatica en la nube.',
-      imagenUrl: '',
-      url: '#',
-      esProductoPropio: false,
-      tecnologias: ['Electron', 'Vue.js', 'SQLite', 'AWS'],
-      categoria: 'Desktop App',
-      anio: 2023
-    },
-    {
-      titulo: 'Portal Web Corporativo',
-      descripcion: 'Plataforma web corporativa con sistema de gestion de contenidos, area de clientes, integracion con CRM, sistema de notificaciones y panel de analytics. Interfaz moderna y completamente responsive.',
-      imagenUrl: '',
-      url: '#',
-      esProductoPropio: false,
-      tecnologias: ['React', 'Django', 'PostgreSQL', 'Redis'],
-      categoria: 'Web App',
-      anio: 2022
+      anio: '2025-2026'
     }
   ];
 
-  categorias: string[] = ['Todos', 'Desktop App', 'Web App', 'E-commerce', 'Mobile App'];
+  categorias: string[] = ['Todos', 'Desktop App', 'Web App', 'Mobile App'];
   categoriaSeleccionada: string = 'Todos';
 
   get proyectosFiltrados(): Proyecto[] {
@@ -103,5 +118,40 @@ export class PortafolioComponent {
 
   filtrarPorCategoria(categoria: string): void {
     this.categoriaSeleccionada = categoria;
+  }
+
+  openModal(content: ModalContent): void {
+    this.modalContent.set(content);
+    this.isModalOpen.set(true);
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeModal(): void {
+    this.isModalOpen.set(false);
+    this.modalContent.set(null);
+    document.body.style.overflow = '';
+  }
+
+  openGestionEmpleadosModal(): void {
+    this.openModal(this.gestionEmpleadosContent);
+  }
+
+  openHabitTrackerModal(): void {
+    this.openModal(this.habitTrackerContent);
+  }
+
+  shouldOpenModal(proyecto: Proyecto): boolean {
+    return proyecto.titulo === 'Gestión de Empleados' || proyecto.titulo === 'HabitTracker';
+  }
+
+  handleProjectClick(proyecto: Proyecto, event: Event): void {
+    if (this.shouldOpenModal(proyecto)) {
+      event.preventDefault();
+      if (proyecto.titulo === 'Gestión de Empleados') {
+        this.openGestionEmpleadosModal();
+      } else if (proyecto.titulo === 'HabitTracker') {
+        this.openHabitTrackerModal();
+      }
+    }
   }
 }
