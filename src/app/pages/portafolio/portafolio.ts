@@ -35,7 +35,7 @@ export class PortafolioComponent {
   // Modal State
   protected readonly isModalOpen = signal(false);
   protected modalContent = signal<ModalContent | null>(null);
-  
+
   // Lightbox State
   protected readonly isLightboxOpen = signal(false);
   protected currentProjectImages = signal<string[]>([]);
@@ -133,10 +133,10 @@ export class PortafolioComponent {
       'Base de datos segura y confiable'
     ],
     images: [
-      '/assets/App/GestionEmpleados/Asistencia.png',
-      '/assets/App/GestionEmpleados/Empleados.png',
-      '/assets/App/GestionEmpleados/Historial.png',
-      '/assets/App/GestionEmpleados/Feriados.png'
+      '/assets/App/GestionEmpleados/Asistencia.webp',
+      '/assets/App/GestionEmpleados/Empleados.webp',
+      '/assets/App/GestionEmpleados/Historial.webp',
+      '/assets/App/GestionEmpleados/Feriados.webp'
     ],
     ctaText: 'Me interesa',
     ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Me%20interesa%20el%20sistema%20de%20Gestión%20de%20Empleados'
@@ -154,8 +154,8 @@ export class PortafolioComponent {
       'Interfaz moderna y rápida'
     ],
     images: [
-      '/assets/App/HabitTracker/Inicio.jpeg',
-      '/assets/App/HabitTracker/AgregarHabito.jpeg'
+      '/assets/App/HabitTracker/Inicio.webp',
+      '/assets/App/HabitTracker/AgregarHabito.webp'
     ],
     ctaText: 'Hablemos de tu app',
     ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Tengo%20una%20idea%20para%20una%20app%20Android'
@@ -165,8 +165,8 @@ export class PortafolioComponent {
     {
       titulo: 'SortProject',
       descripcion: 'Gestión total de stock y ventas. Incluye escáner de códigos de barras, generación de etiquetas e impresión. App web para vender desde el celular y versión PC para administración profunda.',
-      imagenUrl: '/assets/App/Menu.png',
-      imagenes: ['/assets/App/Menu.png'],
+      imagenUrl: '/assets/App/Menu.webp',
+      imagenes: ['/assets/App/Menu.webp'],
       orientacion: 'horizontal',
       url: 'https://sortproject.arrambidetech.com',
       esProductoPropio: true,
@@ -177,8 +177,8 @@ export class PortafolioComponent {
     {
       titulo: 'Control de Asistencia',
       descripcion: 'Sistema inteligente para empresas que buscan orden. Automatizá el registro de entradas y salidas de tu personal. Generá reportes mensuales de horas trabajadas con un solo clic.',
-      imagenUrl: '/assets/App/GestionEmpleados/Asistencia.png',
-      imagenes: ['/assets/App/GestionEmpleados/Asistencia.png'],
+      imagenUrl: '/assets/App/GestionEmpleados/Asistencia.webp',
+      imagenes: ['/assets/App/GestionEmpleados/Asistencia.webp'],
       orientacion: 'horizontal',
       url: '#',
       esProductoPropio: true,
@@ -189,8 +189,8 @@ export class PortafolioComponent {
     {
       titulo: 'Mezuri Carpintería',
       descripcion: 'Catálogo digital profesional para exhibir trabajos a medida. Un sitio web rápido y elegante diseñado para captar clientes y cerrar presupuestos directamente por WhatsApp.',
-      imagenUrl: '/assets/App/Mezuri/Hero.png',
-      imagenes: ['/assets/App/Mezuri/Hero.png'],
+      imagenUrl: '/assets/App/Mezuri/Hero.webp',
+      imagenes: ['/assets/App/Mezuri/Hero.webp'],
       orientacion: 'horizontal',
       url: 'https://mezuricarpinteria.arrambidetech.com/',
       esProductoPropio: false,
@@ -201,8 +201,8 @@ export class PortafolioComponent {
     {
       titulo: 'HabitTracker (App)',
       descripcion: 'Tu asistente personal en el celular. Una aplicación diseñada para organizar tu día a día, cumplir objetivos y mantener la motivación con gráficos de progreso simples y claros.',
-      imagenUrl: '/assets/App/HabitTracker/Inicio.jpeg', // Fallback
-      imagenes: ['/assets/App/HabitTracker/Inicio.jpeg', '/assets/App/HabitTracker/AgregarHabito.jpeg'],
+      imagenUrl: '/assets/App/HabitTracker/Inicio.webp', // Fallback
+      imagenes: ['/assets/App/HabitTracker/Inicio.webp', '/assets/App/HabitTracker/AgregarHabito.webp'],
       orientacion: 'vertical',
       url: '#',
       esProductoPropio: true,

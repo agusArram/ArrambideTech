@@ -201,7 +201,7 @@
   font-weight: 700;
   font-size: 1.1rem;
   background: var(--accent-primary);
-  color: var(--text-primary);
+  color: #0f172a;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -356,7 +356,6 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 700;
-  opacity: 0.8;
 }
 
 .dev-name {
@@ -478,7 +477,6 @@
   font-size: 0.95rem; /* Más chica que la pregunta */
   line-height: 1.6;
   color: var(--text-secondary);
-  opacity: 0.9;
   margin: 0;
   padding-left: calc(40px + 1rem);
 }

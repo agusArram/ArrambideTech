@@ -137,7 +137,7 @@
 
 .btn-primary-hero {
   background: var(--accent-primary);
-  color: var(--text-primary);
+  color: #0f172a;
   border: 2px solid var(--accent-primary);
 }
 
@@ -489,12 +489,13 @@
   top: 1rem;
   left: 1rem;
   background: var(--accent-primary);
-  color: white;
+  color: #0f172a;
   padding: 0.5rem 1rem;
-  border-radius: 2rem;
+  border-radius: 50px;
   font-size: var(--fs-small); /* Scalable */
   font-weight: 600;
   z-index: 2;
+  border: 1px solid var(--border-strong);
 }
 
 .project-placeholder {
@@ -592,7 +593,7 @@
 
 .btn-project-primary {
   background: var(--accent-primary);
-  color: var(--text-primary);
+  color: #0f172a;
   border: none;
 }
 
@@ -888,14 +889,14 @@
 .product-for {
   display: inline-block;
   font-size: var(--fs-small);
-  color: var(--text-muted);
-  font-weight: 500;
+  color: var(--text-secondary); /* Cambiado de text-muted para mejor contraste */
+  font-weight: 600; /* Un poco más de peso */
   background: var(--bg-secondary);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   text-align: center;
-  align-self: flex-start; /* Align left cleanly */
-  width: 100%; /* Full width looks better for lists */
+  align-self: flex-start;
+  width: 100%;
 }
 
 
@@ -906,7 +907,7 @@
   gap: 0.5rem;
   padding: 0.875rem 1.5rem;
   background: var(--accent-primary);
-  color: var(--text-primary);
+  color: #0f172a;
   border: none;
   border-radius: 0.75rem;
   font-size: 0.9375rem;
@@ -926,7 +927,7 @@
 
 .product-card.featured .btn-product {
   background: var(--accent-primary);
-  color: var(--text-primary);
+  color: #0f172a;
 }
 
 .product-card.featured .btn-product:hover {
@@ -1027,14 +1028,14 @@
   justify-content: center;
   gap: 0.75rem;
   padding: var(--btn-padding); /* Scalable */
-  background: #25D366;
+  background: #075E54; /* Verde WhatsApp profundo */
   color: white;
   border-radius: 0.75rem;
   font-size: var(--btn-fs); /* Scalable */
   font-weight: 700;
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 8px 24px rgba(7, 94, 84, 0.3);
 }
 
 .btn-whatsapp-large:hover {

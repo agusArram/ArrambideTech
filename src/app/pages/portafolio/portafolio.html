@@ -43,13 +43,13 @@
             @if (proyecto.orientacion === 'vertical' && proyecto.imagenes && proyecto.imagenes.length >= 2) {
               <!-- Layout para móviles: Dos imágenes verticales -->
               <div class="dual-image-container">
-                <img [src]="proyecto.imagenes[0]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy">
-                <img [src]="proyecto.imagenes[1]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy">
+                <img [src]="proyecto.imagenes[0]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy" width="400" height="800">
+                <img [src]="proyecto.imagenes[1]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy" width="400" height="800">
               </div>
             } @else {
               <!-- Layout estándar horizontal -->
               @if (proyecto.imagenUrl) {
-                <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo" loading="lazy">
+                <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo" loading="lazy" width="800" height="500">
               } @else {
                 <div class="imagen-placeholder">
                   <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,7 +62,7 @@
             
             <div class="proyecto-overlay">
               <div class="overlay-content">
-                <h3 class="overlay-titulo">{{ proyecto.titulo }}</h3>
+                <h2 class="overlay-titulo">{{ proyecto.titulo }}</h2>
                 <p class="overlay-categoria">{{ proyecto.categoria }} • {{ proyecto.anio }}</p>
               </div>
             </div>
@@ -71,14 +71,14 @@
           <!-- Contenido del proyecto -->
           <div class="proyecto-content">
             <div class="proyecto-header">
-              <h3 class="proyecto-titulo">
+              <h2 class="proyecto-titulo">
                 {{ proyecto.titulo }}
                 @if (proyecto.esProductoPropio) {
                   <svg class="exclusive-icon" title="Producto Exclusivo" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                   </svg>
                 }
-              </h3>
+              </h2>
               <span class="proyecto-anio">{{ proyecto.anio }}</span>
             </div>
 

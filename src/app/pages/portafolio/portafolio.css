@@ -112,7 +112,7 @@
 
 .filter-btn.active {
   background: var(--accent-primary);
-  color: white;
+  color: #0f172a;
   border-color: var(--accent-primary);
 }
 
@@ -165,7 +165,7 @@
   padding: 0.5rem 1rem;
   border-radius: 50px;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700; /* Un poco más de peso */
   z-index: 3;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -236,8 +236,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-  padding: 2rem 1.5rem 1.5rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, transparent 100%);
+  padding: 2.5rem 1.5rem 1.5rem;
   transform: translateY(100%);
   transition: transform 0.3s ease;
 }
@@ -258,7 +258,7 @@
 
 .overlay-categoria {
   font-size: var(--fs-small); /* Scalable */
-  opacity: 0.9;
+  opacity: 1; /* Eliminada opacidad para contraste */
 }
 
 
@@ -334,7 +334,7 @@
 
 .proyecto-card:hover .tech-tag {
   background: var(--accent-primary);
-  color: white;
+  color: #0f172a;
   border-color: var(--accent-primary);
 }
 
@@ -350,7 +350,7 @@
   gap: 0.5rem;
   padding: var(--btn-padding); /* Scalable */
   background: var(--accent-primary);
-  color: var(--text-primary);
+  color: #0f172a;
   border: none;
   border-radius: 0.75rem;
   font-size: var(--btn-fs); /* Scalable */
@@ -503,7 +503,7 @@
   gap: 0.75rem;
   padding: var(--btn-padding); /* Scalable */
   background: var(--accent-primary);
-  color: var(--text-primary);
+  color: #0f172a;
   border-radius: 0.75rem;
   font-size: var(--btn-fs); /* Scalable */
   font-weight: 700;
