@@ -89,11 +89,10 @@
 
 .servicios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Optimized min-width */
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  max-width: 1100px; /* Limited width for better balance on Full HD */
+  max-width: 1000px;
   margin: 0 auto;
-  overflow: visible;
 }
 
 
@@ -353,7 +352,7 @@
 
   background: var(--accent-primary);
 
-  color: var(--text-primary);
+  color: #0f172a;
 
   border: none;
 
@@ -383,7 +382,7 @@
 
 .servicio-card.popular .btn-cotizar {
   background: var(--accent-primary);
-  color: var(--text-primary);
+  color: #0f172a;
 }
 
 .servicio-card.popular .btn-cotizar:hover {
@@ -593,7 +592,7 @@
   gap: 0.75rem;
   padding: var(--btn-padding); /* Scalable */
   background: var(--accent-primary);
-  color: var(--text-primary);
+  color: #0f172a;
   border-radius: 0.75rem;
   font-size: var(--btn-fs); /* Scalable */
   font-weight: 700;
