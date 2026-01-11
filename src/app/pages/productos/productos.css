@@ -10,7 +10,7 @@
 
 /* Hero Section */
 .producto-hero {
-  padding: 8rem 1.5rem 4rem; /* Adjusted */
+  padding: 8rem 2rem 4rem; /* Horizontal padding for desktop */
   background: var(--bg-primary);
   text-align: center;
 }
@@ -111,7 +111,7 @@
 
 /* Características Detalladas */
 .caracteristicas-detalladas {
-  padding: var(--space-lg) 1.5rem; /* Standardized Padding */
+  padding: var(--space-lg) 2rem; /* Horizontal padding for desktop */
   background: var(--bg-secondary);
 }
 
@@ -164,7 +164,7 @@
 
 /* Requisitos */
 .requisitos {
-  padding: var(--space-lg) 1.5rem; /* Standardized Padding */
+  padding: var(--space-lg) 2rem; /* Horizontal padding for desktop */
   background: var(--bg-primary);
 }
 
@@ -217,7 +217,7 @@
 
 /* CTA Final */
 .cta-final {
-  padding: var(--space-lg) 1.5rem; /* Standardized Padding */
+  padding: var(--space-lg) 2rem; /* Horizontal padding for desktop */
   background: var(--bg-secondary);
 }
 
@@ -270,4 +270,198 @@
   box-shadow: 0 0 40px var(--accent-glow);
 }
 
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES - MOBILE & TABLET OPTIMIZATION
+   ========================================================================== */
+
+/* Tablet: 768px - 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .producto-hero {
+    padding: 7rem 1.5rem 3.5rem;
+  }
+
+  .caracteristicas-detalladas,
+  .requisitos,
+  .cta-final {
+    padding: 3rem 1.5rem;
+  }
+
+  .caracteristicas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile: < 768px */
+@media (max-width: 767px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .producto-hero {
+    padding: 6rem 0.75rem 2.5rem;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .version {
+    font-size: 1rem;
+  }
+
+  .descripcion {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    width: 100%;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+
+  .caracteristicas-detalladas,
+  .requisitos,
+  .cta-final {
+    padding: 2.5rem 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .caracteristicas-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .caracteristica-card {
+    padding: 1.5rem;
+  }
+
+  .caracteristica-icono {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .caracteristica-titulo {
+    font-size: 1.2rem;
+  }
+
+  .caracteristica-descripcion {
+    font-size: 0.95rem;
+  }
+
+  .requisitos-list {
+    padding: 1.5rem;
+  }
+
+  .requisito-item {
+    padding: 1.25rem 0;
+  }
+
+  .requisito-label {
+    font-size: 1rem;
+  }
+
+  .requisito-valor {
+    font-size: 0.95rem;
+  }
+
+  .cta-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .cta-title {
+    font-size: 1.75rem;
+  }
+
+  .cta-text {
+    font-size: 1rem;
+  }
+
+  .btn-primary-large {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Small Mobile: < 480px */
+@media (max-width: 480px) {
+  .producto-hero {
+    padding: 5rem 0.5rem 2rem;
+  }
+
+  .badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .version {
+    font-size: 0.95rem;
+  }
+
+  .descripcion {
+    font-size: 0.95rem;
+  }
+
+  .caracteristicas-detalladas,
+  .requisitos,
+  .cta-final {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .caracteristica-card {
+    padding: 1.25rem;
+  }
+
+  .caracteristica-icono {
+    font-size: 1.75rem;
+  }
+
+  .caracteristica-titulo {
+    font-size: 1.1rem;
+  }
+
+  .caracteristica-descripcion {
+    font-size: 0.9rem;
+  }
+
+  .requisitos-list {
+    padding: 1.25rem;
+  }
+
+  .cta-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .cta-title {
+    font-size: 1.5rem;
+  }
+
+  .cta-text {
+    font-size: 0.95rem;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-primary-large {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.25rem;
+  }
+}
 

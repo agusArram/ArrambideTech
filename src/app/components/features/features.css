@@ -3,7 +3,7 @@
 }
 
 .features {
-  padding: var(--space-lg) 1.5rem; /* Standardized Padding */
+  padding: var(--space-lg) 2rem; /* Horizontal padding for desktop */
   background: var(--bg-secondary);
   position: relative;
 }
@@ -173,6 +173,88 @@
 
 /* Todos los estilos .features-cta, .cta-final-card, .cta-title, etc. se eliminaron */
 
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES - MOBILE OPTIMIZATION
+   ========================================================================== */
 
+/* Mobile: < 768px */
+@media (max-width: 767px) {
+  .features {
+    padding: 2.5rem 0.75rem;
+  }
 
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .feature-card {
+    padding: 1.25rem;
+  }
+
+  .feature-header {
+    gap: 0.5rem;
+  }
+
+  .feature-icon {
+    font-size: 1.5rem;
+  }
+
+  .feature-title {
+    font-size: 1.1rem;
+  }
+
+  .feature-description {
+    font-size: 0.9rem;
+  }
+
+  .feature-benefit {
+    font-size: 0.85rem;
+    padding: 0.625rem 0.875rem;
+  }
+}
+
+/* Small Mobile: < 480px */
+@media (max-width: 480px) {
+  .features {
+    padding: 2rem 0.5rem;
+  }
+
+  .section-badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .feature-card {
+    padding: 1rem;
+  }
+
+  .feature-title {
+    font-size: 1rem;
+  }
+
+  .feature-description {
+    font-size: 0.875rem;
+  }
+}
 

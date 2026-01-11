@@ -355,27 +355,37 @@ img, video, iframe {
 /* Mobile and Tablets Portrait: < 768px */
 @media (max-width: 767px) {
   .container {
-    padding: 0 1rem;
+    padding: 0 0.75rem;
   }
 
   section {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
   }
 
-  h1 { font-size: clamp(1.75rem, 8vw, 3rem); }
-  h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); }
-  h3 { font-size: clamp(1.25rem, 5vw, 2rem); }
+  h1 { font-size: clamp(1.5rem, 7vw, 2.5rem); }
+  h2 { font-size: clamp(1.25rem, 5.5vw, 2rem); }
+  h3 { font-size: clamp(1.125rem, 4.5vw, 1.75rem); }
   h4 { font-size: 1rem; }
-  p { font-size: 0.9375rem; }
+  p { font-size: 0.9375rem; line-height: 1.6; }
 }
 
 /* Small Mobile: < 480px */
 @media (max-width: 480px) {
-  h1 { font-size: clamp(1.5rem, 7vw, 2.5rem); }
-  h2 { font-size: clamp(1.25rem, 6vw, 2rem); }
-  h3 { font-size: clamp(1.125rem, 5vw, 1.75rem); }
-  p { font-size: 0.875rem; }
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  section {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  h1 { font-size: clamp(1.35rem, 6.5vw, 2.25rem); }
+  h2 { font-size: clamp(1.15rem, 5.5vw, 1.85rem); }
+  h3 { font-size: clamp(1rem, 4.5vw, 1.5rem); }
+  h4 { font-size: 0.95rem; }
+  p { font-size: 0.875rem; line-height: 1.55; }
 }
 
 /* ==========================================================================
@@ -386,16 +396,11 @@ img, video, iframe {
    Covers: iPhone SE, XR/11/12, Android Common (360x640)
    ========================================================================== */
 @media (max-width: 767px) {
-  /* Global Typography Override for Small Screens */
-  h1 { font-size: clamp(1.75rem, 8vw, 3rem); }
-  h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); }
-  h3 { font-size: clamp(1.25rem, 5vw, 2rem); }
-  h4 { font-size: 1rem; }
-  p { font-size: 0.9375rem; }
+  /* Typography is now handled in the main mobile section above */
 
   /* Container */
-  .container { padding: 0 1rem; }
-  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .container { padding: 0 0.75rem; }
+  section { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
 
   /* Header Logic Moved back to header.css due to Angular Encapsulation */
 
@@ -438,17 +443,18 @@ img, video, iframe {
 }
 
 @media (max-width: 480px) {
-  /* Extra Small Mobile Overrides */
-  h1 { font-size: clamp(1.5rem, 7vw, 2.5rem); }
-  h2 { font-size: clamp(1.25rem, 6vw, 2rem); }
-  h3 { font-size: clamp(1.125rem, 5vw, 1.75rem); }
-  p { font-size: 0.875rem; }
+  /* Typography is now handled in the main small mobile section above */
+
+  /* Container */
+  .container { padding: 0 0.5rem; }
+  section { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+
   .proyecto-header { flex-direction: column; }
   .proyecto-anio { align-self: flex-start; }
 }
 
 /* 2. Tablet Portrait - 768px to 1023px
-   Covers: iPad Portrait
+   Covers: iPad Portrait (768x1024)
    ========================================================================== */
 @media (min-width: 768px) and (max-width: 1023px) {
   h1 { font-size: clamp(1.75rem, 5vw, 2.25rem); }
@@ -463,8 +469,7 @@ img, video, iframe {
   .products-grid { grid-template-columns: repeat(2, 1fr); }
   .benefits-grid { grid-template-columns: repeat(2, 1fr); }
 
-  /* Hide Logo in Header for Space */
-  .logo { display: none; }
+  /* Note: Logo is now visible since nav shows direct links at 768px+ */
 }
 
 /* 3. Tablet Landscape / Small Laptop - 768px to 1279px
@@ -473,10 +478,9 @@ img, video, iframe {
 @media (min-width: 768px) {
   /* Restore Multi-Column Layouts for Tablets & Up */
   .footer-content { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
-  .content-grid { grid-template-columns: 2fr 1fr !important; } /* Contact Page */
-  
-  /* FORCE 2x2 for Services to avoid stretching on wide screens */
-  .servicios-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  /* Contact Grid is now handled in contacto.css with specific breakpoints */
+
+  /* Services Grid is now handled in servicios.css with specific breakpoints */
   
   /* Shared Logic */
   .hero-cta, .hero-trust { flex-direction: row; justify-content: flex-start; }
@@ -509,11 +513,11 @@ img, video, iframe {
 
 @media (max-width: 1023px) {
   /* Specific Constraints for Tablets & Mobile */
-  .servicios-grid { grid-template-columns: 1fr; } /* Stack on smaller tablets if needed, or keep 2x2. Let's go 1fr for safety on portrait. */
+  /* Services Grid is now handled in servicios.css with specific breakpoints */
   .servicio-card.popular { transform: scale(1); }
   .servicio-card.popular:hover { transform: scale(1) translateY(-8px); }
   .proyectos-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-  
+
   /* Header Logic Moved back to header.css */
 }
 

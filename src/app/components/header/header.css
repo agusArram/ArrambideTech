@@ -263,8 +263,8 @@
    RESPONSIVE BEHAVIOR (Restored for Angular Encapsulation)
    ========================================================================== */
 
-/* Tablet Landscape / Laptop / Desktop (≥ 1024px) */
-@media (min-width: 1024px) {
+/* Tablet & Desktop (≥ 768px) - Show direct nav links */
+@media (min-width: 768px) {
   .nav-links {
     display: flex;
   }
@@ -286,9 +286,30 @@
   }
 }
 
-/* Hide Logo in middle range if needed, or adjust spacing */
+/* Tablet Specific: Smaller nav for space optimization */
 @media (min-width: 768px) and (max-width: 1023px) {
-  /* Optional: Keep hamburger but maybe adjust layout */
+  .nav-links {
+    gap: 1.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+  }
+
+  .btn-primary {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-icon {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 

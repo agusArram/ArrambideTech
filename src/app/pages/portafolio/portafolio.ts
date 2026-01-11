@@ -170,7 +170,7 @@ export class PortafolioComponent {
       orientacion: 'horizontal',
       url: 'https://sortproject.arrambidetech.com',
       esProductoPropio: true,
-      tecnologias: ['Escaner de Barras', 'App Móvil', 'Gestión Offline', 'Facturación'],
+      tecnologias: ['Escaner de Barras', 'App Móvil', 'Gestión Offline'],
       categoria: 'Desktop App',
       anio: '2025-2026'
     },

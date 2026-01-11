@@ -24,29 +24,23 @@ export class ContactoComponent {
     {
       icono: '💬',
       titulo: 'WhatsApp',
-      valor: '+54 9 11 6254-8659',
+      valor: 'Escribime personalmente',
       link: 'https://wa.me/5491162548659'
-    },
-    {
-      icono: '💻',
-      titulo: 'GitHub',
-      valor: '@sortproyects',
-      link: 'https://github.com/agusArram'
     }
   ];
 
   readonly faqs = [
     {
-      pregunta: '¿Cuánto tiempo tarda la respuesta?',
-      respuesta: 'Respondemos todas las consultas en un plazo máximo de 24 horas hábiles.'
-    },
-    {
       pregunta: '¿Ofrecen soporte técnico?',
-      respuesta: 'Sí, ofrecemos soporte técnico completo por email y documentación detallada.'
+      respuesta: 'Asi es, ofrezco soporte tecnico completo por WhatsApp y les brindo la documentacion detallada por email.'
     },
     {
       pregunta: '¿Puedo solicitar nuevas funcionalidades?',
-      respuesta: 'Por supuesto! Valoramos mucho el feedback de nuestros usuarios y los incentivo a que me digan mejoras.'
+      respuesta: 'Valoro mucho sus ideas y mejoras, me encantaria escucharlas y ver como mejorar los servicios que les brindo.'
+    },
+    {
+      pregunta: '¿Cuánto tiempo tarda la respuesta?',
+      respuesta: 'Respondo todo en menos de 24 horas hábiles.'
     }
   ];
 
@@ -76,7 +70,7 @@ export class ContactoComponent {
       if (response.status === 200) {
         this.mensajeEstado.set({
           tipo: 'success',
-          texto: data.message || '¡Mensaje enviado con éxito! Te responderemos pronto.'
+          texto: '¡Mensaje recibido! Te voy a estar respondiendo en breve.'
         });
         form.reset();
       } else {
