@@ -4,7 +4,8 @@
 
 /* Hero Section */
 .portafolio-hero {
-  padding: 8rem 2rem 4rem; /* Adjusted: Top padding accounts for fixed header */
+  padding: 8rem 2rem 4rem;
+  /* Adjusted: Top padding accounts for fixed header */
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   text-align: center;
   position: relative;
@@ -49,7 +50,8 @@
 }
 
 .hero-title {
-  font-size: var(--fs-display); /* Standardized Size */
+  font-size: var(--fs-display);
+  /* Standardized Size */
   font-weight: 800;
   line-height: 1.1;
   color: var(--text-primary);
@@ -64,7 +66,8 @@
 }
 
 .hero-description {
-  font-size: 1.125rem; /* Reduced from 1.125rem (keep consistent) */
+  font-size: var(--fs-body);
+  /* Use global variable */
   line-height: 1.7;
   color: var(--text-secondary);
   max-width: 600px;
@@ -73,9 +76,12 @@
 
 /* Filter Section */
 .filter-section {
-  padding: 1rem 2rem; /* Reduced padding for a thinner look */
-  background: rgba(var(--bg-secondary-rgb), 0.8); /* More transparent if variable allows, else fallback to lighter solid or just reduced padding effectively makes it feel lighter */
-  background: var(--bg-secondary); /* Fallback/Safety if rgba trick isn't set up, the padding is the key change */
+  padding: 1rem 2rem;
+  /* Reduced padding for a thinner look */
+  background: rgba(var(--bg-secondary-rgb), 0.8);
+  /* More transparent if variable allows, else fallback to lighter solid or just reduced padding effectively makes it feel lighter */
+  background: var(--bg-secondary);
+  /* Fallback/Safety if rgba trick isn't set up, the padding is the key change */
   border-bottom: 1px solid var(--border-default);
   position: sticky;
   top: 80px;
@@ -93,12 +99,14 @@
 }
 
 .filter-btn {
-  padding: 0.75rem 1.5rem; /* Vertical padding at 0.75rem as requested */
+  padding: 0.75rem 1.5rem;
+  /* Vertical padding at 0.75rem as requested */
   background: var(--bg-card);
   color: var(--text-secondary);
   border: 2px solid var(--border-default);
   border-radius: 2rem;
-  font-size: var(--fs-small); /* Scalable */
+  font-size: var(--fs-small);
+  /* Scalable */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -118,7 +126,8 @@
 
 /* Proyectos Section */
 .proyectos-section {
-  padding: var(--space-lg) 2rem; /* Horizontal padding for desktop */
+  padding: var(--space-lg) 2rem;
+  /* Horizontal padding for desktop */
   background: var(--bg-primary);
   min-height: 60vh;
 }
@@ -134,7 +143,8 @@
 @media (min-width: 992px) {
   .proyectos-grid {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 1000px; /* Limiting max-width so 2 columns look elegant and not too stretched */
+    max-width: 1000px;
+    /* Limiting max-width so 2 columns look elegant and not too stretched */
   }
 }
 
@@ -165,7 +175,8 @@
   padding: 0.5rem 1rem;
   border-radius: 50px;
   font-size: 0.875rem;
-  font-weight: 700; /* Un poco más de peso */
+  font-weight: 700;
+  /* Un poco más de peso */
   z-index: 3;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -173,7 +184,8 @@
 .proyecto-imagen {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10; /* Desktop aspect ratio */
+  aspect-ratio: 16 / 10;
+  /* Desktop aspect ratio */
   overflow: hidden;
   background: var(--bg-secondary);
 }
@@ -251,14 +263,17 @@
 }
 
 .overlay-titulo {
-  font-size: var(--fs-card-title); /* Scalable */
+  font-size: var(--fs-card-title);
+  /* Scalable */
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 .overlay-categoria {
-  font-size: var(--fs-small); /* Scalable */
-  opacity: 1; /* Eliminada opacidad para contraste */
+  font-size: var(--fs-small);
+  /* Scalable */
+  opacity: 1;
+  /* Eliminada opacidad para contraste */
 }
 
 
@@ -278,7 +293,8 @@
 }
 
 .proyecto-titulo {
-  font-size: var(--fs-card-title); /* Scalable */
+  font-size: var(--fs-card-title);
+  /* Scalable */
   font-weight: 700;
   color: var(--text-primary);
   flex: 1;
@@ -288,7 +304,8 @@
 }
 
 .exclusive-icon {
-  color: #fbbf24; /* Soft Gold */
+  color: #fbbf24;
+  /* Soft Gold */
   flex-shrink: 0;
 }
 
@@ -297,7 +314,8 @@
   background: var(--bg-secondary);
   color: var(--text-muted);
   border-radius: 2rem;
-  font-size: var(--fs-small); /* Scalable */
+  font-size: var(--fs-small);
+  /* Scalable */
   font-weight: 600;
   white-space: nowrap;
 }
@@ -322,11 +340,13 @@
 }
 
 .tech-tag {
-  padding: 0.3rem 0.7rem; /* Slightly smaller fixed padding for tags */
+  padding: 0.3rem 0.7rem;
+  /* Slightly smaller fixed padding for tags */
   background: var(--bg-secondary);
   border: 1px solid var(--border-default);
   border-radius: 2rem;
-  font-size: var(--fs-small); /* Scalable font size */
+  font-size: var(--fs-small);
+  /* Scalable font size */
   font-weight: 500;
   color: var(--text-primary);
   transition: all 0.3s ease;
@@ -348,12 +368,14 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: var(--btn-padding); /* Scalable */
+  padding: var(--btn-padding);
+  /* Scalable */
   background: var(--accent-primary);
   color: #0f172a;
   border: none;
   border-radius: 0.75rem;
-  font-size: var(--btn-fs); /* Scalable */
+  font-size: var(--btn-fs);
+  /* Scalable */
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -393,7 +415,8 @@
 }
 
 .empty-state h3 {
-  font-size: var(--fs-card-title); /* Scalable */
+  font-size: var(--fs-card-title);
+  /* Scalable */
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 1rem;
@@ -423,7 +446,8 @@
   background: var(--bg-card);
   border: 1px solid var(--border-default);
   border-radius: 1.5rem;
-  padding: var(--space-md); /* Scalable padding */
+  padding: var(--space-md);
+  /* Scalable padding */
   text-align: center;
   transition: all 0.3s ease;
 }
@@ -431,23 +455,27 @@
 /* ... */
 
 .stat-icon {
-  width: 56px; /* Reduced from 70px */
+  width: 56px;
+  /* Reduced from 70px */
   height: 56px;
   background: var(--bg-secondary);
   border-radius: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem; /* Reduced margin */
+  margin: 0 auto 1rem;
+  /* Reduced margin */
   color: var(--accent-primary);
   transition: all 0.3s ease;
-  font-size: var(--icon-size-md); /* Scalable Icon */
+  font-size: var(--icon-size-md);
+  /* Scalable Icon */
 }
 
 /* ... */
 
 .stat-number {
-  font-size: 2rem; /* Reduced from 2.5rem */
+  font-size: 2rem;
+  /* Reduced from 2.5rem */
   font-weight: 800;
   color: var(--accent-primary);
   margin-bottom: 0.5rem;
@@ -455,7 +483,8 @@
 }
 
 .stat-label {
-  font-size: var(--fs-small); /* Scalable */
+  font-size: var(--fs-small);
+  /* Scalable */
   color: var(--text-secondary);
   font-weight: 500;
 }
@@ -483,7 +512,8 @@
 }
 
 .cta-title {
-  font-size: var(--fs-h2); /* Scalable */
+  font-size: var(--fs-h2);
+  /* Scalable */
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 1rem;
@@ -501,11 +531,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: var(--btn-padding); /* Scalable */
+  padding: var(--btn-padding);
+  /* Scalable */
   background: var(--accent-primary);
   color: #0f172a;
   border-radius: 0.75rem;
-  font-size: var(--btn-fs); /* Scalable */
+  font-size: var(--btn-fs);
+  /* Scalable */
   font-weight: 700;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -524,6 +556,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -534,25 +567,32 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.4;
     transform: translate(-50%, -50%) scale(1);
   }
+
   50% {
     opacity: 0.6;
     transform: translate(-50%, -50%) scale(1.1);
@@ -573,7 +613,8 @@
   justify-content: center;
   animation: fadeIn 0.3s ease-out;
   cursor: grab;
-  padding: 1rem; /* Add padding for better spacing */
+  padding: 1rem;
+  /* Add padding for better spacing */
 }
 
 .lightbox-backdrop:active {
@@ -587,7 +628,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none; /* Let clicks pass through to backdrop for dragging unless on buttons */
+  pointer-events: none;
+  /* Let clicks pass through to backdrop for dragging unless on buttons */
 }
 
 .lightbox-image {
@@ -599,12 +641,16 @@
   border-radius: 4px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   pointer-events: auto;
-  user-select: none; /* Prevent image selection while dragging */
-  -webkit-user-drag: none; /* Prevent default browser drag */
+  user-select: none;
+  /* Prevent image selection while dragging */
+  -webkit-user-drag: none;
+  /* Prevent default browser drag */
 }
 
-.lightbox-nav, .lightbox-close {
-  pointer-events: auto; /* Re-enable pointer events for buttons */
+.lightbox-nav,
+.lightbox-close {
+  pointer-events: auto;
+  /* Re-enable pointer events for buttons */
 }
 
 .lightbox-close {
@@ -643,8 +689,13 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-.lightbox-nav.prev { left: -60px; }
-.lightbox-nav.next { right: -60px; }
+.lightbox-nav.prev {
+  left: -60px;
+}
+
+.lightbox-nav.next {
+  right: -60px;
+}
 
 .lightbox-counter {
   position: absolute;
@@ -662,7 +713,8 @@
 }
 
 .proyecto-imagen.clickable:hover .proyecto-overlay {
-  opacity: 1; /* Ensure overlay shows on hover */
+  opacity: 1;
+  /* Ensure overlay shows on hover */
 }
 
 .gallery-hint {
@@ -679,11 +731,13 @@
 
   .lightbox-content {
     max-width: 95vw;
-    max-height: 85vh; /* Reduced to leave space for controls */
+    max-height: 85vh;
+    /* Reduced to leave space for controls */
   }
 
   .lightbox-image {
-    max-height: 75vh; /* Reduced max-height for vertical images on mobile */
+    max-height: 75vh;
+    /* Reduced max-height for vertical images on mobile */
     max-width: 90vw;
   }
 
@@ -716,7 +770,8 @@
   }
 
   .lightbox-image {
-    max-height: 70vh; /* Even more reduced for small screens */
+    max-height: 70vh;
+    /* Even more reduced for small screens */
     max-width: 92vw;
   }
 
@@ -820,16 +875,20 @@
 
   /* Reduce height of project image cards on mobile */
   .proyecto-imagen {
-    aspect-ratio: 4 / 3; /* More square ratio for mobile, reduces vertical space */
-    max-height: 280px; /* Cap the height to prevent too tall cards */
+    aspect-ratio: 4 / 3;
+    /* More square ratio for mobile, reduces vertical space */
+    max-height: 280px;
+    /* Cap the height to prevent too tall cards */
   }
 
   .dual-image-container {
-    padding: 0.75rem; /* Reduce padding on mobile */
+    padding: 0.75rem;
+    /* Reduce padding on mobile */
   }
 
   .vertical-img {
-    max-width: 45%; /* Slightly wider to fill space better */
+    max-width: 45%;
+    /* Slightly wider to fill space better */
   }
 
   .proyecto-content {
@@ -856,7 +915,8 @@
   .proyecto-actions {
     flex-direction: column;
     gap: 0.75rem;
-    padding: 0 1rem; /* Add margins to buttons */
+    padding: 0 1rem;
+    /* Add margins to buttons */
   }
 
   .btn-proyecto {
@@ -891,7 +951,8 @@
   }
 
   .cta-content {
-    padding: 0 1rem; /* Add padding for button margins */
+    padding: 0 1rem;
+    /* Add padding for button margins */
   }
 
   .cta-title {
@@ -942,8 +1003,10 @@
 
   /* Even more compact on very small screens */
   .proyecto-imagen {
-    aspect-ratio: 3 / 2; /* Slightly wider ratio */
-    max-height: 240px; /* Even smaller cap for tiny screens */
+    aspect-ratio: 3 / 2;
+    /* Slightly wider ratio */
+    max-height: 240px;
+    /* Even smaller cap for tiny screens */
   }
 
   .dual-image-container {
@@ -979,7 +1042,8 @@
   }
 
   .proyecto-actions {
-    padding: 0 0.75rem; /* Smaller margins */
+    padding: 0 0.75rem;
+    /* Smaller margins */
   }
 
   .stats-section {
@@ -1010,7 +1074,8 @@
   }
 
   .cta-content {
-    padding: 0 0.75rem; /* Smaller margins */
+    padding: 0 0.75rem;
+    /* Smaller margins */
   }
 
   .cta-title {

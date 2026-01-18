@@ -33,37 +33,48 @@
   --shadow-accent: 0 0 20px var(--accent-glow);
 
   /* === SISTEMA DE DISEÑO (Design System) === */
-  
-  /* Espaciado (Spacing) - Consistente y Escalable */
-  --space-xs: 0.5rem;   /* 8px */
-  --space-sm: 1rem;     /* 16px */
-  --space-md: 2rem;     /* 32px */
-  --space-lg: 4rem;     /* 64px - Estándar para secciones */
-  --space-xl: 6rem;     /* 96px - Estándar para Hero en desktop grande */
-  
-  /* Tipografía (Typography) - Escala Modular Moderada */
-  /* Hero H1 */
-  --fs-display: clamp(2rem, 4vw, 3rem); 
-  /* Títulos de Sección H2 */
-  --fs-h1: clamp(1.75rem, 3vw, 2.5rem);
-  --fs-h2: clamp(1.5rem, 2.5vw, 2rem);
-  /* Subtítulos H3 */
-  --fs-h3: 1.25rem;
-  
-  /* Textos Específicos */
-  --fs-subtitle: 1.125rem; /* Hero subtitles, intro text */
-  --fs-card-title: 1.25rem; /* Card headers */
-  --fs-body: 1rem;
-  --fs-small: 0.875rem;
-  
+
+  /* Espaciado (Spacing) */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: clamp(2rem, 3vw, 3rem);
+  --space-xl: clamp(2.5rem, 4vw, 4rem);
+
+  /* =============================================
+     TYPOGRAPHY HIERARCHY (Most Important!)
+     =============================================
+     Clear visual distinction between titles and body text.
+     Max values are conservative for 1920x1080 screens.
+  */
+
+  /* Display - Hero Title Only */
+  --fs-display: clamp(1.5rem, 2vw + 0.75rem, 2.25rem);
+
+  /* Headings */
+  --fs-h1: clamp(1.35rem, 1.75vw + 0.5rem, 1.85rem);
+  --fs-h2: clamp(1.2rem, 1.5vw + 0.5rem, 1.6rem);
+  --fs-h3: clamp(1.05rem, 1vw + 0.25rem, 1.25rem);
+
+  /* Body Text - MUST be clearly smaller than headings */
+  --fs-subtitle: clamp(0.875rem, 0.75vw + 0.25rem, 0.975rem);
+  /* Hero description */
+  --fs-card-title: clamp(0.95rem, 0.8vw + 0.25rem, 1.1rem);
+  /* Card headers */
+  --fs-body: clamp(0.825rem, 0.5vw + 0.25rem, 0.9rem);
+  /* Body paragraphs */
+  --fs-small: 0.8125rem;
+  /* Labels, small text */
+
   /* Componentes (Botones, Iconos) */
-  --btn-padding: 1rem 2rem;
-  --btn-fs: 1rem;
-  --icon-size-lg: 2.5rem; /* Hero visual icons */
-  --icon-size-md: 2rem;   /* Section icons */
+  --btn-padding: 0.75rem 1.5rem;
+  --btn-fs: clamp(0.825rem, 0.6vw + 0.25rem, 0.9rem);
+
+  --icon-size-lg: clamp(1.5rem, 2vw + 0.25rem, 2rem);
+  --icon-size-md: clamp(1.25rem, 1.5vw + 0.25rem, 1.5rem);
 
   /* Layout */
-  --container-width: 1200px; /* Ancho máximo optimizado para lectura */
+  --container-width: min(100% - 2rem, 1200px);
   --header-height: 70px;
 }
 
@@ -71,28 +82,23 @@
 /* Dark Theme Variables
    ========================================================================== */
 [data-theme="dark"] {
-  /* Fondos Dark */
   --bg-primary: #0a0a0a;
   --bg-secondary: #1a1a1a;
   --bg-card: #1e1e1e;
   --bg-elevated: #252525;
 
-  /* Acento Celeste Brillante */
   --accent-primary: #00d9ff;
   --accent-primary-dark: #00b8db;
   --accent-primary-light: #33e3ff;
   --accent-glow: rgba(0, 217, 255, 0.4);
 
-  /* Texto Dark */
   --text-primary: #ffffff;
   --text-secondary: #9ca3af;
   --text-muted: #6b7280;
 
-  /* Bordes Dark */
   --border-default: rgba(255, 255, 255, 0.1);
   --border-strong: rgba(255, 255, 255, 0.2);
 
-  /* Sombras Dark */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
@@ -119,24 +125,26 @@ html {
 body {
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
-  font-size: 16px;
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--text-primary);
   background: var(--bg-primary);
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
-
-  /* === INICIO CAMBIO GLOBAL PARA CORTE DE PALABRAS === */
-  word-break: keep-all; /* Intenta no cortar palabras */
-  hyphens: none; /* Desactiva guiones automáticos */
-  /* === FIN CAMBIO GLOBAL === */
+  word-break: keep-all;
+  hyphens: none;
 }
 
 /* Typography
    ========================================================================== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   font-weight: 700;
   line-height: 1.2;
@@ -146,6 +154,7 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin: 0;
   color: var(--text-secondary);
+  font-size: var(--fs-body);
 }
 
 a {
@@ -177,11 +186,17 @@ button {
   text-align: center;
 }
 
-/* Typography Defaults using Variables */
-h1 { font-size: var(--fs-h1); }
-h2 { font-size: var(--fs-h2); }
-h3 { font-size: var(--fs-h3); }
-p { font-size: var(--fs-body); color: var(--text-secondary); }
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
 
 .hidden {
   display: none;
@@ -201,29 +216,6 @@ p { font-size: var(--fs-body); color: var(--text-secondary); }
   right: 0;
   height: 2px;
   background: var(--accent-primary);
-}
-
-/* Prevent horizontal overflow */
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-}
-
-/* Better word breaking for long text (Esto es para evitar DESBORDAMIENTO) */
-p, li, td, th, dd, dt, a {
-  word-wrap: break-word; /* Ya obsoleto, pero no molesta */
-  overflow-wrap: break-word; /* Correcto para forzar corte si desborda */
-}
-
-/* Responsive images and media */
-img, video, iframe {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Prevent specific elements from causing horizontal scroll */
-.container, section, article, div {
-  max-width: 100vw;
 }
 
 /* Scrollbar Styling
@@ -275,6 +267,7 @@ img, video, iframe {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -282,9 +275,12 @@ img, video, iframe {
 }
 
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px var(--accent-glow);
   }
+
   50% {
     box-shadow: 0 0 30px var(--accent-glow);
   }
@@ -294,338 +290,114 @@ img, video, iframe {
   animation: fadeIn 0.6s ease-out;
 }
 
-/* Responsive Utilities
-   ========================================================================== */
 /* ==========================================================================
-   RESPONSIVE BREAKPOINTS - Global Typography & Spacing
-   ========================================================================== */
-
-/* Small Desktop: 1280x800, 1366x768 (13-14" laptops) */
-@media (min-width: 1025px) and (max-width: 1440px) {
-  h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); }
-  h2 { font-size: clamp(1.5rem, 3.5vw, 1.75rem); }
-  h3 { font-size: clamp(1rem, 2.5vw, 1.125rem); }
-  h4 { font-size: 0.9375rem; }
-  h5 { font-size: 0.875rem; }
-  h6 { font-size: 0.8125rem; }
-
-  p { font-size: 0.875rem; }
-
-  .container { max-width: 1200px; }
-}
-
-/* Medium Desktop: 1366x768 specific */
-@media (min-width: 1280px) and (max-width: 1400px) {
-  h2 { font-size: 1.5rem; }
-  h3 { font-size: 0.9375rem; }
-  p { font-size: 0.8125rem; line-height: 1.5; }
-}
-
-/* Medium-Large Desktop: 1440x900 */
-@media (min-width: 1400px) and (max-width: 1500px) {
-  h1 { font-size: clamp(2rem, 4.5vw, 2.5rem); }
-  h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
-}
-
-/* Large Desktop: 1600x900 */
-@media (min-width: 1500px) and (max-width: 1680px) {
-  h1 { font-size: clamp(2rem, 4.5vw, 2.5rem); }
-  h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
-  p { font-size: 1rem; }
-}
-
-/* Full HD and above: 1920x1080+ */
-@media (min-width: 1681px) {
-  h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
-  h2 { font-size: clamp(2rem, 4vw, 2.5rem); }
-  h3 { font-size: 1.25rem; }
-  p { font-size: 1rem; }
-
-  .container { max-width: 1400px; }
-}
-
-/* Tablets Landscape: 768px - 1024px */
-@media (min-width: 768px) and (max-width: 1024px) {
-  h1 { font-size: clamp(1.75rem, 5vw, 2.25rem); }
-  h2 { font-size: clamp(1.5rem, 4vw, 1.875rem); }
-  h3 { font-size: 1.125rem; }
-  p { font-size: 0.9375rem; }
-}
-
-/* Mobile and Tablets Portrait: < 768px */
-@media (max-width: 767px) {
-  .container {
-    padding: 0 0.75rem;
-  }
-
-  section {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-
-  h1 { font-size: clamp(1.5rem, 7vw, 2.5rem); }
-  h2 { font-size: clamp(1.25rem, 5.5vw, 2rem); }
-  h3 { font-size: clamp(1.125rem, 4.5vw, 1.75rem); }
-  h4 { font-size: 1rem; }
-  p { font-size: 0.9375rem; line-height: 1.6; }
-}
-
-/* Small Mobile: < 480px */
-@media (max-width: 480px) {
-  .container {
-    padding: 0 0.5rem;
-  }
-
-  section {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
-  }
-
-  h1 { font-size: clamp(1.35rem, 6.5vw, 2.25rem); }
-  h2 { font-size: clamp(1.15rem, 5.5vw, 1.85rem); }
-  h3 { font-size: clamp(1rem, 4.5vw, 1.5rem); }
-  h4 { font-size: 0.95rem; }
-  p { font-size: 0.875rem; line-height: 1.55; }
-}
-
-/* ==========================================================================
-   COMPONENT RESPONSIVE OVERRIDES
+   RESPONSIVE LAYOUT & BREAKPOINTS
    ========================================================================== */
 
 /* 1. Mobile (Phones) - < 768px
-   Covers: iPhone SE, XR/11/12, Android Common (360x640)
    ========================================================================== */
 @media (max-width: 767px) {
-  /* Typography is now handled in the main mobile section above */
+  .container {
+    padding: 0 1rem;
+  }
 
-  /* Container */
-  .container { padding: 0 0.75rem; }
-  section { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
+  .hero-container,
+  .services-grid,
+  .featured-project,
+  .products-grid,
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
 
-  /* Header Logic Moved back to header.css due to Angular Encapsulation */
+  .hero-visual {
+    display: none;
+  }
 
-  /* Home Page & Components */
-  .hero-container, .services-grid, .featured-project, .products-grid, .benefits-grid { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
-  .hero-stats, .hero-actions, .project-actions, .cta-buttons { flex-direction: column; }
-  .stat-divider { width: 100%; height: 1px; }
-  .btn-primary-hero, .btn-secondary-hero, .btn-project-primary, .btn-project-secondary, .btn-whatsapp-large, .btn-secondary-large { width: 100%; justify-content: center; }
-  .service-card.featured { transform: scale(1); }
-  .product-card.featured { order: -1; }
+  .hero-stats,
+  .hero-actions,
+  .project-actions,
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 
-  /* Servicios Page */
-  .servicios-grid { grid-template-columns: 1fr; }
-  .paso-item { grid-template-columns: 60px 1fr; }
+  .btn-primary-hero,
+  .btn-secondary-hero,
+  .btn-project-primary,
+  .btn-project-secondary,
+  .btn-primary-large,
+  .btn-secondary-large {
+    width: 100%;
+    justify-content: center;
+  }
 
-  /* Portafolio Page */
-  .filter-section { position: relative; top: 0; }
-  .proyectos-grid { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-  .proyecto-overlay { transform: translateY(0); background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 100%); }
+  .stat-divider {
+    width: 100%;
+    height: 1px;
+  }
 
-  /* Benefits Component (Tables) */
-  .comparison-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .comparison-table thead, .comparison-table tbody, .comparison-table tr, .comparison-table th, .comparison-table td { display: block; }
-  .comparison-table thead { display: none; }
-  .comparison-table tr { margin-bottom: 1.5rem; border: 1px solid var(--border-default); border-radius: 8px; overflow: hidden; }
-  .comparison-cell { text-align: left; padding: 0.8rem 1rem; border-bottom: 1px solid var(--border-default); }
-  .comparison-cell:last-child { border-bottom: none; }
-  .comparison-cell.feature { background: var(--bg-elevated); font-weight: 700; font-size: 1rem; }
-  .comparison-cell.highlight { background: rgba(0, 217, 255, 0.1); color: var(--accent-primary); }
-
-  /* Contacto Page */
-  .contact-link { word-break: break-all; }
-
-  /* Modal */
-  .modal-backdrop { align-items: flex-start; }
-  .modal-close { top: 1rem; right: 1rem; }
-  .btn-modal-primary { width: 100%; }
+  .modal-backdrop {
+    align-items: flex-start;
+  }
 }
 
-@media (max-width: 480px) {
-  /* Typography is now handled in the main small mobile section above */
-
-  /* Container */
-  .container { padding: 0 0.5rem; }
-  section { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
-
-  .proyecto-header { flex-direction: column; }
-  .proyecto-anio { align-self: flex-start; }
-}
-
-/* 2. Tablet Portrait - 768px to 1023px
-   Covers: iPad Portrait (768x1024)
+/* 2. Tablet (Portrait & Landscape small) - 768px to 1023px
    ========================================================================== */
 @media (min-width: 768px) and (max-width: 1023px) {
-  h1 { font-size: clamp(1.75rem, 5vw, 2.25rem); }
-  h2 { font-size: clamp(1.5rem, 4vw, 1.875rem); }
-  h3 { font-size: 1.125rem; }
-  p { font-size: 0.9375rem; }
+  .hero-container {
+    grid-template-columns: 1fr;
+  }
 
-  /* Layout Adjustments */
-  .hero-container { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
-  .featured-project { grid-template-columns: 1fr; }
-  .products-grid { grid-template-columns: repeat(2, 1fr); }
-  .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-visual {
+    display: none;
+  }
 
-  /* Note: Logo is now visible since nav shows direct links at 768px+ */
+  .products-grid,
+  .benefits-grid,
+  .features-grid,
+  .faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* 3. Tablet Landscape / Small Laptop - 768px to 1279px
-   Covers: iPad Landscape, Old 1024x768 screens, Small Laptops
+/* 3. Desktop (Standard & Laptops) - 1024px+
    ========================================================================== */
-@media (min-width: 768px) {
-  /* Restore Multi-Column Layouts for Tablets & Up */
-  .footer-content { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
-  /* Contact Grid is now handled in contacto.css with specific breakpoints */
-
-  /* Services Grid is now handled in servicios.css with specific breakpoints */
-  
-  /* Shared Logic */
-  .hero-cta, .hero-trust { flex-direction: row; justify-content: flex-start; }
-  .hero-actions { flex-direction: row; justify-content: flex-start; } /* Aligned Left */
-
-  .footer-bottom-content { flex-direction: row; justify-content: center; text-align: center; }
-  
-  /* Grids - Start expanding at Tablet */
-  .faq-grid { grid-template-columns: repeat(2, 1fr); }
-  .plan-price { flex-direction: row; align-items: baseline; gap: 0.25rem; }
-  .price { font-size: 2.5rem; }
-  .period { margin-top: 0; }
-  
-  /* Features & Benefits can stay 2 cols here, expand later */
-  .features-grid { grid-template-columns: repeat(2, 1fr); }
-  .benefits-grid { grid-template-columns: repeat(3, 1fr); }
-  .caracteristicas-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (min-width: 1024px) {
-  /* Header Logic Moved back to header.css due to Angular Encapsulation */
-  
-  /* Hero Layout - Scoped to Split Layouts */
-  .hero-container { grid-template-columns: 1fr 1fr; }
-  .hero-container .hero-content { text-align: left; } /* Only left-align if in split container */
-  .hero-container .hero-badge { margin-left: 0; margin-right: 0; } /* Only align badge left if in split container */
-  
-  .pricing-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 1023px) {
-  /* Specific Constraints for Tablets & Mobile */
-  /* Services Grid is now handled in servicios.css with specific breakpoints */
-  .servicio-card.popular { transform: scale(1); }
-  .servicio-card.popular:hover { transform: scale(1) translateY(-8px); }
-  .proyectos-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-
-  /* Header Logic Moved back to header.css */
-}
-
-/* 4. Desktop Standard - 1280px to 1599px
-   Covers: 1280x800, 1366x768, 1440x900, 1536x864 (Zoom 125%)
-   ========================================================================== */
-@media (min-width: 1024px) and (max-width: 1440px) {
-  /* === LAPTOP DIET: Force smaller base variables for this specific range === */
-  :root {
-    --fs-display: 2.5rem;      /* Reduced from clamp(2rem, 4vw, 3rem) */
-    --fs-h1: 2rem;             /* Reduced */
-    --fs-h2: 1.75rem;          /* Reduced */
-    --space-lg: 3rem;          /* Reduced padding */
-    --container-width: 1000px; /* Tighter container */
+  .hero-container {
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
   }
 
-  /* Specific Adjustments */
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.5rem; }
-  p { font-size: 0.9rem; }
-  
-  .container { max-width: 1000px; }
-  
-  /* Grid tweaks for cramped screens */
-  .products-grid { grid-template-columns: repeat(3, 1fr); } /* 4 is too crowded here */
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
 }
 
-@media (min-width: 1280px) and (max-width: 1400px) {
-  /* Targeted tweak for 1366x768 screens */
-  h2 { font-size: 1.5rem; }
-  h3 { font-size: 0.9375rem; }
-  p { font-size: 0.8125rem; line-height: 1.5; }
-}
-
-/* 5. Large Desktop - 1600px+
-   Covers: Full HD (1920x1080), 2K, 4K
+/* 4. Vertical Height Optimization (For Laptops with Short Screens)
    ========================================================================== */
-@media (min-width: 1600px) {
+@media (max-height: 800px) and (min-width: 1024px) {
   :root {
-    /* Scale up body and card text for large monitors */
-    --fs-subtitle: 1.25rem;   /* Larger subtitles */
-    --fs-card-title: 1.4rem;  /* Larger card headers */
-    --fs-body: 1.1rem;        /* Larger body text */
-    --fs-small: 0.95rem;      /* Larger small text (links, labels) */
-    
-    --container-width: 1400px;
-    --space-lg: 5rem;         /* More breathing room on big screens */
+    --space-xl: 2rem;
+    --space-lg: 1.5rem;
   }
 
-  h1 { font-size: clamp(2rem, 4.5vw, 2.5rem); }
-  h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); } /* Stays the same as per user request */
-  p { font-size: var(--fs-body); }
-  .container { max-width: var(--container-width); }
-}
-
-
-/* ==========================================================================
-   FINAL OVERRIDES (Must be at the end to win Cascade)
-   ========================================================================== */
-
-/* Fix: Ensure Footer and Contact are Multi-Column on Tablets & Laptops */
-@media (min-width: 768px) {
-  .footer-content { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
-  .content-grid { grid-template-columns: 2fr 1fr !important; }
-}
-
-/* Fix: Force "Laptop Diet" to prevent huge fonts in the 1024px - 1440px range */
-@media (min-width: 1024px) and (max-width: 1440px) {
-  :root {
-    --fs-display: 2rem !important;    /* Hero Title */
-    --fs-h1: 1.75rem !important;      /* Section Title */
-    --fs-h2: 1.5rem !important;       /* Section Title Small */
-    --fs-h3: 1rem !important;         /* Subheadings */
-    
-    --fs-subtitle: 0.95rem !important; /* Subtitles */
-    --fs-card-title: 1.05rem !important; /* Card Titles -> Reduced slightly */
-    --fs-body: 0.9rem !important;      /* Body text */
-    --fs-small: 0.8rem !important;     /* Small text */
-    
-    /* Components Scaled Down */
-    --btn-padding: 0.6rem 1.2rem !important; 
-    --btn-fs: 0.85rem !important;
-    --icon-size-lg: 1.75rem !important;
-    --icon-size-md: 1.2rem !important; /* Smaller icons for cards */
-    
-    --space-md: 1.25rem !important;    /* Card padding (Compact) */
-    --space-lg: 2rem !important;       /* Section padding -> Reduced from 2.5rem */
-    --container-width: 960px !important;
+  .hero,
+  .new-hero {
+    padding-top: calc(var(--header-height) + 1rem);
+    padding-bottom: 1rem;
+    min-height: auto;
   }
 
+  .hero-badge {
+    margin-bottom: 0.5rem;
+  }
 
-  /* Target specific elements to override previous clamps/fixed values */
-  .hero-title { font-size: var(--fs-display) !important; }
-  .section-title, .cta-title { font-size: var(--fs-h2) !important; }
-  .hero-subtitle, .section-description { font-size: var(--fs-subtitle) !important; }
-  
-  /* Layout adjustments for this specific range */
-  .hero-container { gap: 1.5rem !important; }
-  /* Restore 100dvh for Impact, but manage padding */
-  .new-hero, .hero { min-height: 100dvh !important; padding-top: 5rem !important; padding-bottom: 2rem !important; }
-  
-  /* FORCE 2x2 GRID for Products on Laptop to avoid 3-1 split and cramped text */
-  .products-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .hero-title {
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-subtitle {
+    margin-bottom: 0.75rem;
+  }
 }
-
-
-
-
-
-
-

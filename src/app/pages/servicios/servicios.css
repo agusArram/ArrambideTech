@@ -4,12 +4,14 @@
 
 /* Hero Section */
 .servicios-hero {
-  padding: 8rem 2rem 4rem; /* Horizontal padding for desktop */
+  padding: 8rem 2rem 4rem;
+  /* Horizontal padding for desktop */
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   text-align: center;
   position: relative;
   overflow: hidden;
-  min-height: auto; /* Remove excessive fixed heights */
+  min-height: auto;
+  /* Remove excessive fixed heights */
 }
 
 .servicios-hero::before {
@@ -50,30 +52,32 @@
 }
 
 .hero-title {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem); /* Slightly smaller than global */
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  /* Smaller to fit on one line */
   font-weight: 800;
   line-height: 1.2;
   color: var(--text-primary);
   margin-bottom: 1.5rem;
+  white-space: nowrap;
+  /* Force single line */
+  text-align: center;
 }
 
-@media (min-width: 1024px) {
-  .hero-title {
-    white-space: nowrap; /* Force single line on large screens */
-  }
-}
+/* Removed white-space: nowrap to allow natural text wrapping and centering */
 
 .hero-highlight {
   background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  display: inline; /* Ensure it stays in the same line */
+  display: inline;
+  /* Ensure it stays in the same line */
 }
 
 
 .hero-description {
-  font-size: 1.125rem; /* Reduced from 1.25rem */
+  font-size: var(--fs-body);
+  /* Use global variable */
   line-height: 1.6;
   color: var(--text-secondary);
   max-width: 600px;
@@ -82,7 +86,8 @@
 
 /* Servicios Section */
 .servicios-section {
-  padding: var(--space-lg) 2rem; /* Horizontal padding for desktop */
+  padding: var(--space-lg) 2rem;
+  /* Horizontal padding for desktop */
   background: var(--bg-primary);
   overflow: visible;
 }
@@ -100,7 +105,8 @@
   background: var(--bg-card);
   border: 2px solid var(--border-default);
   border-radius: 1.5rem;
-  padding: var(--space-md); /* Scalable */
+  padding: var(--space-md);
+  /* Scalable */
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
@@ -186,7 +192,8 @@
 
   flex-shrink: 0;
 
-  margin-bottom: 0; /* Override old margin */
+  margin-bottom: 0;
+  /* Override old margin */
 
 }
 
@@ -194,7 +201,8 @@
 
 .servicio-titulo {
 
-  font-size: 1.1rem; /* Balanced title */
+  font-size: 1.1rem;
+  /* Balanced title */
 
   font-weight: 700;
 
@@ -202,7 +210,8 @@
 
   line-height: 1.2;
 
-  margin-bottom: 0; /* Remove margin, handled by gap */
+  margin-bottom: 0;
+  /* Remove margin, handled by gap */
 
 }
 
@@ -210,7 +219,8 @@
 
 .servicio-descripcion {
 
-  font-size: var(--fs-small); /* Crisp description */
+  font-size: var(--fs-small);
+  /* Crisp description */
 
   line-height: 1.6;
 
@@ -218,7 +228,8 @@
 
   margin-bottom: 1.5rem;
 
-  min-height: 3rem; /* Visual alignment */
+  min-height: 3rem;
+  /* Visual alignment */
 
 }
 
@@ -304,9 +315,11 @@
 
 .servicio-body {
 
-  flex: 1; /* Pushes footer down */
+  flex: 1;
+  /* Pushes footer down */
 
-  margin-bottom: 0; /* Remove old margin */
+  margin-bottom: 0;
+  /* Remove old margin */
 
 }
 
@@ -348,7 +361,8 @@
 
   gap: 0.5rem;
 
-  padding: 0.75rem 1.5rem; /* Compact padding */
+  padding: 0.75rem 1.5rem;
+  /* Compact padding */
 
   background: var(--accent-primary);
 
@@ -368,7 +382,8 @@
 
   cursor: pointer;
 
-  width: 100%; /* Full Width Button */
+  width: 100%;
+  /* Full Width Button */
 
 }
 
@@ -393,13 +408,15 @@
 
 /* Proceso Section */
 .proceso-section {
-  padding: var(--space-lg) 2rem; /* Horizontal padding for desktop */
+  padding: var(--space-lg) 2rem;
+  /* Horizontal padding for desktop */
   background: var(--bg-secondary);
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 3rem; /* Reduced from 4rem */
+  margin-bottom: 3rem;
+  /* Reduced from 4rem */
 }
 
 .section-badge {
@@ -419,14 +436,16 @@
 }
 
 .section-title {
-  font-size: var(--fs-h2); /* Standardized Size */
+  font-size: var(--fs-h2);
+  /* Standardized Size */
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
 .section-description {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
+  /* Use global variable */
   color: var(--text-secondary);
   max-width: 700px;
   margin: 0 auto;
@@ -458,7 +477,8 @@
 
   flex-direction: column;
 
-  align-items: center; /* Center everything horizontally */
+  align-items: center;
+  /* Center everything horizontally */
 
   justify-content: flex-start;
 
@@ -466,7 +486,7 @@
 
   position: relative;
 
-  z-index: 1; 
+  z-index: 1;
 
   gap: 1rem;
 
@@ -484,7 +504,8 @@
 
 
 .paso-content {
-  background: transparent; /* Open layout, no card bg */
+  background: transparent;
+  /* Open layout, no card bg */
   border: none;
   padding: 0;
   box-shadow: none;
@@ -493,23 +514,30 @@
 .paso-icon {
   width: 50px;
   height: 50px;
-  background: var(--bg-card); /* White/Dark bg to hide line behind */
-  border: 2px solid var(--accent-primary); /* Accent border */
-  border-radius: 50%; /* Circular */
+  background: var(--bg-card);
+  /* White/Dark bg to hide line behind */
+  border: 2px solid var(--accent-primary);
+  /* Accent border */
+  border-radius: 50%;
+  /* Circular */
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent-primary);
   margin-bottom: 0.5rem;
-  margin-left: auto; /* Force Center */
-  margin-right: auto; /* Force Center */
+  margin-left: auto;
+  /* Force Center */
+  margin-right: auto;
+  /* Force Center */
   font-size: var(--icon-size-md);
-  box-shadow: 0 0 0 8px var(--bg-secondary); /* "Margin" to cut line visually */
+  box-shadow: 0 0 0 8px var(--bg-secondary);
+  /* "Margin" to cut line visually */
 }
 
 
 .paso-numero {
-  display: none; /* Hide big number, implied by order */
+  display: none;
+  /* Hide big number, implied by order */
 }
 
 .paso-titulo {
@@ -529,20 +557,24 @@
 @media (max-width: 1023px) {
   .proceso-timeline {
     grid-template-columns: 1fr;
-    gap: 3.5rem; /* Increased gap between items */
+    gap: 3.5rem;
+    /* Increased gap between items */
   }
-  
+
   .paso-item {
     flex-direction: row;
     text-align: left;
     align-items: flex-start;
-    gap: 2rem; /* Significantly increased gap for mobile */
+    gap: 2rem;
+    /* Significantly increased gap for mobile */
   }
-  
+
   .paso-icon {
-    margin-bottom: 15px; /* Added spacing below icon */
-    margin-left: 20px;   /* Added spacing from the left edge */
-    margin-right: 0; 
+    margin-bottom: 15px;
+    /* Added spacing below icon */
+    margin-left: 20px;
+    /* Added spacing from the left edge */
+    margin-right: 0;
     flex-shrink: 0;
     box-shadow: none;
   }
@@ -573,14 +605,16 @@
 }
 
 .cta-title {
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: var(--fs-h2);
+  /* Use global variable */
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
 .cta-description {
-  font-size: 1rem;
+  font-size: var(--fs-body);
+  /* Use global variable */
   color: var(--text-secondary);
   margin-bottom: 2.5rem;
   line-height: 1.7;
@@ -590,11 +624,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: var(--btn-padding); /* Scalable */
+  padding: var(--btn-padding);
+  /* Scalable */
   background: var(--accent-primary);
   color: #0f172a;
   border-radius: 0.75rem;
-  font-size: var(--btn-fs); /* Scalable */
+  font-size: var(--btn-fs);
+  /* Scalable */
   font-weight: 700;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -613,6 +649,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -625,6 +662,7 @@
 
 /* Mobile: < 768px */
 @media (max-width: 767px) {
+
   /* Hero Section */
   .servicios-hero {
     padding: 6rem 0.75rem 2.5rem;
@@ -692,7 +730,8 @@
   }
 
   .cta-content {
-    padding: 0 1rem; /* Add padding for button margins */
+    padding: 0 1rem;
+    /* Add padding for button margins */
   }
 
   .btn-cta-primary {
@@ -728,7 +767,8 @@
   }
 
   .cta-content {
-    padding: 0 0.75rem; /* Smaller margins */
+    padding: 0 0.75rem;
+    /* Smaller margins */
   }
 
   .servicio-card {
@@ -777,4 +817,3 @@
     padding: 3rem 1.5rem;
   }
 }
-

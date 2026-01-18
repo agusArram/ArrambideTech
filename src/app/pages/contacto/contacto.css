@@ -48,10 +48,15 @@
   font-family: 'Inter Tight', sans-serif;
 }
 
-  .page-subtitle {
-    font-size: 0.9rem;
-    padding: 0 0.5rem;
-  }
+.page-subtitle {
+  font-size: var(--fs-body);
+  /* Use global variable */
+  padding: 0 0.5rem;
+  max-width: 550px;
+  /* Limit width for short text */
+  margin: 0 auto;
+  /* Center the block */
+}
 
 /* Content Section */
 .contacto-content {
@@ -159,8 +164,8 @@
   box-shadow: 0 0 0 4px var(--accent-glow);
 }
 
-.form-input:focus + .input-icon,
-.form-textarea:focus + .input-icon,
+.form-input:focus+.input-icon,
+.form-textarea:focus+.input-icon,
 .input-wrapper:focus-within .input-icon {
   color: var(--accent-primary);
 }
@@ -257,7 +262,7 @@
 .contact-card-item:hover {
   transform: translateY(-5px);
   border-color: var(--accent-primary);
-  box-shadow: 0 15px 35px -12px rgba(0,0,0,0.25);
+  box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.25);
 }
 
 .contact-card-icon {
@@ -279,8 +284,10 @@
 
 .contact-card-title {
   font-size: 0.8rem;
-  font-weight: 700; /* Más peso para mejor lectura */
-  color: var(--text-secondary); /* Color con más contraste que muted */
+  font-weight: 700;
+  /* Más peso para mejor lectura */
+  color: var(--text-secondary);
+  /* Color con más contraste que muted */
   text-transform: uppercase;
   margin-bottom: 0.2rem;
   letter-spacing: 0.05em;
@@ -352,7 +359,8 @@
 
 .dev-label {
   font-size: 0.7rem;
-  color: var(--text-secondary); /* Mejor contraste */
+  color: var(--text-secondary);
+  /* Mejor contraste */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 700;
@@ -474,7 +482,8 @@
 }
 
 .faq-answer {
-  font-size: 0.95rem; /* Más chica que la pregunta */
+  font-size: 0.95rem;
+  /* Más chica que la pregunta */
   line-height: 1.6;
   color: var(--text-secondary);
   margin: 0;
@@ -512,7 +521,7 @@
     padding: 0.75rem 0.75rem 0.75rem 2.5rem;
     font-size: 0.9rem;
   }
-  
+
   .input-icon {
     left: 0.8rem;
     width: 18px;
@@ -526,8 +535,10 @@
   }
 
   .contact-card-item {
-    padding: 1rem 0.75rem; /* Padding más ajustado */
-    gap: 0.75rem; /* Menos espacio entre icono y texto */
+    padding: 1rem 0.75rem;
+    /* Padding más ajustado */
+    gap: 0.75rem;
+    /* Menos espacio entre icono y texto */
     flex: 1 1 100%;
   }
 
@@ -538,7 +549,8 @@
   }
 
   .contact-card-value {
-    font-size: 0.8rem; /* Letra un toque más chica */
+    font-size: 0.8rem;
+    /* Letra un toque más chica */
   }
 
   .contact-card-arrow {
@@ -562,14 +574,15 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .faq-card {
     padding: 1.5rem;
   }
-  
+
   .faq-answer {
     padding-left: 0;
     margin-top: 0.5rem;
-    font-size: 0.9rem; /* Todavía más chica en celu */
+    font-size: 0.9rem;
+    /* Todavía más chica en celu */
   }
 }
