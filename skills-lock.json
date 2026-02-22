@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "skills": {
+    "angular-component": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "9d2fb6fbec5a8a9fd029e125194ba749b717b1fefef1cf5cd6f7a67d5b7bc364"
+    },
+    "angular-migration": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "9984ad497b9a30807c94b0c6171e8e3c4c115e60f92157f5ef4df2ef851ffa80"
+    },
+    "angular-routing": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "cd02400200c70c1c8544ac6deb589269275fd33a7d6b93728bf8127cc2f0c71e"
+    },
+    "angular-signals": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "3c81e0d5622c38ba42699895c50b3363130f2c2c6f74faf3402302e40f6ccbb9"
+    },
+    "api-design-principles": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "1ee396a9c4714df95f1a9f8d156395848e8bd0fac1d70920a0487e8526ec0e55"
+    },
+    "clean-code-principles": {
+      "source": "asyrafhussin/agent-skills",
+      "sourceType": "github",
+      "computedHash": "37a7062bd10c7341c2824e384612137058ee3c83155a107f9367429c22e58c1a"
+    },
+    "design-system-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "7bb475bb3304d9a801e482f08fb2415472c5d27df3eaa6269cd38111fab8ce76"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "computedHash": "25872a21881a950edc3db1f3329664d60405d539660ce05b3265db2de06a7dfd"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    },
+    "refactor": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "computedHash": "87789a786b96f99ba0680e89345a975106e10e7db1071c7cdc2e76d507c449d6"
+    },
+    "stride-analysis-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "177ffce8b3b22884b6e3b6a0c6902151aded22d1e548e59b4cf362506c34f9bf"
+    },
+    "subagent-driven-development": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "computedHash": "1f5831dbfcddda9ac3e706f2ca81a3887fef9598159966d27ef672d86e255242"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "computedHash": "e3ba3d760c5f4cc43b02a91fb8924f726c7818f95cc35d79d0a606ca622b72f5"
+    },
+    "systematic-debugging": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "computedHash": "72e9ab72627e4fd8ed26a582e82309a98ecdc4f6e1c99418430ac05682c9e91d"
+    },
+    "test-driven-development": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "computedHash": "126f1ebf6ccd414f42544f6e83d8cc5adb089e1108eaffb7c400701e37eecd9f"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "computedHash": "4cfe5e95a230616c17d92b44e3cd37bae543ce087a7756a446a62f77d7c58a37"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "d8e7d3afe37dcc8a97b99ffb5afdb4d0919ae0092ea8b68f44eb201f035e33ac"
+    }
+  }
+}
