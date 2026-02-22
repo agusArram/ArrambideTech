@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
 
@@ -7,9 +8,11 @@
 
   <meta name="title" content="Arrambide Tech - Software SaaS y Desarrollo Web">
 
-  <meta name="description" content="Empresa de desarrollo de software a medida, páginas web y aplicaciones como SortProject (gestión de stock). Soluciones tecnológicas para pymes.">
+  <meta name="description"
+    content="Empresa de desarrollo de software a medida, páginas web y aplicaciones como SortProject (gestión de stock). Soluciones tecnológicas para pymes.">
 
-  <meta name="keywords" content="Arrambide Tech, SortProject, sistema saas, gestión inventario, control stock, software pymes, desarrollo web">
+  <meta name="keywords"
+    content="Arrambide Tech, SortProject, sistema saas, gestión inventario, control stock, software pymes, desarrollo web">
 
   <meta name="author" content="Agustín Arrambide - Arrambide Tech">
 
@@ -25,9 +28,10 @@
 
   <meta property="og:title" content="Arrambide Tech - Desarrollo de Software a Medida">
 
-  <meta property="og:description" content="Desarrollamos software como SortProject (gestión de inventario) y páginas web para pymes.">
+  <meta property="og:description"
+    content="Desarrollamos software como SortProject (gestión de inventario) y páginas web para pymes.">
 
-  <meta property="og:image" content="https://arrambidetech.com/assets/og-image.webp">
+  <meta property="og:image" content="https://arrambidetech.com/assets/ArrambideTech.png">
 
   <meta property="og:locale" content="es_ES">
 
@@ -39,9 +43,10 @@
 
   <meta property="twitter:title" content="Arrambide Tech - Software y Desarrollo Web">
 
-  <meta property="twitter:description" content="Software a medida, gestión de inventario (SortProject) y páginas web para pymes.">
+  <meta property="twitter:description"
+    content="Software a medida, gestión de inventario (SortProject) y páginas web para pymes.">
 
-  <meta property="twitter:image" content="https://arrambidetech.com/assets/og-image.webp">
+  <meta property="twitter:image" content="https://arrambidetech.com/assets/ArrambideTech.png">
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/ArrambideTech.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/ArrambideTech.png">
@@ -51,41 +56,86 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "SortProject",
-      "applicationCategory": "BusinessApplication",
-      "softwareVersion": "2.3.2",
-      "operatingSystem": "Windows, macOS, Linux",
-      "offers": [{
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "name": "Demo Gratuita"
-      }, {
-        "@type": "Offer",
-        "price": "40",
-        "priceCurrency": "USD",
-        "name": "Plan Base"
-      }],
-      "description": "Sistema de gestión de inventario, ventas y precios para pequeños y medianos comercios. (Producto de Arrambide Tech)",
-      "creator": {
-        "@type": "Person",
-        "name": "Agustín Arrambide"
-      },
-      "provider": {
-        "@type": "Organization",
-        "name": "Arrambide Tech",
-        "url": "https://arrambidetech.com",
-        "logo": "https://arrambidetech.com/assets/logo.webp"
-      }
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://arrambidetech.com/#organization",
+          "name": "Arrambide Tech",
+          "url": "https://arrambidetech.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://arrambidetech.com/assets/ArrambideTech.png"
+          },
+          "image": "https://arrambidetech.com/assets/ArrambideTech.png",
+          "description": "Empresa de desarrollo de software a medida y soluciones tecnológicas para pymes.",
+          "founder": {
+            "@type": "Person",
+            "name": "Agustín Arrambide"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/agustin-arrambide-365687271/",
+            "https://github.com/agusArram",
+            "https://wa.me/5491162548659"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://arrambidetech.com/#website",
+          "url": "https://arrambidetech.com",
+          "name": "Arrambide Tech",
+          "publisher": { "@id": "https://arrambidetech.com/#organization" }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "SortProject",
+          "applicationCategory": "BusinessApplication",
+          "softwareVersion": "2.3.2",
+          "operatingSystem": "Windows, macOS, Linux",
+          "description": "Sistema de gestión de inventario, ventas y precios para pequeños y medianos comercios.",
+          "provider": { "@id": "https://arrambidetech.com/#organization" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Ofrecen soporte técnico?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Así es, ofrecemos soporte técnico completo por WhatsApp y brindamos documentación detallada por email para todos nuestros productos como SortProject."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo solicitar nuevas funcionalidades?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Claro que sí. Valoramos mucho las ideas de nuestros clientes y trabajamos constantemente en mejorar nuestros servicios basándonos en su feedback."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tarda la respuesta?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nuestro compromiso es responder todas las consultas en menos de 24 horas hábiles por cualquiera de nuestros canales de contacto."
+              }
+            }
+          ]
+        }
+      ]
     }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
-<app-root></app-root>
+  <app-root></app-root>
 </body>
+
 </html>

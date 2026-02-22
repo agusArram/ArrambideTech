@@ -30,12 +30,18 @@
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.6rem;
   text-decoration: none;
   font-family: 'Inter Tight', sans-serif;
   font-weight: 700;
   font-size: 1.25rem;
   transition: transform 0.2s ease;
+}
+
+.nav-logo-img {
+  height: 32px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.2));
 }
 
 .logo-link:hover {
@@ -282,7 +288,8 @@
   }
 
   .mobile-menu {
-    display: none !important; /* Force hide even if open state exists */
+    display: none !important;
+    /* Force hide even if open state exists */
   }
 }
 
@@ -311,5 +318,3 @@
     height: 18px;
   }
 }
-
-
