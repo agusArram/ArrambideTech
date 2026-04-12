@@ -13,69 +13,64 @@
 }
 
 .nav-container {
-  width: 100%;
-  max-width: 1280px;
+  max-width: var(--container-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.nav-content {
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 70px;
 }
 
-/* Logo */
-.logo-link {
+/* =============================================
+   LOGO
+   ============================================= */
+.logo {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 700;
+  gap: 0.25rem;
+  font-family: var(--font-tight);
   font-size: 1.25rem;
-  transition: transform 0.2s ease;
-}
-
-.nav-logo-img {
-  height: 32px;
-  width: auto;
-  filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.2));
-}
-
-.logo-link:hover {
-  transform: scale(1.02);
-}
-
-.logo-text {
-  color: var(--text-primary);
-  transition: color 0.3s ease;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -0.02em;
 }
 
 .logo-accent {
-  color: var(--accent-primary);
-  text-shadow: 0 0 10px var(--accent-glow);
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  opacity: 0.9;
 }
 
-/* Desktop Navigation */
+.logo-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* =============================================
+   NAVIGATION LINKS
+   ============================================= */
 .nav-links {
-  display: none;
-  gap: 2rem;
+  display: flex;
   list-style: none;
-  padding: 0;
+  gap: 2.5rem;
   margin: 0;
+  padding: 0;
 }
 
 .nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: color 0.2s ease;
+  transition: color 0.3s;
   cursor: pointer;
   position: relative;
+}
+
+.nav-link:hover {
+  color: #fff;
 }
 
 .nav-link::after {
@@ -83,83 +78,48 @@
   position: absolute;
   bottom: -4px;
   left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--accent-primary);
-  transition: width 0.3s ease, background 0.3s ease;
-}
-
-.nav-link:hover {
-  color: var(--accent-primary);
-}
-
-.nav-link:hover::after {
   width: 100%;
-}
-
-/* Solo para links con routerLinkActive (Contacto) */
-.nav-link.active {
-  color: var(--accent-primary);
-}
-
-.nav-link.active::after {
-  width: 100%;
-}
-
-/* Nav Actions (Theme Toggle + CTA) */
-.nav-actions {
-  display: none;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Theme Toggle Button */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px solid var(--border-default);
-  background: var(--bg-card);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-}
-
-.theme-toggle:hover {
+  height: 1px;
   background: var(--accent-primary);
-  color: var(--bg-primary);
-  border-color: var(--accent-primary);
-  transform: scale(1.05);
-}
-
-.theme-icon {
-  width: 20px;
-  height: 20px;
+  transform: scaleX(0);
+  transform-origin: right;
   transition: transform 0.3s ease;
 }
 
-/* CTA Button */
-.nav-cta {
-  display: none;
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
-.btn-primary {
-  background: var(--accent-primary);
-  color: #0f172a;
-  padding: 0.625rem 1.25rem;
-  border-radius: 8px;
-  text-decoration: none;
+/* =============================================
+   HEADER ACTIONS
+   ============================================= */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.btn-consultancy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
   font-weight: 600;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 20px var(--accent-glow);
-  cursor: pointer;
-  display: inline-block;
-  border: none;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-default);
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-consultancy:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+  transform: translateY(-1px);
 }
 
 .btn-primary:hover {

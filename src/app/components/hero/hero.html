@@ -1,100 +1,92 @@
 <section id="inicio" class="hero">
-  <div class="hero-container">
-    <div class="hero-content">
-      <!-- Badge -->
-      <div class="hero-badge">
-        <span class="badge-icon">☁️</span>
-        <span class="badge-text">Sistema Híbrido - Versión 2.3.3</span>
+  <div class="hero__container">
+    <div class="hero__content fade-in">
+      <!-- Badge Premium -->
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        <span class="hero__badge-text">Arquitectura e Ingeniería de Eficiencia</span>
       </div>
 
       <!-- Main Heading -->
-      <h1 class="hero-title">
-        Control Total sobre<br>
-        <span class="hero-gradient">Stock, Ventas y Precios</span>
+      <h1 class="hero__title">
+        Diseño soluciones que <br>
+        <span class="hero__gradient">dominan la complejidad</span>
       </h1>
 
-      <!-- Subtitle -->
-      <p class="hero-subtitle">
-        La solución de gestión diseñada para pequeños y medianos comercios.
-        Reemplace planillas y anotadores por una aplicación moderna que le muestra
-        toda la información de su negocio en tiempo real.
+      <!-- Subtitle Principal -->
+      <p class="hero__subtitle">
+        No construyo solo software. Arquitecturo sistemas de alto rendimiento que eliminan fricciones operativas.
+        Aprendo su negocio, detecto el caos y entrego ingeniería épica.
       </p>
 
-      <!-- CTA Buttons -->
-      <div class="hero-cta">
-        <!--
-        <a (click)="scrollToSection('caracteristicas')" class="btn-primary-large">
-          <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+      <!-- CTA Principal -->
+      <div class="hero__cta">
+        <button (click)="scrollToSection('soluciones')" class="hero__btn hero__btn--primary">
+          Explorar Soluciones
+          <svg class="hero__btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M5 12h14m-7-7l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          Descargar Demo Gratis
-        </a>
-        COMENTADO HASTA IMPLEMENTAR LA FUNCION Y ZONA DE DESCARGAS
-        -->
-        <a (click)="scrollToSection('caracteristicas')" class="btn-secondary-large">
-          <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Ver Características
-        </a>
+        </button>
+        <button (click)="navegarContacto()" class="hero__btn hero__btn--secondary">
+          Consultoría Directa
+        </button>
       </div>
 
       <!-- Trust Indicators -->
-      <ul class="hero-trust">
-        <li class="trust-item">
-          <svg class="trust-icon" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-              clip-rule="evenodd" />
-          </svg>
-          <span>Demo gratuita sin límite de tiempo</span>
-        </li>
-        <li class="trust-item">
-          <svg class="trust-icon" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-              clip-rule="evenodd" />
-          </svg>
-          <span>Funciona en la nube y modo local</span>
-        </li>
-
-      </ul>
+      <div class="hero__meta">
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Enfoque</span>
+          <span class="hero__meta-value">Solution-First</span>
+        </div>
+        <div class="hero__meta-divider"></div>
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Stack</span>
+          <span class="hero__meta-value">Ingeniería Híbrida</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Hero Image/Illustration -->
-    <div class="hero-visual">
-      <div class="visual-card">
-        <div class="card-header">
-          <div class="card-dots">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
+    <!-- Visual Engineering Backdrop -->
+    <div class="hero__visual">
+      <div class="hero__card">
+        <div class="hero__card-glow"></div>
+        <div class="hero__card-inner">
+          <div class="hero__terminal">
+            <div class="hero__terminal-header">
+              <span class="hero__terminal-dot hero__terminal-dot--red"></span>
+              <span class="hero__terminal-dot hero__terminal-dot--yellow"></span>
+              <span class="hero__terminal-dot hero__terminal-dot--green"></span>
+              <span class="hero__terminal-title">efficiency_engine.rs</span>
+            </div>
+            <div class="hero__terminal-body">
+              <pre><code><span class="line-num">01</span> <span class="keyword">fn</span> <span class="func">solve</span>(problem: Problem) -> Solution {{ '{' }}
+<span class="line-num">02</span>   <span class="keyword">let</span> architecture = <span class="type">Architecture</span>::new();
+<span class="line-num">03</span>   <span class="keyword">let</span> result = architecture.<span class="func">optimize</span>(problem);
+<span class="line-num">04</span>   <span class="keyword">let</span> efficiency = <span class="number">0.98</span>;
+<span class="line-num">05</span> {{ '}' }}</code></pre>
+            </div>
           </div>
-          <span class="card-title">SortProject</span>
-        </div>
-        <div class="card-content">
-          <div class="stat-item">
-            <div class="stat-label">Productos en Stock</div>
-            <div class="stat-value">1,247</div>
-            <div class="stat-trend positive">+12.5%</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-label">Ventas Hoy</div>
-            <div class="stat-value">$45,890</div>
-            <div class="stat-trend positive">+8.3%</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-label">Margen Promedio</div>
-            <div class="stat-value">32.4%</div>
-            <div class="stat-trend positive">+2.1%</div>
+          <div class="hero__metrics">
+            <div class="hero__metric">
+              <span class="hero__metric-val">+98%</span>
+              <span class="hero__metric-lab">Eficiencia</span>
+            </div>
+            <div class="hero__metric">
+              <span class="hero__metric-val">-40h</span>
+              <span class="hero__metric-lab">Ahorro Semanal</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Scroll Indicator -->
-  <div class="scroll-indicator">
-    <div class="scroll-mouse"></div>
+  <!-- Ambient Light -->
+  <div class="hero__ambient hero__ambient--top-right"></div>
+  <div class="hero__ambient hero__ambient--bottom-left"></div>
+
+  <!-- Scroll Mouse -->
+  <div class="hero__scroll">
+    <div class="hero__mouse"></div>
   </div>
-</section>
+</section>

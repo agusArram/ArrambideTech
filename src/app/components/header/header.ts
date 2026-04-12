@@ -5,32 +5,29 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
 export class HeaderComponent implements OnInit {
   protected readonly isMenuOpen = signal(false);
-  protected readonly isDarkMode = signal(false);
+  protected readonly isScrolled = signal(false);
 
   constructor(
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
     public router: Router
-  ) {
-    // Efecto para aplicar el tema cuando cambia
-    effect(() => {
-      const theme = this.isDarkMode() ? 'dark' : 'light';
-      this.renderer.setAttribute(this.document.documentElement, 'data-theme', theme);
-      localStorage.setItem('theme', theme);
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    // Cargar preferencia guardada o usar tema claro por defecto
-    const savedTheme = localStorage.getItem('theme');
-    const initialTheme = savedTheme || 'light';
-    this.isDarkMode.set(initialTheme === 'dark');
+    // Forzar tema oscuro en el root
+    this.renderer.setAttribute(this.document.documentElement, 'data-theme', 'dark');
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollOffset = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
+    this.isScrolled.set(scrollOffset > 50);
   }
 
   @HostListener('document:click', ['$event'])
@@ -39,16 +36,11 @@ export class HeaderComponent implements OnInit {
 
     const target = event.target as HTMLElement;
     const mobileMenu = this.document.querySelector('.mobile-menu');
-    const mobileMenuBtn = this.document.querySelector('.mobile-menu-btn');
+    const menuToggle = this.document.querySelector('.menu-toggle');
 
-    if (!mobileMenu?.contains(target) && !mobileMenuBtn?.contains(target)) {
+    if (!mobileMenu?.contains(target) && !menuToggle?.contains(target)) {
       this.closeMenu();
     }
-  }
-
-  toggleTheme(): void {
-    this.isDarkMode.update(value => !value);
-    this.closeMenu();
   }
 
   toggleMenu(): void {
@@ -62,7 +54,6 @@ export class HeaderComponent implements OnInit {
   scrollToSection(sectionId: string): void {
     this.closeMenu();
 
-    // Si no estamos en home, navegar primero a home
     if (this.router.url !== '/') {
       this.router.navigate(['/']).then(() => {
         setTimeout(() => {
@@ -75,23 +66,21 @@ export class HeaderComponent implements OnInit {
   }
 
   private scrollToElement(sectionId: string): void {
-    // Si es "inicio", hacer scroll al top
     if (sectionId === 'inicio') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
-    // Para otras secciones, buscar el elemento
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   }
-
-  navegarYCerrar(ruta: string): void {
-    this.closeMenu();
-    this.router.navigate([ruta]);
-  }
-
-
 }

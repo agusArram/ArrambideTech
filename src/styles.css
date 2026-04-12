@@ -5,105 +5,58 @@
 /* CSS Variables - Light Theme (Default)
    ========================================================================== */
 :root {
-  /* Fondos Light */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-elevated: #f1f5f9;
+  /* Fondos Deep Dark (Vercel/Linear style) */
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: #121212;
+  --bg-elevated: #1a1a1a;
 
-  /* Acento Azul */
-  --accent-primary: #3b82f6;
-  --accent-primary-dark: #2563eb;
-  --accent-primary-light: #60a5fa;
-  --accent-glow: rgba(59, 130, 246, 0.4);
+  /* Acento Esmeralda Premium */
+  --accent-primary: #6ee7b7;
+  --accent-primary-dark: #34d399;
+  --accent-primary-light: #a7f3d0;
+  --accent-glow: rgba(110, 231, 183, 0.15);
 
-  /* Texto Light */
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
+  /* Texto */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
 
-  /* Bordes Light */
-  --border-default: rgba(0, 0, 0, 0.1);
-  --border-strong: rgba(0, 0, 0, 0.15);
-
-  /* Sombras Light */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-  --shadow-accent: 0 0 20px var(--accent-glow);
+  /* Bordes Glassmorphism */
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.8);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.9);
+  --shadow-lg: 0 8px 48px rgba(0, 0, 0, 1);
+  --shadow-accent: 0 0 40px var(--accent-glow);
 
   /* === SISTEMA DE DISEÑO (Design System) === */
+  --font-main: 'Inter', sans-serif;
+  --font-tight: 'Inter Tight', sans-serif;
 
-  /* Espaciado (Spacing) */
+  /* Espaciado */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
-  --space-lg: clamp(2rem, 3vw, 3rem);
-  --space-xl: clamp(2.5rem, 4vw, 4rem);
+  --space-lg: clamp(2.5rem, 5vw, 4rem);
+  --space-xl: clamp(4rem, 8vw, 7rem);
 
-  /* =============================================
-     TYPOGRAPHY HIERARCHY (Most Important!)
-     =============================================
-     Clear visual distinction between titles and body text.
-     Max values are conservative for 1920x1080 screens.
-  */
-
-  /* Display - Hero Title Only */
-  --fs-display: clamp(1.5rem, 2vw + 0.75rem, 2.25rem);
-
-  /* Headings */
-  --fs-h1: clamp(1.35rem, 1.75vw + 0.5rem, 1.85rem);
-  --fs-h2: clamp(1.2rem, 1.5vw + 0.5rem, 1.6rem);
-  --fs-h3: clamp(1.05rem, 1vw + 0.25rem, 1.25rem);
-
-  /* Body Text - MUST be clearly smaller than headings */
-  --fs-subtitle: clamp(0.875rem, 0.75vw + 0.25rem, 0.975rem);
-  /* Hero description */
-  --fs-card-title: clamp(0.95rem, 0.8vw + 0.25rem, 1.1rem);
-  /* Card headers */
-  --fs-body: clamp(0.825rem, 0.5vw + 0.25rem, 0.9rem);
-  /* Body paragraphs */
-  --fs-small: 0.8125rem;
-  /* Labels, small text */
-
-  /* Componentes (Botones, Iconos) */
-  --btn-padding: 0.75rem 1.5rem;
-  --btn-fs: clamp(0.825rem, 0.6vw + 0.25rem, 0.9rem);
-
-  --icon-size-lg: clamp(1.5rem, 2vw + 0.25rem, 2rem);
-  --icon-size-md: clamp(1.25rem, 1.5vw + 0.25rem, 1.5rem);
+  /* Tipografía */
+  --fs-display: clamp(2.5rem, 6vw, 4.5rem);
+  --fs-h1: clamp(2rem, 4vw, 3rem);
+  --fs-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --fs-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --fs-subtitle: clamp(1rem, 1.2vw, 1.25rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
 
   /* Layout */
-  --container-width: min(100% - 2rem, 1200px);
-  --header-height: 70px;
+  --container-width: 1200px;
+  --header-height: 80px;
 }
 
-
-/* Dark Theme Variables
-   ========================================================================== */
-[data-theme="dark"] {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #1a1a1a;
-  --bg-card: #1e1e1e;
-  --bg-elevated: #252525;
-
-  --accent-primary: #00d9ff;
-  --accent-primary-dark: #00b8db;
-  --accent-primary-light: #33e3ff;
-  --accent-glow: rgba(0, 217, 255, 0.4);
-
-  --text-primary: #ffffff;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-
-  --border-default: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.2);
-
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
-  --shadow-accent: 0 0 20px var(--accent-glow);
-}
 
 /* CSS Reset & Base Styles
    ========================================================================== */
@@ -124,17 +77,13 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-main);
   font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--text-primary);
   background: var(--bg-primary);
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
-  word-break: keep-all;
-  hyphens: none;
 }
 
 /* Typography

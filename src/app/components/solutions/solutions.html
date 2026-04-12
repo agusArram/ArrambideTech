@@ -1,0 +1,73 @@
+<section id="soluciones" class="solutions">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag">Engineering Mastery</span>
+      <h2 class="section-title">Ingeniería que <span class="text-gradient">resuelve</span></h2>
+      <p class="section-subtitle">Casos de estudio donde la arquitectura técnica se traduce en eficiencia operativa medible.</p>
+    </div>
+
+    <!-- Bento Grid Layout -->
+    <div class="bento-grid">
+      @for (item of cases(); track item.id) {
+        <div 
+          class="bento-item" 
+          [class.is-expanded]="expandedCaseId() === item.id"
+          (click)="toggleCase(item.id)"
+        >
+          <div class="item-content">
+            <div class="item-header">
+              <span class="item-icon">{{ item.icon }}</span>
+              <span class="item-tag">{{ item.tag }}</span>
+            </div>
+            
+            <h3 class="item-title">{{ item.title }}</h3>
+            
+            <!-- Default View: Problem & Solution -->
+            <div class="item-summary" [class.is-collapsed]="expandedCaseId() === item.id">
+              <div class="summary-block summary-block--problem">
+                <span class="block-label block-label--problem">EL PROBLEMA (DOLOR)</span>
+                <p class="block-text">{{ item.problem }}</p>
+              </div>
+              
+              <div class="summary-block highlight">
+                <span class="block-label">MI SOLUCIÓN</span>
+                <p class="block-text">{{ item.solution }}</p>
+              </div>
+
+              <div class="item-hint">
+                <span>VER JUSTIFICACIÓN TÉCNICA</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+            <!-- Expanded View: Justification & Architecture Details -->
+            <div class="item-details" [class.active]="expandedCaseId() === item.id">
+              <div class="details-header">
+                <span class="block-label">POR QUÉ / JUSTIFICACIÓN</span>
+                <button class="btn-close">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+              <p class="architecture-text">{{ item.justification }}</p>
+              
+              <div class="tech-stack-visual">
+                <div class="stack-dot"></div>
+                <div class="stack-line"></div>
+                <div class="stack-dot"></div>
+                <div class="stack-line"></div>
+                <div class="stack-dot"></div>
+              </div>
+
+              <div class="result-badge">
+                 <span class="badge-accent">Result: READY FOR SCALE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Glassmorphism Background layer -->
+          <div class="glass-layer"></div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,100 +1,45 @@
-<header class="header">
+<header class="header" [class.scrolled]="isScrolled()">
   <nav class="nav-container">
-    <div class="nav-content">
-      <!-- Logo -->
-      <div class="logo">
-        <a routerLink="/" class="logo-link">
-          <img src="assets/ArrambideTech.png" alt="ArrambideTech Logo" class="nav-logo-img">
-          <span class="logo-text">ARRAMBIDE</span>
-          <span class="logo-accent">TECH</span>
-        </a>
-      </div>
+    <!-- Logo -->
+    <a routerLink="/" class="logo">
+      <span class="logo-accent">Arrambide</span>Tech
+      <span class="logo-dot"></span>
+    </a>
 
-      <!-- Desktop Navigation -->
-      <ul class="nav-links">
-        <li><a routerLink="/" class="nav-link" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
-        <li><a routerLink="/servicios" class="nav-link" routerLinkActive="active">Servicios</a></li>
-        <li><a routerLink="/portafolio" class="nav-link" routerLinkActive="active">Portafolio</a></li>
-        <li><a routerLink="/contacto" class="nav-link" routerLinkActive="active">Contacto</a></li>
-      </ul>
+    <!-- Desktop Nav -->
+    <ul class="nav-links">
+      <li><a (click)="scrollToSection('inicio')" class="nav-link">Inicio</a></li>
+      <li><a (click)="scrollToSection('soluciones')" class="nav-link">Arquitectura</a></li>
+      <li><a routerLink="/portafolio" class="nav-link">Proyectos</a></li>
+      <li><a routerLink="/contacto" class="nav-link">Contacto</a></li>
+    </ul>
 
-      <!-- Right Side: Theme Toggle + CTA -->
-      <div class="nav-actions">
-        <!-- Theme Toggle Button -->
-        <button class="theme-toggle" (click)="toggleTheme()"
-          [attr.aria-label]="isDarkMode() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'">
-          <!-- Condicional actualizado a @if/@else -->
-          @if (isDarkMode()) {
-          <!-- Sun Icon (Light Mode) -->
-          <svg class="theme-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          } @else {
-          <!-- Moon Icon (Dark Mode) -->
-          <svg class="theme-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-          }
-        </button>
-
-        <!-- CTA Button -->
-
-        <div class="nav-cta">
-          <a routerLink="/contacto" class="btn-primary">
-            Pedir Cotización
-          </a>
-        </div>
-
-      </div>
-
-      <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen()"
-        aria-label="Toggle menu">
-        <!-- Condicional actualizado a @if/@else -->
-        @if (!isMenuOpen()) {
-        <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <a routerLink="/contacto" class="btn-consultancy">
+        Agendar Consultoría
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M5 12h14m-7-7l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        } @else {
-        <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-        }
+      </a>
+      
+      <!-- Mobile Toggle -->
+      <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle Menu">
+        <div class="hamburger" [class.active]="isMenuOpen()"></div>
       </button>
     </div>
-
-    <!-- Mobile Menu -->
-    <nav class="mobile-menu" [class.open]="isMenuOpen()">
-      <ul>
-        <li><a routerLink="/" (click)="toggleMenu()" class="mobile-link">Inicio</a></li>
-        <li><a routerLink="/servicios" (click)="toggleMenu()" class="mobile-link">Servicios</a></li>
-        <li><a routerLink="/portafolio" (click)="toggleMenu()" class="mobile-link">Portafolio</a></li>
-        <li><a routerLink="/contacto" (click)="toggleMenu()" class="mobile-link">Contacto</a></li>
-      </ul>
-
-      <!-- Theme Toggle in Mobile -->
-      <button class="mobile-theme-toggle" (click)="toggleTheme()">
-        <!-- Condicional actualizado a @if/@else -->
-        @if (isDarkMode()) {
-        <svg class="theme-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-        } @else {
-        <svg class="theme-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-        }
-        <span>{{ isDarkMode() ? 'Tema Claro' : 'Tema Oscuro' }}</span>
-      </button>
-
-      <a routerLink="/contacto" (click)="toggleMenu()" class="btn-primary mobile-cta">
-        Pedir Cotización
-      </a>
-    </nav>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" [class.active]="isMenuOpen()">
+    <ul class="mobile-links">
+      <li><a (click)="scrollToSection('inicio')" class="mobile-link">Inicio</a></li>
+      <li><a (click)="scrollToSection('soluciones')" class="mobile-link">Soluciones</a></li>
+      <li><a routerLink="/portafolio" class="mobile-link">Proyectos</a></li>
+      <li><a routerLink="/contacto" class="mobile-link">Contacto</a></li>
+      <li class="mobile-cta-item">
+        <a routerLink="/contacto" class="mobile-cta">Agendar Consultoría</a>
+      </li>
+    </ul>
+  </div>
 </header>

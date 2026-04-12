@@ -2,6 +2,8 @@ import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
+import { HeroComponent } from '../../components/hero/hero';
+import { SolutionsComponent } from '../../components/solutions/solutions';
 import { ModalComponent, ModalContent } from '../../components/modal/modal';
 
 @Component({
@@ -11,6 +13,8 @@ import { ModalComponent, ModalContent } from '../../components/modal/modal';
     RouterLink,
     HeaderComponent,
     FooterComponent,
+    HeroComponent,
+    SolutionsComponent,
     ModalComponent
   ],
   templateUrl: './home.html',
