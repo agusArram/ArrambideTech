@@ -1,6 +1,6 @@
 <section id="soluciones" class="solutions">
   <div class="container">
-    <div class="section-header text-center">
+    <div class="section-header text-center reveal-on-scroll">
       <span class="section-tag">Engineering Mastery</span>
       <h2 class="section-title">Ingeniería que <span class="text-gradient">resuelve</span></h2>
       <p class="section-subtitle">Casos de estudio donde la arquitectura técnica se traduce en eficiencia operativa medible.</p>
@@ -10,7 +10,7 @@
     <div class="bento-grid">
       @for (item of cases(); track item.id) {
         <div 
-          class="bento-item" 
+          class="bento-item reveal-on-scroll" 
           [class.is-expanded]="expandedCaseId() === item.id"
           (click)="toggleCase(item.id)"
         >

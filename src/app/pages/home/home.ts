@@ -5,6 +5,7 @@ import { FooterComponent } from '../../components/footer/footer';
 import { HeroComponent } from '../../components/hero/hero';
 import { SolutionsComponent } from '../../components/solutions/solutions';
 import { ModalComponent, ModalContent } from '../../components/modal/modal';
+import { ContactFormComponent } from '../../components/contact-form/contact-form';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ import { ModalComponent, ModalContent } from '../../components/modal/modal';
     FooterComponent,
     HeroComponent,
     SolutionsComponent,
-    ModalComponent
+    ModalComponent,
+    ContactFormComponent
   ],
   templateUrl: './home.html',
   styleUrl: './home.css'

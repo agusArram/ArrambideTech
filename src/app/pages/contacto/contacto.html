@@ -1,160 +1,55 @@
 <app-header></app-header>
 
 <main class="contacto-page">
-  <!-- Hero Section -->
   <section class="contacto-hero">
-    <div class="container">
-      <div class="badge">
-        <span class="badge-icon">🤝</span>
-        <span>Trato Directo</span>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Contáctanos</h1>
+        <p class="hero-subtitle">Hablemos de ingeniería, eficiencia y el futuro de tu proyecto.</p>
       </div>
-      <h1 class="page-title">Tu idea, mi desafío</h1>
-      <p class="page-subtitle">
-        Contame qué tenés en mente. Mi compromiso es brindarte un trato personal y directo para que juntos transformemos
-        tus procesos en soluciones digitales eficientes.
-      </p>
     </div>
   </section>
 
-  <!-- Content Section -->
-  <section class="contacto-content">
-    <div class="container">
-
-      <!-- Formulario de Contacto (Full Width) -->
-      <article class="formulario-section">
-        <h2 class="section-title">Enviame un mensaje</h2>
-
-        <!-- Mensaje de estado con @if -->
-        @if (mensajeEstado(); as estado) {
-        <div class="mensaje-estado" [class.success]="estado.tipo === 'success'" [class.error]="estado.tipo === 'error'">
-          {{ estado.texto }}
-        </div>
-        }
-
-        <form class="contacto-form" (submit)="enviarFormulario($event)" id="contactForm">
-          <!-- Hidden fields for Web3Forms -->
-          <input type="hidden" name="access_key" value="87e1a14e-ccf0-4851-8dcd-c6ef81bc4507">
-          <input type="hidden" name="subject" value="Nuevo mensaje desde SortProject">
-          <input type="hidden" name="from_name" value="SortProject - Formulario Web">
-          <input type="checkbox" name="botcheck" style="display: none;">
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="nombre" class="sr-only">Nombre completo</label>
-              <div class="input-wrapper">
-                <svg class="input-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <input type="text" id="nombre" name="name" class="form-input" placeholder="Nombre completo"
-                  autocomplete="name" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="email" class="sr-only">Email</label>
-              <div class="input-wrapper">
-                <svg class="input-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-                </svg>
-                <input type="email" id="email" name="email" class="form-input" placeholder="Correo electrónico"
-                  autocomplete="email" required>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="mensaje" class="sr-only">Mensaje</label>
-            <div class="input-wrapper textarea-wrapper">
-              <svg class="input-icon textarea-icon" width="20" height="20" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
-              <textarea id="mensaje" name="message" class="form-textarea" placeholder="¿En qué puedo ayudarte?" rows="6"
-                required></textarea>
-            </div>
-          </div>
-
-          <button type="submit" class="btn-submit" [disabled]="enviando()">
-            @if (!enviando()) {
-            <span>
-              Enviar Mensaje
-              <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-            } @else {
-            <span>Enviando...</span>
+  <section class="contacto-main">
+    <div class="container main-container">
+      <div class="contacto-grid">
+        <!-- Info Column -->
+        <div class="contacto-info">
+          <div class="info-card-container">
+            @for (info of contactInfo; track info.titulo) {
+              <a [href]="info.link" target="_blank" class="info-card">
+                <span class="info-icon">{{ info.icono }}</span>
+                <div class="info-details">
+                  <h3 class="info-title">{{ info.titulo }}</h3>
+                  <p class="info-valor">{{ info.valor }}</p>
+                </div>
+              </a>
             }
-          </button>
-        </form>
-      </article>
-
-      <!-- Información de Contacto -->
-      <section class="info-section-wide">
-        <h2 class="section-title text-center">Otras formas de contactarme</h2>
-
-        <div class="contact-cards-grid dual-cards">
-          @for (info of contactInfo; track $index) {
-          <a [href]="info.link" class="contact-card-item" target="_blank" rel="noopener">
-            <div class="contact-card-icon">{{ info.icono }}</div>
-            <div class="contact-card-content">
-              <h3 class="contact-card-title">{{ info.titulo }}</h3>
-              <span class="contact-card-value">{{ info.valor }}</span>
-            </div>
-            <div class="contact-card-arrow">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </div>
-          </a>
-          }
-        </div>
-
-        <div class="developer-minimal-card">
-          <div class="dev-avatar">
-            <img src="assets/ArrambideTech.png" alt="Logo de ArrambideTech" class="dev-logo-img">
           </div>
-          <div class="dev-main-info">
-            <div class="dev-text">
-              <span class="dev-label">Desarrollado por</span>
-              <strong class="dev-name">Agustín Arrambide</strong>
-              <span class="dev-tagline">Estudiante de 3er año de Ing. en Informática</span>
+
+          <div class="faq-container">
+            <h2 class="faq-section-title">Preguntas Frecuentes</h2>
+            <div class="faq-list">
+              @for (faq of faqs; track faq.pregunta) {
+                <div class="faq-item">
+                  <h3 class="faq-pregunta">{{ faq.pregunta }}</h3>
+                  <p class="faq-respuesta">{{ faq.respuesta }}</p>
+                </div>
+              }
             </div>
-            <a href="https://github.com/agusArram" target="_blank" class="github-icon-btn" title="Ver GitHub">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-              </svg>
-            </a>
           </div>
         </div>
-      </section>
 
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section class="faq-section">
-    <div class="container">
-      <h2 class="section-title text-center">Preguntas Frecuentes</h2>
-      <div class="faq-grid">
-        @for (faq of faqs; track $index) {
-        <article class="faq-card">
-          <div class="faq-card-header">
-            <div class="faq-icon-wrapper">
-              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 class="faq-question">{{ faq.pregunta }}</h3>
+        <!-- Form Column -->
+        <div class="contacto-form-section">
+          <div class="form-header">
+            <h2 class="form-title">Enviar Solicitud</h2>
+            <p class="form-subtitle">Completa el formulario y recibe una evaluación técnica personalizada.</p>
           </div>
-          <p class="faq-answer">{{ faq.respuesta }}</p>
-        </article>
-        }
+          
+          <!-- B2B Reusable Component -->
+          <app-contact-form></app-contact-form>
+        </div>
       </div>
     </div>
   </section>

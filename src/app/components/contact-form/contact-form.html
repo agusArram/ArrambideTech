@@ -1,0 +1,84 @@
+<div class="b2b-form-container">
+  @if (mensajeEstado(); as estado) {
+    <div class="form-feedback" [class.success]="estado.tipo === 'success'" [class.error]="estado.tipo === 'error'">
+      <span class="feedback-icon">{{ estado.tipo === 'success' ? '✓' : '⚠' }}</span>
+      <p class="feedback-text">{{ estado.texto }}</p>
+    </div>
+  }
+
+  <form class="b2b-form" (submit)="enviarFormulario($event)">
+    <!-- Web3Forms Config -->
+    <input type="hidden" name="access_key" value="87e1a14e-ccf0-4851-8dcd-c6ef81bc4507">
+    <input type="hidden" name="subject" value="Nuevo Lead B2B - Arrambide Tech">
+    <input type="hidden" name="from_name" value="Arrambide Tech - Lead Engine">
+    <input type="checkbox" name="botcheck" style="display: none;">
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="nombre">Nombre y Apellido</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej: Agustín Arrambide" required>
+      </div>
+
+      <div class="form-group">
+        <label for="empresa">Empresa / Organización</label>
+        <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu compañía" required>
+      </div>
+
+      <div class="form-group">
+        <label for="contacto">Dato de Seguimiento</label>
+        <input type="text" id="contacto" name="contacto" placeholder="Email o Teléfono (WhatsApp)" required>
+      </div>
+
+      <div class="form-group">
+        <label>Desafío Operativo</label>
+        <div class="custom-select" [class.active]="isDropdownOpen()">
+          <div class="select-trigger" (click)="toggleDropdown()">
+            <span class="selected-value" [class.placeholder]="!selectedChallenge()">
+              {{ selectedChallenge() || placeholder }}
+            </span>
+            <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+
+          @if (isDropdownOpen()) {
+            <ul class="select-options">
+              @for (opcion of desafios; track opcion) {
+                <li (click)="selectOption(opcion)" [class.selected]="selectedChallenge() === opcion">
+                  {{ opcion }}
+                </li>
+              }
+            </ul>
+          }
+
+          <!-- Hidden Input para Web3Forms (CRÍTICO) -->
+          <input type="hidden" name="desafio" [value]="selectedChallenge()">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="mensaje">Descripción del Problema</label>
+        <textarea 
+          id="mensaje" 
+          name="mensaje" 
+          placeholder="Cuéntanos brevemente sobre el proceso que deseas optimizar..." 
+          rows="4" 
+          required
+        ></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-b2b-submit" [disabled]="enviando()">
+      @if (!enviando()) {
+        <span class="btn-content">
+          SOLICITAR EVALUACIÓN TÉCNICA
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      } @else {
+        <span class="btn-loader">PROCESANDO ARQUITECTURA...</span>
+      }
+    </button>
+  </form>
+</div>
