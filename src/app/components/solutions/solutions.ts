@@ -26,27 +26,27 @@ export class SolutionsComponent {
       id: 'marinas',
       tag: 'IoT & Smart Routing',
       title: 'Ecosistema Biométrico Unificado (Marinas)',
-      problem: 'La liquidación manual generaba ineficiencias, y el control vehicular dependía del "amiguismo", permitiendo fugas y el ingreso de morosos sin control estricto.',
-      solution: 'Optimización de hardware con enrutamiento inteligente: Una única terminal facial (Hikvision Ultra) procesa dos lógicas simultáneas. Si lee a un empleado, registra su asistencia en Supabase (RRHH); si lee a un cliente, consulta el sistema de morosidad local.',
-      justification: 'Para maximizar el ROI del cliente usando un solo equipo. Elimina el "amiguismo" en la barrera: si adeuda, la pantalla avisa y no abre. Al pagar, impacta en 15 segundos y la barrera se abre antes de que el cliente suba al auto.',
+      problem: 'La liquidación manual generaba ineficiencias, y el control vehicular dependía de procesos internos vulnerables, permitiendo fugas y el ingreso de morosos sin control estricto.',
+      solution: 'Optimización de hardware con enrutamiento inteligente: Una terminal facial de alta gama procesa dos lógicas simultáneas. Si detecta a un activo, registra asistencia en Supabase (RRHH); si detecta a un cliente, valida el estado de cuenta local.',
+      justification: 'Maximización del ROI mediante el uso de infraestructura dual. Erradica la vulnerabilidad en el acceso: si existe deuda, el sistema bloquea la apertura de forma autónoma. Al regularizarse, el impacto en barrera es menor a 15 segundos.',
       icon: '🔐'
     },
     {
       id: 'sortproject',
       tag: 'Desktop & Cloud Engineering',
       title: 'Gestión Omnicanal & POS (SortProject)',
-      problem: 'Los negocios físicos pierden control sobre su rentabilidad real, tienen ventas lentas y los sistemas en la nube los dejan inoperativos si se corta el WiFi.',
-      solution: 'SaaS híbrido: App de Escritorio en Java (Offline-First con SQLite local) para el POS, hiper-sincronizada con un Dashboard Web integral en Supabase.',
-      justification: 'Para vender sin interrupciones y a máxima velocidad. Facturación ultrarrápida, soporte térmico, PDFs y control de rentabilidad milimétrico. Devuelve paz mental y control total.',
+      problem: 'Los ecosistemas de retail pierden control sobre la rentabilidad real y la velocidad transaccional, volviéndose inoperativos ante fallas de conectividad.',
+      solution: 'Arquitectura híbrida: Núcleo de escritorio (Offline-First con SQLite local) para garantizar operatividad 24/7, sincronizado con un Dashboard de analítica en Supabase.',
+      justification: 'Garantiza la continuidad operativa y la velocidad de procesamiento crítica. Facturación de alta frecuencia, soporte para periféricos industriales y control de rentabilidad milimétrico a nivel de base de datos.',
       icon: '⚙️'
     },
     {
       id: 'hyder',
       tag: 'Secure Corporate Portals',
       title: 'Portales Corporativos Autogestionables (Hyder)',
-      problem: 'Las empresas dependen de desarrolladores externos para actualizaciones simples, generando cuellos de botella operativos y gastos innecesarios.',
-      solution: 'Plataforma web dinámica con panel de administración 100% autogestionable, protegido mediante autenticación segura y CAPTCHA anti-bots.',
-      justification: 'Independencia total al cliente. Permite subir noticias, PDFs o fotos desde cualquier lugar sin intermediarios. La web se convierte en una herramienta de comunicación viva y segura.',
+      problem: 'La dependencia de proveedores externos para actualizaciones operativas genera cuellos de botella y riesgos en la integridad de la información.',
+      solution: 'Desarrollo de plataforma web dinámica con motor de administración centralizado, protegido mediante protocolos de autenticación robustos.',
+      justification: 'Independencia operativa total para el cliente. Gestión autónoma de activos digitales (documentos, medios, noticias) sobre una infraestructura segura y escalable.',
       icon: '🏢'
     }
   ]);

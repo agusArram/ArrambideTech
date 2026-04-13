@@ -646,6 +646,160 @@
   text-align: center;
 }
 
+/* CTA Technical Repo v3.6.1 */
+.home__repo-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.btn-repo-technical {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 2.5rem;
+  background: #0d0d0d;
+  color: #a1a1aa;
+  border: 1px solid #222;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.btn-repo-technical:hover {
+  background: #111;
+  border-color: #6EE7B7;
+  color: #6EE7B7;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(110, 231, 183, 0.1);
+}
+
+.btn-repo-technical svg {
+  transition: transform 0.4s ease;
+}
+
+.btn-repo-technical:hover svg {
+  transform: translateX(5px);
+}
+
+/* Paradigma Arrambide - Brand Manifesto Section 
+   ========================================================================== */
+.paradigma-section {
+  padding: 120px 2rem;
+  background-color: #050505;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.paradigma-header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  animation: fadeIn 1s ease-out;
+}
+
+.paradigma-badge {
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  background: rgba(110, 231, 183, 0.03);
+  color: #6EE7B7;
+  border: 1px solid rgba(110, 231, 183, 0.1);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.paradigma-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-wrap: balance;
+}
+
+.paradigma-subtitle {
+  font-size: 1.2rem;
+  color: #888;
+  line-height: 1.6;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.paradigma-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.paradigma-card {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid #222;
+  padding: 2.5rem;
+  border-radius: 4px;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 200px;
+}
+
+.paradigma-card:hover {
+  background: rgba(110, 231, 183, 0.01);
+  border-color: rgba(110, 231, 183, 0.25);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+              0 0 20px rgba(110, 231, 183, 0.03);
+}
+
+.paradigma-card .card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+  overflow-wrap: break-word;
+}
+
+.paradigma-card .card-text {
+  font-size: 1rem;
+  color: #999;
+  line-height: 1.7;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+@media (max-width: 1024px) {
+  .paradigma-section {
+    padding: 80px 1.5rem;
+  }
+  
+  .paradigma-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .paradigma-card {
+    padding: 2.5rem;
+  }
+}
+
 /* CTA Section
    ========================================================================== */
 /* CTA Section B2B (Enterprise Engineering) */

@@ -4,13 +4,13 @@
 <section class="portafolio-hero">
   <div class="container">
     <div class="hero-content">
-      <span class="hero-badge">Nuestro Portafolio</span>
+      <span class="hero-badge">Technical Repository v3.7.0</span>
       <h1 class="hero-title">
-        Proyectos que transforman
-        <span class="hero-highlight">negocios reales</span>
+        Historial de Arquitecturas
+        <span class="hero-highlight">y Soluciones Críticas</span>
       </h1>
       <p class="hero-description">
-        Explora algunos de nuestros trabajos más destacados. Desde productos propios hasta soluciones personalizadas para clientes.
+        Un registro detallado de desafíos operativos resueltos mediante ingeniería a medida. Desde sistemas offline-first hasta infraestructuras cloud de alta disponibilidad.
       </p>
     </div>
   </div>
@@ -100,7 +100,7 @@
                   <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                   </svg>
-                  <span>Visitar Proyecto</span>
+                  <span>{{ proyecto.btnText || 'Ver Proyecto' }}</span>
                 </a>
               } @else {
                 @if (shouldOpenModal(proyecto)) {
@@ -108,7 +108,7 @@
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    <span>Conocer más</span>
+                    <span>{{ proyecto.btnText || 'Conocer más' }}</span>
                   </button>
                 } @else {
                   <button class="btn-proyecto disabled" disabled>
@@ -176,9 +176,9 @@
 <section class="cta-section">
   <div class="container">
     <div class="cta-content">
-      <h2 class="cta-title">¿Tienes un proyecto en mente?</h2>
+      <h2 class="cta-title">¿Requiere un ecosistema técnico especializado?</h2>
       <p class="cta-description">
-        Hagamos realidad tu próxima gran idea. Contactanos para una consulta gratuita.
+        Inicie la transformación de su arquitectura operativa hoy. Solicite una evaluación de viabilidad técnica con nuestros ingenieros.
       </p>
       <a routerLink="/contacto" class="btn-cta-primary">
         Comenzar Proyecto

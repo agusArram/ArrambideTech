@@ -16,10 +16,11 @@ interface Proyecto {
   tecnologias: string[];
   categoria: string;
   anio: string;
+  btnText?: string;
 }
 
 @Component({
-  selector: 'app-portafolio',
+  selector: 'app-soluciones-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -28,10 +29,10 @@ interface Proyecto {
     FooterComponent,
     ModalComponent
   ],
-  templateUrl: './portafolio.html',
-  styleUrl: './portafolio.css'
+  templateUrl: './soluciones-page.html',
+  styleUrl: './soluciones-page.css'
 })
-export class PortafolioComponent {
+export class SolucionesPageComponent {
   // Modal State
   protected readonly isModalOpen = signal(false);
   protected modalContent = signal<ModalContent | null>(null);
@@ -123,14 +124,14 @@ export class PortafolioComponent {
   }
 
   protected readonly gestionEmpleadosContent: ModalContent = {
-    title: 'Control de Asistencia',
-    description: 'Sistema inteligente para empresas que buscan orden. Automatiza el registro de entradas y salidas de tu personal con tecnología segura.',
+    title: 'Control Biométrico y Auditoría de Personal',
+    description: 'Nodos de control de acceso integrados con validación de identidad de alta precisión. Diseñado para garantizar la trazabilidad total de la jornada laboral y la seguridad de infraestructuras corporativas.',
     features: [
-      'Control de asistencia con PIN personalizado',
-      'Reportes automáticos por email mensuales',
-      'Registro de licencias, vacaciones y cubiertas',
-      'Interfaz intuitiva para administración',
-      'Base de datos segura y confiable'
+      'Validación biométrica y auditoría de integridad',
+      'Sincronización de datos en tiempo real (Cloud Sync)',
+      'Generación automatizada de reportes de cumplimiento laboral',
+      'Gestión escalable de licencias, vacaciones y cubiertas',
+      'Arquitectura de alta disponibilidad con redundancia'
     ],
     images: [
       '/assets/App/GestionEmpleados/Asistencia.webp',
@@ -138,77 +139,80 @@ export class PortafolioComponent {
       '/assets/App/GestionEmpleados/Historial.webp',
       '/assets/App/GestionEmpleados/Feriados.webp'
     ],
-    ctaText: 'Me interesa',
-    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Me%20interesa%20el%20sistema%20de%20Gestión%20de%20Empleados'
+    ctaText: 'Solicitar Especificaciones',
+    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Me%20interesa%20la%20arquitectura%20de%20Control%20Biométrico%20y%20Auditoría'
   };
 
   protected readonly habitTrackerContent: ModalContent = {
-    title: 'HabitTracker',
-    description: 'Tu asistente personal en el celular. Una aplicación diseñada para organizar tu día a día, cumplir objetivos y mantener la motivación.',
+    title: 'Ecosistemas Móviles Nativos',
+    description: 'Ingeniería de aplicaciones móviles a medida con sincronización bidireccional y procesamiento de datos en tiempo real. Soluciones diseñadas para la optimización de flujos de trabajo en campo y logística crítica.',
     features: [
-      'Seguimiento de hábitos diarios y semanales',
-      'Gráficos de progreso visual claros',
-      'Sistema de rachas para motivación',
-      'Recordatorios personalizables',
-      'Estadísticas mensuales y anuales',
-      'Interfaz moderna y rápida'
+      'Desarrollo nativo de alto rendimiento (Android/iOS)',
+      'Protocolos de sincronización de baja latencia',
+      'Visualización de analítica avanzada y KPI en tiempo real',
+      'Arquitectura modular para escalabilidad empresarial',
+      'Integración con sistemas legacy y APIs externas'
     ],
     images: [
       '/assets/App/HabitTracker/Inicio.webp',
       '/assets/App/HabitTracker/AgregarHabito.webp'
     ],
-    ctaText: 'Hablemos de tu app',
-    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Tengo%20una%20idea%20para%20una%20app%20Android'
+    ctaText: 'Consultar Viabilidad',
+    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Deseo%20consultar%20la%20viabilidad%20de%20un%20ecosistema%20móvil%20nativo'
   };
 
   proyectos: Proyecto[] = [
     {
-      titulo: 'SortProject',
-      descripcion: 'Gestión total de stock y ventas. Incluye escáner de códigos de barras, generación de etiquetas e impresión. App web para vender desde el celular y versión PC para administración profunda.',
+      titulo: 'SortProject: Infraestructura de Gestión Retail y POS.',
+      descripcion: 'Sistema de punto de venta (POS) y trazabilidad de inventario con arquitectura offline-first. Diseñado para alta disponibilidad, con sincronización de datos en la nube y reportes de rentabilidad en tiempo real.',
       imagenUrl: '/assets/App/Menu.webp',
       imagenes: ['/assets/App/Menu.webp'],
       orientacion: 'horizontal',
       url: 'https://sortproject.arrambidetech.com',
       esProductoPropio: true,
-      tecnologias: ['Escaner de Barras', 'App Móvil', 'Gestión Offline'],
+      tecnologias: ['SQLite', 'Supabase', 'Angular', 'Offline-First'],
       categoria: 'Desktop App',
-      anio: '2025-2026'
+      anio: '2025-2026',
+      btnText: 'Ver Especificaciones Técnicas'
     },
     {
-      titulo: 'Control de Asistencia',
-      descripcion: 'Sistema inteligente para empresas que buscan orden. Automatizá el registro de entradas y salidas de tu personal. Generá reportes mensuales de horas trabajadas con un solo clic.',
+      titulo: 'Control Biométrico y Auditoría de Personal.',
+      descripcion: 'Nodos de control de acceso integrados con validación de identidad de alta precisión. Generación automatizada de auditorías, registro de licencias y reportes estrictos de cumplimiento laboral.',
       imagenUrl: '/assets/App/GestionEmpleados/Asistencia.webp',
       imagenes: ['/assets/App/GestionEmpleados/Asistencia.webp'],
       orientacion: 'horizontal',
       url: '#',
       esProductoPropio: true,
-      tecnologias: ['Control con PIN', 'Reportes PDF', 'Gestión de RRHH'],
+      tecnologias: ['IoT', 'Biometría', 'Cloud Sync'],
       categoria: 'Desktop App',
-      anio: '2025-2026'
+      anio: '2025-2026',
+      btnText: 'Explorar Arquitectura'
     },
     {
-      titulo: 'Mezuri Carpintería',
-      descripcion: 'Catálogo digital profesional para exhibir trabajos a medida. Un sitio web rápido y elegante diseñado para captar clientes y cerrar presupuestos directamente por WhatsApp.',
+      titulo: 'Portales Corporativos y E-Commerce B2B.',
+      descripcion: 'Desarrollo de interfaces web de alto rendimiento con optimización SEO técnica. Plataformas robustas enfocadas en la adquisición, retención de clientes corporativos y digitalización de ventas.',
       imagenUrl: '/assets/App/Mezuri/Hero.webp',
       imagenes: ['/assets/App/Mezuri/Hero.webp'],
       orientacion: 'horizontal',
       url: 'https://mezuricarpinteria.arrambidetech.com/',
       esProductoPropio: false,
-      tecnologias: ['Diseño Moderno', 'Catálogo Online', 'WhatsApp Directo'],
+      tecnologias: ['SSR', 'Angular', 'SEO Técnico', 'UI/UX'],
       categoria: 'Web App',
-      anio: '2025'
+      anio: '2025',
+      btnText: 'Ver Casos de Éxito'
     },
     {
-      titulo: 'HabitTracker (App)',
-      descripcion: 'Tu asistente personal en el celular. Una aplicación diseñada para organizar tu día a día, cumplir objetivos y mantener la motivación con gráficos de progreso simples y claros.',
+      titulo: 'Ecosistemas Móviles Nativos.',
+      descripcion: 'Ingeniería de aplicaciones móviles a medida con sincronización bidireccional y procesamiento de datos en tiempo real. Soluciones diseñadas para la optimización de flujos de trabajo en campo y logística.',
       imagenUrl: '/assets/App/HabitTracker/Inicio.webp', // Fallback
       imagenes: ['/assets/App/HabitTracker/Inicio.webp', '/assets/App/HabitTracker/AgregarHabito.webp'],
       orientacion: 'vertical',
       url: '#',
       esProductoPropio: true,
-      tecnologias: ['App Android', 'Notificaciones', 'Estadísticas'],
+      tecnologias: ['Kotlin', 'Android', 'Real-time'],
       categoria: 'Mobile App',
-      anio: '2025-2026'
+      anio: '2025-2026',
+      btnText: 'Solicitar Viabilidad'
     }
   ];
 
@@ -247,15 +251,15 @@ export class PortafolioComponent {
   }
 
   shouldOpenModal(proyecto: Proyecto): boolean {
-    return proyecto.titulo === 'Control de Asistencia' || proyecto.titulo === 'HabitTracker (App)';
+    return proyecto.titulo.includes('Biométrico') || proyecto.titulo.includes('Ecosistemas Móviles');
   }
 
   handleProjectClick(proyecto: Proyecto, event: Event): void {
     if (this.shouldOpenModal(proyecto)) {
       event.preventDefault();
-      if (proyecto.titulo === 'Control de Asistencia') {
+      if (proyecto.titulo.includes('Biométrico')) {
         this.openGestionEmpleadosModal();
-      } else if (proyecto.titulo === 'HabitTracker (App)') {
+      } else if (proyecto.titulo.includes('Ecosistemas Móviles')) {
         this.openHabitTrackerModal();
       }
     }

@@ -10,6 +10,7 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
   styleUrl: './header.css'
 })
 export class HeaderComponent implements OnInit {
+  protected readonly isDarkMode = signal(true);
   protected readonly isMenuOpen = signal(false);
   protected readonly isScrolled = signal(false);
 
@@ -17,11 +18,28 @@ export class HeaderComponent implements OnInit {
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
     public router: Router
-  ) {}
+  ) {
+    // Sincronizar el tema con el DOM mediante un efecto reactivo
+    effect(() => {
+      const theme = this.isDarkMode() ? 'dark' : 'light';
+      this.renderer.setAttribute(this.document.documentElement, 'data-theme', theme);
+      localStorage.setItem('theme', theme);
+    });
+  }
 
   ngOnInit(): void {
-    // Forzar tema oscuro en el root
-    this.renderer.setAttribute(this.document.documentElement, 'data-theme', 'dark');
+    // Cargar preferencia guardada
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      this.isDarkMode.set(savedTheme === 'dark');
+    } else {
+      // Por defecto oscuro para ArrambideTech
+      this.isDarkMode.set(true);
+    }
+  }
+
+  toggleTheme(): void {
+    this.isDarkMode.update(dark => !dark);
   }
 
   @HostListener('window:scroll', [])

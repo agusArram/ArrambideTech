@@ -4,12 +4,13 @@
 
 /* Hero Section */
 .portafolio-hero {
-  padding: 8rem 2rem 4rem;
-  /* Adjusted: Top padding accounts for fixed header */
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  padding: 10rem 2rem 5rem;
+  background-color: #050505;
+  background-image: radial-gradient(circle at 50% 100%, rgba(110, 231, 183, 0.05) 0%, transparent 70%);
   text-align: center;
   position: relative;
   overflow: hidden;
+  border-bottom: 1px solid #111;
 }
 
 .portafolio-hero::before {
@@ -76,13 +77,9 @@
 
 /* Filter Section */
 .filter-section {
-  padding: 1rem 2rem;
-  /* Reduced padding for a thinner look */
-  background: rgba(var(--bg-secondary-rgb), 0.8);
-  /* More transparent if variable allows, else fallback to lighter solid or just reduced padding effectively makes it feel lighter */
-  background: var(--bg-secondary);
-  /* Fallback/Safety if rgba trick isn't set up, the padding is the key change */
-  border-bottom: 1px solid var(--border-default);
+  padding: 1.5rem 2rem;
+  background: #000;
+  border-bottom: 1px solid #111;
   position: sticky;
   top: 80px;
   z-index: 10;
@@ -99,29 +96,29 @@
 }
 
 .filter-btn {
-  padding: 0.75rem 1.5rem;
-  /* Vertical padding at 0.75rem as requested */
-  background: var(--bg-card);
-  color: var(--text-secondary);
-  border: 2px solid var(--border-default);
-  border-radius: 2rem;
-  font-size: var(--fs-small);
-  /* Scalable */
-  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  background: #0d0d0d;
+  color: #71717a;
+  border: 1px solid #222;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filter-btn:hover {
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-  transform: translateY(-2px);
+  border-color: #333;
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 .filter-btn.active {
-  background: var(--accent-primary);
-  color: #0f172a;
-  border-color: var(--accent-primary);
+  background: rgba(110, 231, 183, 0.1);
+  color: #6EE7B7;
+  border-color: #6EE7B7;
 }
 
 /* Proyectos Section */
@@ -149,20 +146,20 @@
 }
 
 .proyecto-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-default);
-  border-radius: 1.5rem;
+  background: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
 .proyecto-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--accent-primary);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border-color: #333;
 }
 
 .propio-badge {
@@ -340,22 +337,21 @@
 }
 
 .tech-tag {
-  padding: 0.3rem 0.7rem;
-  /* Slightly smaller fixed padding for tags */
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-default);
-  border-radius: 2rem;
-  font-size: var(--fs-small);
-  /* Scalable font size */
-  font-weight: 500;
-  color: var(--text-primary);
+  padding: 0.25rem 0.6rem;
+  background: #161616;
+  border: 1px solid #222;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #a1a1aa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   transition: all 0.3s ease;
 }
 
 .proyecto-card:hover .tech-tag {
-  background: var(--accent-primary);
-  color: #0f172a;
-  border-color: var(--accent-primary);
+  border-color: rgba(110, 231, 183, 0.3);
+  color: #6EE7B7;
 }
 
 .proyecto-actions {
@@ -368,38 +364,40 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: var(--btn-padding);
-  /* Scalable */
-  background: var(--accent-primary);
-  color: #0f172a;
-  border: none;
-  border-radius: 0.75rem;
-  font-size: var(--btn-fs);
-  /* Scalable */
+  padding: 0.8rem 1.5rem;
+  background: #0d0d0d;
+  color: #a1a1aa;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px; /* Industrial radius */
+  font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   flex: 1;
 }
 
-
 .btn-proyecto:hover {
-  background: var(--accent-primary-dark);
+  background: rgba(110, 231, 183, 0.05);
+  border-color: #6EE7B7;
+  color: #6EE7B7;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--accent-glow);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .btn-proyecto.disabled {
-  background: var(--bg-secondary);
-  color: var(--text-muted);
+  background: #080808;
+  color: #3f3f46;
+  border-color: #111;
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .btn-proyecto.disabled:hover {
   transform: none;
   box-shadow: none;
+  border-color: #111;
+  color: #3f3f46;
 }
 
 /* Empty State */
