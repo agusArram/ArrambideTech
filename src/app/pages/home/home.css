@@ -814,7 +814,7 @@
 
 .cta-b2b-grid {
   display: grid;
-  grid-template-columns: 1fr 450px;
+  grid-template-columns: 1fr 500px;
   gap: 100px;
   align-items: flex-start;
   position: relative;
@@ -840,20 +840,21 @@
   align-items: center;
   gap: 0.6rem;
   margin-bottom: 2rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(110, 231, 183, 0.03);
   padding: 0.4rem 0.8rem;
   border-radius: 100px;
   width: fit-content;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(110, 231, 183, 0.1);
 }
 
 .pulse-dot {
   position: relative;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background-color: #6EE7B7;
   border-radius: 50%;
   flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(110, 231, 183, 0.5);
 }
 
 .pulse-dot::after {
@@ -865,17 +866,21 @@
   height: 100%;
   background-color: inherit;
   border-radius: inherit;
-  animation: pulse-ring 2.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+  animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   z-index: -1;
 }
 
 @keyframes pulse-ring {
   0% {
-    transform: scale(0.6);
+    transform: scale(1);
     opacity: 0.8;
   }
-  80%, 100% {
-    transform: scale(3);
+  50% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
     opacity: 0;
   }
 }
@@ -917,33 +922,44 @@
   font-style: italic;
 }
 
-/* WhatsApp Boutique Button v2 */
+/* WhatsApp Ghost Button v3.9 */
 .cta-actions-direct {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
-.btn-whatsapp-minimal {
+.btn-whatsapp-ghost {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1.1rem 1.8rem;
-  background: rgba(110, 231, 183, 0.02);
-  color: #6EE7B7;
-  border: 1px solid rgba(110, 231, 183, 0.15);
+  padding: 1rem 1.6rem;
+  background: transparent;
+  color: #a1a1aa;
+  border: 1px solid #222;
   border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-decoration: none;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 15px rgba(110, 231, 183, 0.03);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.btn-whatsapp-minimal:hover {
-  background: rgba(110, 231, 183, 0.08);
+.btn-whatsapp-ghost:hover {
+  background: rgba(110, 231, 183, 0.02);
   border-color: #6EE7B7;
+  color: #6EE7B7;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(110, 231, 183, 0.15);
+  box-shadow: 0 10px 30px rgba(110, 231, 183, 0.1);
+}
+
+.btn-whatsapp-ghost .wa-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.btn-whatsapp-ghost:hover .wa-icon {
+  transform: scale(1.1) rotate(-5deg);
 }
 
 /* Form Wrapper */

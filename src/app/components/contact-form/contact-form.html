@@ -15,26 +15,26 @@
 
     <div class="form-grid">
       <div class="form-group">
-        <label for="nombre">Nombre y Apellido</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Ej: Agustín Arrambide" required>
+        <label for="nombre">Nombre / Razón Social</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej: Arrambide Tech / Agustín Arrambide" required>
       </div>
 
       <div class="form-group">
         <label for="empresa">Empresa / Organización</label>
-        <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu compañía" required>
+        <input type="text" id="empresa" name="empresa" placeholder="Compañía o Proyecto" required>
       </div>
 
-      <div class="form-group">
-        <label for="contacto">Dato de Seguimiento</label>
-        <input type="text" id="contacto" name="contacto" placeholder="Email o Teléfono (WhatsApp)" required>
+      <div class="form-group full-width">
+        <label for="contacto">Email Corporativo / WhatsApp</label>
+        <input type="text" id="contacto" name="contacto" placeholder="email@empresa.com o +54 9..." required>
       </div>
 
-      <div class="form-group">
-        <label>Desafío Operativo</label>
+      <div class="form-group full-width">
+        <label>Selecciona tu categoría</label>
         <div class="custom-select" [class.active]="isDropdownOpen()">
           <div class="select-trigger" (click)="toggleDropdown()">
             <span class="selected-value" [class.placeholder]="!selectedChallenge()">
-              {{ selectedChallenge() || placeholder }}
+              {{ selectedChallenge() || 'Elija una opción...' }}
             </span>
             <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 9l6 6 6-6"/>
@@ -56,12 +56,12 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="mensaje">Descripción del Problema</label>
+      <div class="form-group full-width">
+        <label for="mensaje">Descripción del Desafío Técnico</label>
         <textarea 
           id="mensaje" 
           name="mensaje" 
-          placeholder="Cuéntanos brevemente sobre el proceso que deseas optimizar..." 
+          placeholder="Describe brevemente la problemática de infraestructura o el flujo que debas optimizar..." 
           rows="4" 
           required
         ></textarea>
@@ -71,7 +71,7 @@
     <button type="submit" class="btn-b2b-submit" [disabled]="enviando()">
       @if (!enviando()) {
         <span class="btn-content">
-          SOLICITAR EVALUACIÓN TÉCNICA
+          SOLICITAR EVALUACIÓN
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
