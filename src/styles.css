@@ -13,9 +13,11 @@
 
   /* Acento Esmeralda Premium */
   --accent-primary: #6ee7b7;
+  --accent-primary-rgb: 110, 231, 183;
   --accent-primary-dark: #34d399;
   --accent-primary-light: #a7f3d0;
-  --accent-glow: rgba(110, 231, 183, 0.15);
+  --accent-glow: rgba(var(--accent-primary-rgb), 0.15);
+  --bg-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
 
   /* Texto */
   --text-primary: #ffffff;
@@ -55,6 +57,50 @@
   /* Layout */
   --container-width: 1200px;
   --header-height: 80px;
+
+  /* Botones (Standardized) */
+  --btn-padding: 0.8rem 1.75rem;
+  --btn-fs: 0.9rem;
+
+  /* Engineering Grid Tokens */
+  --grid-line: rgba(255, 255, 255, 0.08);
+}
+
+/* Modo Claro (Boutique Engineering Palette)
+   ========================================================================== */
+[data-theme='light'] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-elevated: #f1f5f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-white: #ffffff;
+  --text-black: #050505;
+  --text-bright: #f8fafc;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+
+  --border-default: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.15);
+
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 8px 48px rgba(15, 23, 42, 0.12);
+  
+  --accent-primary: #059669;
+  --accent-primary-rgb: 5, 150, 105;
+  --accent-primary-dark: #047857;
+  --accent-primary-light: #10b981;
+  --accent-glow: rgba(var(--accent-primary-rgb), 0.1);
+  --bg-overlay: linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
+
+  --btn-padding: 0.8rem 1.75rem;
+  --btn-fs: 0.92rem; /* Slightly larger for better readability in light mode */
+
+  /* Engineering Grid Tokens */
+  --grid-line: rgba(0, 0, 0, 0.06);
 }
 
 
@@ -83,7 +129,15 @@ body {
   color: var(--text-primary);
   background: var(--bg-primary);
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Transiciones Globales para Interactividad Premium */
+* {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease,
+              transform 0.3s ease,
+              box-shadow 0.3s ease;
 }
 
 /* Typography

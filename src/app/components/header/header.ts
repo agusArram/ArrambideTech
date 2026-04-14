@@ -72,22 +72,22 @@ export class HeaderComponent implements OnInit {
   scrollToSection(sectionId: string): void {
     this.closeMenu();
 
-    if (this.router.url !== '/') {
+    // Intentar primero el scroll local si el elemento existe en la página actual
+    const localElement = this.document.getElementById(sectionId);
+    
+    if (localElement) {
+      this.scrollToElement(sectionId);
+    } else {
+      // Si no existe localmente, navegar al inicio y luego hacer scroll
       this.router.navigate(['/']).then(() => {
         setTimeout(() => {
           this.scrollToElement(sectionId);
-        }, 100);
+        }, 150);
       });
-    } else {
-      this.scrollToElement(sectionId);
     }
   }
 
   private scrollToElement(sectionId: string): void {
-    if (sectionId === 'inicio') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
 
     const element = document.getElementById(sectionId);
     if (element) {

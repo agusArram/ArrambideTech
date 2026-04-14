@@ -118,7 +118,7 @@
 
 .servicio-card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-lg), 0 0 40px var(--accent-glow);
   border-color: var(--accent-primary);
 }
 
@@ -126,6 +126,7 @@
   background: var(--bg-card);
   border: 2px solid var(--accent-primary);
   transform: scale(1.05);
+  box-shadow: 0 0 30px var(--accent-glow);
 }
 
 .servicio-card.popular .servicio-titulo,

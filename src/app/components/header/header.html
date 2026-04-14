@@ -8,10 +8,10 @@
 
     <!-- Desktop Nav -->
     <ul class="nav-links">
-      <li><a (click)="scrollToSection('inicio')" class="nav-link">Inicio</a></li>
-      <li><a (click)="scrollToSection('proyectos')" class="nav-link">Arquitectura</a></li>
+      <li><a routerLink="/" class="nav-link">Inicio</a></li>
+      <li><a href="#proyectos" (click)="scrollToSection('proyectos'); $event.preventDefault()" class="nav-link">Arquitectura</a></li>
       <li><a routerLink="/soluciones" class="nav-link" routerLinkActive="active">Soluciones</a></li>
-      <li><a (click)="scrollToSection('contacto')" class="nav-link">Contacto</a></li>
+      <li><a href="#contacto" (click)="scrollToSection('contacto'); $event.preventDefault()" class="nav-link">Contacto</a></li>
     </ul>
 
     <!-- Header Actions -->
@@ -27,12 +27,6 @@
         </svg>
       </button>
 
-      <a routerLink="/contacto" class="btn-consultancy">
-        Agendar Consultoría
-        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M5 12h14m-7-7l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
       
       <!-- Mobile Toggle -->
       <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle Menu">
@@ -41,16 +35,30 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" [class.active]="isMenuOpen()">
-    <ul class="mobile-links">
-      <li><a (click)="scrollToSection('inicio')" class="mobile-link">Inicio</a></li>
-      <li><a (click)="scrollToSection('proyectos')" class="mobile-link">Arquitectura</a></li>
-      <li><a routerLink="/soluciones" (click)="closeMenu()" class="mobile-link" routerLinkActive="active">Soluciones</a></li>
-      <li><a (click)="scrollToSection('contacto')" class="mobile-link">Contacto</a></li>
-      <li class="mobile-cta-item">
-        <a routerLink="/contacto" (click)="closeMenu()" class="mobile-cta">Agendar Consultoría</a>
-      </li>
-    </ul>
+  <!-- Mobile Menu Backdrop -->
+  <div class="mobile-menu" [class.active]="isMenuOpen()" (click)="closeMenu()">
+    <!-- Floating Content Card -->
+    <div class="mobile-menu-wrapper" (click)="$event.stopPropagation()">
+      <!-- Mobile Theme Toggle (Top Placement) -->
+      <div class="mobile-menu-header">
+        <button class="theme-toggle mobile" (click)="toggleTheme()" [attr.aria-label]="isDarkMode() ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+          <span class="theme-label">{{ isDarkMode() ? 'Modo Claro' : 'Modo Oscuro' }}</span>
+          <svg *ngIf="isDarkMode()" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="5" stroke-width="2"/>
+            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg *ngIf="!isDarkMode()" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <ul class="mobile-links">
+        <li><a routerLink="/" (click)="closeMenu()" class="mobile-link">Inicio</a></li>
+        <li><a href="#proyectos" (click)="scrollToSection('proyectos'); $event.preventDefault()" class="mobile-link">Arquitectura</a></li>
+        <li><a routerLink="/soluciones" (click)="closeMenu()" class="mobile-link" routerLinkActive="active">Soluciones</a></li>
+        <li><a href="#contacto" (click)="scrollToSection('contacto'); $event.preventDefault()" class="mobile-link">Contacto</a></li>
+      </ul>
+    </div>
   </div>
 </header>

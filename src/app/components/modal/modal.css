@@ -207,23 +207,33 @@
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: var(--btn-padding); /* Scalable */
-  background: #25D366;
-  color: white;
-  border: none;
-  border-radius: 0.75rem;
-  font-size: var(--btn-fs); /* Scalable */
-  font-weight: 600;
+  padding: var(--btn-padding);
+  background: var(--accent-primary);
+  color: var(--bg-primary); /* High contrast with emerald */
+  border: 1px solid var(--accent-primary);
+  border-radius: 8px; /* Standard industrial radius */
+  font-size: var(--btn-fs);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
 }
 
-
 .btn-modal-primary:hover {
-  background: #20BA5A;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+  background: transparent;
+  color: var(--accent-primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn-modal-primary svg {
+  transition: transform 0.4s ease;
+}
+
+.btn-modal-primary:hover svg {
+  transform: rotate(15deg) scale(1.1);
 }
 
 /* Animations */

@@ -23,14 +23,14 @@
 
 .section-badge {
   display: inline-flex;
-  background: rgba(0, 217, 255, 0.1);
+  background: var(--accent-glow);
   color: var(--accent-primary);
   padding: 0.5rem 1rem;
   border-radius: 50px;
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: 1rem;
-  border: 1px solid rgba(0, 217, 255, 0.3);
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.3);
 }
 
 .section-title {

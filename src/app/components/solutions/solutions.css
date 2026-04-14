@@ -26,7 +26,7 @@
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #fff, var(--accent-primary));
+  background: linear-gradient(to right, var(--text-primary), var(--accent-primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -55,7 +55,7 @@
 
 .bento-item {
   position: relative;
-  background: var(--bg-card);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-default);
   border-radius: 16px;
   overflow: hidden;
@@ -63,12 +63,13 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-sm);
 }
 
 .bento-item:hover {
-  border-color: var(--border-strong);
+  border-color: var(--accent-primary);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: var(--shadow-md);
 }
 
 .bento-item.is-expanded {
@@ -94,7 +95,7 @@
 
 .item-icon {
   font-size: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-elevated);
   width: 48px;
   height: 48px;
   display: flex;
@@ -117,7 +118,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 /* =============================================
@@ -145,7 +146,7 @@
 .summary-block--problem {
   padding: 1.25rem;
   border-left: 3px solid #f87171;
-  background: linear-gradient(to right, rgba(248, 113, 113, 0.05), transparent);
+  background: linear-gradient(to right, rgba(248, 113, 113, 0.1), transparent);
   border-radius: 0 8px 8px 0;
 }
 
@@ -174,8 +175,8 @@
 }
 
 .summary-block.highlight .block-text {
-  color: #fff;
-  font-weight: 500;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .item-hint {
@@ -237,7 +238,7 @@
 }
 
 .btn-close {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-elevated);
   border: 1px solid var(--border-default);
   color: var(--text-muted);
   padding: 8px;
@@ -250,8 +251,8 @@
 }
 
 .btn-close:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: var(--bg-elevated);
+  color: var(--accent-primary);
   transform: rotate(90deg);
 }
 
@@ -264,7 +265,7 @@
   font-family: 'Fira Code', 'JetBrains Mono', monospace;
   font-size: 0.95rem;
   color: var(--text-primary);
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--bg-secondary);
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid var(--border-default);
@@ -298,7 +299,7 @@
 .result-badge {
   display: inline-flex;
   padding: 0.5rem 1rem;
-  background: rgba(110, 231, 183, 0.05);
+  background: var(--bg-secondary);
   border: 1px solid var(--accent-primary);
   border-radius: 6px;
   backdrop-filter: blur(4px);

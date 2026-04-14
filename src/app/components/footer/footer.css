@@ -1,8 +1,8 @@
 .footer-minimal {
   padding: 4rem 0 2rem;
-  background-color: #050505;
-  border-top: 1px solid #1A1A1A;
-  color: #888;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-default);
+  color: var(--text-muted);
 }
 
 .footer-container {
@@ -19,7 +19,7 @@
 
 /* Brand Styles */
 .footer-logo {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-main);
   font-weight: 800;
   font-size: 1.25rem;
   letter-spacing: -0.02em;
@@ -27,17 +27,18 @@
 }
 
 .logo-text {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .logo-accent {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
+  opacity: 0.6;
 }
 
 .brand-statement {
   font-size: 0.85rem;
   font-weight: 500;
-  color: #444;
+  color: var(--text-muted);
   margin: 0;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -50,19 +51,19 @@
 }
 
 .footer-social-link {
-  color: #444;
+  color: var(--text-muted);
   transition: all 0.3s ease;
 }
 
 .footer-social-link:hover {
-  color: #fff;
+  color: var(--accent-primary);
   transform: translateY(-2px);
 }
 
 /* Bottom Bar */
 .footer-divider {
   height: 1px;
-  background: #111;
+  background: var(--border-default);
   width: 100%;
   margin-bottom: 1.5rem;
 }
@@ -74,7 +75,7 @@
 .copyright {
   font-size: 0.8rem;
   font-weight: 400;
-  color: #333;
+  color: var(--text-muted);
   margin: 0;
 }
 

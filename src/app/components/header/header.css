@@ -31,9 +31,11 @@
   font-family: var(--font-tight);
   font-size: 1.25rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   text-decoration: none;
   letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1002;
 }
 
 .logo-accent {
@@ -52,7 +54,7 @@
    NAVIGATION LINKS
    ============================================= */
 .nav-links {
-  display: flex;
+  display: none;
   list-style: none;
   gap: 2.5rem;
   margin: 0;
@@ -70,7 +72,7 @@
 }
 
 .nav-link:hover {
-  color: #fff;
+  color: var(--accent-primary);
 }
 
 .nav-link::after {
@@ -100,37 +102,6 @@
   gap: 1.5rem;
 }
 
-.btn-consultancy {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.8rem;
-  border: 1px solid var(--border-default);
-  border-radius: 4px;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-
-.btn-consultancy:hover {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
-  transform: translateY(-1px);
-}
-
-.btn-arrow {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.3s ease;
-}
-
-.btn-consultancy:hover .btn-arrow {
-  transform: translateX(3px);
-}
 
 .theme-toggle {
   background: transparent;
@@ -146,8 +117,9 @@
   transition: all 0.3s ease;
 }
 
+
 .theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
@@ -164,8 +136,8 @@
 }
 
 /* Mobile Menu Button */
-.mobile-menu-btn {
-  display: flex;
+.menu-toggle {
+  display: none;
   align-items: center;
   justify-content: center;
   width: 40px;
@@ -176,88 +148,228 @@
   cursor: pointer;
   padding: 0;
   transition: color 0.2s ease;
+  position: relative;
+  z-index: 1002;
 }
 
-.mobile-menu-btn:hover {
+.menu-toggle:hover {
   color: var(--accent-primary);
 }
 
-.menu-icon {
+.hamburger {
+  position: relative;
   width: 24px;
-  height: 24px;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: currentColor;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  top: 8px;
+}
+
+/* Active State (X Animation) */
+.hamburger.active {
+  background-color: transparent;
+}
+
+.hamburger.active::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.hamburger.active::after {
+  top: 0;
+  transform: rotate(-45deg);
 }
 
 /* Mobile Menu */
-.mobile-menu {
+/* Mobile Theme Toggle Container (At the bottom) */
+.mobile-theme-toggle-container {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  width: 100%;
+}
+
+.theme-toggle.mobile {
+  width: 100%;
+  height: auto;
+  padding: 1rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-  padding: 0 1rem;
-  background: var(--bg-secondary);
-}
-
-.mobile-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.mobile-menu li {
-  margin: 0;
-}
-
-.mobile-menu.open {
-  max-height: 600px;
-  padding: 1.5rem 1rem;
-  border-top: 1px solid var(--border-default);
-}
-
-.mobile-link {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.mobile-link:hover {
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle.mobile:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-elevated);
+}
+
+.theme-toggle.mobile .theme-label {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.theme-toggle.mobile .theme-icon {
+  width: 20px;
+  height: 20px;
   color: var(--accent-primary);
 }
 
-/* Mobile Theme Toggle */
-.mobile-theme-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-default);
-  background: var(--bg-card);
-  color: var(--text-primary);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 0.5rem;
-}
 
-.mobile-theme-toggle:hover {
-  background: var(--accent-primary);
-  color: var(--bg-primary);
-  border-color: var(--accent-primary);
-}
+/* Mobile (≤ 767px) - Enable Hamburger and Menu Logic */
+@media (max-width: 767px) {
+  .menu-toggle {
+    display: flex;
+  }
 
-.mobile-cta {
-  margin-top: 1rem;
-  text-align: center;
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    background: var(--bg-primary);
+    background-color: rgba(var(--bg-primary), 0.5); /* This is a fallback/placeholder approach if needed, but I'll use the overlay token */
+    background: var(--bg-overlay); /* Themed gradient overlay from styles.css */
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  /* Specificity-based backdrop for clarity */
+  [data-theme='light'] .mobile-menu {
+    background: rgba(248, 250, 252, 0.7); /* Subtle light overlay using bg-secondary tones */
+  }
+
+  .mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu-wrapper {
+    background: var(--bg-card);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    width: 90%;
+    max-width: 400px;
+    margin: calc(var(--header-height) + 1.5rem) auto auto;
+    border-radius: 28px;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-default);
+    transform: translateY(-20px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Premium Dark Mode Enhancements (Isolated) */
+  :root:not([data-theme='light']) .mobile-menu-wrapper {
+    background: linear-gradient(145deg, var(--bg-secondary), var(--bg-primary));
+    border-top: 1px solid rgba(var(--accent-primary-rgb), 0.2); 
+    box-shadow: 
+      var(--shadow-lg),
+      0 0 40px rgba(0, 0, 0, 0.4),
+      inset 0 0 0 1px var(--border-default);
+  }
+
+  /* Inner Glow for Dark Mode only */
+  :root:not([data-theme='light']) .mobile-menu-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 0%, rgba(var(--accent-primary-rgb), 0.03), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Light Mode Surface Cleanup */
+  [data-theme='light'] .mobile-menu-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .mobile-menu.active .mobile-menu-wrapper {
+    transform: translateY(0) scale(1);
+  }
+
+  .mobile-menu-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .theme-toggle.mobile {
+    width: 100%;
+    height: auto;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+  }
+
+  .theme-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .mobile-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .mobile-link {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-family: var(--font-tight);
+    padding: 0.5rem 0;
+    transition: color 0.2s ease;
+  }
+
+  .header-actions .theme-toggle {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -270,7 +382,7 @@
     display: flex;
   }
 
-  .nav-actions {
+  .header-actions {
     display: flex;
   }
 
@@ -278,13 +390,12 @@
     display: block;
   }
 
-  .mobile-menu-btn {
+  .menu-toggle {
     display: none;
   }
 
   .mobile-menu {
     display: none !important;
-    /* Force hide even if open state exists */
   }
 }
 

@@ -2,8 +2,8 @@ import { Component, signal, HostListener } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { ModalComponent, ModalContent } from '../../components/modal/modal';
+import { ContactFormComponent } from '../../components/contact-form/contact-form';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 interface Proyecto {
   titulo: string;
@@ -24,10 +24,10 @@ interface Proyecto {
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
     HeaderComponent,
     FooterComponent,
-    ModalComponent
+    ModalComponent,
+    ContactFormComponent
   ],
   templateUrl: './soluciones-page.html',
   styleUrl: './soluciones-page.css'

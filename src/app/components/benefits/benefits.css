@@ -63,7 +63,7 @@
 
 .benefit-icon {
   font-size: 1.75rem;
-  filter: drop-shadow(0 0 15px rgba(0, 217, 255, 0.3));
+  filter: drop-shadow(0 0 10px rgba(var(--accent-primary-rgb), 0.3));
   flex-shrink: 0;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .comparison-cell.highlight {
-  background: rgba(0, 217, 255, 0.1);
+  background: var(--accent-glow);
   color: var(--accent-primary);
   font-weight: 700;
 }
