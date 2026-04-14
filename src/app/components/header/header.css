@@ -266,7 +266,7 @@
 
   /* Specificity-based backdrop for clarity */
   [data-theme='light'] .mobile-menu {
-    background: rgba(248, 250, 252, 0.7); /* Subtle light overlay using bg-secondary tones */
+    background: rgba(var(--bg-secondary-rgb), 0.7); /* Subtle light overlay using global secondary RGB */
   }
 
   .mobile-menu.active {

@@ -7,7 +7,9 @@
 :root {
   /* Fondos Deep Dark (Vercel/Linear style) */
   --bg-primary: #000000;
+  --bg-primary-rgb: 0, 0, 0;
   --bg-secondary: #0a0a0a;
+  --bg-secondary-rgb: 10, 10, 10;
   --bg-card: #121212;
   --bg-elevated: #1a1a1a;
 
@@ -70,7 +72,9 @@
    ========================================================================== */
 [data-theme='light'] {
   --bg-primary: #ffffff;
+  --bg-primary-rgb: 255, 255, 255;
   --bg-secondary: #f8fafc;
+  --bg-secondary-rgb: 248, 250, 252;
   --bg-card: #ffffff;
   --bg-elevated: #f1f5f9;
 
