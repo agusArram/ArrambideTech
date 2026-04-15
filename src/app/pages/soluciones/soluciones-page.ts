@@ -173,7 +173,7 @@ export class SolucionesPageComponent {
       tecnologias: ['SQLite', 'Supabase', 'Angular', 'Offline-First'],
       categoria: 'Desktop App',
       anio: '2025-2026',
-      btnText: 'Ver Especificaciones Técnicas'
+      btnText: 'Visualizar Plataforma'
     },
     {
       titulo: 'Control Biométrico y Auditoría de Personal.',
@@ -186,7 +186,7 @@ export class SolucionesPageComponent {
       tecnologias: ['IoT', 'Biometría', 'Cloud Sync'],
       categoria: 'Desktop App',
       anio: '2025-2026',
-      btnText: 'Explorar Arquitectura'
+      btnText: 'Ver Especificaciones Técnicas'
     },
     {
       titulo: 'Portales Corporativos y E-Commerce B2B.',
@@ -199,7 +199,7 @@ export class SolucionesPageComponent {
       tecnologias: ['SSR', 'Angular', 'SEO Técnico', 'UI/UX'],
       categoria: 'Web App',
       anio: '2025',
-      btnText: 'Ver Casos de Éxito'
+      btnText: 'Visualizar Portal'
     },
     {
       titulo: 'Ecosistemas Móviles Nativos.',
@@ -212,7 +212,7 @@ export class SolucionesPageComponent {
       tecnologias: ['Kotlin', 'Android', 'Real-time'],
       categoria: 'Mobile App',
       anio: '2025-2026',
-      btnText: 'Solicitar Viabilidad'
+      btnText: 'Ver Especificaciones Técnicas'
     }
   ];
 

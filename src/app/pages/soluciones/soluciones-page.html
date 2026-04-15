@@ -18,134 +18,145 @@
   </div>
 </section>
 
-<!-- Filter Section -->
-<section class="filter-section">
-  <div class="container">
-    <div class="filter-buttons">
-      @for (categoria of categorias; track categoria) {
-      <button class="filter-btn" [class.active]="categoriaSeleccionada === categoria"
-        (click)="filtrarPorCategoria(categoria)">
-        {{ categoria }}
-      </button>
-      }
+<!-- Main Content Wrapper to contain sticky filter -->
+<div class="projects-main-content">
+  <!-- Filter Section -->
+  <section class="filter-section">
+    <div class="container">
+      <div class="filter-buttons">
+        @for (categoria of categorias; track categoria) {
+        <button class="filter-btn" [class.active]="categoriaSeleccionada === categoria"
+          (click)="filtrarPorCategoria(categoria)">
+          {{ categoria }}
+        </button>
+        }
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Proyectos Grid -->
-<section class="proyectos-section">
-  <div class="container">
-    <div class="proyectos-grid">
-      @for (proyecto of proyectosFiltrados; track proyecto.titulo) {
-      <article class="proyecto-card">
-        <!-- Imagen del proyecto -->
-        <div class="proyecto-imagen">
-          @if (proyecto.orientacion === 'vertical' && proyecto.imagenes && proyecto.imagenes.length >= 2) {
-          <!-- Layout para móviles: Dos imágenes verticales -->
-          <div class="dual-image-container">
-            <img [src]="proyecto.imagenes[0]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy" width="400"
-              height="800">
-            <img [src]="proyecto.imagenes[1]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy" width="400"
-              height="800">
-          </div>
-          } @else {
-          <!-- Layout estándar horizontal -->
-          @if (proyecto.imagenUrl) {
-          <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo" loading="lazy" width="800" height="500">
-          } @else {
-          <div class="imagen-placeholder">
-            <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-            </svg>
-            <p class="placeholder-text">{{ proyecto.categoria }}</p>
-          </div>
-          }
-          }
-
-          <div class="proyecto-overlay">
-            <div class="overlay-content">
-              <h2 class="overlay-titulo">{{ proyecto.titulo }}</h2>
-              <p class="overlay-categoria">{{ proyecto.categoria }} • {{ proyecto.anio }}</p>
+  <!-- Proyectos Grid -->
+  <section class="proyectos-section">
+    <div class="container">
+      <div class="proyectos-grid">
+        @for (proyecto of proyectosFiltrados; track proyecto.titulo) {
+        <article class="proyecto-card">
+          <!-- Imagen del proyecto -->
+          <div class="proyecto-imagen">
+            @if (proyecto.orientacion === 'vertical' && proyecto.imagenes && proyecto.imagenes.length >= 2) {
+            <!-- Layout para móviles: Dos imágenes verticales -->
+            <div class="dual-image-container">
+              <img [src]="proyecto.imagenes[0]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy" width="400"
+                height="800">
+              <img [src]="proyecto.imagenes[1]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy" width="400"
+                height="800">
             </div>
-          </div>
-        </div>
-
-        <!-- Contenido del proyecto -->
-        <div class="proyecto-content">
-          <div class="proyecto-header">
-            <h2 class="proyecto-titulo">
-              {{ proyecto.titulo }}
-              @if (proyecto.esProductoPropio) {
-              <svg class="exclusive-icon" title="Producto Exclusivo" width="18" height="18" fill="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            } @else {
+            <!-- Layout estándar horizontal -->
+            @if (proyecto.imagenUrl) {
+            <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo" loading="lazy" width="800" height="500">
+            } @else {
+            <div class="imagen-placeholder">
+              <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
               </svg>
-              }
-            </h2>
-            <span class="proyecto-anio">{{ proyecto.anio }}</span>
-          </div>
+              <p class="placeholder-text">{{ proyecto.categoria }}</p>
+            </div>
+            }
+            }
 
-          <p class="proyecto-descripcion">{{ proyecto.descripcion }}</p>
-
-          <!-- Tecnologías -->
-          <div class="tecnologias-container">
-            <div class="tecnologias-lista">
-              @for (tech of proyecto.tecnologias; track tech) {
-              <span class="tech-tag">{{ tech }}</span>
-              }
+            <div class="proyecto-overlay">
+              <div class="overlay-content">
+                <div class="overlay-reveal-indicator">
+                  <svg class="reveal-icon" width="24" height="24" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                  <span class="reveal-label">INGENIERÍA DE SOLUCIÓN</span>
+                </div>
+                <p class="overlay-categoria">{{ proyecto.categoria }} • {{ proyecto.anio }}</p>
+              </div>
             </div>
           </div>
 
-          <!-- Acciones -->
-          <div class="proyecto-actions">
-            @if (proyecto.url !== '#') {
-            <a [href]="proyecto.url" target="_blank" class="btn-proyecto">
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-              <span>{{ proyecto.btnText || 'Ver Proyecto' }}</span>
-            </a>
-            } @else {
-            @if (shouldOpenModal(proyecto)) {
-            <button class="btn-proyecto" (click)="handleProjectClick(proyecto, $event)">
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>{{ proyecto.btnText || 'Conocer más' }}</span>
-            </button>
-            } @else {
-            <button class="btn-proyecto disabled" disabled>
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              <span>Proyecto Privado</span>
-            </button>
-            }
-            }
+          <!-- Contenido del proyecto -->
+          <div class="proyecto-content">
+            <div class="proyecto-header">
+              <h2 class="proyecto-titulo">
+                {{ proyecto.titulo }}
+                @if (proyecto.esProductoPropio) {
+                <svg class="exclusive-icon" title="Producto Exclusivo" width="18" height="18" fill="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                }
+              </h2>
+              <span class="proyecto-anio">{{ proyecto.anio }}</span>
+            </div>
+
+            <p class="proyecto-descripcion">{{ proyecto.descripcion }}</p>
+
+            <!-- Tecnologías -->
+            <div class="tecnologias-container">
+              <div class="tecnologias-lista">
+                @for (tech of proyecto.tecnologias; track tech) {
+                <span class="tech-tag">{{ tech }}</span>
+                }
+              </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="proyecto-actions">
+              @if (proyecto.url !== '#') {
+              <a [href]="proyecto.url" target="_blank" class="btn-proyecto">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                <span>{{ proyecto.btnText || 'Ver Proyecto' }}</span>
+              </a>
+              } @else {
+              @if (shouldOpenModal(proyecto)) {
+              <button class="btn-proyecto" (click)="handleProjectClick(proyecto, $event)">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{{ proyecto.btnText || 'Conocer más' }}</span>
+              </button>
+              } @else {
+              <button class="btn-proyecto disabled" disabled>
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <span>Proyecto Privado</span>
+              </button>
+              }
+              }
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+        }
+      </div>
+
+      <!-- Empty State -->
+      @if (proyectosFiltrados.length === 0) {
+      <div class="empty-state">
+        <svg width="100" height="100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h3>No hay proyectos en esta categoría</h3>
+        <p>Intenta seleccionar otra categoría para ver más proyectos.</p>
+      </div>
       }
     </div>
+  </section>
+</div>
 
-    <!-- Empty State -->
-    @if (proyectosFiltrados.length === 0) {
-    <div class="empty-state">
-      <svg width="100" height="100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-          d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <h3>No hay proyectos en esta categoría</h3>
-      <p>Intenta seleccionar otra categoría para ver más proyectos.</p>
-    </div>
-    }
-  </div>
-</section>
 
 <!-- Garantías Operativas Section (Risk Reversal SLA) -->
 <section class="stats-section">
