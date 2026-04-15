@@ -189,6 +189,19 @@ export class SolucionesPageComponent {
       btnText: 'Ver Especificaciones Técnicas'
     },
     {
+      titulo: 'Portal Operativo B2B - Hyder',
+      descripcion: 'Desarrollo de infraestructura web y portal corporativo para firma líder en aduana y logística. Implementación de un CMS a medida de alto rendimiento que otorga autogestión total: administración de contenidos, subida de archivos operativos y publicación de novedades en tiempo real. Arquitectura SEO-first.',
+      imagenUrl: '/assets/App/Hyder/hyder-preview.webp',
+      imagenes: ['/assets/App/Hyder/hyder-preview.webp'],
+      orientacion: 'horizontal',
+      url: 'https://hyder.com.ar/',
+      esProductoPropio: false,
+      tecnologias: ['Portal B2B', 'CMS de Alto Rendimiento', 'Arquitectura SEO', 'Logística Aduanera'],
+      categoria: 'Web App',
+      anio: '2026',
+      btnText: 'Visualizar Portal Operativo'
+    },
+    {
       titulo: 'Portales Corporativos y E-Commerce B2B.',
       descripcion: 'Desarrollo de interfaces web de alto rendimiento con optimización SEO técnica. Plataformas robustas enfocadas en la adquisición, retención de clientes corporativos y digitalización de ventas.',
       imagenUrl: '/assets/App/Mezuri/Hero.webp',
