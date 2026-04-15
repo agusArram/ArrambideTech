@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Benefit {
@@ -12,7 +12,8 @@ interface Benefit {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './benefits.html',
-  styleUrl: './benefits.css'
+  styleUrl: './benefits.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BenefitsComponent {
   protected readonly benefits: Benefit[] = [

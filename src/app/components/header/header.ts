@@ -1,4 +1,4 @@
-import { Component, signal, OnInit, effect, Renderer2, Inject, HostListener } from '@angular/core';
+import { Component, signal, OnInit, effect, Renderer2, Inject, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 
@@ -7,7 +7,8 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrl: './header.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
   protected readonly isDarkMode = signal(true);

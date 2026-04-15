@@ -1,4 +1,4 @@
-import { Component, signal, HostListener, ElementRef } from '@angular/core';
+import { Component, signal, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './contact-form.html',
-  styleUrl: './contact-form.css'
+  styleUrl: './contact-form.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactFormComponent {
   protected readonly enviando = signal(false);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Feature {
@@ -14,7 +14,8 @@ interface Feature {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './features.html',
-  styleUrl: './features.css'
+  styleUrl: './features.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeaturesComponent {
   protected readonly features: Feature[] = [

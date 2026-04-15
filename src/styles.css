@@ -6,8 +6,8 @@
    ========================================================================== */
 :root {
   /* Fondos Deep Dark (Vercel/Linear style) */
-  --bg-primary: #000000;
-  --bg-primary-rgb: 0, 0, 0;
+  --bg-primary: #050505;
+  --bg-primary-rgb: 5, 5, 5;
   --bg-secondary: #0a0a0a;
   --bg-secondary-rgb: 10, 10, 10;
   --bg-card: #121212;
@@ -37,8 +37,8 @@
   --shadow-accent: 0 0 40px var(--accent-glow);
 
   /* === SISTEMA DE DISEÑO (Design System) === */
-  --font-main: 'Inter', sans-serif;
-  --font-tight: 'Inter Tight', sans-serif;
+  --font-main: 'Inter Variable', 'Inter', sans-serif;
+  --font-tight: 'Inter Variable', 'Inter Tight', sans-serif;
 
   /* Espaciado */
   --space-xs: 0.5rem;
@@ -106,6 +106,16 @@
   /* Engineering Grid Tokens */
   --grid-line: rgba(0, 0, 0, 0.06);
 }
+
+/* @font-face - Inter Variable Self-Hosted */
+@font-face {
+  font-family: 'Inter Variable';
+  src: url('/fonts/InterVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
 
 
 /* CSS Reset & Base Styles

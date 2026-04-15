@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface SolutionCase {
@@ -17,7 +17,8 @@ export interface SolutionCase {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './solutions.html',
-  styleUrl: './solutions.css'
+  styleUrl: './solutions.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SolutionsComponent {
   
