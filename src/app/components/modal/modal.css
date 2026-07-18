@@ -98,7 +98,13 @@
   margin-bottom: 2rem;
   background: var(--bg-elevated);
   border-radius: 1rem;
-  padding: 1rem; /* Padding around images */
+  padding: 1rem;
+}
+
+.gallery-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .gallery-scroll {
@@ -118,27 +124,16 @@
 }
 
 .gallery-scroll::-webkit-scrollbar {
-  height: 6px;
-}
-
-.gallery-scroll::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-  border-radius: 10px;
-}
-
-.gallery-scroll::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 10px;
+  display: none; /* Hide scrollbar completely */
 }
 
 .gallery-item {
-  flex: 0 0 auto; /* Allow image to size itself based on height */
-  width: auto;    /* Natural width based on aspect ratio */
-  height: 100%;   /* Fill container height */
-  max-width: 100%; /* Safety cap */
+  flex: 0 0 100%; /* Force 100% width for snapping exactly */
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   border-radius: 0.5rem;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   cursor: pointer;
   transition: transform 0.2s;
   user-select: none;
@@ -146,19 +141,73 @@
 }
 
 .gallery-item:hover {
-  transform: scale(1.02);
+  transform: scale(1.01); /* Subtle hover to prevent overflow issues */
 }
 
 .modal-image.clickable {
   cursor: pointer;
 }
 
-.gallery-tip {
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-  font-weight: 500;
+/* Nav Buttons */
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.gallery-nav:hover:not([disabled]) {
+  background: var(--accent-primary);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-nav[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.gallery-nav.prev {
+  left: 0.5rem;
+}
+
+.gallery-nav.next {
+  right: 0.5rem;
+}
+
+/* Dots */
+.gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.gallery-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-default);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-dot.active {
+  background: var(--accent-primary);
+  transform: scale(1.3);
 }
 
 .modal-features {

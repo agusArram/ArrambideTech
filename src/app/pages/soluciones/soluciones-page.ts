@@ -123,15 +123,15 @@ export class SolucionesPageComponent {
     this.currentImageIndex.update(i => (i - 1 + total) % total);
   }
 
-  protected readonly gestionEmpleadosContent: ModalContent = {
-    title: 'Control Biométrico y Auditoría de Personal',
-    description: 'Nodos de control de acceso integrados con validación de identidad de alta precisión. Diseñado para garantizar la trazabilidad total de la jornada laboral y la seguridad de infraestructuras corporativas.',
+  protected readonly timeSyncContent: ModalContent = {
+    title: 'TimeSync: Gestión de Asistencia y Nómina SaaS',
+    description: 'Plataforma SaaS diseñada para erradicar las inconsistencias de asistencia corporativa. Integración fluida entre hardware de validación (Lectores faciales, Escáner MAC por ESP32) y un dashboard en la nube para auditoría en tiempo real y cálculo automatizado de nóminas.',
     features: [
-      'Validación biométrica y auditoría de integridad',
-      'Sincronización de datos en tiempo real (Cloud Sync)',
-      'Generación automatizada de reportes de cumplimiento laboral',
-      'Gestión escalable de licencias, vacaciones y cubiertas',
-      'Arquitectura de alta disponibilidad con redundancia'
+      'Múltiples métodos de validación in-hackeables (Facial, MAC, PIN)',
+      'Cálculo automatizado de nómina y envío de recibos por email (Resend)',
+      'Planificador visual Drag & Drop para licencias y vacaciones',
+      'Dashboard de inconsistencias (llegadas tarde >15m) e historial exportable',
+      'Arquitectura de alta disponibilidad con redundancia offline'
     ],
     images: [
       '/assets/App/GestionEmpleados/Asistencia.webp',
@@ -140,7 +140,24 @@ export class SolucionesPageComponent {
       '/assets/App/GestionEmpleados/Feriados.webp'
     ],
     ctaText: 'Solicitar Especificaciones',
-    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Me%20interesa%20la%20arquitectura%20de%20Control%20Biométrico%20y%20Auditoría'
+    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Me%20interesa%20conocer%20mas%20sobre%20TimeSync'
+  };
+
+  protected readonly accessCoreContent: ModalContent = {
+    title: 'AccessCore: Ecosistema Biométrico y Seguridad Cloud',
+    description: 'Sistema integral de control de accesos para barrios privados y marinas. Nodos IoT físicos sincronizados con Supabase que garantizan operación 100% offline y sincronización inteligente de caras y eventos al recuperar conexión.',
+    features: [
+      'Monitor de eventos en tiempo real y validación biométrica/IoT',
+      'Gestión de invitados desde plataforma de escritorio con apertura remota',
+      'Módulo financiero (Importación Excel, deudas por unidad/persona)',
+      'Módulo CRM Analytics (Horas pico, scoring de usuarios)',
+      'OTA Updates vía GitHub Releases para los nodos de acceso'
+    ],
+    images: [
+      '/assets/App/GestionEmpleados/Asistencia.webp' // Placeholder until specific images are loaded
+    ],
+    ctaText: 'Ver Detalles de Arquitectura',
+    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Me%20interesa%20la%20arquitectura%20de%20AccessCore'
   };
 
   protected readonly habitTrackerContent: ModalContent = {
@@ -163,17 +180,17 @@ export class SolucionesPageComponent {
 
   proyectos: Proyecto[] = [
     {
-      titulo: 'SortProject: Infraestructura de Gestión Retail y POS.',
-      descripcion: 'Sistema de punto de venta (POS) y trazabilidad de inventario con arquitectura offline-first. Diseñado para alta disponibilidad, con sincronización de datos en la nube y reportes de rentabilidad en tiempo real.',
-      imagenUrl: '/assets/App/Menu.webp',
-      imagenes: ['/assets/App/Menu.webp'],
+      titulo: 'AccessCore: Ecosistema Biométrico Cloud.',
+      descripcion: 'Infraestructura de control de accesos offline-first para barrios cerrados. Gestión integral de residentes e invitados desde software de escritorio, cruce analítico de eventos en tiempo real, integración financiera para control de morosos y actualizaciones OTA.',
+      imagenUrl: '/assets/App/GestionEmpleados/Asistencia.webp', // Usando la misma carpeta como fallback por ahora
+      imagenes: ['/assets/App/GestionEmpleados/Asistencia.webp'],
       orientacion: 'horizontal',
-      url: 'https://sortproject.arrambidetech.com',
+      url: '#',
       esProductoPropio: true,
-      tecnologias: ['SQLite', 'Supabase', 'Angular', 'Offline-First'],
+      tecnologias: ['IoT', 'Supabase', 'GitHub Releases', 'CRM Analytics'],
       categorias: ['SaaS', 'Software de Escritorio'],
-      anio: '2025-2026',
-      btnText: 'Visualizar Plataforma'
+      anio: '2026',
+      btnText: 'Ver Arquitectura IoT'
     },
     {
       titulo: 'La Ñata: SaaS de Gestión Deportiva y Reservas.',
@@ -189,6 +206,32 @@ export class SolucionesPageComponent {
       btnText: 'Visualizar Plataforma'
     },
     {
+      titulo: 'SortProject: Infraestructura de Gestión Retail y POS.',
+      descripcion: 'Sistema de punto de venta (POS) y trazabilidad de inventario con arquitectura offline-first. Diseñado para alta disponibilidad, con sincronización de datos en la nube y reportes de rentabilidad en tiempo real.',
+      imagenUrl: '/assets/App/Menu.webp',
+      imagenes: ['/assets/App/Menu.webp'],
+      orientacion: 'horizontal',
+      url: 'https://sortproject.arrambidetech.com',
+      esProductoPropio: true,
+      tecnologias: ['SQLite', 'Supabase', 'Angular', 'Offline-First'],
+      categorias: ['SaaS', 'Software de Escritorio'],
+      anio: '2025-2026',
+      btnText: 'Visualizar Plataforma'
+    },
+    {
+      titulo: 'TimeSync: Gestión de Asistencia y Nómina SaaS.',
+      descripcion: 'Plataforma SaaS corporativa para trazabilidad de jornada laboral. Combina nodos de hardware in-hackeables (Reconocimiento facial y validación MAC) con un dashboard cloud que automatiza el cálculo de salarios y reportes de inconsistencias.',
+      imagenUrl: '/assets/App/GestionEmpleados/Asistencia.webp',
+      imagenes: ['/assets/App/GestionEmpleados/Asistencia.webp'],
+      orientacion: 'horizontal',
+      url: '#',
+      esProductoPropio: true,
+      tecnologias: ['JavaFX', 'Supabase', 'Edge Functions', 'ESP32'],
+      categorias: ['SaaS', 'Software de Escritorio'],
+      anio: '2025-2026',
+      btnText: 'Ver Arquitectura del Sistema'
+    },
+    {
       titulo: 'demode: Ecosistema SaaS para Barberías.',
       descripcion: 'Plataforma escalable B2B2C con arquitectura robusta en Angular y Supabase. Implementa políticas de seguridad (RLS) granulares por rol (Dueño, Caja, Peluquero) para un control estricto de permisos y reservas ultra rápidas. Incluye e-commerce, métricas en tiempo real y gestión centralizada.',
       imagenUrl: '/assets/App/Demode/Hero.webp',
@@ -200,19 +243,6 @@ export class SolucionesPageComponent {
       categorias: ['SaaS', 'Web App'],
       anio: '2026',
       btnText: 'Visualizar Plataforma'
-    },
-    {
-      titulo: 'Control Biométrico y Auditoría de Personal.',
-      descripcion: 'Nodos de control de acceso integrados con validación de identidad de alta precisión. Generación automatizada de auditorías, registro de licencias y reportes estrictos de cumplimiento laboral.',
-      imagenUrl: '/assets/App/GestionEmpleados/Asistencia.webp',
-      imagenes: ['/assets/App/GestionEmpleados/Asistencia.webp'],
-      orientacion: 'horizontal',
-      url: '#',
-      esProductoPropio: true,
-      tecnologias: ['IoT', 'Biometría', 'Cloud Sync'],
-      categorias: ['SaaS', 'Software de Escritorio'],
-      anio: '2025-2026',
-      btnText: 'Ver Especificaciones Técnicas'
     },
     {
       titulo: 'Portal Operativo B2B - Hyder',
@@ -281,8 +311,12 @@ export class SolucionesPageComponent {
     document.body.style.overflow = '';
   }
 
-  openGestionEmpleadosModal(): void {
-    this.openModal(this.gestionEmpleadosContent);
+  openTimeSyncModal(): void {
+    this.openModal(this.timeSyncContent);
+  }
+
+  openAccessCoreModal(): void {
+    this.openModal(this.accessCoreContent);
   }
 
   openHabitTrackerModal(): void {
@@ -290,14 +324,18 @@ export class SolucionesPageComponent {
   }
 
   shouldOpenModal(proyecto: Proyecto): boolean {
-    return proyecto.titulo.includes('Biométrico') || proyecto.titulo.includes('Ecosistemas Móviles');
+    return proyecto.titulo.includes('TimeSync') || 
+           proyecto.titulo.includes('AccessCore') || 
+           proyecto.titulo.includes('Ecosistemas Móviles');
   }
 
   handleProjectClick(proyecto: Proyecto, event: Event): void {
     if (this.shouldOpenModal(proyecto)) {
       event.preventDefault();
-      if (proyecto.titulo.includes('Biométrico')) {
-        this.openGestionEmpleadosModal();
+      if (proyecto.titulo.includes('TimeSync')) {
+        this.openTimeSyncModal();
+      } else if (proyecto.titulo.includes('AccessCore')) {
+        this.openAccessCoreModal();
       } else if (proyecto.titulo.includes('Ecosistemas Móviles')) {
         this.openHabitTrackerModal();
       }

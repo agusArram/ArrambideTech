@@ -31,6 +31,9 @@ export class ModalComponent {
   private startX = 0;
   private scrollLeft = 0;
   private lastMouseDownTarget: EventTarget | null = null;
+  
+  // Slider state
+  currentSlideIndex = 0;
 
   // Global event listeners bound to 'this'
   private boundOnGlobalMouseUp = this.onGlobalMouseUp.bind(this);
@@ -63,6 +66,39 @@ export class ModalComponent {
     const x = e.pageX - this.scrollContainer.nativeElement.offsetLeft;
     const walk = (x - this.startX) * 2; // Scroll speed
     this.scrollContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
+  }
+
+  onScroll(event: Event): void {
+    const target = event.target as HTMLElement;
+    const scrollLeft = target.scrollLeft;
+    const clientWidth = target.clientWidth;
+    // Calculate which image is currently most visible
+    this.currentSlideIndex = Math.round(scrollLeft / clientWidth);
+  }
+
+  prevSlide(): void {
+    if (this.currentSlideIndex > 0) {
+      this.goToSlide(this.currentSlideIndex - 1);
+    }
+  }
+
+  nextSlide(): void {
+    if (this.content?.images && this.currentSlideIndex < this.content.images.length - 1) {
+      this.goToSlide(this.currentSlideIndex + 1);
+    }
+  }
+
+  goToSlide(index: number): void {
+    this.currentSlideIndex = index;
+    if (this.scrollContainer?.nativeElement) {
+      const clientWidth = this.scrollContainer.nativeElement.clientWidth;
+      // scroll-snap behavior will handle the exact alignment, we just push it in the right direction
+      // However, we can also scroll to precise position
+      this.scrollContainer.nativeElement.scrollTo({
+        left: index * clientWidth,
+        behavior: 'smooth'
+      });
+    }
   }
 
   onBackdropMouseDown(event: MouseEvent): void {

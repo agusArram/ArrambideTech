@@ -16,13 +16,39 @@
         @if (content.imageUrl || (content.images && content.images.length > 0)) {
           <div class="modal-gallery">
             @if (content.images && content.images.length > 0) {
-              <div class="gallery-scroll" #scrollContainer 
-                   (mousedown)="onMouseDown($event)">
-                @for (img of content.images; track img; let i = $index) {
-                  <img [src]="img" [alt]="content.title" class="gallery-item clickable" (click)="onImageClick(i)">
+              <div class="gallery-wrapper">
+                @if (content.images.length > 1) {
+                  <button class="gallery-nav prev" (click)="prevSlide()" [disabled]="currentSlideIndex === 0">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                  </button>
+                }
+                
+                <div class="gallery-scroll" #scrollContainer 
+                     (scroll)="onScroll($event)"
+                     (mousedown)="onMouseDown($event)">
+                  @for (img of content.images; track img; let i = $index) {
+                    <img [src]="img" [alt]="content.title" class="gallery-item clickable" (click)="onImageClick(i)">
+                  }
+                </div>
+
+                @if (content.images.length > 1) {
+                  <button class="gallery-nav next" (click)="nextSlide()" [disabled]="currentSlideIndex === content.images.length - 1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
                 }
               </div>
-              <p class="gallery-tip">⬅️ Desliza para ver más fotos ➡️ (Toca para ampliar)</p>
+              
+              @if (content.images.length > 1) {
+                <div class="gallery-dots">
+                  @for (img of content.images; track img; let i = $index) {
+                    <button class="gallery-dot" [class.active]="currentSlideIndex === i" (click)="goToSlide(i)" aria-label="Ir a imagen"></button>
+                  }
+                </div>
+              }
             } @else {
               <div class="modal-image clickable" (click)="onImageClick(0)">
                 <img [src]="content.imageUrl" [alt]="content.title">
