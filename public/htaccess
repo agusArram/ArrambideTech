@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # 1. Enrutar invisiblemente hyder.com.ar a la carpeta HyderLipy
+  RewriteCond %{HTTP_HOST} ^(www\.)?hyder\.com\.ar$ [NC]
+  RewriteCond %{REQUEST_URI} !^/HyderLipy/
+  RewriteRule ^(.*)$ /HyderLipy/$1 [L]
+  
+  # 2. Reglas de Angular PARA TU PORTFOLIO PRINCIPAL
+  # CRÍTICO: Excluimos la carpeta HyderLipy para que no te secuestre sus rutas
+  RewriteCond %{REQUEST_URI} !^/HyderLipy/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule ^(.*)$ index.html [NC,L]
+</IfModule>

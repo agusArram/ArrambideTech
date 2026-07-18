@@ -60,7 +60,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                   d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
               </svg>
-              <p class="placeholder-text">{{ proyecto.categoria }}</p>
+              <p class="placeholder-text">{{ proyecto.categorias[0] }}</p>
             </div>
             }
             }
@@ -75,7 +75,7 @@
                   </svg>
                   <span class="reveal-label">INGENIERÍA DE SOLUCIÓN</span>
                 </div>
-                <p class="overlay-categoria">{{ proyecto.categoria }} • {{ proyecto.anio }}</p>
+                <p class="overlay-categoria">{{ proyecto.categorias.join(' • ') }} • {{ proyecto.anio }}</p>
               </div>
             </div>
           </div>

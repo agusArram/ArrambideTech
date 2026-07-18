@@ -14,7 +14,7 @@ interface Proyecto {
   url: string;
   esProductoPropio: boolean;
   tecnologias: string[];
-  categoria: string;
+  categorias: string[];
   anio: string;
   btnText?: string;
 }
@@ -171,8 +171,34 @@ export class SolucionesPageComponent {
       url: 'https://sortproject.arrambidetech.com',
       esProductoPropio: true,
       tecnologias: ['SQLite', 'Supabase', 'Angular', 'Offline-First'],
-      categoria: 'Desktop App',
+      categorias: ['SaaS', 'Software de Escritorio'],
       anio: '2025-2026',
+      btnText: 'Visualizar Plataforma'
+    },
+    {
+      titulo: 'La Ñata: SaaS de Gestión Deportiva y Reservas.',
+      descripcion: 'Plataforma multi-tenant de reservas con pasarela de pagos inhackeable (Mercado Pago). Arquitectura en Supabase con Edge Functions para seguridad absoluta de transacciones, grilla de disponibilidad en tiempo real, gestión de suspensiones por lluvia y billetera virtual de reembolsos.',
+      imagenUrl: '/assets/App/LaNata/Hero.webp',
+      imagenes: ['/assets/App/LaNata/Hero.webp'],
+      orientacion: 'horizontal',
+      url: 'https://www.lañata.com/',
+      esProductoPropio: true,
+      tecnologias: ['Angular', 'Supabase', 'Mercado Pago', 'Edge Functions', 'PWA'],
+      categorias: ['SaaS', 'Web App'],
+      anio: '2026',
+      btnText: 'Visualizar Plataforma'
+    },
+    {
+      titulo: 'demode: Ecosistema SaaS para Barberías.',
+      descripcion: 'Plataforma escalable B2B2C con arquitectura robusta en Angular y Supabase. Implementa políticas de seguridad (RLS) granulares por rol (Dueño, Caja, Peluquero) para un control estricto de permisos y reservas ultra rápidas. Incluye e-commerce, métricas en tiempo real y gestión centralizada.',
+      imagenUrl: '/assets/App/Demode/Hero.webp',
+      imagenes: ['/assets/App/Demode/Hero.webp'],
+      orientacion: 'horizontal',
+      url: 'https://demodepeluqueria.com/',
+      esProductoPropio: true,
+      tecnologias: ['Angular', 'Supabase', 'RLS Security', 'Real-time'],
+      categorias: ['SaaS', 'Web App'],
+      anio: '2026',
       btnText: 'Visualizar Plataforma'
     },
     {
@@ -184,7 +210,7 @@ export class SolucionesPageComponent {
       url: '#',
       esProductoPropio: true,
       tecnologias: ['IoT', 'Biometría', 'Cloud Sync'],
-      categoria: 'Desktop App',
+      categorias: ['SaaS', 'Software de Escritorio'],
       anio: '2025-2026',
       btnText: 'Ver Especificaciones Técnicas'
     },
@@ -197,7 +223,7 @@ export class SolucionesPageComponent {
       url: 'https://hyder.com.ar/',
       esProductoPropio: false,
       tecnologias: ['Portal B2B', 'CMS de Alto Rendimiento', 'Arquitectura SEO', 'Logística Aduanera'],
-      categoria: 'Web App',
+      categorias: ['Web App'],
       anio: '2026',
       btnText: 'Visualizar Portal Operativo'
     },
@@ -210,7 +236,7 @@ export class SolucionesPageComponent {
       url: 'https://mezuricarpinteria.arrambidetech.com/',
       esProductoPropio: false,
       tecnologias: ['SSR', 'Angular', 'SEO Técnico', 'UI/UX'],
-      categoria: 'Web App',
+      categorias: ['Web App'],
       anio: '2025',
       btnText: 'Visualizar Portal'
     },
@@ -223,20 +249,20 @@ export class SolucionesPageComponent {
       url: '#',
       esProductoPropio: true,
       tecnologias: ['Kotlin', 'Android', 'Real-time'],
-      categoria: 'Mobile App',
+      categorias: ['Mobile App'],
       anio: '2025-2026',
       btnText: 'Ver Especificaciones Técnicas'
     }
   ];
 
-  categorias: string[] = ['Todos', 'Desktop App', 'Web App', 'Mobile App'];
+  categorias: string[] = ['Todos', 'SaaS', 'Software de Escritorio', 'Web App', 'Mobile App'];
   categoriaSeleccionada: string = 'Todos';
 
   get proyectosFiltrados(): Proyecto[] {
     if (this.categoriaSeleccionada === 'Todos') {
       return this.proyectos;
     }
-    return this.proyectos.filter(p => p.categoria === this.categoriaSeleccionada);
+    return this.proyectos.filter(p => p.categorias.includes(this.categoriaSeleccionada));
   }
 
   filtrarPorCategoria(categoria: string): void {
