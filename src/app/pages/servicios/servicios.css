@@ -147,3 +147,28 @@
     grid-template-columns: 1fr;
   }
 }
+
+.cap__how summary {
+  list-style: none;
+  cursor: pointer;
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--im-muted);
+}
+.cap__how summary::-webkit-details-marker {
+  display: none;
+}
+.cap__how summary::after {
+  content: ' +';
+  color: var(--im-accent);
+}
+.cap__how[open] summary::after {
+  content: ' −';
+}
+.cap__how summary:focus-visible {
+  outline: 2px solid var(--im-accent);
+  outline-offset: 3px;
+}

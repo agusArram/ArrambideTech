@@ -88,6 +88,7 @@ export class MorphScene {
   private yawVel = 0;
   private dragging = false;
   private lastTouch = 0;
+  private lastFrame = 0;
   private readonly pointer = { x: 0, y: 0, cx: 0, cy: 0 };
   private readonly cleanups: Array<() => void> = [];
 
@@ -285,12 +286,19 @@ export class MorphScene {
     u['uMorph'].value = this.morph;
     u['uTime'].value = t;
     u['uScan'].value = ((t % 6) / 6) * 3.4 - 1.7;
+    const dt = Math.min(0.05, Math.max(0, (now - (this.lastFrame || now)) / 1000));
+    this.lastFrame = now;
     if (!this.dragging) {
       this.userYaw += this.yawVel;
       this.yawVel *= 0.94;
-      // Tras unos segundos sin tocar, vuelve suavemente a la posición base.
-      if (now - this.lastTouch > 3500) this.userYaw *= 0.985;
+      // Tras un momento sin tocar, vuelve al estado base por el camino más corto.
+      if (now - this.lastTouch > 2200) {
+        this.yawVel = 0;
+        this.userYaw *= Math.exp(-dt * 1.7);
+      }
     }
+    // Girar 2π es visualmente idéntico: se normaliza a (-π, π] para no acumular vueltas.
+    this.userYaw -= Math.PI * 2 * Math.round(this.userYaw / (Math.PI * 2));
     this.group.rotation.y = this.spin + this.userYaw + Math.sin(t * 0.3) * 0.22 + this.pointer.cx * 0.3;
     this.group.rotation.x = this.pointer.cy * 0.12;
     this.renderer.render(this.scene, this.camera);

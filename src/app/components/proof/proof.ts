@@ -73,6 +73,7 @@ export class ProofComponent implements AfterViewInit, OnDestroy {
   ];
 
   protected readonly values = signal<string[]>(this.stats.map((s) => this.render(s, 1)));
+  protected readonly all = signal(false);
 
   protected readonly releases: Release[] = [
     {

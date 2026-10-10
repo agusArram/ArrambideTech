@@ -160,3 +160,20 @@
     gap: 0.4rem;
   }
 }
+
+.log__toggle {
+  margin-top: 1.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--im-fg);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.log__toggle:focus-visible {
+  outline: 2px solid var(--im-accent);
+  outline-offset: 4px;
+}

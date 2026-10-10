@@ -2,11 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
+  OnDestroy,
   PLATFORM_ID,
   inject,
   signal,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -18,8 +19,9 @@ import { filter } from 'rxjs/operators';
   styleUrl: './header.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   private readonly router = inject(Router);
+  private readonly doc = inject(DOCUMENT);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   protected readonly solid = signal(false);
@@ -34,7 +36,7 @@ export class HeaderComponent {
   constructor() {
     this.router.events
       .pipe(filter((e) => e instanceof NavigationEnd))
-      .subscribe(() => this.open.set(false));
+      .subscribe(() => this.setOpen(false));
   }
 
   @HostListener('window:scroll')
@@ -43,12 +45,28 @@ export class HeaderComponent {
     this.solid.set(window.scrollY > 24);
   }
 
+  @HostListener('window:resize')
+  onResize(): void {
+    if (this.isBrowser && window.innerWidth > 860 && this.open()) this.setOpen(false);
+  }
+
   @HostListener('document:keydown.escape')
   onEscape(): void {
-    this.open.set(false);
+    this.setOpen(false);
   }
 
   toggle(): void {
-    this.open.update((v) => !v);
+    this.setOpen(!this.open());
+  }
+
+  /** Abre/cierra el menú y bloquea el scroll del fondo mientras está abierto. */
+  setOpen(value: boolean): void {
+    if (this.open() === value) return;
+    this.open.set(value);
+    if (this.isBrowser) this.doc.body.style.overflow = value ? 'hidden' : '';
+  }
+
+  ngOnDestroy(): void {
+    if (this.isBrowser) this.doc.body.style.overflow = '';
   }
 }

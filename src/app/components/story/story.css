@@ -355,3 +355,29 @@
     animation: none;
   }
 }
+
+.more {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+  font-size: 0.9rem;
+  color: var(--im-fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--im-line-2);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease, gap 0.2s ease;
+}
+.more:hover {
+  gap: 0.8rem;
+  border-color: var(--im-accent);
+}
+.more:focus-visible {
+  outline: 2px solid var(--im-accent);
+  outline-offset: 4px;
+}
+.panel .title {
+  max-width: 14ch;
+}
+.panel .lead {
+  max-width: 28rem;
+}

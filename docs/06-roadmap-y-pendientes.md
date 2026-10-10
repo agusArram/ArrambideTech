@@ -23,6 +23,16 @@
 - **Scroll:** continuo con inercia.
 - **Sitio solo oscuro**, páginas y componentes rehechos.
 
+## Propuesta pendiente de decisión: formulario con Turnstile y leads propios
+
+Hoy el formulario envía por Web3Forms (funciona y llega el mail, con plantilla genérica). Alternativa pensada con lo que ya existe en el Core (sitio key de Turnstile y proyecto Supabase):
+
+1. **Cloudflare Turnstile** en modo gestionado o invisible: verifica sin pedir que se marque nada.
+2. **Edge Function `submit-lead`** en Supabase: valida el token con el *secret* de Turnstile, guarda el lead en una tabla `leads` (con origen, página y necesidad) y envía el mail con **plantilla de marca** por Resend.
+3. Los leads quedan en una base propia, listos para verse en AT Core y para disparar un flujo de n8n (aviso por WhatsApp/Telegram).
+
+Requiere de Agustín: confirmar el proyecto de Supabase a usar, que el dominio `arrambidetech.com` esté permitido en el widget de Turnstile y cargar `TURNSTILE_SECRET` y la clave de Resend como secretos de la función. El despliegue de la función es por CLI (`supabase functions deploy`).
+
 ## Lo que necesito de Agustín
 
 ### Pendiente de autorización

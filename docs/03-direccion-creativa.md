@@ -29,6 +29,15 @@ La transformación no es un corte: las partículas viajan de una forma a otra (m
 - En móvil, `touch-action: pan-y` deja el scroll vertical al navegador y el horizontal a la escena.
 - Aviso “Arrastrá o deslizá para girar” que desaparece tras la primera interacción.
 
+## Densidad de información (v3)
+
+Feedback: “demasiado texto, muchísima data de golpe”. Regla desde esta versión:
+
+1. **Primer nivel (siempre visible):** un título, una frase, una cifra. Nada más en cada paso del scroll.
+2. **Segundo nivel (a pedido):** el detalle técnico y el problema resuelto viven detrás de un control explícito (“Ver cómo está resuelto”, “Ver detalle técnico”, “Ver las 7 versiones”, “Cómo está resuelto +”).
+3. **Cada caso muestra 3 puntos** de solución y pliega el resto.
+4. El grafo del paso “Decide” usa 17 nodos con 2 vecinos cada uno: con más nodos dejaba de leerse como grafo.
+
 ## Lenguaje visual
 
 **Atmósfera:** negro profundo, casi sin gradientes. Mucho aire. Tipografía grande y callada.

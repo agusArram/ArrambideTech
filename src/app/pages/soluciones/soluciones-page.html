@@ -63,10 +63,21 @@
 
           <h3 class="case__h">La solución</h3>
           <ul class="case__list">
-            @for (s of c.solution; track s) {
+            @for (s of c.solution.slice(0, 3); track s) {
               <li>{{ s }}</li>
             }
           </ul>
+
+          @if (c.solution.length > 3) {
+            <details class="case__more">
+              <summary>Ver detalle técnico ({{ c.solution.length - 3 }} puntos más)</summary>
+              <ul class="case__list">
+                @for (s of c.solution.slice(3); track s) {
+                  <li>{{ s }}</li>
+                }
+              </ul>
+            </details>
+          }
 
           <ul class="case__stack" aria-label="Tecnologías">
             @for (t of c.stack; track t) {

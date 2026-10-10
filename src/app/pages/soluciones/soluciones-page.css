@@ -226,3 +226,32 @@
     transition: none;
   }
 }
+
+.case__more {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--im-line);
+}
+.case__more summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--im-fg);
+}
+.case__more summary::-webkit-details-marker {
+  display: none;
+}
+.case__more summary::after {
+  content: ' +';
+  color: var(--im-accent);
+}
+.case__more[open] summary::after {
+  content: ' −';
+}
+.case__more summary:focus-visible {
+  outline: 2px solid var(--im-accent);
+  outline-offset: 2px;
+}
+.case__more .case__list {
+  padding-bottom: 0.5rem;
+}

@@ -7,10 +7,7 @@
     <div class="panel panel--hero" data-panel>
       <p class="eyebrow">Arrambide Tech · Ingeniería de sistemas críticos</p>
       <h1 class="display">Reconoce.<br />Cobra.<br />Decide.</h1>
-      <p class="lead">
-        Sistemas que ya operan: reconocimiento facial integrado a hardware real, pagos que nadie puede alterar e IA que
-        consulta sin inventar.
-      </p>
+      <p class="lead">Sistemas que ya operan: reconocimiento facial, pagos e IA integrados a hardware real.</p>
       <div class="actions">
         <a class="btn btn--primary" href="#demo" (click)="go('demo', $event)">Ver demostración en vivo</a>
         <a class="btn btn--ghost" href="#contacto" (click)="go('contacto', $event)">Agendar una conversación</a>
@@ -25,15 +22,11 @@
         </p>
         <h2 class="title">{{ p.title }}</h2>
         <p class="lead">{{ p.lead }}</p>
-        <ul class="proofs">
-          @for (item of p.proofs; track item) {
-            <li>{{ item }}</li>
-          }
-        </ul>
         <div class="metric">
           <span class="metric__v">{{ p.metric.value }}</span>
           <span class="metric__l">{{ p.metric.label }}</span>
         </div>
+        <a class="more" routerLink="/soluciones" [fragment]="p.caseId">Ver cómo está resuelto <span aria-hidden="true">→</span></a>
       </article>
     }
 

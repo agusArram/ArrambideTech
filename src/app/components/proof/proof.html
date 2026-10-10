@@ -18,7 +18,7 @@
     <div class="log">
       <p class="log__title">Línea de releases · sistema de control de acceso</p>
       <ol class="log__list">
-        @for (r of releases; track r.tag) {
+        @for (r of all() ? releases : releases.slice(0, 3); track r.tag) {
           <li class="entry">
             <span class="entry__tag">{{ r.tag }}</span>
             <div class="entry__main">
@@ -29,15 +29,9 @@
           </li>
         }
       </ol>
-    </div>
-
-    <div class="eco">
-      <p class="eco__title">En operación</p>
-      <ul class="eco__list">
-        @for (e of ecosystem; track e) {
-          <li>{{ e }}</li>
-        }
-      </ul>
+      <button type="button" class="log__toggle" (click)="all.set(!all())" [attr.aria-expanded]="all()">
+        {{ all() ? 'Mostrar menos' : 'Ver las ' + releases.length + ' versiones' }}
+      </button>
     </div>
   </div>
 </section>

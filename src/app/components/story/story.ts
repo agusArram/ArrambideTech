@@ -11,13 +11,14 @@ import {
   signal,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import type { MorphScene } from '../../immersive/morph-scene';
 
 interface Pillar {
   verb: string;
   title: string;
   lead: string;
-  proofs: string[];
+  caseId: string;
   metric: { value: string; label: string };
 }
 
@@ -36,6 +37,7 @@ const smooth = (v: number): number => {
 @Component({
   selector: 'app-story',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './story.html',
   styleUrl: './story.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -65,35 +67,23 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     {
       verb: 'Reconoce',
       title: 'Acceso facial que sobrevive a la realidad.',
-      lead: 'Integrado a terminales Hikvision por ISAPI. Cada rostro se valida en el hardware y se resguarda cifrado.',
-      proofs: [
-        'La imagen que acepta el terminal es la misma que se cifra con AES-256-GCM. Si el hardware la rechaza, nunca llega a la bóveda.',
-        'Solo personas viven en el terminal; la deuda y las reglas se resuelven en el servidor.',
-        'En producción: dos empresas, un mismo terminal, cero cruces de datos.',
-      ],
-      metric: { value: '26.500 → 560', label: 'registros por importación de saldos (v1.9.9)' },
+      lead: 'Terminales Hikvision integrados a software propio. En producción con dos empresas sobre el mismo terminal.',
+      caseId: 'acceso',
+      metric: { value: '26.500 → 560', label: 'registros por importación de saldos' },
     },
     {
       verb: 'Cobra',
       title: 'Pagos que nadie puede alterar.',
-      lead: 'Mercado Pago integrado de punta a punta, multi-comercio y sin comisión por transacción.',
-      proofs: [
-        'El monto lo decide el servidor: aunque se modifique el navegador, el importe que llega a Mercado Pago no cambia.',
-        'OAuth con PKCE: el dinero va directo a la cuenta del comercio.',
-        'Los webhooks se procesan en Edge Functions de Supabase: nada de la lógica de pago vive en el cliente.',
-      ],
+      lead: 'Mercado Pago de punta a punta: el monto lo decide el servidor, nunca el navegador.',
+      caseId: 'pagos',
       metric: { value: '0 %', label: 'comisión por transacción' },
     },
     {
       verb: 'Decide',
       title: 'IA que consulta, no que inventa.',
-      lead: 'Agentes orquestados con n8n sobre microservicios. La IA traduce; el sistema ejecuta y deja auditoría.',
-      proofs: [
-        'La IA no tiene la base en memoria: convierte la pregunta en una consulta acotada que el sistema ejecuta.',
-        'Acceso por lista blanca y registro de cada consulta ejecutada.',
-        'En producción en la Secretaría de Salud de la Municipalidad de Pilar.',
-      ],
-      metric: { value: '~8.000', label: 'tokens por consulta, frente a >1.500.000 sin límites' },
+      lead: 'Agentes con n8n que consultan datos reales y dejan auditoría. En producción en la Municipalidad de Pilar.',
+      caseId: 'ia',
+      metric: { value: '~8.000', label: 'tokens por consulta, frente a más de 1.500.000 sin límites' },
     },
   ];
 

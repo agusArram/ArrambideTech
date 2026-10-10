@@ -243,7 +243,7 @@ export function cardShape(count: number, rnd: Rng): Float32Array {
 export function networkShape(count: number, rnd: Rng): Float32Array {
   const out = new Float32Array(count * 3);
   const nodes: Array<[number, number, number]> = [[0, 0, 0]];
-  const n = 22;
+  const n = 17;
   const golden = Math.PI * (3 - Math.sqrt(5));
 
   for (let i = 0; i < n; i++) {
@@ -265,12 +265,12 @@ export function networkShape(count: number, rnd: Rng): Float32Array {
     return Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]);
   };
   for (let i = 1; i < nodes.length; i++) {
-    if (i % 3 === 1 || i % 7 === 0) edges.add(`0-${i}`);
+    if (i % 3 === 1) edges.add(`0-${i}`);
     const order = nodes
       .map((_, j) => j)
       .filter((j) => j !== i && j !== 0)
       .sort((a, b) => dist(i, a) - dist(i, b))
-      .slice(0, 3);
+      .slice(0, 2);
     for (const j of order) edges.add(i < j ? `${i}-${j}` : `${j}-${i}`);
   }
   const edgeList = [...edges].map((e) => e.split('-').map(Number) as [number, number]);

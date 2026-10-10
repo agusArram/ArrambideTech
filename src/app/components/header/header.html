@@ -1,4 +1,4 @@
-<header class="hd" [class.is-solid]="solid() || open()">
+<header class="hd" [class.is-solid]="solid() && !open()" [class.is-open]="open()">
   <div class="hd__bar im-wrap">
     <a routerLink="/" class="hd__brand" aria-label="Arrambide Tech, inicio">
       Arrambide<span>Tech</span><i class="hd__dot" aria-hidden="true"></i>
@@ -20,19 +20,21 @@
       (click)="toggle()"
       [attr.aria-expanded]="open()"
       aria-controls="hd-mobile"
-      aria-label="Abrir menú"
+      [attr.aria-label]="open() ? 'Cerrar menú' : 'Abrir menú'"
     >
       <span></span><span></span>
     </button>
   </div>
-
-  <div id="hd-mobile" class="hd__mobile" [class.is-open]="open()">
-    <nav class="im-wrap" aria-label="Móvil">
-      @for (l of links; track l.path) {
-        <a [routerLink]="l.path" routerLinkActive="is-active">{{ l.label }}</a>
-      }
-      <a routerLink="/" fragment="demo">Demo</a>
-      <a routerLink="/contacto" class="hd__mcta">Agendar conversación</a>
-    </nav>
-  </div>
 </header>
+
+<!-- Menú móvil: capa propia a pantalla completa; tocar fuera de los enlaces lo cierra -->
+<div id="hd-mobile" class="ov" [class.is-open]="open()" (click)="setOpen(false)">
+  <nav class="ov__nav im-wrap" aria-label="Móvil" [attr.aria-hidden]="!open()">
+    @for (l of links; track l.path; let i = $index) {
+      <a [routerLink]="l.path" routerLinkActive="is-active" [style.--i]="i" [attr.tabindex]="open() ? 0 : -1" (click)="$event.stopPropagation(); setOpen(false)">{{ l.label }}</a>
+    }
+    <a routerLink="/" fragment="demo" [style.--i]="3" [attr.tabindex]="open() ? 0 : -1" (click)="$event.stopPropagation(); setOpen(false)">Demo</a>
+    <a routerLink="/contacto" class="ov__cta" [style.--i]="4" [attr.tabindex]="open() ? 0 : -1" (click)="$event.stopPropagation(); setOpen(false)">Agendar conversación</a>
+  </nav>
+  <p class="ov__hint">Tocá fuera para cerrar</p>
+</div>
