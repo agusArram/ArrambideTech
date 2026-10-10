@@ -432,3 +432,134 @@ h3 {
     margin-bottom: 0.75rem;
   }
 }
+/* ==========================================================================
+   Sistema inmersivo (rediseño 2026): oscuro, contenido, un solo acento.
+   Prefijo im- para convivir con estilos previos.
+   ========================================================================== */
+:root {
+  --im-bg: #050506;
+  --im-bg-2: #0a0a0c;
+  --im-fg: #f4f4f2;
+  --im-soft: #b9b9c1;
+  --im-muted: #8b8b94;
+  --im-line: rgba(255, 255, 255, 0.09);
+  --im-line-2: rgba(255, 255, 255, 0.17);
+  --im-accent: #6ee7b7;
+  --im-warn: #fbbf24;
+  --im-danger: #f87171;
+  --im-gutter: max(24px, 6vw);
+}
+
+html {
+  color-scheme: dark;
+  background: var(--im-bg);
+}
+body {
+  background: var(--im-bg);
+  color: var(--im-fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection {
+  background: rgba(110, 231, 183, 0.28);
+}
+
+.im-page {
+  min-height: 100vh;
+  background: var(--im-bg);
+  color: var(--im-fg);
+}
+.im-wrap {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-inline: var(--im-gutter);
+}
+.im-section {
+  padding-block: clamp(4.5rem, 10vw, 8rem);
+  border-top: 1px solid var(--im-line);
+}
+.im-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--im-muted);
+}
+.im-eyebrow b {
+  margin-right: 0.6rem;
+  font-weight: 500;
+  color: var(--im-accent);
+  font-variant-numeric: tabular-nums;
+}
+.im-title {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+.im-title--xl {
+  font-size: clamp(2.8rem, 7.5vw, 6rem);
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+.im-lead {
+  margin: 1.5rem 0 0;
+  max-width: 40rem;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--im-soft);
+}
+.im-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.im-btn:focus-visible {
+  outline: 2px solid var(--im-accent);
+  outline-offset: 3px;
+}
+.im-btn--primary {
+  background: var(--im-fg);
+  color: #0a0a0b;
+}
+.im-btn--primary:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+.im-btn--ghost {
+  color: var(--im-fg);
+  border-color: var(--im-line-2);
+}
+.im-btn--ghost:hover {
+  border-color: rgba(255, 255, 255, 0.34);
+}
+.im-pill {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--im-line);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--im-soft);
+}
+.im-pill--live {
+  border-color: rgba(110, 231, 183, 0.35);
+  color: var(--im-accent);
+}
+.im-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

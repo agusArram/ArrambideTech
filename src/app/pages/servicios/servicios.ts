@@ -1,111 +1,117 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ContactFormComponent } from '../../components/contact-form/contact-form';
 
-interface Servicio {
-  icono: string;
-  titulo: string;
-  descripcion: string;
-  caracteristicas: string[];
-  precio?: string;
-  popular?: boolean;
+interface Capability {
+  id: string;
+  index: string;
+  verb: string;
+  title: string;
+  intro: string;
+  builds: string[];
+  how: string[];
+  fit: string;
+  caseId: string;
 }
 
 @Component({
   selector: 'app-servicios',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    HeaderComponent,
-    FooterComponent
-  ],
+  imports: [RouterLink, HeaderComponent, FooterComponent, ContactFormComponent],
   templateUrl: './servicios.html',
-  styleUrl: './servicios.css'
+  styleUrl: './servicios.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServiciosComponent {
-  servicios: Servicio[] = [
+  protected readonly capabilities: Capability[] = [
     {
-      icono: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z',
-      titulo: 'Arquitectura de Sistemas Propietarios',
-      descripcion: 'Ingeniería de software de alta disponibilidad diseñada para centralizar procesos críticos en entornos Windows. Eliminamos la dependencia de terceros y aseguramos el control total sobre la lógica de negocio y los datos sensibles.',
-      caracteristicas: [
-        'Propiedad intelectual total',
-        'Operación Offline redundante',
-        'Cifrado de datos de grado militar',
-        'Automatización de flujos complejos',
-        'Soporte directo nivel Senior',
-        'Arquitectura escalable'
+      id: 'reconoce',
+      index: '01',
+      verb: 'Reconoce',
+      title: 'Reconocimiento facial y control de acceso',
+      intro:
+        'Terminales biométricos de marca integrados a un software propio: quién entra, cuándo, bajo qué regla y con qué respaldo.',
+      builds: [
+        'Enrolamiento y sincronización de personas con terminales Hikvision por ISAPI.',
+        'Monitor de eventos en tiempo real: accesos concedidos, denegados y autorizaciones manuales.',
+        'Reglas por categoría y horario, deuda o estado de cuenta, y gestión de invitados.',
+        'Analítica de flujo: horas pico, perfilado y alertas.',
       ],
-      popular: true
+      how: [
+        'Solo personas en el terminal; la lógica de negocio en el servidor.',
+        'Imágenes biométricas cifradas con AES-256-GCM, con rollback si el hardware rechaza.',
+        'Multi-empresa sobre el mismo terminal, con redirección y sin pérdida de eventos.',
+        'Operación ante falta de red y actualizaciones automáticas.',
+      ],
+      fit: 'Barrios cerrados, marinas, edificios corporativos, plantas y cualquier lugar con control de ingreso y morosidad.',
+      caseId: 'acceso',
     },
     {
-      icono: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-      titulo: 'Infraestructura Digital Premium',
-      descripcion: 'Desarrollo de ecosistemas web de alto rendimiento orientados a la conversión y el posicionamiento de marca. No creamos sitios, construimos plataformas de adquisición de clientes con tecnología de vanguardia.',
-      caracteristicas: [
-        'Optimización CORE Web Vitals',
-        'SEO Técnico Avanzado',
-        'Gestión de contenidos Cloud',
-        'Integración con CRMs externos',
-        'Diseño de experiencia (UX) de lujo',
-        'Seguridad SSL y Firewall activo'
-      ]
+      id: 'cobra',
+      index: '02',
+      verb: 'Cobra',
+      title: 'Pagos integrados y facturación',
+      intro:
+        'Cobros dentro del propio sistema, conciliados y a prueba de manipulación: el cliente paga y el sistema ya sabe qué hacer.',
+      builds: [
+        'Mercado Pago (Checkout Pro / Bricks) con señas, pagos totales y estados en tiempo real.',
+        'Vinculación de cuentas por OAuth para operar multi-comercio.',
+        'Billetera virtual, saldos a favor y manejo de cancelaciones.',
+        'Avisos automáticos por email y recibos para usuarios sin cuenta.',
+      ],
+      how: [
+        'El importe lo calcula el servidor, nunca el navegador.',
+        'Webhooks en Edge Functions: toda la lógica de pago en el backend.',
+        'Idempotencia y tolerancia a reintentos.',
+        'Aislamiento por comercio con políticas a nivel de fila.',
+      ],
+      fit: 'Reservas, suscripciones, plataformas para varios comercios y negocios que hoy concilian pagos a mano.',
+      caseId: 'pagos',
     },
     {
-      icono: 'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
-      titulo: 'Auditoría y Optimización Operativa',
-      descripcion: 'Soluciones móviles y dashboards de inteligencia de negocios para supervisar rentabilidad y desempeño en tiempo real. Transformamos datos en decisiones estratégicas desde cualquier lugar del mundo.',
-      caracteristicas: [
-        'Dashboards de KPI personalizados',
-        'Notificaciones inteligentes PUSH',
-        'Sincronización multi-dispositivo',
-        'Gestión de inventarios de precisión',
-        'Control de costos y márgenes',
-        'Acceso remoto seguro 24/7'
-      ]
+      id: 'decide',
+      index: '03',
+      verb: 'Decide',
+      title: 'Automatización y agentes de IA',
+      intro:
+        'Flujos con n8n y asistentes que consultan tus datos reales, con control de acceso, auditoría y consumo acotado.',
+      builds: [
+        'Asistentes por Telegram o WhatsApp que consultan bases propias en lenguaje natural.',
+        'ETL: normalización y carga de planillas hacia bases relacionales.',
+        'Flujos que conectan sistemas, notifican y escalan excepciones.',
+        'Tableros que concentran múltiples bases y APIs.',
+      ],
+      how: [
+        'La IA traduce; el sistema ejecuta. Sin la base en memoria, sin respuestas inventadas.',
+        'Lista blanca por identidad y registro de cada consulta.',
+        'Límites de consulta y de columnas para un consumo predecible.',
+        'Microservicios aislados: si uno falla, no cae el resto.',
+      ],
+      fit: 'Áreas de RRHH, atención y administración que pierden horas buscando, copiando y cruzando información.',
+      caseId: 'ia',
     },
-    {
-      icono: 'M13 10V3L4 14h7v7l9-11h-7z',
-      titulo: 'Integración de Hardware/Software',
-      descripcion: 'Convergencia tecnológica para infraestructuras físicas. Implementamos sistemas de control de acceso, monitoreo industrial y telemetría avanzada para erradicar brechas de seguridad y pérdidas operativas.',
-      caracteristicas: [
-        'Control Biométrico de precisión',
-        'Telemetría y sensores en tiempo real',
-        'Protocolos de seguridad física',
-        'Control de personal automatizado',
-        'Hardware de diseño industrial',
-        'Mantenimiento preventivo incluido'
-      ]
-    }
   ];
 
-  procesoDeTrabajo = [
-    {
-      numero: '01',
-      titulo: 'Consultoría Técnica Estratégica',
-      descripcion: 'Análisis exhaustivo de la infraestructura actual y detección de cuellos de botella operativos para definir el roadmap de la solución.',
-      icono: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z'
-    },
-    {
-      numero: '02',
-      titulo: 'Arquitectura y Prototipado',
-      descripcion: 'Diseño lógico de la base de datos y flujos de usuario. Entregamos un esquema detallado antes de escribir una sola línea de código.',
-      icono: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01'
-    },
-    {
-      numero: '03',
-      titulo: 'Ingeniería y Desarrollo Ciclo',
-      descripcion: 'Codificación con estándares de seguridad STRIDE. El cliente supervisa el progreso mediante entregas parciales y demos en vivo.',
-      icono: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4'
-    },
-    {
-      numero: '04',
-      titulo: 'Implementación y Deployment',
-      descripcion: 'Pruebas de estrés, capacitación del personal y despliegue final. Monitoreamos el sistema durante los primeros 30 días post-entrega.',
-      icono: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
-    }
+  protected readonly others = [
+    { t: 'Software de escritorio y web a medida', d: 'Java/JavaFX y Angular, con operación offline y sincronización.' },
+    { t: 'Apps Android nativas', d: 'Kotlin y Jetpack Compose con arquitectura limpia.' },
+    { t: 'IoT y hardware', d: 'Placas ESP32, lectores, molinetes y sensores conectados a la nube.' },
+    { t: 'Portales corporativos', d: 'Sitios con gestor de contenidos a medida y SEO técnico.' },
+  ];
+
+  protected readonly steps = [
+    { n: '01', t: 'Diagnóstico', d: 'Entendemos el proceso, sus excepciones y qué cuesta hoy hacerlo mal.' },
+    { n: '02', t: 'Arquitectura', d: 'Definimos datos, seguridad y puntos de falla antes de escribir código.' },
+    { n: '03', t: 'Construcción', d: 'Entregas cortas con pruebas automatizadas y visibilidad semanal.' },
+    { n: '04', t: 'Operación', d: 'Puesta en marcha, capacitación, monitoreo y mejoras continuas.' },
+  ];
+
+  protected readonly principles = [
+    { t: 'Pruebas primero', d: 'No se escribe código sin una prueba que lo valide.' },
+    { t: 'Seguridad en el backend', d: 'Los controles del navegador son experiencia; la seguridad vive en el servidor.' },
+    { t: 'Documentación viva', d: 'Cada decisión y cada release queda documentado y versionado.' },
+    { t: 'Aislamiento por cliente', d: 'Multi-tenancy estricta: los datos de uno no tocan los de otro.' },
   ];
 }

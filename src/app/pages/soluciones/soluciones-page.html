@@ -1,238 +1,107 @@
 <app-header></app-header>
 
-<!-- Hero Section -->
-<section class="portafolio-hero">
-  <div class="container">
-    <div class="hero-content">
-      <span class="hero-badge">CASOS DE ESTUDIO</span>
-      <h1 class="hero-title">
-        Ingeniería Aplicada a
-        <span class="hero-highlight">Desafíos Críticos</span>
-      </h1>
-      <p class="hero-description">
-        Explora cómo erradicamos ineficiencias operativas complejas. Un registro de arquitecturas a medida: desde
-        sistemas locales de alta velocidad integrados con sensores biométricos, hasta infraestructuras nube con
-        sincronización en tiempo real y disponibilidad absoluta.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Main Content Wrapper to contain sticky filter -->
-<div class="projects-main-content">
-  <!-- Filter Section -->
-  <section class="filter-section">
-    <div class="container">
-      <div class="filter-buttons">
-        @for (categoria of categorias; track categoria) {
-        <button class="filter-btn" [class.active]="categoriaSeleccionada === categoria"
-          (click)="filtrarPorCategoria(categoria)">
-          {{ categoria }}
-        </button>
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Proyectos Grid -->
-  <section class="proyectos-section">
-    <div class="container">
-      <div class="proyectos-grid">
-        @for (proyecto of proyectosFiltrados; track proyecto.titulo) {
-        <article class="proyecto-card">
-          <!-- Imagen del proyecto -->
-          <div class="proyecto-imagen">
-            @if (proyecto.orientacion === 'vertical' && proyecto.imagenes && proyecto.imagenes.length >= 2) {
-            <!-- Layout para móviles: Dos imágenes verticales -->
-            <div class="dual-image-container">
-              <img [src]="proyecto.imagenes[0]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy" width="400"
-                height="800">
-              <img [src]="proyecto.imagenes[1]" [alt]="proyecto.titulo" class="vertical-img" loading="lazy" width="400"
-                height="800">
-            </div>
-            } @else {
-            <!-- Layout estándar horizontal -->
-            @if (proyecto.imagenUrl) {
-            <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo" loading="lazy" width="800" height="500">
-            } @else {
-            <div class="imagen-placeholder">
-              <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-              </svg>
-              <p class="placeholder-text">{{ proyecto.categorias[0] }}</p>
-            </div>
-            }
-            }
-
-            <div class="proyecto-overlay">
-              <div class="overlay-content">
-                <div class="overlay-reveal-indicator">
-                  <svg class="reveal-icon" width="24" height="24" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                  </svg>
-                  <span class="reveal-label">INGENIERÍA DE SOLUCIÓN</span>
-                </div>
-                <p class="overlay-categoria">{{ proyecto.categorias.join(' • ') }} • {{ proyecto.anio }}</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contenido del proyecto -->
-          <div class="proyecto-content">
-            <div class="proyecto-header">
-              <h2 class="proyecto-titulo">
-                {{ proyecto.titulo }}
-                @if (proyecto.esProductoPropio) {
-                <svg class="exclusive-icon" title="Producto Exclusivo" width="18" height="18" fill="currentColor"
-                  viewBox="0 0 24 24">
-                  <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                }
-              </h2>
-              <span class="proyecto-anio">{{ proyecto.anio }}</span>
-            </div>
-
-            <p class="proyecto-descripcion">{{ proyecto.descripcion }}</p>
-
-            <!-- Tecnologías -->
-            <div class="tecnologias-container">
-              <div class="tecnologias-lista">
-                @for (tech of proyecto.tecnologias; track tech) {
-                <span class="tech-tag">{{ tech }}</span>
-                }
-              </div>
-            </div>
-
-            <!-- Acciones -->
-            <div class="proyecto-actions">
-              @if (proyecto.url !== '#') {
-              <a [href]="proyecto.url" target="_blank" rel="noopener noreferrer nofollow" class="btn-proyecto">
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-                <span>{{ proyecto.btnText || 'Ver Proyecto' }}</span>
-              </a>
-              } @else {
-              @if (shouldOpenModal(proyecto)) {
-              <button class="btn-proyecto" (click)="handleProjectClick(proyecto, $event)">
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>{{ proyecto.btnText || 'Conocer más' }}</span>
-              </button>
-              } @else {
-              <button class="btn-proyecto disabled" disabled>
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-                <span>Proyecto Privado</span>
-              </button>
-              }
-              }
-            </div>
-          </div>
-        </article>
-        }
-      </div>
-
-      <!-- Empty State -->
-      @if (proyectosFiltrados.length === 0) {
-      <div class="empty-state">
-        <svg width="100" height="100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <h3>No hay proyectos en esta categoría</h3>
-        <p>Intenta seleccionar otra categoría para ver más proyectos.</p>
-      </div>
+<main class="im-page cases">
+  <header class="cases__hero im-wrap">
+    <p class="im-eyebrow">Casos</p>
+    <h1 class="im-title im-title--xl">Sistemas que ya operan.</h1>
+    <p class="im-lead">
+      Cada caso nace de un problema real, con una restricción real. Esto es lo que construimos, cómo está resuelto y qué
+      se midió.
+    </p>
+    <nav class="cases__index" aria-label="Casos">
+      @for (c of cases; track c.id) {
+        <a [href]="'#' + c.id"><b>{{ c.index }}</b> {{ c.title }}</a>
       }
+    </nav>
+  </header>
+
+  @for (c of cases; track c.id) {
+    <!--
+      Decisiones de Agustín (v2):
+      - Se puede mencionar a Marinas del Paraná Guazú y a la Municipalidad de Pilar (instituciones).
+      - NO se nombran personas (directivos, funcionarios, intendente, etc.).
+      - Microservicios y bot: ambos están en producción.
+      TODO(Agustín): las valoraciones del bot (jefa del Hospital Central, intendente) siguen sin publicarse
+      hasta tener autorización explícita. No agregar nombres propios de personas.
+    -->
+    <article [id]="c.id" class="case im-section">
+      <div class="im-wrap case__grid">
+        <div class="case__head">
+          <p class="im-eyebrow"><b>{{ c.index }}</b> {{ c.pillar }}</p>
+          <h2 class="im-title">{{ c.title }}</h2>
+          <p class="case__client">{{ c.client }}</p>
+          <p><span class="im-pill im-pill--live">{{ c.status }}</span></p>
+
+          <h3 class="case__h">El desafío</h3>
+          <p class="case__text">{{ c.challenge }}</p>
+
+          @if (c.validation) {
+            <h3 class="case__h">Validaciones</h3>
+            <ul class="case__list case__list--tight">
+              @for (v of c.validation; track v) {
+                <li>{{ v }}</li>
+              }
+            </ul>
+          }
+
+          @if (c.link) {
+            <p class="case__link">
+              <a [href]="c.link.url" target="_blank" rel="noopener noreferrer" class="im-btn im-btn--ghost">{{ c.link.label }}</a>
+            </p>
+          }
+        </div>
+
+        <div class="case__body">
+          <dl class="case__metrics">
+            @for (m of c.metrics; track m.label) {
+              <div>
+                <dd>{{ m.value }}</dd>
+                <dt>{{ m.label }}</dt>
+              </div>
+            }
+          </dl>
+
+          <h3 class="case__h">La solución</h3>
+          <ul class="case__list">
+            @for (s of c.solution; track s) {
+              <li>{{ s }}</li>
+            }
+          </ul>
+
+          <ul class="case__stack" aria-label="Tecnologías">
+            @for (t of c.stack; track t) {
+              <li class="im-pill">{{ t }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+    </article>
+  }
+
+  <section class="works im-section" aria-labelledby="works-title">
+    <div class="im-wrap">
+      <p class="im-eyebrow">Más trabajo</p>
+      <h2 id="works-title" class="im-title">Y el resto del ecosistema.</h2>
+
+      <div class="works__grid">
+        @for (w of works; track w.name) {
+          <article class="work">
+            <div class="work__media">
+              <img [src]="w.image" [alt]="'Vista de ' + w.name" loading="lazy" width="640" height="400" />
+            </div>
+            <p class="work__kind">{{ w.kind }}</p>
+            <h3 class="work__name">{{ w.name }}</h3>
+            <p class="work__text">{{ w.text }}</p>
+            @if (w.url) {
+              <a [href]="w.url" target="_blank" rel="noopener noreferrer" class="work__link">Visitar ↗</a>
+            }
+          </article>
+        }
+      </div>
     </div>
   </section>
-</div>
 
-
-<!-- Garantías Operativas Section (Risk Reversal SLA) -->
-<section class="stats-section">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon">
-          <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 022 2h2v4l.586-.586z" />
-          </svg>
-        </div>
-        <div class="stat-label">Soporte de Ingeniería 1 a 1</div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-icon">
-          <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-          </svg>
-        </div>
-        <div class="stat-label">Garantía de Despliegue</div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-icon">
-          <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-        </div>
-        <div class="stat-label">Transparencia Absoluta (Sin letra chica)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<app-contact-form></app-contact-form>
-
-
-<!-- Modal Component -->
-<app-modal [isOpen]="isModalOpen()" [content]="modalContent()" (close)="closeModal()"
-  (imageClick)="openLightbox($event.images, $event.index)">
-</app-modal>
-
-<!-- Image Lightbox (Restored) -->
-@if (isLightboxOpen()) {
-<div class="lightbox-backdrop" (click)="closeLightbox()" (mousedown)="onDragStart($event)" (mouseup)="onDragEnd($event)"
-  (touchstart)="onDragStart($event)" (touchend)="onDragEnd($event)">
-  <button class="lightbox-close" (click)="closeLightbox()">
-    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </button>
-
-  <div class="lightbox-content" (click)="$event.stopPropagation()">
-    <button class="lightbox-nav prev" (click)="prevImage($event)">
-      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
-
-    <img [src]="currentProjectImages()[currentImageIndex()]" alt="Project Screenshot" class="lightbox-image">
-
-    <button class="lightbox-nav next" (click)="nextImage($event)">
-      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
-
-    <div class="lightbox-counter">
-      {{ currentImageIndex() + 1 }} / {{ currentProjectImages().length }}
-    </div>
-  </div>
-</div>
-}
+  <app-contact-form></app-contact-form>
+</main>
 
 <app-footer></app-footer>

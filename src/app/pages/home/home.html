@@ -1,58 +1,29 @@
 <app-header></app-header>
 
-<app-hero></app-hero>
+<main>
+  <app-story></app-story>
+  <app-face-demo></app-face-demo>
+  <app-proof></app-proof>
 
-<section class="paradigma-section">
-  <div class="container">
-    <div class="paradigma-header">
-      <span class="paradigma-badge">ENGINEERING MANIFESTO</span>
-      <h2 class="paradigma-title">El código y el hardware son commodities. <br>Nosotros creamos soluciones integrales.</h2>
-      <p class="paradigma-subtitle">
-        Software de alto rendimiento y hardware físico integrados en una única arquitectura para aniquilar tus ineficiencias operativas.
-      </p>
-    </div>
+  <section class="teaser im-section" aria-labelledby="teaser-title">
+    <div class="im-wrap">
+      <p class="im-eyebrow"><b>03</b> Casos</p>
+      <h2 id="teaser-title" class="im-title">Tres sistemas, tres entornos reales.</h2>
 
-    <div class="paradigma-grid">
-      <!-- Vía A -->
-      <div class="paradigma-card">
-        <h3 class="card-title">Infraestructuras Propietarias (SaaS)</h3>
-        <p class="card-text">
-          Despliegue inmediato de nuestros ecosistemas offline-first probados (Ej. SortProject, Nodos Biométricos).
-        </p>
-      </div>
-
-      <!-- Vía B -->
-      <div class="paradigma-card">
-        <h3 class="card-title">Arquitectura End-to-End</h3>
-        <p class="card-text">
-          Soluciones llave en mano. Auditamos tus procesos, desarrollamos a medida e instalamos el hardware en campo.
-        </p>
+      <div class="teaser__grid">
+        @for (c of cases; track c.id) {
+          <a class="card" routerLink="/soluciones" [fragment]="c.id">
+            <span class="card__verb">{{ c.verb }}</span>
+            <h3>{{ c.title }}</h3>
+            <p>{{ c.text }}</p>
+            <span class="card__more">Ver el caso →</span>
+          </a>
+        }
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="proyectos">
-  <app-solutions></app-solutions>
-  <div class="home__repo-cta">
-    <a routerLink="/soluciones" class="btn-repo-technical">
-      Ver Historial de Arquitecturas
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14m-7-7l7 7-7 7" />
-      </svg>
-    </a>
-  </div>
-</section>
-
-<!-- Sección de Portfolio Preview eliminada por redundancia con app-solutions -->
-
-
-<!-- CTA Section (B2B Re-engineered) -->
-<app-contact-form></app-contact-form>
-
-
-<!-- Modal Component -->
-<app-modal [isOpen]="isModalOpen()" [content]="modalContent()" (close)="closeModal()">
-</app-modal>
+  <app-contact-form></app-contact-form>
+</main>
 
 <app-footer></app-footer>

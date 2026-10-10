@@ -13,7 +13,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withInMemoryScrolling({
-        scrollPositionRestoration: 'top', // <-- Esta es la línea que soluciona el problema
+        scrollPositionRestoration: 'top',
+        anchorScrolling: 'enabled',
       })
     )
   ]

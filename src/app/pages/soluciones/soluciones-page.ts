@@ -1,344 +1,195 @@
-import { Component, signal, HostListener } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
-import { ModalComponent, ModalContent } from '../../components/modal/modal';
 import { ContactFormComponent } from '../../components/contact-form/contact-form';
-import { CommonModule } from '@angular/common';
 
-interface Proyecto {
-  titulo: string;
-  descripcion: string;
-  imagenUrl?: string; // Main thumbnail (or first image)
-  imagenes?: string[]; // Array for display if vertical
-  orientacion?: 'horizontal' | 'vertical'; // Layout hint
-  url: string;
-  esProductoPropio: boolean;
-  tecnologias: string[];
-  categorias: string[];
-  anio: string;
-  btnText?: string;
+interface Metric {
+  value: string;
+  label: string;
+}
+
+interface CaseStudy {
+  id: string;
+  index: string;
+  pillar: string;
+  title: string;
+  client: string;
+  status: string;
+  challenge: string;
+  solution: string[];
+  metrics: Metric[];
+  stack: string[];
+  validation?: string[];
+  link?: { url: string; label: string };
+}
+
+interface Work {
+  name: string;
+  kind: string;
+  text: string;
+  image: string;
+  url?: string;
 }
 
 @Component({
   selector: 'app-soluciones-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeaderComponent,
-    FooterComponent,
-    ModalComponent,
-    ContactFormComponent
-  ],
+  imports: [HeaderComponent, FooterComponent, ContactFormComponent],
   templateUrl: './soluciones-page.html',
-  styleUrl: './soluciones-page.css'
+  styleUrl: './soluciones-page.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SolucionesPageComponent {
-  // Modal State
-  protected readonly isModalOpen = signal(false);
-  protected modalContent = signal<ModalContent | null>(null);
-
-  // Lightbox State
-  protected readonly isLightboxOpen = signal(false);
-  protected currentProjectImages = signal<string[]>([]);
-  protected currentImageIndex = signal(0);
-
-  // Keyboard Navigation
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (!this.isLightboxOpen()) return;
-
-    if (event.key === 'ArrowRight') {
-      this.nextImage(event);
-    } else if (event.key === 'ArrowLeft') {
-      this.prevImage(event);
-    } else if (event.key === 'Escape') {
-      this.closeLightbox();
-    }
-  }
-
-  // Drag / Swipe Logic
-  private dragStartX = 0;
-  private minSwipeDistance = 50; // Minimum distance to trigger slide
-
-  onDragStart(event: MouseEvent | TouchEvent): void {
-    // Check if we are clicking on a button (nav or close) - if so, ignore drag
-    if ((event.target as HTMLElement).closest('button')) return;
-
-    this.dragStartX = this.getClientX(event);
-  }
-
-  onDragEnd(event: MouseEvent | TouchEvent): void {
-    if ((event.target as HTMLElement).closest('button')) return;
-
-    const endX = this.getClientX(event);
-    const diff = this.dragStartX - endX;
-
-    if (Math.abs(diff) > this.minSwipeDistance) {
-      if (diff > 0) {
-        // Dragged Left -> Next Image
-        this.nextImage(event);
-      } else {
-        // Dragged Right -> Prev Image
-        this.prevImage(event);
-      }
-    }
-  }
-
-  private getClientX(event: MouseEvent | TouchEvent): number {
-    if (event instanceof MouseEvent) {
-      return event.clientX;
-    }
-    return event.changedTouches[0].clientX;
-  }
-
-  // Lightbox Methods
-  openLightbox(images: string[], index: number = 0): void {
-    if (images && images.length > 0) {
-      this.currentProjectImages.set(images);
-      this.currentImageIndex.set(index);
-      this.isLightboxOpen.set(true);
-      // Note: Body overflow is already hidden by modal, but this ensures it stays locked
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  closeLightbox(): void {
-    this.isLightboxOpen.set(false);
-    this.currentProjectImages.set([]);
-    // Only restore scroll if modal is NOT open. If modal is open, keep it hidden.
-    if (!this.isModalOpen()) {
-      document.body.style.overflow = '';
-    }
-  }
-
-  nextImage(event: Event): void {
-    event.stopPropagation();
-    const total = this.currentProjectImages().length;
-    this.currentImageIndex.update(i => (i + 1) % total);
-  }
-
-  prevImage(event: Event): void {
-    event.stopPropagation();
-    const total = this.currentProjectImages().length;
-    this.currentImageIndex.update(i => (i - 1 + total) % total);
-  }
-
-  protected readonly timeSyncContent: ModalContent = {
-    title: 'TimeSync: Gestión de Asistencia y Nómina SaaS',
-    description: 'Plataforma SaaS diseñada para erradicar las inconsistencias de asistencia corporativa. Integración fluida entre hardware de validación (Lectores faciales, Escáner MAC por ESP32) y un dashboard en la nube para auditoría en tiempo real y cálculo automatizado de nóminas.',
-    features: [
-      'Múltiples métodos de validación in-hackeables (Facial, MAC, PIN)',
-      'Cálculo automatizado de nómina y envío de recibos por email (Resend)',
-      'Planificador visual Drag & Drop para licencias y vacaciones',
-      'Dashboard de inconsistencias (llegadas tarde >15m) e historial exportable',
-      'Arquitectura de alta disponibilidad con redundancia offline'
-    ],
-    images: [
-      '/assets/App/GestionEmpleados/Asistencia.webp',
-      '/assets/App/GestionEmpleados/Empleados.webp',
-      '/assets/App/GestionEmpleados/Historial.webp',
-      '/assets/App/GestionEmpleados/Feriados.webp'
-    ],
-    ctaText: 'Solicitar Especificaciones',
-    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Me%20interesa%20conocer%20mas%20sobre%20TimeSync'
-  };
-
-  protected readonly accessCoreContent: ModalContent = {
-    title: 'AccessCore: Ecosistema Biométrico y Seguridad Cloud',
-    description: 'Sistema integral de control de accesos para barrios privados y marinas. Nodos IoT físicos sincronizados con Supabase que garantizan operación 100% offline y sincronización inteligente de caras y eventos al recuperar conexión.',
-    features: [
-      'Monitor de eventos en tiempo real y validación biométrica/IoT',
-      'Gestión de invitados desde plataforma de escritorio con apertura remota',
-      'Módulo financiero (Importación Excel, deudas por unidad/persona)',
-      'Módulo CRM Analytics (Horas pico, scoring de usuarios)',
-      'OTA Updates vía GitHub Releases para los nodos de acceso'
-    ],
-    images: [
-      '/assets/App/GestionEmpleados/Asistencia.webp' // Placeholder until specific images are loaded
-    ],
-    ctaText: 'Ver Detalles de Arquitectura',
-    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Me%20interesa%20la%20arquitectura%20de%20AccessCore'
-  };
-
-  protected readonly habitTrackerContent: ModalContent = {
-    title: 'Ecosistemas Móviles Nativos',
-    description: 'Ingeniería de aplicaciones móviles a medida con sincronización bidireccional y procesamiento de datos en tiempo real. Soluciones diseñadas para la optimización de flujos de trabajo en campo y logística crítica.',
-    features: [
-      'Desarrollo nativo de alto rendimiento (Android/iOS)',
-      'Protocolos de sincronización de baja latencia',
-      'Visualización de analítica avanzada y KPI en tiempo real',
-      'Arquitectura modular para escalabilidad empresarial',
-      'Integración con sistemas legacy y APIs externas'
-    ],
-    images: [
-      '/assets/App/HabitTracker/Inicio.webp',
-      '/assets/App/HabitTracker/AgregarHabito.webp'
-    ],
-    ctaText: 'Consultar Viabilidad',
-    ctaLink: 'https://wa.me/5491162548659?text=Hola!%20Deseo%20consultar%20la%20viabilidad%20de%20un%20ecosistema%20móvil%20nativo'
-  };
-
-  proyectos: Proyecto[] = [
+  protected readonly cases: CaseStudy[] = [
     {
-      titulo: 'AccessCore: Ecosistema Biométrico Cloud.',
-      descripcion: 'Infraestructura de control de accesos offline-first para barrios cerrados. Gestión integral de residentes e invitados desde software de escritorio, cruce analítico de eventos en tiempo real, integración financiera para control de morosos y actualizaciones OTA.',
-      imagenUrl: '/assets/App/GestionEmpleados/Asistencia.webp', // Usando la misma carpeta como fallback por ahora
-      imagenes: ['/assets/App/GestionEmpleados/Asistencia.webp'],
-      orientacion: 'horizontal',
-      url: '#',
-      esProductoPropio: true,
-      tecnologias: ['IoT', 'Supabase', 'GitHub Releases', 'CRM Analytics'],
-      categorias: ['SaaS', 'Software de Escritorio'],
-      anio: '2026',
-      btnText: 'Ver Arquitectura IoT'
+      id: 'acceso',
+      index: '01',
+      pillar: 'Reconoce',
+      title: 'Control de acceso biométrico multi-empresa',
+      client: 'Marinas del Paraná Guazú · Guazú Entre Ríos SRL',
+      status: 'En producción',
+      challenge:
+        'Dos empresas comparten oficina y terminal. El hardware repite identidades, descarta o duplica eventos y debe seguir operando aunque la red falle. Cada cliente debía quedar en su empresa, con su deuda y su horario, sin cruces.',
+      solution: [
+        'Terminales Hikvision DS-K1T673DWX integrados por ISAPI con Digest Auth. Solo personas viven en el terminal (límite de 10.000); la deuda se calcula en el servidor.',
+        'Redirección activa entre empresas: cada evento se inyecta en la empresa que le corresponde sin importar cuál esté seleccionada. Un ancla en memoria hace avanzar el polling sin bucles ni duplicados.',
+        'Filtro anti-ruido que conoce el hardware: los accesos concedidos o denegados siempre se guardan; botón, puerta forzada y cierre se descartan si hay un acceso concedido en los 3 segundos previos.',
+        'Saneamiento de identidades falsas: el terminal arrastra el ID del último usuario en eventos de infraestructura; se vacía en origen para que el monitor no atribuya una persona a un botón.',
+        'Paginación consistente con identificador de búsqueda estable: tras dos semanas sin conexión, un terminal con 350 eventos se recupera en 7 consultas.',
+        'Bóveda biométrica: la imagen aceptada por el terminal se cifra con AES-256-GCM y se resguarda en almacenamiento privado; si el hardware la rechaza, no se guarda.',
+        'Servidor interno en un puerto reservado y detección de la IP de red real (ignora adaptadores virtuales). Instancia única por IPC: un segundo doble clic despierta la ventana ya abierta.',
+        'CRM Analytics: horas pico, perfilado de clientes, filtros por empresa y protección de rendimiento con límite de 10.000 registros bajo confirmación.',
+      ],
+      metrics: [
+        { value: '26.500 → 560', label: 'registros en la importación de saldos' },
+        { value: '350 / 7', label: 'eventos recuperados en 7 consultas' },
+        { value: '10', label: 'releases en la línea 1.9 (julio–septiembre 2026)' },
+      ],
+      stack: ['Java 21', 'JavaFX 21', 'Hikvision ISAPI', 'Supabase', 'AES-256-GCM', 'GitHub Releases (actualización)'],
+      validation: [
+        'En operación diaria con dos empresas sobre el mismo terminal.',
+        'Cada release documentado con su causa raíz y la corrección aplicada.',
+      ],
     },
     {
-      titulo: 'La Ñata: SaaS de Gestión Deportiva y Reservas.',
-      descripcion: 'Plataforma multi-tenant de reservas con pasarela de pagos inhackeable (Mercado Pago). Arquitectura en Supabase con Edge Functions para seguridad absoluta de transacciones, grilla de disponibilidad en tiempo real, gestión de suspensiones por lluvia y billetera virtual de reembolsos.',
-      imagenUrl: '/assets/App/LaNata/Hero.webp',
-      imagenes: ['/assets/App/LaNata/Hero.webp'],
-      orientacion: 'horizontal',
-      url: 'https://www.lañata.com/',
-      esProductoPropio: true,
-      tecnologias: ['Angular', 'Supabase', 'Mercado Pago', 'Edge Functions', 'PWA'],
-      categorias: ['SaaS', 'Web App'],
-      anio: '2026',
-      btnText: 'Visualizar Plataforma'
+      id: 'pagos',
+      index: '02',
+      pillar: 'Cobra',
+      title: 'Reservas y cobros con Mercado Pago, multi-comercio',
+      client: 'La Ñata · Demode',
+      status: 'En producción',
+      challenge:
+        'Cobrar señas y pagos totales sin que el cliente pueda manipular el importe, sin quedarse con el dinero de terceros y sin que la grilla de turnos muestre disponibilidad falsa.',
+      solution: [
+        'El navegador solo envía el identificador del turno y el tipo de pago. El servidor calcula el importe desde la base y crea la preferencia de Mercado Pago.',
+        'Vinculación por OAuth con PKCE: cada comercio opera con su propio token y el dinero va directo a su cuenta. Sin comisión por transacción; cuota fija mensual.',
+        'Webhooks resueltos en Edge Functions de Supabase: toda la lógica de pago vive en el backend, nada en el cliente.',
+        'Idempotencia con vencimiento de 30 minutos y tolerancia a reintentos de notificación.',
+        'Estados de turno en tiempo real (Pendiente de pago, Pago total, Suspendido) con control de concurrencia en la reserva.',
+        'Billetera virtual ante suspensiones por lluvia: la seña se acredita como saldo a favor en lugar de esperar 10 a 30 días de reintegro bancario.',
+        'Aislamiento por comercio con RLS y verificación de pertenencia en cada función.',
+      ],
+      metrics: [
+        { value: '0 %', label: 'comisión por transacción' },
+        { value: '100 %', label: 'de la lógica de pago en el backend' },
+      ],
+      stack: ['Angular (PWA)', 'Supabase · Edge Functions · Realtime · RLS', 'Mercado Pago', 'Cloudflare Turnstile', 'Resend'],
+      link: { url: 'https://www.lañata.com/', label: 'Ver La Ñata' },
     },
     {
-      titulo: 'SortProject: Infraestructura de Gestión Retail y POS.',
-      descripcion: 'Sistema de punto de venta (POS) y trazabilidad de inventario con arquitectura offline-first. Diseñado para alta disponibilidad, con sincronización de datos en la nube y reportes de rentabilidad en tiempo real.',
-      imagenUrl: '/assets/App/Menu.webp',
-      imagenes: ['/assets/App/Menu.webp'],
-      orientacion: 'horizontal',
-      url: 'https://sortproject.arrambidetech.com',
-      esProductoPropio: true,
-      tecnologias: ['SQLite', 'Supabase', 'Angular', 'Offline-First'],
-      categorias: ['SaaS', 'Software de Escritorio'],
-      anio: '2025-2026',
-      btnText: 'Visualizar Plataforma'
+      id: 'ia',
+      index: '03',
+      pillar: 'Decide',
+      title: 'Asistente de IA para consultas de RRHH',
+      client: 'Secretaría de Salud · Municipalidad de Pilar',
+      status: 'En producción',
+      challenge:
+        'Consultar la nómina de una Secretaría de Salud por chat, en lenguaje natural, sin exponer datos a terceros, sin respuestas inventadas y sin que el consumo de la IA se descontrole.',
+      solution: [
+        'Arquitectura de microservicios orquestada con n8n: Telegram como interfaz, un agente de IA como traductor y MySQL como única fuente de verdad.',
+        'Text-to-SQL restringido: la IA no tiene la base en memoria, solo traduce la pregunta a una consulta que el sistema ejecuta de forma determinista.',
+        'Zero Trust: lista blanca por identificador interno de Telegram (no por nombre de usuario) y alerta ante accesos no autorizados.',
+        'Auditoría silenciosa: cada consulta registra fecha, usuario, pregunta, columnas y el SQL ejecutado.',
+        'Control de consumo: LIMIT obligatorio y prohibido SELECT *; de más de 55 columnas se usan 8. Un error de desbordamiento que llegó a ~138.000 tokens quedó acotado.',
+        'ETL automatizado: normaliza el Excel maestro de RRHH, deduplica por legajo y hace carga masiva.',
+        'Canal de observaciones: la IA captura las correcciones del usuario y n8n las deriva a una planilla de control de calidad.',
+      ],
+      metrics: [
+        { value: '~8.162', label: 'tokens por consulta (promedio medido)' },
+        { value: '>1.500.000', label: 'tokens por iteración sin las restricciones' },
+        { value: '8 de 55+', label: 'columnas consultadas por ficha' },
+      ],
+      stack: ['n8n', 'Google Gemini (LangChain)', 'MySQL', 'Telegram Bot API', 'Google Sheets (auditoría)'],
+      validation: [
+        'En producción en la Secretaría de Salud de la Municipalidad de Pilar.',
+        'Benchmarks medidos con consultas reales de uso cotidiano.',
+        'Cada consulta ejecutada queda registrada y es auditable.',
+      ],
     },
     {
-      titulo: 'TimeSync: Gestión de Asistencia y Nómina SaaS.',
-      descripcion: 'Plataforma SaaS corporativa para trazabilidad de jornada laboral. Combina nodos de hardware in-hackeables (Reconocimiento facial y validación MAC) con un dashboard cloud que automatiza el cálculo de salarios y reportes de inconsistencias.',
-      imagenUrl: '/assets/App/GestionEmpleados/Asistencia.webp',
-      imagenes: ['/assets/App/GestionEmpleados/Asistencia.webp'],
-      orientacion: 'horizontal',
-      url: '#',
-      esProductoPropio: true,
-      tecnologias: ['JavaFX', 'Supabase', 'Edge Functions', 'ESP32'],
-      categorias: ['SaaS', 'Software de Escritorio'],
-      anio: '2025-2026',
-      btnText: 'Ver Arquitectura del Sistema'
+      id: 'plataforma',
+      index: '04',
+      pillar: 'Decide',
+      title: 'Plataforma de microservicios institucional',
+      client: 'Municipalidad de Pilar',
+      status: 'En producción',
+      challenge:
+        'Concentrar múltiples bases de datos y APIs en un tablero principal, con inicio de sesión centralizado, sin que la falla de un sistema tumbe a los demás.',
+      solution: [
+        'Servicios aislados en una red privada de contenedores Docker, comunicados con una base maestra central.',
+        'Autenticación centralizada: un solo usuario para todos los módulos, sin repetir cuentas.',
+        'Módulos independientes: dashboard principal, ticketera y asistente de IA. Si uno se rompe, solo cae ese.',
+        'Todo operado desde el servidor de la propia institución, con documentación de arquitectura, despliegue y migración.',
+      ],
+      metrics: [{ value: '4', label: 'módulos independientes sobre una base central' }],
+      stack: ['Docker', 'MySQL', 'Spring', 'Angular', 'n8n'],
+      validation: [
+        'En producción en la Municipalidad de Pilar, operada desde el servidor de la propia institución.',
+        'Documentación de arquitectura, despliegue y migración.',
+      ],
     },
-    {
-      titulo: 'demode: Ecosistema SaaS para Barberías.',
-      descripcion: 'Plataforma escalable B2B2C con arquitectura robusta en Angular y Supabase. Implementa políticas de seguridad (RLS) granulares por rol (Dueño, Caja, Peluquero) para un control estricto de permisos y reservas ultra rápidas. Incluye e-commerce, métricas en tiempo real y gestión centralizada.',
-      imagenUrl: '/assets/App/Demode/Hero.webp',
-      imagenes: ['/assets/App/Demode/Hero.webp'],
-      orientacion: 'horizontal',
-      url: 'https://demodepeluqueria.com/',
-      esProductoPropio: true,
-      tecnologias: ['Angular', 'Supabase', 'RLS Security', 'Real-time'],
-      categorias: ['SaaS', 'Web App'],
-      anio: '2026',
-      btnText: 'Visualizar Plataforma'
-    },
-    {
-      titulo: 'Portal Operativo B2B - Hyder',
-      descripcion: 'Desarrollo de infraestructura web y portal corporativo para firma líder en aduana y logística. Implementación de un CMS a medida de alto rendimiento que otorga autogestión total: administración de contenidos, subida de archivos operativos y publicación de novedades en tiempo real. Arquitectura SEO-first.',
-      imagenUrl: '/assets/App/Hyder/hyder-preview.webp',
-      imagenes: ['/assets/App/Hyder/hyder-preview.webp'],
-      orientacion: 'horizontal',
-      url: 'https://hyder.com.ar/',
-      esProductoPropio: false,
-      tecnologias: ['Portal B2B', 'CMS de Alto Rendimiento', 'Arquitectura SEO', 'Logística Aduanera'],
-      categorias: ['Web App'],
-      anio: '2026',
-      btnText: 'Visualizar Portal Operativo'
-    },
-    {
-      titulo: 'Portales Corporativos y E-Commerce B2B.',
-      descripcion: 'Desarrollo de interfaces web de alto rendimiento con optimización SEO técnica. Plataformas robustas enfocadas en la adquisición, retención de clientes corporativos y digitalización de ventas.',
-      imagenUrl: '/assets/App/Mezuri/Hero.webp',
-      imagenes: ['/assets/App/Mezuri/Hero.webp'],
-      orientacion: 'horizontal',
-      url: 'https://mezuricarpinteria.arrambidetech.com/',
-      esProductoPropio: false,
-      tecnologias: ['SSR', 'Angular', 'SEO Técnico', 'UI/UX'],
-      categorias: ['Web App'],
-      anio: '2025',
-      btnText: 'Visualizar Portal'
-    },
-    {
-      titulo: 'Ecosistemas Móviles Nativos.',
-      descripcion: 'Ingeniería de aplicaciones móviles a medida con sincronización bidireccional y procesamiento de datos en tiempo real. Soluciones diseñadas para la optimización de flujos de trabajo en campo y logística.',
-      imagenUrl: '/assets/App/HabitTracker/Inicio.webp', // Fallback
-      imagenes: ['/assets/App/HabitTracker/Inicio.webp', '/assets/App/HabitTracker/AgregarHabito.webp'],
-      orientacion: 'vertical',
-      url: '#',
-      esProductoPropio: true,
-      tecnologias: ['Kotlin', 'Android', 'Real-time'],
-      categorias: ['Mobile App'],
-      anio: '2025-2026',
-      btnText: 'Ver Especificaciones Técnicas'
-    }
   ];
 
-  categorias: string[] = ['Todos', 'SaaS', 'Software de Escritorio', 'Web App', 'Mobile App'];
-  categoriaSeleccionada: string = 'Todos';
-
-  get proyectosFiltrados(): Proyecto[] {
-    if (this.categoriaSeleccionada === 'Todos') {
-      return this.proyectos;
-    }
-    return this.proyectos.filter(p => p.categorias.includes(this.categoriaSeleccionada));
-  }
-
-  filtrarPorCategoria(categoria: string): void {
-    this.categoriaSeleccionada = categoria;
-  }
-
-  openModal(content: ModalContent): void {
-    this.modalContent.set(content);
-    this.isModalOpen.set(true);
-    document.body.style.overflow = 'hidden';
-  }
-
-  closeModal(): void {
-    this.isModalOpen.set(false);
-    this.modalContent.set(null);
-    document.body.style.overflow = '';
-  }
-
-  openTimeSyncModal(): void {
-    this.openModal(this.timeSyncContent);
-  }
-
-  openAccessCoreModal(): void {
-    this.openModal(this.accessCoreContent);
-  }
-
-  openHabitTrackerModal(): void {
-    this.openModal(this.habitTrackerContent);
-  }
-
-  shouldOpenModal(proyecto: Proyecto): boolean {
-    return proyecto.titulo.includes('TimeSync') || 
-           proyecto.titulo.includes('AccessCore') || 
-           proyecto.titulo.includes('Ecosistemas Móviles');
-  }
-
-  handleProjectClick(proyecto: Proyecto, event: Event): void {
-    if (this.shouldOpenModal(proyecto)) {
-      event.preventDefault();
-      if (proyecto.titulo.includes('TimeSync')) {
-        this.openTimeSyncModal();
-      } else if (proyecto.titulo.includes('AccessCore')) {
-        this.openAccessCoreModal();
-      } else if (proyecto.titulo.includes('Ecosistemas Móviles')) {
-        this.openHabitTrackerModal();
-      }
-    }
-  }
+  protected readonly works: Work[] = [
+    {
+      name: 'SortProject',
+      kind: 'SaaS · Inventario y ventas',
+      text: 'Punto de venta y trazabilidad de stock offline-first, de escritorio y web, con sincronización en la nube.',
+      image: '/assets/App/Menu.webp',
+      url: 'https://sortproject.arrambidetech.com',
+    },
+    {
+      name: 'Gestión de empleados',
+      kind: 'Presentismo y nómina',
+      text: 'Fichaje por QR, ESP32 o reconocimiento facial, con reportes automáticos y liquidación por horas trabajadas.',
+      image: '/assets/App/GestionEmpleados/Asistencia.webp',
+    },
+    {
+      name: 'Demode',
+      kind: 'SaaS · Barberías',
+      text: 'Reservas, permisos por rol (dueño, caja, peluquero), e-commerce y métricas en tiempo real.',
+      image: '/assets/App/Demode/Hero.webp',
+      url: 'https://demodepeluqueria.com/',
+    },
+    {
+      name: 'Hyder',
+      kind: 'Portal corporativo B2B',
+      text: 'Portal para una firma de aduana y logística con CMS a medida y autogestión total de contenidos.',
+      image: '/assets/App/Hyder/hyder-preview.webp',
+      url: 'https://hyder.com.ar/',
+    },
+    {
+      name: 'Mezuri Carpintería',
+      kind: 'Sitio institucional',
+      text: 'Catálogo digital con galería y cierre de presupuestos por WhatsApp. Publicado y posicionado.',
+      image: '/assets/App/Mezuri/Hero.webp',
+      url: 'https://mezuricarpinteria.arrambidetech.com/',
+    },
+    {
+      name: 'HabitTracker',
+      kind: 'App Android nativa',
+      text: 'Kotlin y Jetpack Compose con arquitectura limpia, rachas y estadísticas.',
+      image: '/assets/App/HabitTracker/Inicio.webp',
+    },
+  ];
 }

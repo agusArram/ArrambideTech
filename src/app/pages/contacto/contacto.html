@@ -1,55 +1,22 @@
 <app-header></app-header>
 
-<main class="contacto-page">
-  <section class="contacto-hero">
-    <div class="container hero-container">
-      <div class="hero-content">
-        <h1 class="hero-title">Contáctanos</h1>
-        <p class="hero-subtitle">Hablemos de ingeniería, eficiencia y el futuro de tu proyecto.</p>
+<main class="im-page ct">
+  <div class="ct__spacer" aria-hidden="true"></div>
+  <app-contact-form></app-contact-form>
+
+  <section class="im-section">
+    <div class="im-wrap ct__faq">
+      <div>
+        <p class="im-eyebrow">Preguntas frecuentes</p>
+        <h2 class="im-title">Antes de escribir.</h2>
       </div>
-    </div>
-  </section>
-
-  <section class="contacto-main">
-    <div class="container main-container">
-      <div class="contacto-grid">
-        <!-- Info Column -->
-        <div class="contacto-info">
-          <div class="info-card-container">
-            @for (info of contactInfo; track info.titulo) {
-              <a [href]="info.link" target="_blank" class="info-card">
-                <span class="info-icon">{{ info.icono }}</span>
-                <div class="info-details">
-                  <h3 class="info-title">{{ info.titulo }}</h3>
-                  <p class="info-valor">{{ info.valor }}</p>
-                </div>
-              </a>
-            }
-          </div>
-
-          <div class="faq-container">
-            <h2 class="faq-section-title">Preguntas Frecuentes</h2>
-            <div class="faq-list">
-              @for (faq of faqs; track faq.pregunta) {
-                <div class="faq-item">
-                  <h3 class="faq-pregunta">{{ faq.pregunta }}</h3>
-                  <p class="faq-respuesta">{{ faq.respuesta }}</p>
-                </div>
-              }
-            </div>
-          </div>
-        </div>
-
-        <!-- Form Column -->
-        <div class="contacto-form-section">
-          <div class="form-header">
-            <h2 class="form-title">Enviar Solicitud</h2>
-            <p class="form-subtitle">Completa el formulario y recibe una evaluación técnica personalizada.</p>
-          </div>
-          
-          <!-- B2B Reusable Component -->
-          <app-contact-form></app-contact-form>
-        </div>
+      <div class="ct__list">
+        @for (f of faqs; track f.q) {
+          <details>
+            <summary>{{ f.q }}</summary>
+            <p>{{ f.a }}</p>
+          </details>
+        }
       </div>
     </div>
   </section>

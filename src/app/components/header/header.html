@@ -1,64 +1,38 @@
-<header class="header" [class.scrolled]="isScrolled()">
-  <nav class="nav-container">
-    <!-- Logo -->
-    <a routerLink="/" class="logo">
-      <span class="logo-accent">Arrambide</span>Tech
-      <span class="logo-dot"></span>
+<header class="hd" [class.is-solid]="solid() || open()">
+  <div class="hd__bar im-wrap">
+    <a routerLink="/" class="hd__brand" aria-label="Arrambide Tech, inicio">
+      Arrambide<span>Tech</span><i class="hd__dot" aria-hidden="true"></i>
     </a>
 
-    <!-- Desktop Nav -->
-    <ul class="nav-links">
-      <li><a routerLink="/" class="nav-link">Inicio</a></li>
-      <li><a href="#proyectos" (click)="scrollToSection('proyectos'); $event.preventDefault()" class="nav-link">Arquitectura</a></li>
-      <li><a routerLink="/soluciones" class="nav-link" routerLinkActive="active">Soluciones</a></li>
-      <li><a href="#contacto" (click)="scrollToSection('contacto'); $event.preventDefault()" class="nav-link">Contacto</a></li>
-    </ul>
+    <nav class="hd__nav" aria-label="Principal">
+      @for (l of links; track l.path) {
+        <a [routerLink]="l.path" routerLinkActive="is-active" class="hd__link">{{ l.label }}</a>
+      }
+      <a routerLink="/" fragment="demo" class="hd__link">Demo</a>
+    </nav>
 
-    <!-- Header Actions -->
-    <div class="header-actions">
-      <!-- Theme Toggle -->
-      <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDarkMode() ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
-        <svg *ngIf="isDarkMode()" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="5" stroke-width="2"/>
-          <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <svg *ngIf="!isDarkMode()" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
+    <a routerLink="/contacto" class="hd__cta">Agendar conversación</a>
 
-      
-      <!-- Mobile Toggle -->
-      <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle Menu">
-        <div class="hamburger" [class.active]="isMenuOpen()"></div>
-      </button>
-    </div>
-  </nav>
+    <button
+      type="button"
+      class="hd__burger"
+      [class.is-open]="open()"
+      (click)="toggle()"
+      [attr.aria-expanded]="open()"
+      aria-controls="hd-mobile"
+      aria-label="Abrir menú"
+    >
+      <span></span><span></span>
+    </button>
+  </div>
 
-  <!-- Mobile Menu Backdrop -->
-  <div class="mobile-menu" [class.active]="isMenuOpen()" (click)="closeMenu()">
-    <!-- Floating Content Card -->
-    <div class="mobile-menu-wrapper" (click)="$event.stopPropagation()">
-      <!-- Mobile Theme Toggle (Top Placement) -->
-      <div class="mobile-menu-header">
-        <button class="theme-toggle mobile" (click)="toggleTheme()" [attr.aria-label]="isDarkMode() ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
-          <span class="theme-label">{{ isDarkMode() ? 'Modo Claro' : 'Modo Oscuro' }}</span>
-          <svg *ngIf="isDarkMode()" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <circle cx="12" cy="12" r="5" stroke-width="2"/>
-            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <svg *ngIf="!isDarkMode()" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
-
-      <ul class="mobile-links">
-        <li><a routerLink="/" (click)="closeMenu()" class="mobile-link">Inicio</a></li>
-        <li><a href="#proyectos" (click)="scrollToSection('proyectos'); $event.preventDefault()" class="mobile-link">Arquitectura</a></li>
-        <li><a routerLink="/soluciones" (click)="closeMenu()" class="mobile-link" routerLinkActive="active">Soluciones</a></li>
-        <li><a href="#contacto" (click)="scrollToSection('contacto'); $event.preventDefault()" class="mobile-link">Contacto</a></li>
-      </ul>
-    </div>
+  <div id="hd-mobile" class="hd__mobile" [class.is-open]="open()">
+    <nav class="im-wrap" aria-label="Móvil">
+      @for (l of links; track l.path) {
+        <a [routerLink]="l.path" routerLinkActive="is-active">{{ l.label }}</a>
+      }
+      <a routerLink="/" fragment="demo">Demo</a>
+      <a routerLink="/contacto" class="hd__mcta">Agendar conversación</a>
+    </nav>
   </div>
 </header>

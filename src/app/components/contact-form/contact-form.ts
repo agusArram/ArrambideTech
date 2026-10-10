@@ -11,18 +11,18 @@ import { CommonModule } from '@angular/common';
 })
 export class ContactFormComponent {
   protected readonly enviando = signal(false);
+  protected readonly enviado = signal(false);
   protected readonly mensajeEstado = signal<{tipo: 'success' | 'error', texto: string} | null>(null);
 
   // Custom Select Signals
   protected readonly isDropdownOpen = signal(false);
   protected readonly selectedChallenge = signal('');
-  protected readonly placeholder = 'Selecciona tu categoría';
-
   protected readonly desafios = [
-    'Integración de Hardware/IoT',
-    'Sistemas Offline-First',
-    'Portales Autogestionables',
-    'Consultoría Arquitectónica'
+    'Reconocimiento facial / control de acceso',
+    'Pagos integrados',
+    'Automatización con IA (n8n)',
+    'Sistema a medida',
+    'Otro'
   ];
 
   constructor(private el: ElementRef) {}
@@ -70,12 +70,10 @@ export class ContactFormComponent {
       const data = await response.json();
 
       if (response.status === 200) {
-        this.mensajeEstado.set({
-          tipo: 'success',
-          texto: '¡Solicitud recibida! Analizaremos tu arquitectura y te responderemos en breve.'
-        });
         form.reset();
         this.selectedChallenge.set('');
+        this.mensajeEstado.set(null);
+        this.enviado.set(true);
       } else {
         throw new Error(data.message || 'Error al enviar la solicitud');
       }
@@ -83,15 +81,15 @@ export class ContactFormComponent {
       console.error('Error:', error);
       this.mensajeEstado.set({
         tipo: 'error',
-        texto: 'Error operativo en el envío. Por favor, intenta de nuevo o escribe a arrambide.agustin@gmail.com'
+        texto: 'No pudimos enviar el mensaje. Probá de nuevo o escribinos a arrambide.agustin@gmail.com'
       });
     } finally {
       this.enviando.set(false);
-
-      // Ocultar mensaje después de 8 segundos para B2B (más tiempo de lectura)
-      setTimeout(() => {
-        this.mensajeEstado.set(null);
-      }, 8000);
     }
+  }
+
+  nuevoMensaje(): void {
+    this.enviado.set(false);
+    this.mensajeEstado.set(null);
   }
 }
