@@ -1,0 +1,135 @@
+<section id="demo" class="demo" aria-labelledby="demo-title">
+  <div class="demo__inner">
+    <header class="demo__head">
+      <p class="eyebrow"><span class="eyebrow__n">01</span> Demostración en vivo</p>
+      <h2 id="demo-title" class="title">Probalo ahora.<br />Es tu cámara, es tu navegador.</h2>
+      <p class="lead">
+        Reproducimos el recorrido de un acceso: detección, firma, cifrado y decisión. La malla y el cifrado son reales y
+        corren en tu equipo. <strong>No se envía ni se guarda ninguna imagen.</strong>
+      </p>
+    </header>
+
+    <div class="demo__grid">
+      <!-- Visor -->
+      <div class="viewer" [class.is-live]="cameraOn()">
+        <video #video class="viewer__video" playsinline muted aria-hidden="true"></video>
+        <canvas #overlay class="viewer__overlay" aria-hidden="true"></canvas>
+
+        <span class="corner corner--tl"></span>
+        <span class="corner corner--tr"></span>
+        <span class="corner corner--bl"></span>
+        <span class="corner corner--br"></span>
+
+        @if (state() === 'idle' || state() === 'error') {
+          <div class="viewer__cover">
+            <button type="button" class="btn btn--primary" (click)="start()">Iniciar demostración</button>
+            <p class="viewer__note">Te pediremos permiso de cámara. Se procesa localmente.</p>
+            @if (state() === 'error') {
+              <p class="viewer__error" role="alert">{{ errorMsg() }}</p>
+            }
+          </div>
+        }
+        @if (state() === 'loading') {
+          <div class="viewer__cover" aria-live="polite">
+            <span class="spinner" aria-hidden="true"></span>
+            <p class="viewer__note">Preparando cámara y modelo de visión…</p>
+          </div>
+        }
+        @if (cameraOn()) {
+          <div class="viewer__hud" aria-live="polite">
+            <span class="dot"></span> {{ hint() }}
+          </div>
+        }
+      </div>
+
+      <!-- Pipeline -->
+      <div class="pipeline">
+        <ol class="stages">
+          @for (s of stages; track s.id) {
+            <li class="stage" [class.is-done]="stageDone() >= s.id" [class.is-current]="stageDone() + 1 === s.id && cameraOn()">
+              <span class="stage__n">{{ s.id }}</span>
+              <span class="stage__body">
+                <span class="stage__label">{{ s.label }}</span>
+                <span class="stage__detail">
+                  @switch (s.id) {
+                    @case (2) {
+                      {{ stageDone() >= 2 ? landmarkCount() + ' puntos detectados' : s.detail }}
+                    }
+                    @case (3) {
+                      {{ signature() ? 'sig · ' + signature() + '…' : s.detail }}
+                    }
+                    @case (4) {
+                      @if (cipher(); as c) {
+                        {{ c.plain | number }} B → {{ c.bytes | number }} B · IV {{ c.iv.slice(0, 8) }}…
+                      } @else {
+                        {{ s.detail }}
+                      }
+                    }
+                    @default {
+                      {{ s.detail }}
+                    }
+                  }
+                </span>
+              </span>
+            </li>
+          }
+        </ol>
+
+        @if (state() === 'ready') {
+          <div class="decide">
+            <p class="decide__label">Perfil de ejemplo</p>
+            <div class="decide__options">
+              @for (p of profiles; track p.id) {
+                <button
+                  type="button"
+                  class="chip"
+                  [class.is-selected]="result()?.profile?.id === p.id"
+                  (click)="decide(p)"
+                >
+                  {{ p.label }}
+                </button>
+              }
+            </div>
+
+            @if (result(); as r) {
+              <div class="verdict" [attr.data-decision]="r.profile.decision" role="status">
+                <span class="verdict__state">
+                  @switch (r.profile.decision) {
+                    @case ('granted') { Acceso concedido }
+                    @case ('denied_debt') { Acceso denegado · deuda }
+                    @case ('manual_override') { Requiere autorización manual }
+                  }
+                </span>
+                <span class="verdict__reason">{{ r.profile.reason }}</span>
+                <code class="verdict__log">
+                  {{ r.at }} · {{ r.profile.decision }} · {{ r.profile.unit }} · sig:{{ signature() }}
+                </code>
+                <span class="verdict__meta">
+                  Pipeline local medido: {{ pipelineMs() }} ms · Datos de ejemplo
+                </span>
+              </div>
+            }
+          </div>
+        }
+
+        <div class="pipeline__actions">
+          @if (cameraOn()) {
+            <button type="button" class="link" (click)="stop()">Detener cámara</button>
+            @if (state() === 'ready') {
+              <button type="button" class="link" (click)="retry()">Repetir</button>
+            }
+          }
+        </div>
+      </div>
+    </div>
+
+    <details class="honest">
+      <summary>¿Qué es real y qué es simulado?</summary>
+      <ul>
+        <li><strong>Real:</strong> cámara, detección de 478 puntos (modelo local), firma SHA-256 de proporciones, cifrado AES-256-GCM con clave no exportable y descarte posterior.</li>
+        <li><strong>Simulado:</strong> la regla de acceso (perfiles de ejemplo). En producción la valida un terminal Hikvision por ISAPI y la deuda se calcula en el servidor.</li>
+        <li><strong>No existe:</strong> ningún envío de imagen, firma o puntos a un servidor. Podés verificarlo en la pestaña Red de tu navegador.</li>
+      </ul>
+    </details>
+  </div>
+</section>

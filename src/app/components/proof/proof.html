@@ -1,0 +1,43 @@
+<section #root id="pruebas" class="proof" aria-labelledby="proof-title">
+  <div class="proof__inner">
+    <header class="proof__head">
+      <p class="eyebrow"><span class="eyebrow__n">02</span> Pruebas</p>
+      <h2 id="proof-title" class="title">Cifras de sistemas en operación,<br />no de presentaciones.</h2>
+    </header>
+
+    <dl class="stats">
+      @for (s of stats; track s.label; let i = $index) {
+        <div class="stat">
+          <dt class="stat__label">{{ s.label }}</dt>
+          <dd class="stat__value">{{ values()[i] }}</dd>
+          <dd class="stat__note">{{ s.note }}</dd>
+        </div>
+      }
+    </dl>
+
+    <div class="log">
+      <p class="log__title">Línea de releases · sistema de control de acceso</p>
+      <ol class="log__list">
+        @for (r of releases; track r.tag) {
+          <li class="entry">
+            <span class="entry__tag">{{ r.tag }}</span>
+            <div class="entry__main">
+              <h3 class="entry__title">{{ r.title }}</h3>
+              <p class="entry__body">{{ r.body }}</p>
+            </div>
+            <span class="entry__area">{{ r.area }}</span>
+          </li>
+        }
+      </ol>
+    </div>
+
+    <div class="eco">
+      <p class="eco__title">En operación</p>
+      <ul class="eco__list">
+        @for (e of ecosystem; track e) {
+          <li>{{ e }}</li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>

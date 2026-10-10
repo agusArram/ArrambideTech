@@ -1,0 +1,70 @@
+<section #section id="inicio" class="story" aria-label="Qué hacemos">
+  <div class="story__stage" [class.is-dragging]="dragging()">
+    <canvas #canvas class="story__canvas" [class.is-ready]="sceneReady()" aria-hidden="true"></canvas>
+    <div class="story__vignette" aria-hidden="true"></div>
+
+    <!-- 0 · Hero -->
+    <div class="panel panel--hero" data-panel>
+      <p class="eyebrow">Arrambide Tech · Ingeniería de sistemas críticos</p>
+      <h1 class="display">Reconoce.<br />Cobra.<br />Decide.</h1>
+      <p class="lead">
+        Sistemas que ya operan: reconocimiento facial integrado a hardware real, pagos que nadie puede alterar e IA que
+        consulta sin inventar.
+      </p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#demo" (click)="go('demo', $event)">Ver demostración en vivo</a>
+        <a class="btn btn--ghost" href="#contacto" (click)="go('contacto', $event)">Agendar una conversación</a>
+      </div>
+    </div>
+
+    <!-- 1..3 · Pilares -->
+    @for (p of pillars; track p.verb; let i = $index) {
+      <article class="panel" data-panel>
+        <p class="eyebrow">
+          <span class="eyebrow__n">0{{ i + 1 }}</span> {{ p.verb }}
+        </p>
+        <h2 class="title">{{ p.title }}</h2>
+        <p class="lead">{{ p.lead }}</p>
+        <ul class="proofs">
+          @for (item of p.proofs; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+        <div class="metric">
+          <span class="metric__v">{{ p.metric.value }}</span>
+          <span class="metric__l">{{ p.metric.label }}</span>
+        </div>
+      </article>
+    }
+
+    <nav class="rail" data-rail aria-label="Secciones">
+      <span class="rail__bar" aria-hidden="true"><span class="rail__fill"></span></span>
+      <ol class="rail__list">
+        @for (item of railItems; track item; let i = $index) {
+          <li>
+            <button
+              type="button"
+              class="rail__btn"
+              [class.is-on]="active() === i"
+              [attr.aria-label]="'Ir a ' + item"
+              [attr.aria-current]="active() === i ? 'step' : null"
+              (click)="goPanel(i)"
+            >
+              <span class="rail__label">{{ item }}</span>
+            </button>
+          </li>
+        }
+      </ol>
+    </nav>
+
+    <p class="grab" [class.is-gone]="touched()" aria-hidden="true">
+      <span class="grab__arrows">← →</span>
+      <span class="grab__txt">Arrastrá o deslizá para girar</span>
+    </p>
+
+    <div class="hint" aria-hidden="true">
+      <span class="hint__line"></span>
+      Desplazá
+    </div>
+  </div>
+</section>
