@@ -28,8 +28,10 @@
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@mediapipe/tasks-vision": "^1.1.0",
     "rxjs": "~7.8.0",
     "sharp": "^0.34.5",
+    "three": "^0.186.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
@@ -38,6 +40,7 @@
     "@angular/cli": "^20.3.7",
     "@angular/compiler-cli": "^20.3.0",
     "@types/jasmine": "~5.1.0",
+    "@types/three": "^0.186.0",
     "angular-cli-ghpages": "^2.0.3",
     "baseline-browser-mapping": "^2.10.43",
     "jasmine-core": "~5.9.0",
