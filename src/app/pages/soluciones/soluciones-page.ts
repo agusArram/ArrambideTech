@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { ContactFormComponent } from '../../components/contact-form/contact-form';
+import { RevealDirective } from '../../shared/reveal.directive';
 
 interface Metric {
   value: string;
@@ -34,7 +35,7 @@ interface Work {
 @Component({
   selector: 'app-soluciones-page',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, ContactFormComponent],
+  imports: [HeaderComponent, FooterComponent, ContactFormComponent, RevealDirective],
   templateUrl: './soluciones-page.html',
   styleUrl: './soluciones-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -101,7 +102,7 @@ export class SolucionesPageComponent {
       index: '03',
       pillar: 'Decide',
       title: 'Asistente de IA para consultas de RRHH',
-      client: 'Secretaría de Salud · Municipalidad de Pilar',
+      client: 'Hospital Central de Pilar · Secretaría de Salud, Municipalidad de Pilar',
       status: 'En producción',
       challenge:
         'Consultar la nómina de una Secretaría de Salud por chat, en lenguaje natural, sin exponer datos a terceros, sin respuestas inventadas y sin que el consumo de la IA se descontrole.',
@@ -121,7 +122,7 @@ export class SolucionesPageComponent {
       ],
       stack: ['n8n', 'Google Gemini (LangChain)', 'MySQL', 'Telegram Bot API', 'Google Sheets (auditoría)'],
       validation: [
-        'En producción en la Secretaría de Salud de la Municipalidad de Pilar.',
+        'En producción en el Hospital Central de Pilar.',
         'Benchmarks medidos con consultas reales de uso cotidiano.',
         'Cada consulta ejecutada queda registrada y es auditable.',
       ],

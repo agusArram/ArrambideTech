@@ -1,37 +1,38 @@
-<section #root id="pruebas" class="proof" aria-labelledby="proof-title">
+<section id="pruebas" class="proof" aria-labelledby="proof-title">
   <div class="proof__inner">
-    <header class="proof__head">
-      <p class="eyebrow"><span class="eyebrow__n">02</span> Pruebas</p>
-      <h2 id="proof-title" class="title">Cifras de sistemas en operación,<br />no de presentaciones.</h2>
+    <header class="proof__head" appReveal>
+      <p class="eyebrow"><span class="eyebrow__n">02</span> Resultados</p>
+      <h2 id="proof-title" class="title">Problemas reales,<br />resueltos en producción.</h2>
+      <p class="lead">Cada versión del sistema de acceso nace de un problema que apareció en la operación diaria.</p>
     </header>
 
-    <dl class="stats">
-      @for (s of stats; track s.label; let i = $index) {
-        <div class="stat">
-          <dt class="stat__label">{{ s.label }}</dt>
-          <dd class="stat__value">{{ values()[i] }}</dd>
-          <dd class="stat__note">{{ s.note }}</dd>
-        </div>
-      }
-    </dl>
+    <div class="grid">
+      @for (p of problems; track p.tag; let i = $index) {
+        <article class="card" [appReveal]="i * 90">
+          <p class="card__tag"><span>{{ p.tag }}</span></p>
+          <h3 class="card__title">{{ p.title }}</h3>
 
-    <div class="log">
-      <p class="log__title">Línea de releases · sistema de control de acceso</p>
-      <ol class="log__list">
-        @for (r of all() ? releases : releases.slice(0, 3); track r.tag) {
-          <li class="entry">
-            <span class="entry__tag">{{ r.tag }}</span>
-            <div class="entry__main">
-              <h3 class="entry__title">{{ r.title }}</h3>
-              <p class="entry__body">{{ r.body }}</p>
+          <dl class="card__story">
+            <div>
+              <dt>Antes</dt>
+              <dd>{{ p.before }}</dd>
             </div>
-            <span class="entry__area">{{ r.area }}</span>
-          </li>
-        }
-      </ol>
-      <button type="button" class="log__toggle" (click)="all.set(!all())" [attr.aria-expanded]="all()">
-        {{ all() ? 'Mostrar menos' : 'Ver las ' + releases.length + ' versiones' }}
-      </button>
+            <div>
+              <dt>Ahora</dt>
+              <dd>{{ p.after }}</dd>
+            </div>
+          </dl>
+
+          <p class="card__metric">
+            <span class="card__v">{{ p.value }}</span>
+            <span class="card__u">{{ p.unit }}</span>
+          </p>
+        </article>
+      }
     </div>
+
+    <p class="proof__more" appReveal>
+      <a routerLink="/soluciones" fragment="acceso">Ver el caso completo y el detalle técnico →</a>
+    </p>
   </div>
 </section>

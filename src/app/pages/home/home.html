@@ -7,15 +7,19 @@
 
   <section class="teaser im-section" aria-labelledby="teaser-title">
     <div class="im-wrap">
-      <p class="im-eyebrow"><b>03</b> Casos</p>
-      <h2 id="teaser-title" class="im-title">Tres sistemas, tres entornos reales.</h2>
+      <div appReveal>
+        <p class="im-eyebrow"><b>03</b> Casos</p>
+        <h2 id="teaser-title" class="im-title">Tres sistemas, tres entornos reales.</h2>
+      </div>
 
       <div class="teaser__grid">
-        @for (c of cases; track c.id) {
-          <a class="card" routerLink="/soluciones" [fragment]="c.id">
+        @for (c of cases; track c.id; let i = $index) {
+          <a class="card" routerLink="/soluciones" [fragment]="c.id" [appReveal]="i * 90">
             <span class="card__verb">{{ c.verb }}</span>
             <h3>{{ c.title }}</h3>
             <p>{{ c.text }}</p>
+            <p class="card__where">{{ c.where }}</p>
+            <p class="card__metric"><b>{{ c.value }}</b><span>{{ c.unit }}</span></p>
             <span class="card__more">Ver el caso →</span>
           </a>
         }

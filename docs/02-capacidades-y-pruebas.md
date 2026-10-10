@@ -92,7 +92,7 @@ Leyenda de estado: 🟢 en producción · 🟡 MVP / validado, no confirmado en 
 **Producto de referencia:** *SAP (Sistema de Asistencia al Personal)* — asistente conversacional por Telegram para consultas de RRHH de una Secretaría de Salud municipal.
 **Stack:** n8n (orquestador), Google Gemini (LangChain Agent), MySQL, Google Sheets (auditoría), Telegram Bot API.
 
-> Es información institucional con datos personales. **Nunca se muestran datos reales** en el sitio. Estado confirmado por Agustín: **el bot está en producción** en la Secretaría de Salud de la Municipalidad de Pilar. El sitio lo nombra así; lo que dicen la jefa del Hospital Central y el intendente **no se publica** (queda como `TODO(Agustín)` en `soluciones-page.html`).
+> Es información institucional con datos personales. **Nunca se muestran datos reales** en el sitio. Estado confirmado por Agustín: **el bot está en producción** en el Hospital Central de Pilar (Secretaría de Salud, Municipalidad de Pilar). El bot consulta datos de **personal (RRHH)**, no de pacientes: el copy no debe decir “datos de pacientes”. El sitio lo nombra así; lo que dicen la jefa del Hospital Central y el intendente **no se publica** (queda como `TODO(Agustín)` en `soluciones-page.html`).
 
 ### Hechos verificables
 

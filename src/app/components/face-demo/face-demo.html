@@ -1,6 +1,6 @@
 <section id="demo" class="demo" aria-labelledby="demo-title">
   <div class="demo__inner">
-    <header class="demo__head">
+    <header class="demo__head" appReveal>
       <p class="eyebrow"><span class="eyebrow__n">01</span> Demostración en vivo</p>
       <h2 id="demo-title" class="title">Probalo ahora.<br />Es tu cámara, es tu navegador.</h2>
       <p class="lead">
@@ -8,7 +8,7 @@
       </p>
     </header>
 
-    <div class="demo__grid">
+    <div class="demo__grid" [appReveal]="120">
       <!-- Visor -->
       <div class="viewer" [class.is-live]="cameraOn()">
         <video #video class="viewer__video" playsinline muted aria-hidden="true"></video>

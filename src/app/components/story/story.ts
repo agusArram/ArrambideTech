@@ -29,9 +29,10 @@ const HOLD = 0.06;
 const FADE = 0.17;
 
 const clamp01 = (v: number): number => Math.min(1, Math.max(0, v));
+/** smootherstep: arranque y llegada más suaves que smoothstep. */
 const smooth = (v: number): number => {
   const x = clamp01(v);
-  return x * x * (3 - 2 * x);
+  return x * x * x * (x * (x * 6 - 15) + 10);
 };
 
 @Component({
@@ -81,7 +82,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     {
       verb: 'Decide',
       title: 'IA que consulta, no que inventa.',
-      lead: 'Agentes con n8n que consultan datos reales y dejan auditoría. En producción en la Municipalidad de Pilar.',
+      lead: 'Agentes con n8n que consultan datos sensibles reales, con control de acceso y auditoría. En producción en el Hospital Central de Pilar.',
       caseId: 'ia',
       metric: { value: '~8.000', label: 'tokens por consulta, frente a más de 1.500.000 sin límites' },
     },
@@ -219,7 +220,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
   private step = (now: number): void => {
     const dt = Math.min(0.05, (now - this.last) / 1000);
     this.last = now;
-    const k = 1 - Math.exp(-dt * 7);
+    const k = 1 - Math.exp(-dt * 5.5);
     this.shown += (this.target - this.shown) * k;
     if (Math.abs(this.target - this.shown) < 0.0004) this.shown = this.target;
     this.apply();

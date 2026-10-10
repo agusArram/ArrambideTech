@@ -11,6 +11,7 @@ import {
   signal,
 } from '@angular/core';
 import { DecimalPipe, isPlatformBrowser } from '@angular/common';
+import { RevealDirective } from '../../shared/reveal.directive';
 import type { FaceLandmarker, NormalizedLandmark } from '@mediapipe/tasks-vision';
 
 type DemoState = 'idle' | 'loading' | 'scanning' | 'ready' | 'error';
@@ -45,7 +46,7 @@ const hex = (bytes: Uint8Array, n: number): string =>
 @Component({
   selector: 'app-face-demo',
   standalone: true,
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, RevealDirective],
   templateUrl: './face-demo.html',
   styleUrl: './face-demo.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

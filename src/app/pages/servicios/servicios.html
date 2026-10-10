@@ -13,7 +13,7 @@
   @for (c of capabilities; track c.id) {
     <section [id]="c.id" class="cap im-section">
       <div class="im-wrap cap__grid">
-        <div class="cap__head">
+        <div class="cap__head" appReveal>
           <p class="im-eyebrow"><b>{{ c.index }}</b> {{ c.verb }}</p>
           <h2 class="im-title">{{ c.title }}</h2>
           <p class="im-lead">{{ c.intro }}</p>
@@ -23,7 +23,7 @@
           </p>
         </div>
 
-        <div class="cap__cols">
+        <div class="cap__cols" [appReveal]="100">
           <div>
             <h3 class="cap__h">Qué construimos</h3>
             <ul class="cap__list">
@@ -50,8 +50,8 @@
       <p class="im-eyebrow">También construimos</p>
       <h2 class="im-title">Lo que rodea a un sistema crítico.</h2>
       <div class="rows">
-        @for (o of others; track o.t) {
-          <div class="row">
+        @for (o of others; track o.t; let i = $index) {
+          <div class="row" [appReveal]="i * 80">
             <h3>{{ o.t }}</h3>
             <p>{{ o.d }}</p>
           </div>
@@ -65,8 +65,8 @@
       <p class="im-eyebrow">Método</p>
       <h2 class="im-title">Cómo trabajamos.</h2>
       <ol class="steps">
-        @for (s of steps; track s.n) {
-          <li>
+        @for (s of steps; track s.n; let i = $index) {
+          <li [appReveal]="i * 90">
             <span class="steps__n">{{ s.n }}</span>
             <h3>{{ s.t }}</h3>
             <p>{{ s.d }}</p>

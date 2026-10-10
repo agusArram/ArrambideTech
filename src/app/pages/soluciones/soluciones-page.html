@@ -18,7 +18,8 @@
   @for (c of cases; track c.id) {
     <!--
       Decisiones de Agustín (v2):
-      - Se puede mencionar a Marinas del Paraná Guazú y a la Municipalidad de Pilar (instituciones).
+      - Se puede mencionar a Marinas del Paraná Guazú, a la Municipalidad de Pilar y al Hospital Central de Pilar (instituciones).
+      - Importante: el bot consulta datos de PERSONAL (RRHH), no de pacientes; el copy no debe decir "datos de pacientes".
       - NO se nombran personas (directivos, funcionarios, intendente, etc.).
       - Microservicios y bot: ambos están en producción.
       TODO(Agustín): las valoraciones del bot (jefa del Hospital Central, intendente) siguen sin publicarse
@@ -26,7 +27,7 @@
     -->
     <article [id]="c.id" class="case im-section">
       <div class="im-wrap case__grid">
-        <div class="case__head">
+        <div class="case__head" appReveal>
           <p class="im-eyebrow"><b>{{ c.index }}</b> {{ c.pillar }}</p>
           <h2 class="im-title">{{ c.title }}</h2>
           <p class="case__client">{{ c.client }}</p>
@@ -51,7 +52,7 @@
           }
         </div>
 
-        <div class="case__body">
+        <div class="case__body" [appReveal]="100">
           <dl class="case__metrics">
             @for (m of c.metrics; track m.label) {
               <div>
@@ -95,8 +96,8 @@
       <h2 id="works-title" class="im-title">Y el resto del ecosistema.</h2>
 
       <div class="works__grid">
-        @for (w of works; track w.name) {
-          <article class="work">
+        @for (w of works; track w.name; let i = $index) {
+          <article class="work" [appReveal]="(i % 3) * 90">
             <div class="work__media">
               <img [src]="w.image" [alt]="'Vista de ' + w.name" loading="lazy" width="640" height="400" />
             </div>

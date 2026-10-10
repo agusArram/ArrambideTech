@@ -38,6 +38,14 @@ Feedback: “demasiado texto, muchísima data de golpe”. Regla desde esta vers
 3. **Cada caso muestra 3 puntos** de solución y pliega el resto.
 4. El grafo del paso “Decide” usa 17 nodos con 2 vecinos cada uno: con más nodos dejaba de leerse como grafo.
 
+## Resultados como historias (v4)
+
+La sección *Resultados* dejó de ser un tablero de cifras sueltas (10 releases, AES-256-GCM, tokens: poco legibles para un directivo) y pasó a **cuatro problemas reales** con la forma *Antes → Ahora → cifra*, en lenguaje de negocio. El detalle técnico y la línea de releases completa quedan en la página de Casos.
+
+## Aparición
+
+Todo bloque relevante entra con `appReveal`: opacidad + desplazamiento de 26 px con curva `cubic-bezier(.16,1,.3,1)` (entrada rápida, asentamiento largo), escalonada de 80–120 ms. Se desactiva con `prefers-reduced-motion`. El scroll de la story usa *smootherstep* e inercia (`1 − e^(−5,5·dt)`).
+
 ## Lenguaje visual
 
 **Atmósfera:** negro profundo, casi sin gradientes. Mucho aire. Tipografía grande y callada.

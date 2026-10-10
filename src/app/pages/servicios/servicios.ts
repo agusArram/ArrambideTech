@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { ContactFormComponent } from '../../components/contact-form/contact-form';
+import { RevealDirective } from '../../shared/reveal.directive';
 
 interface Capability {
   id: string;
@@ -19,7 +20,7 @@ interface Capability {
 @Component({
   selector: 'app-servicios',
   standalone: true,
-  imports: [RouterLink, HeaderComponent, FooterComponent, ContactFormComponent],
+  imports: [RouterLink, HeaderComponent, FooterComponent, ContactFormComponent, RevealDirective],
   templateUrl: './servicios.html',
   styleUrl: './servicios.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

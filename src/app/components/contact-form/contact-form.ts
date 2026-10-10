@@ -1,10 +1,11 @@
 import { Component, signal, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RevealDirective } from '../../shared/reveal.directive';
 
 @Component({
   selector: 'app-contact-form',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RevealDirective],
   templateUrl: './contact-form.html',
   styleUrl: './contact-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush
