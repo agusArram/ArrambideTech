@@ -22,9 +22,13 @@
 
   # 2. Reglas de Angular PARA EL PORTFOLIO PRINCIPAL
   # CRÍTICO: Excluimos la carpeta HyderLipy para que no secuestre sus rutas
+  # Solo las rutas reales devuelven la app con estado 200; cualquier otra cae en
+  # ErrorDocument y responde 404 (la app muestra la página "no encontrada").
   RewriteCond %{REQUEST_URI} !^/HyderLipy/
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
-  RewriteRule ^(.*)$ index.html [NC,L]
+  RewriteRule ^(servicios|soluciones|contacto)/?$ index.html [NC,L]
 </IfModule>
+
+ErrorDocument 404 /index.html
