@@ -2,12 +2,16 @@
   "name": "Arrambide Tech",
   "short_name": "Arrambide Tech",
   "lang": "es-AR",
+  "id": "/",
+  "scope": "/",
   "start_url": "/",
-  "display": "browser",
+  "display": "standalone",
+  "description": "Reconocimiento facial, pagos integrados e IA aplicada.",
   "background_color": "#050506",
   "theme_color": "#050506",
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

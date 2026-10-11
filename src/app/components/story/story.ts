@@ -199,14 +199,17 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
   /** En celular el objeto 3D ocupa solo el espacio que deja libre el bloque de texto (varía con el alto de pantalla). */
   private fitScene = (): void => {
     if (!this.scene) return;
-    const hero = this.panels[0];
     const stage = this.canvas.nativeElement.parentElement;
-    if (!hero || !stage) return;
+    if (!stage || !this.panels.length) return;
     const mobile = window.innerWidth <= 800;
-    // offsetTop ignora las transformaciones de scroll: mide el bloque en reposo.
-    const textTop = hero.offsetTop;
-    this.scene.setSafeArea(76, mobile ? Math.max(0, stage.clientHeight - textTop + 14) : 0);
+    // Se reserva el alto del bloque de texto más alto de todos los paneles: así el objeto no cambia
+    // de tamaño al pasar de uno a otro y ningún título queda debajo de los puntos.
+    // offsetTop ignora las transformaciones de scroll: mide los bloques en reposo.
+    let textH = 0;
+    for (const p of this.panels) textH = Math.max(textH, stage.clientHeight - p.offsetTop);
+    this.scene.setSafeArea(76, mobile ? Math.max(0, textH + 14) : 0);
   };
+
 
   /** Ondas pedidas desde afuera (cosas escondidas): coordenadas de pantalla → NDC del canvas. */
   private onExternalBlast = (ev: Event): void => {
