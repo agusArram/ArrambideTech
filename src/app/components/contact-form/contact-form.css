@@ -206,3 +206,12 @@
 @media (prefers-reduced-motion: reduce) {
   .cf__check { animation: none; }
 }
+
+/* Campo trampa anti-bots: fuera de la pantalla, sin ocultarlo con display:none (los bots lo detectan). */
+.cf__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

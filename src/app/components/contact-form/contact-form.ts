@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { ParticleCheckComponent } from '../particle-check/particle-check';
 
+// Clave pública (publishable) del proyecto ArrambideTech-Core: está pensada para ir en el navegador.
+// La tabla `leads` no es accesible con ella; solo la función `submit_web_lead`.
+const SUPABASE_URL = 'https://wyvrbfmcsqrnilrqohfq.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_lmp1AbveqoyEzSZCUZi2VQ_yVSdXOON';
+
 @Component({
   selector: 'app-contact-form',
   standalone: true,
@@ -85,30 +90,26 @@ export class ContactFormComponent {
 
     try {
       const formData = new FormData(form);
-      const object = Object.fromEntries(formData);
-      const json = JSON.stringify(object);
+      const fields = Object.fromEntries(formData) as Record<string, string>;
+      // El campo trampa solo es para la base de datos; el correo no lo necesita.
+      const { website = '', ...forEmail } = fields;
 
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: json
-      });
+      // Dos destinos en paralelo: el correo (Web3Forms) y la base de datos (Supabase).
+      // Alcanza con que uno funcione: nunca se pierde un mensaje porque el otro esté caído.
+      const [mail, db] = await Promise.allSettled([
+        this.enviarCorreo(forEmail),
+        this.guardarLead(fields, website),
+      ]);
+      const mailOk = mail.status === 'fulfilled' && mail.value;
+      const dbOk = db.status === 'fulfilled' && db.value;
+      if (!mailOk && !dbOk) throw new Error('No se pudo enviar por ningún canal');
 
-      const data = await response.json();
-
-      if (response.status === 200) {
-        form.reset();
-        this.selectedChallenge.set('');
-        this.mensajeEstado.set(null);
-        this.enviado.set(true);
-        // La página se acorta al reemplazar el formulario: se lleva la vista a la confirmación.
-        setTimeout(() => this.root().querySelector('.cf__done')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
-      } else {
-        throw new Error(data.message || 'Error al enviar la solicitud');
-      }
+      form.reset();
+      this.selectedChallenge.set('');
+      this.mensajeEstado.set(null);
+      this.enviado.set(true);
+      // La página se acorta al reemplazar el formulario: se lleva la vista a la confirmación.
+      setTimeout(() => this.root().querySelector('.cf__done')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
     } catch (error) {
       console.error('Error:', error);
       this.mensajeEstado.set({
@@ -118,6 +119,33 @@ export class ContactFormComponent {
     } finally {
       this.enviando.set(false);
     }
+  }
+
+  private async enviarCorreo(fields: Record<string, string>): Promise<boolean> {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(fields),
+    });
+    return response.status === 200;
+  }
+
+  private async guardarLead(fields: Record<string, string>, honeypot: string): Promise<boolean> {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/submit_web_lead`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: SUPABASE_PUBLISHABLE_KEY },
+      body: JSON.stringify({
+        p_name: fields['nombre'] ?? '',
+        p_company: fields['empresa'] ?? '',
+        p_contact: fields['contacto'] ?? '',
+        p_need: fields['necesidad'] ?? '',
+        p_message: fields['mensaje'] ?? '',
+        p_honeypot: honeypot,
+      }),
+    });
+    if (!response.ok) return false;
+    const data = (await response.json()) as { ok?: boolean };
+    return data.ok === true;
   }
 
   nuevoMensaje(): void {

@@ -41,6 +41,10 @@
           <input type="hidden" name="subject" value="Nuevo contacto - Arrambide Tech" />
           <input type="hidden" name="from_name" value="Arrambide Tech - Sitio web" />
           <input type="checkbox" name="botcheck" style="display: none" tabindex="-1" autocomplete="off" />
+          <!-- Campo trampa: fuera de pantalla; un humano no lo completa -->
+          <div class="cf__trap" aria-hidden="true">
+            <label>No completar <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
 
           <div class="cf__row">
             <label class="cf__field">

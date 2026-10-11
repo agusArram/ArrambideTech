@@ -23,15 +23,18 @@
 - **Scroll:** continuo con inercia.
 - **Sitio solo oscuro**, páginas y componentes rehechos.
 
-## Propuesta pendiente de decisión: formulario con Turnstile y leads propios
+## Formulario de contacto → Supabase (hecho)
 
-Hoy el formulario envía por Web3Forms (funciona y llega el mail, con plantilla genérica). Alternativa pensada con lo que ya existe en el Core (sitio key de Turnstile y proyecto Supabase):
+El formulario envía a dos destinos en paralelo y alcanza con que uno responda:
 
-1. **Cloudflare Turnstile** en modo gestionado o invisible: verifica sin pedir que se marque nada.
-2. **Edge Function `submit-lead`** en Supabase: valida el token con el *secret* de Turnstile, guarda el lead en una tabla `leads` (con origen, página y necesidad) y envía el mail con **plantilla de marca** por Resend.
-3. Los leads quedan en una base propia, listos para verse en AT Core y para disparar un flujo de n8n (aviso por WhatsApp/Telegram).
+1. **Web3Forms**: el email de aviso (como siempre).
+2. **Supabase** (`ArrambideTech-Core`): función `submit_web_lead` (RPC), que valida, frena ráfagas y reutiliza `upsert_lead`. El lead queda en `leads` con `source = 'web'`.
 
-Requiere de Agustín: confirmar el proyecto de Supabase a usar, que el dominio `arrambidetech.com` esté permitido en el widget de Turnstile y cargar `TURNSTILE_SECRET` y la clave de Resend como secretos de la función. El despliegue de la función es por CLI (`supabase functions deploy`).
+- Migración: `supabase/sql/20261011190000_submit_web_lead.sql` (se pega en el SQL Editor del Core; trae consultas de verificación y rollback).
+- Clave: la *publishable key* del proyecto, pensada para el navegador. La tabla `leads` sigue cerrada.
+- Anti-bots: campo trampa `website` + límite de 10 por minuto y 100 por hora. Turnstile queda como mejora futura.
+- No pasa por n8n: no hay Discord ni Notion para estos leads; se leen desde Supabase.
+- Idea descartada por ahora: chat con el bot dentro de la web (ver tareas EXTRA en Notion).
 
 ## Lo que necesito de Agustín
 
