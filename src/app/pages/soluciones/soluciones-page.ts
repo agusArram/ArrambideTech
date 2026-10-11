@@ -3,6 +3,7 @@ import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { ContactFormComponent } from '../../components/contact-form/contact-form';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { FlowBallDirective } from '../../shared/flow-ball.directive';
 
 interface Metric {
   value: string;
@@ -40,7 +41,7 @@ interface Work {
 @Component({
   selector: 'app-soluciones-page',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, ContactFormComponent, RevealDirective],
+  imports: [HeaderComponent, FooterComponent, ContactFormComponent, RevealDirective, FlowBallDirective],
   templateUrl: './soluciones-page.html',
   styleUrl: './soluciones-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

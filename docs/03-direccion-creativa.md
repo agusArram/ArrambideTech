@@ -243,3 +243,13 @@ Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica
 Al encontrar la quinta aparece un aviso con un enlace a “Hablemos”. A los 7 s de la primera visita en la portada, una única pista (“Esta web esconde cinco cosas”) que no vuelve a mostrarse.
 
 No se hizo la cronología de versiones (pieza 7): se descartó porque ya no se muestran las versiones.
+
+## Ajustes de los detalles (v17)
+
+- **Onda del logo:** una sola onda, ancha y suave (un degradé radial que se expande ~1,3 s y se disuelve, sin ir y volver). Antes eran tres anillos finos con tonos distintos.
+- **“puntos”:** ahora son tres explosiones de partículas en el hero (sin anillos en pantalla).
+- **Avisos:** entran arriba a la derecha, debajo del header; el contador n/5 queda abajo a la izquierda.
+- **Botones magnéticos:** máximo 3 px (antes 4) y menor ganancia.
+- **Monitor:** se quitó la latencia por evento.
+- **Recorrido:** una pelotita pasa por los cinco nodos (izquierda → derecha; arriba → abajo en móvil), cada nodo late al ser alcanzado, espera ~2 s y repite (ciclo de 7 s). Posiciones reales de los nodos (Web Animations API).
+- **✓ de partículas:** centrado en el panel de éxito, con el texto y el botón.

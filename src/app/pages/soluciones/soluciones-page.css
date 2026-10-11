@@ -455,25 +455,34 @@
   transition-delay: calc(var(--i, 0) * 0.16s + 0.25s);
   transform: scaleX(1);
 }
-/* un destello recorre el trayecto, apenas */
-.flow.is-in .flow__n:not(:last-child)::before {
-  content: '';
+/* La pelotita (creada por appFlowBall) y el pulso de cada nodo al ser alcanzado */
+.flow {
+  position: relative;
+}
+.flow__ball {
   position: absolute;
-  top: 5px;
-  left: 50%;
-  width: 5px;
-  height: 5px;
+  left: 0;
+  top: 0;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: #fff;
+  box-shadow:
+    0 0 0 3px rgba(110, 231, 183, 0.25),
+    0 0 14px 2px rgba(110, 231, 183, 0.65);
+  z-index: 2;
+  pointer-events: none;
   opacity: 0;
-  animation: flow-run 3.2s ease-in-out infinite;
-  animation-delay: calc(var(--i, 0) * 0.4s + 1.2s);
 }
-@keyframes flow-run {
-  0% { opacity: 0; transform: translateX(0); }
-  15% { opacity: 0.9; }
-  70% { opacity: 0.9; }
-  100% { opacity: 0; transform: translateX(var(--flow-w, 120px)); }
+.flow.is-in .flow__dot {
+  animation: node-hit 7s ease-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.855s + 0.35s);
+}
+@keyframes node-hit {
+  0% { transform: scale(1); box-shadow: 0 0 0 4px var(--im-bg); }
+  3% { transform: scale(1.55); box-shadow: 0 0 0 4px var(--im-bg), 0 0 14px 4px rgba(110, 231, 183, 0.6); }
+  12% { transform: scale(1); box-shadow: 0 0 0 4px var(--im-bg); }
+  100% { transform: scale(1); box-shadow: 0 0 0 4px var(--im-bg); }
 }
 @media (max-width: 760px) {
   .flow {
@@ -504,17 +513,13 @@
   .flow.is-in .flow__n:not(:last-child)::after {
     transform: scaleY(1);
   }
-  .flow.is-in .flow__n:not(:last-child)::before {
-    display: none;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .flow__dot,
   .flow.is-in .flow__n:not(:last-child)::after {
     transition: none;
   }
-  .flow.is-in .flow__n:not(:last-child)::before {
+  .flow.is-in .flow__dot {
     animation: none;
-    display: none;
   }
 }

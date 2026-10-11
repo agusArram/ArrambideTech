@@ -166,7 +166,8 @@
 
 .cf__done {
   display: grid;
-  justify-items: start;
+  justify-items: center;
+  text-align: center;
   gap: 1rem;
   padding: clamp(1rem, 3vw, 2rem) 0;
 }
@@ -176,7 +177,7 @@
   letter-spacing: -0.03em;
 }
 .cf__done p {
-  margin: 0;
+  margin: 0 auto;
   max-width: 28rem;
   line-height: 1.6;
   color: var(--im-soft);

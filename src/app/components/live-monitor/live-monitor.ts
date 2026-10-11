@@ -23,7 +23,6 @@ interface AccessEvent {
   label: string;
   who: string;
   door: string;
-  ms: string;
 }
 
 const DOORS = ['Portón principal', 'Muelle B', 'Oficina', 'Estacionamiento', 'Portón peatonal'];
@@ -135,7 +134,6 @@ export class LiveMonitorComponent implements AfterViewInit, OnDestroy {
       label: LABEL[status],
       who,
       door: pick(DOORS),
-      ms: (0.4 + Math.random() * 0.7).toFixed(1).replace('.', ','),
     };
   }
 }

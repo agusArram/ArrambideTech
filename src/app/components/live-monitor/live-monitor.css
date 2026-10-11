@@ -101,7 +101,7 @@
 }
 .ev__in {
   display: grid;
-  grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr) minmax(0, 11rem) 4rem;
+  grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr) minmax(0, 12rem);
   gap: 1rem;
   align-items: center;
   padding: 0.95rem 1.25rem;
@@ -138,12 +138,6 @@
 .ev__door {
   color: var(--im-soft);
 }
-.ev__ms {
-  text-align: right;
-  font-size: 0.78rem;
-  color: var(--im-muted);
-  font-variant-numeric: tabular-nums;
-}
 
 @keyframes ev-in {
   from {
@@ -167,7 +161,7 @@
   .ev__in {
     grid-template-columns: 4.6rem minmax(0, 1fr) auto;
     grid-template-areas:
-      'time chip ms'
+      'time chip chip'
       'time who door';
     row-gap: 0.25rem;
   }
@@ -176,9 +170,6 @@
   }
   .ev__chip {
     grid-area: chip;
-  }
-  .ev__ms {
-    grid-area: ms;
   }
   .ev__who {
     grid-area: who;

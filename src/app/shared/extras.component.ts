@@ -55,14 +55,16 @@ interface Wave {
     </div>
 
     <div class="eg" aria-live="polite">
-      @if (toast(); as t) {
-        <div class="eg__toast" [class.is-hint]="t.hint">
-          <span>{{ t.text }}</span>
-          @if (t.link) {
-            <a routerLink="/contacto">Hablemos →</a>
-          }
-        </div>
-      }
+      <div class="eg__top">
+        @if (toast(); as t) {
+          <div class="eg__toast" [class.is-hint]="t.hint">
+            <span>{{ t.text }}</span>
+            @if (t.link) {
+              <a routerLink="/contacto">Hablemos →</a>
+            }
+          </div>
+        }
+      </div>
       @if (found().length > 0) {
         <div class="eg__count" [title]="'Cosas escondidas encontradas'">{{ found().length }} / {{ total }}</div>
       }
@@ -96,49 +98,46 @@ interface Wave {
         inset: 0;
         overflow: hidden;
       }
+      /* Una sola onda, suave y ancha: se expande una vez y se disuelve (sin ir y volver). */
       .sw {
         position: absolute;
-        width: 24px;
-        height: 24px;
-        margin: -12px 0 0 -12px;
+        width: 120px;
+        height: 120px;
+        margin: -60px 0 0 -60px;
         border-radius: 50%;
-        border: 1px solid var(--im-accent, #6ee7b7);
+        background: radial-gradient(
+          circle,
+          transparent 52%,
+          color-mix(in srgb, var(--im-accent, #6ee7b7) 26%, transparent) 60%,
+          transparent 69%
+        );
         opacity: 0;
-        animation: sw 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-      }
-      .sw::before,
-      .sw::after {
-        content: '';
-        position: absolute;
-        inset: -1px;
-        border-radius: 50%;
-        border: 1px solid var(--im-accent, #6ee7b7);
-        animation: inherit;
-      }
-      .sw::before {
-        animation-delay: 0.12s;
-      }
-      .sw::after {
-        animation-delay: 0.26s;
+        animation: sw 1.3s cubic-bezier(0.16, 1, 0.3, 1) both;
       }
       @keyframes sw {
         0% {
-          opacity: 0.9;
-          transform: scale(0.2);
+          opacity: 0.95;
+          transform: scale(0.12);
+        }
+        60% {
+          opacity: 0.45;
         }
         100% {
           opacity: 0;
-          transform: scale(48);
+          transform: scale(14);
         }
       }
       .eg {
         position: absolute;
-        left: 16px;
-        bottom: 16px;
+        inset: 0;
+      }
+      .eg__top {
+        position: absolute;
+        top: 82px;
+        right: 16px;
         display: flex;
         flex-direction: column;
-        gap: 8px;
-        align-items: flex-start;
+        align-items: flex-end;
       }
       .eg__toast {
         pointer-events: auto;
@@ -165,6 +164,9 @@ interface Wave {
         text-decoration: none;
       }
       .eg__count {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
         padding: 3px 9px;
         border-radius: 999px;
         border: 1px solid rgba(255, 255, 255, 0.14);
@@ -177,7 +179,7 @@ interface Wave {
       @keyframes toast-in {
         from {
           opacity: 0;
-          transform: translate3d(0, 10px, 0);
+          transform: translate3d(28px, 0, 0);
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -321,9 +323,9 @@ export class ExtrasComponent implements OnInit, OnDestroy {
       const d = Math.hypot(dx, dy);
       const st = this.mag.get(el) ?? { x: 0, y: 0, tx: 0, ty: 0 };
       if (d < reach) {
-        const k = (1 - d / reach) * 0.16;
-        st.tx = Math.max(-4, Math.min(4, dx * k));
-        st.ty = Math.max(-4, Math.min(4, dy * k));
+        const k = (1 - d / reach) * 0.1;
+        st.tx = Math.max(-3, Math.min(3, dx * k));
+        st.ty = Math.max(-3, Math.min(3, dy * k));
       } else {
         st.tx = 0;
         st.ty = 0;
@@ -418,7 +420,6 @@ export class ExtrasComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           const px = w * (0.55 + 0.15 * (i - 1)) + Math.random() * 40;
           const py = h * (0.4 + 0.12 * i);
-          this.wave(px, py);
           this.blast(px, py);
         }, delay),
       );
