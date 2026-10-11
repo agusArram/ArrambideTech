@@ -40,6 +40,26 @@ Feedback sobre la v6: la animación nueva no gustó y era lenta. Cambios:
 3. **Campo del mouse (escritorio):** los puntos cercanos al cursor se apartan con una distorsión aleatoria (empuje radial + torsión + ruido por punto), más amplio que en la v6.
 4. **Hero:** se restituyó la frase completa: “Sistemas que le ahorran tiempo a tu empresa: controlan quién entra, cobran solos y responden con inteligencia artificial.”
 
+## Onda expansiva (v10)
+
+Feedback: la explosión era demasiado fuerte y afectaba demasiados puntos; se pidió una onda que salga del toque y empuje.
+
+- **Frente que viaja:** un anillo gaussiano nace en el punto tocado y se expande a ~0,5 unidades/s. Cada punto es empujado hacia afuera **solo mientras el frente lo cruza** y vuelve solo al alejarse el frente: eso produce el efecto de onda, sin fases artificiales.
+- **Menos puntos y menos fuerza:** ~34 % de los puntos reaccionan con fuerza completa (el resto, 30 %); amplitud ~50 % menor que la v9; amortiguación exponencial (~1,8 s en total).
+- Acumulable hasta 3.
+
+## Entrada del logo (v10)
+
+Duración 1,3 s → **1,65 s** (+0,35 s), con aterrizaje *ease-out quint*.
+
+## Tablet (v10)
+
+En vertical con relación de aspecto > 0,6 el objeto se ajusta al menor entre el 80 % del ancho visible y el 44 % del alto, y se ubica en la mitad superior: las órbitas ya no se salen ni tapan el texto. En móvil y escritorio el encuadre no cambió.
+
+## Resultados: siempre caja completa (v10)
+
+Columnas explícitas: 4 (> 1100 px), 2×2 (561–1100 px) y 1 (≤ 560 px); nunca 3 + 1.
+
 ## Explosión al estilo Apple (v9)
 
 Feedback: la explosión “se expande demasiado rápido, frena en seco y vuelve”. Ahora tiene una física más pausada:

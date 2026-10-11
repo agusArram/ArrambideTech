@@ -51,6 +51,18 @@ src/app/
 | Pestaña oculta / fuera de pantalla | Se pausa el bucle de render (`IntersectionObserver` + `visibilitychange`) |
 | Sin cámara / permiso denegado | Mensaje claro y la demo explica lo que haría |
 
+### 3b. Calidad adaptativa (v10)
+
+La escena mide el tiempo de cada cuadro (promedio móvil, ignorando los primeros 30 cuadros por la compilación de shaders):
+
+| Nivel | Condición | Acción |
+|---|---|---|
+| 0 | Equipo que sostiene ≥ ~40 fps | Resolución nativa (hasta DPR 2) y 100 % de los puntos |
+| 1 | Promedio > 26 ms durante 60 cuadros | DPR 1 y 70 % de los puntos (`setDrawRange`) |
+| 2 | Sigue > 30 ms | 45 % de los puntos |
+
+No reconstruye geometría ni recarga nada, y respeta el cambio de tamaño de ventana. Además: pausa fuera de pantalla y con la pestaña oculta, 4.500 puntos en móvil o equipos de ≤ 4 núcleos, y modo estático con `prefers-reduced-motion`.
+
 ### 4. Rendimiento
 - `devicePixelRatio` limitado a 2.
 - Sin post-procesado, sin sombras, sin texturas.

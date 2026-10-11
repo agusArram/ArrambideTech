@@ -63,24 +63,21 @@ const VERTEX = /* glsl */ `
     vec2 acc = vec2(0.0);
     float glow = 0.0;
 
-    // Explosión (hasta 3 a la vez): pocos puntos salen lejos, frenan con suavidad y vuelven despacio.
+    // Onda expansiva (hasta 3 a la vez): un frente que sale del toque y empuja los puntos que cruza.
     for (int i = 0; i < 3; i++) {
       float bt = uB[i].z;
-      if (bt < 2.4) {
+      if (bt < 2.6) {
         vec2 dv = ndc - uB[i].xy;
         vec2 dn = vec2(dv.x * uAspect, dv.y);
         float dist = length(dn);
-        float flyer = step(fract(aRand.x * 11.3 + aRand.y * 5.7), 0.48);
-        float zone = exp(-pow(dist / 0.24, 2.0));
-        float outT = clamp(bt / 0.75, 0.0, 1.0);
-        float outE = 1.0 - pow(1.0 - outT, 4.0);
-        float backT = clamp((bt - 0.75) / 1.35, 0.0, 1.0);
-        float backE = backT * backT * (3.0 - 2.0 * backT);
-        float env = outE * (1.0 - backE);
-        vec2 dir = normalize(dn + (aRand.xy - 0.5) * 1.3 + vec2(0.0001));
-        float mag = zone * env * mix(0.25, 1.0, flyer) * (0.55 + aRand.z * 0.9);
-        acc += dir * mag * 0.34;
-        glow += zone * env * flyer * 0.5;
+        float flyer = step(fract(aRand.x * 11.3 + aRand.y * 5.7), 0.34);
+        float front = 0.015 + bt * 0.52;
+        float pulse = exp(-pow((dist - front) / 0.12, 2.0));
+        float decay = exp(-bt * 1.25);
+        vec2 dir = normalize(dn + (aRand.xy - 0.5) * 0.45 + vec2(0.0001));
+        float mag = pulse * decay * mix(0.3, 1.0, flyer) * (0.6 + aRand.z * 0.8);
+        acc += dir * mag * 0.17;
+        glow += pulse * decay * flyer * 0.45;
       }
     }
 
@@ -145,6 +142,10 @@ export class MorphScene {
   private bornAt = 0;
   private pointerOn = 0;
   private pointerAt = 0;
+  private frames = 0;
+  private msEma = 16;
+  private level = 0;
+  private readonly total: number;
   private readonly pointer = { x: 0, y: 0, cx: 0, cy: 0 };
   private readonly cleanups: Array<() => void> = [];
 
@@ -176,6 +177,7 @@ export class MorphScene {
     logo: Float32Array,
   ) {
     this.renderer = renderer;
+    this.total = opts.count;
     this.renderer.setClearColor(0x000000, 0);
 
     this.scene = new THREE.Scene();
@@ -338,7 +340,7 @@ export class MorphScene {
     const parent = this.canvas.parentElement ?? this.canvas;
     const w = Math.max(1, parent.clientWidth);
     const h = Math.max(1, parent.clientHeight);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    this.renderer.setPixelRatio(this.level >= 1 ? 1 : Math.min(window.devicePixelRatio || 1, 2));
     this.renderer.setSize(w, h, false);
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
@@ -350,9 +352,17 @@ export class MorphScene {
       this.group.scale.setScalar(0.88);
     } else {
       // Retrato: el objeto debe caber en el ancho visible a la distancia de cámara.
-      const visibleW = 2 * 5 * Math.tan((40 / 2) * (Math.PI / 180)) * this.camera.aspect;
-      this.group.position.set(0, 0.8, 0);
-      this.group.scale.setScalar(Math.min(0.9, visibleW / 2.9));
+      const visibleH = 2 * 5 * Math.tan((40 / 2) * (Math.PI / 180));
+      const visibleW = visibleH * this.camera.aspect;
+      if (this.camera.aspect > 0.6) {
+        // Tablet vertical: más aire, el objeto ocupa la mitad superior sin tapar el texto.
+        const fit = Math.min(visibleW * 0.8, visibleH * 0.44) / 3.2;
+        this.group.position.set(0, visibleH * 0.2, 0);
+        this.group.scale.setScalar(Math.min(0.9, fit));
+      } else {
+        this.group.position.set(0, 0.8, 0);
+        this.group.scale.setScalar(Math.min(0.9, visibleW / 2.9));
+      }
     }
     if (!this.opts.animate) this.renderOnce();
   }
@@ -372,7 +382,7 @@ export class MorphScene {
       else uB[i].set(0, 0, 99);
     }
     if (!this.bornAt) this.bornAt = now;
-    u['uIntro'].value = Math.min(1, (now - this.bornAt) / 1300);
+    u['uIntro'].value = Math.min(1, (now - this.bornAt) / 1650);
     // El campo del puntero aparece al mover el mouse y se apaga solo.
     const idle = now - this.pointerAt;
     const target = this.opts.parallax && idle < 1500 ? 1 : 0;
@@ -382,6 +392,7 @@ export class MorphScene {
     u['uTime'].value = t;
     u['uScan'].value = ((t % 6) / 6) * 3.4 - 1.7;
     const dt = Math.min(0.05, Math.max(0, (now - (this.lastFrame || now)) / 1000));
+    this.adapt(dt * 1000);
     this.lastFrame = now;
     if (!this.dragging) {
       this.userYaw += this.yawVel;
@@ -397,6 +408,29 @@ export class MorphScene {
     this.group.rotation.y = this.spin + this.userYaw + Math.sin(t * 0.3) * 0.22 + this.pointer.cx * 0.3;
     this.group.rotation.x = this.pointer.cy * 0.12;
     this.renderer.render(this.scene, this.camera);
+  }
+
+  /**
+   * Calidad adaptativa: si el equipo no sostiene ~40 fps, primero baja la resolución
+   * de render y después la cantidad de puntos (sin reconstruir nada).
+   */
+  private adapt(ms: number): void {
+    this.frames++;
+    if (this.frames < 30) return; // el arranque (compilación de shaders) no cuenta
+    this.msEma += (ms - this.msEma) * 0.08;
+    if (this.frames % 60 !== 0 || this.level >= 2) return;
+    if (this.msEma > (this.level === 0 ? 26 : 30)) {
+      this.level++;
+      if (this.level === 1) {
+        this.renderer.setPixelRatio(1);
+        this.renderer.setSize(this.canvas.parentElement?.clientWidth ?? 1, this.canvas.parentElement?.clientHeight ?? 1, false);
+        this.material.uniforms['uPixelRatio'].value = 1;
+        this.geometry.setDrawRange(0, Math.floor(this.total * 0.7));
+      } else {
+        this.geometry.setDrawRange(0, Math.floor(this.total * 0.45));
+      }
+      this.msEma = 16;
+    }
   }
 
   private renderOnce(): void {
