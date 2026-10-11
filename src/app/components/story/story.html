@@ -7,10 +7,22 @@
 
     <!-- 0 · Hero -->
     <div class="panel panel--hero" data-panel>
-      <h1 class="display">Reconocé.<br />Decidí.<br />Cobrá.</h1>
+      <p class="eyebrow">Sistemas que trabajan solos</p>
+      <h1 class="display" aria-label="Reconocen. Deciden. Cobran.">
+        @for (w of heroWords; track $index) {
+          <span class="display__w" [class.display__w--accent]="w.accent" aria-hidden="true">
+            @for (l of w.letters; track l.i) {
+              <span class="display__c" [style.--i]="l.i">{{ l.ch }}</span>
+            }
+          </span>
+          @if (!$last) {
+            <br />
+          }
+        }
+      </h1>
       <p class="lead">
-        Sistemas que le ahorran tiempo a tu empresa: controlan quién entra, responden con inteligencia artificial y
-        cobran solos.
+        Le ahorran tiempo a tu empresa: controlan quién entra, responden con inteligencia artificial y cobran sin que
+        nadie persiga pagos.
       </p>
       <div class="actions">
         <a class="btn btn--primary" href="#demo" (click)="go('demo', $event)">Probalo ahora</a>

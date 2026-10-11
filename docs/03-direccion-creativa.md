@@ -6,7 +6,7 @@ Un único objeto 3D —una nube de ~9.000 partículas— es el protagonista de t
 
 | Escena | Forma | Mensaje | Metáfora |
 |---|---|---|---|
-| 0 · Hero | **El logo de Arrambide Tech hecho de puntos** (muestreado del archivo real del logo), con dos órbitas inclinadas, satélites y polvo | *Reconocé. Decidí. Cobrá.* | La marca como sistema |
+| 0 · Hero | **El logo de Arrambide Tech hecho de puntos** (muestreado del archivo real del logo), con dos órbitas inclinadas, satélites y polvo | *Reconocen. Deciden. Cobran.* | La marca como sistema |
 | 1 · Reconoce | **Terminal de acceso facial** (tablet de pared con módulo de cámara, pantalla en líneas de barrido, visor con esquinas y halos de detección) | Acceso facial real, cifrado, auditable | El punto de entrada |
 | 2 · Decide | **Red de 22 nodos** con hub central y vínculos entre vecinos | IA que consulta, no inventa | El cerebro operativo |
 | 3 · Cobra | **Tarjeta** con chip y numeración | El monto lo decide el servidor | El dinero |
@@ -167,7 +167,7 @@ Todo bloque relevante entra con `appReveal`: opacidad + desplazamiento de 26 px 
 ## Copy base (borrador)
 
 **Hero**
-> Reconocé. Decidí. Cobrá.
+> Reconocen. Deciden. Cobran.
 > Ingeniería de sistemas que ya operan: reconocimiento facial integrado a hardware real, pagos que nadie puede alterar e IA que consulta sin inventar.
 
 **CTA principal:** “Ver demostración en vivo” · **Secundario:** “Agendar una conversación”.
@@ -188,7 +188,7 @@ Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica
 
 ## Orden de los verbos y gesto del trackpad (v11)
 
-- **Reconocé. Decidí. Cobrá.** reemplaza a “Reconoce. Cobra. Decide.”: sigue la secuencia lógica (reconozco → decido → cobro) y termina en la plata. Las formas siguen el mismo orden: marca → terminal → red → tarjeta. Casos, Capacidades y el selector de dolores usan el mismo orden.
+- **Reconocen. Deciden. Cobran.** reemplaza a “Reconoce. Cobra. Decide.”: sigue la secuencia lógica (reconozco → decido → cobro) y termina en la plata. Las formas siguen el mismo orden: marca → terminal → red → tarjeta. Casos, Capacidades y el selector de dolores usan el mismo orden.
 - **Trackpad:** `overscroll-behavior-x: none` y un “enganche” del gesto horizontal (260 ms) evitan que girar el logo con dos dedos dispare *atrás* del navegador.
 - **Primer pixel oscuro:** `<html>`/`<body>` con fondo inline, `color-scheme` y `theme-color` para eliminar el destello blanco al recargar.
 - **Onda:** ataque suave (`smoothstep` 0,45 s), frente más lento (0,36 u/s) y decaimiento más largo.
@@ -207,5 +207,12 @@ Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica
 
 ## Voseo y menú lateral (v14)
 
-- **Titular en voseo:** *Reconocé. Decidí. Cobrá.* Le habla directo a quien visita (él es el protagonista) y es consistente con el resto del sitio (“Cobrá sin perseguir pagos”, “Probalo ahora”). La frase de apoyo queda en tercera persona, describiendo lo que hacen los sistemas. Mismo criterio en los rótulos de cada paso y de los casos.
+- **Titular en voseo:** *Reconocen. Deciden. Cobran.* Le habla directo a quien visita (él es el protagonista) y es consistente con el resto del sitio (“Cobrá sin perseguir pagos”, “Probalo ahora”). La frase de apoyo queda en tercera persona, describiendo lo que hacen los sistemas. Mismo criterio en los rótulos de cada paso y de los casos.
 - **Menú lateral por cercanía:** cada ítem recibe `--prox` (0–1) según la distancia vertical del puntero (`exp(−d²/0,8)`): el más cercano abre su etiqueta por completo, los vecinos un 30 %, el resto nada. Antes las etiquetas inactivas usaban `display: none`, y al aparecer movían el layout bajo el mouse (el “bug”). Ahora el layout es fijo (40 px por ítem) y solo cambian opacidad, ancho de la marca y desplazamiento. Área de captura ampliada alrededor.
+
+## Titular en plural y tipografía (v15)
+
+- **Reconocen. Deciden. Cobran.** reemplaza al voseo. Razón: el diferencial es que el sistema lo hace **sin depender de la persona**, que es lo que compra quien decide (tiempo, menos dependencia de gente). El voseo ponía al visitante como el que trabaja. El sujeto lo da la línea previa “Sistemas que trabajan solos”. Los llamados a la acción siguen en voseo (“Probalo ahora”, “Hablemos”): ahí sí se le habla a la persona.
+- **Tipografía:** Inter es variable; el titular se parte por letra y el **grosor se “llena”** de 140 a 620 con un retardo de 34 ms por letra (1 s, ease-out). La última palabra, *Cobran.*, va en el color de acento como cierre. Con `prefers-reduced-motion` no se anima. El texto accesible se conserva con `aria-label`.
+- Paso 03: “Se cobra solo, sin perseguir pagos.” (antes en voseo).
+- Menú lateral: aprobado.

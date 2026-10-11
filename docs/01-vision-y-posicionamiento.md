@@ -19,7 +19,7 @@
 
 > **Sistemas que reconocen a las personas, cobran solos y deciden con IA — diseñados para no fallar.**
 
-Tagline corto: **Reconocé. Decidí. Cobrá.**
+Tagline corto: **Reconocen. Deciden. Cobran.**
 
 ## Pilares (los tres que más cierran ventas, según Agustín)
 

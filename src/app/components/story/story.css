@@ -434,3 +434,31 @@
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   margin-top: 1.25rem;
 }
+
+/* Titular: el grosor de la tipografía variable "se llena" letra por letra al entrar. */
+.display__w--accent {
+  color: var(--im-accent);
+}
+.display__c {
+  font-weight: 620;
+  animation: wght-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 34ms + 120ms);
+}
+@keyframes wght-in {
+  from {
+    font-weight: 140;
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  to {
+    font-weight: 620;
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .display__c {
+    animation: none;
+  }
+}

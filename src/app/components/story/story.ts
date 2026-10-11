@@ -68,7 +68,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
 
   protected readonly pillars: Pillar[] = [
     {
-      verb: 'Reconocé',
+      verb: 'Reconocen',
       where: 'Marinas del Paraná Guazú',
       title: 'Que entre solo quien debe entrar.',
       lead: 'Reconoce a cada persona y abre solo a quien corresponde.',
@@ -76,7 +76,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
       metric: { value: '2 en 1', label: 'dos empresas, un solo equipo, cero datos mezclados' },
     },
     {
-      verb: 'Decidí',
+      verb: 'Deciden',
       where: 'Hospital Central de Pilar',
       title: 'Tu equipo pregunta, el sistema responde.',
       lead: 'Un asistente de IA que contesta por chat con tus datos reales.',
@@ -84,16 +84,25 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
       metric: { value: '100 %', label: 'de las consultas quedan registradas' },
     },
     {
-      verb: 'Cobrá',
+      verb: 'Cobran',
       where: 'La Ñata · Demode',
-      title: 'Cobrá sin perseguir pagos.',
+      title: 'Se cobra solo, sin perseguir pagos.',
       lead: 'El cliente paga en el momento y el dinero va directo a tu cuenta.',
       caseId: 'pagos',
       metric: { value: '0 %', label: 'de comisión por cada cobro' },
     },
   ];
 
-  protected readonly railItems = ['Inicio', 'Reconocé', 'Decidí', 'Cobrá'];
+  /** Titular partido por letra para animar el grosor de la tipografía (fuente variable). */
+  protected readonly heroWords = (() => {
+    let n = 0;
+    return ['Reconocen.', 'Deciden.', 'Cobran.'].map((word, wi) => ({
+      accent: wi === 2,
+      letters: word.split('').map((ch) => ({ ch, i: n++ })),
+    }));
+  })();
+
+  protected readonly railItems = ['Inicio', 'Reconocen', 'Deciden', 'Cobran'];
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) return;
