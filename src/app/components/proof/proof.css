@@ -9,7 +9,7 @@
   color: var(--im-fg);
 }
 .proof {
-  padding: clamp(5rem, 11vw, 9rem) max(24px, 6vw);
+  padding: clamp(4.5rem, 9vw, 8rem) max(24px, 6vw);
   border-top: 1px solid var(--im-line);
 }
 .proof__inner {
@@ -30,49 +30,53 @@
 }
 .title {
   margin: 0;
-  font-size: clamp(2rem, 5vw, 3.8rem);
-  line-height: 1;
+  font-size: clamp(1.9rem, 4.2vw, 3.2rem);
+  line-height: 1.02;
   letter-spacing: -0.04em;
   font-weight: 600;
 }
+
+/* Las líneas son el "gap" del grid sobre un fondo de color: no se rompen en ningún ancho. */
 .grid {
   list-style: none;
-  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  margin: clamp(2rem, 4vw, 3.25rem) 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--im-line);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
+  gap: 1px;
+  background: var(--im-line);
+  border: 1px solid var(--im-line);
+  border-radius: 18px;
+  overflow: hidden;
 }
 .item {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  padding: 1.75rem 1.5rem 1.75rem 0;
-}
-.item + .item {
-  padding-left: 1.5rem;
-  border-left: 1px solid var(--im-line);
+  gap: 0.55rem;
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  background: var(--im-bg);
+  min-width: 0;
 }
 .item__v {
-  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  font-size: clamp(1.5rem, 2.3vw, 2.15rem);
   font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
   color: var(--im-accent);
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 .item__t {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-weight: 500;
   line-height: 1.35;
 }
 .item__l {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   color: var(--im-muted);
 }
 .proof__more {
-  margin: 2rem 0 0;
+  margin: 1.75rem 0 0;
 }
 .proof__more a {
   font-size: 0.92rem;
@@ -83,30 +87,4 @@
 .proof__more a:focus-visible {
   outline: 2px solid var(--im-accent);
   outline-offset: 4px;
-}
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .item:nth-child(odd) {
-    padding-left: 0;
-    border-left: 0;
-  }
-  .item:nth-child(n + 3) {
-    border-top: 1px solid var(--im-line);
-  }
-}
-@media (max-width: 520px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  .item,
-  .item + .item {
-    padding: 1.4rem 0;
-    border-left: 0;
-    border-top: 1px solid var(--im-line);
-  }
-  .item:first-child {
-    border-top: 0;
-  }
 }

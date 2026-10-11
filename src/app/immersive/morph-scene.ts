@@ -47,7 +47,7 @@ const VERTEX = /* glsl */ `
 
     // Aparición inicial rápida: los puntos llegan y se acomodan.
     float it = clamp(uIntro * 1.3 - aRand.x * 0.3, 0.0, 1.0);
-    float ie = 1.0 - pow(1.0 - it, 3.0);
+    float ie = 1.0 - pow(1.0 - it, 5.0);
     vec3 far = normalize(aRand - 0.5 + vec3(0.0001)) * (1.8 + aRand.y * 1.6);
     p = mix(far, p, ie);
 
@@ -63,22 +63,24 @@ const VERTEX = /* glsl */ `
     vec2 acc = vec2(0.0);
     float glow = 0.0;
 
-    // Micro explosiones (hasta 3 a la vez): rompen un punto y distorsionan un poco alrededor.
+    // Explosión (hasta 3 a la vez): pocos puntos salen lejos, frenan con suavidad y vuelven despacio.
     for (int i = 0; i < 3; i++) {
       float bt = uB[i].z;
-      if (bt < 1.7) {
+      if (bt < 2.4) {
         vec2 dv = ndc - uB[i].xy;
         vec2 dn = vec2(dv.x * uAspect, dv.y);
         float dist = length(dn);
-        vec2 dir = normalize(dn + (aRand.xy - 0.5) * 1.1 + vec2(0.0001));
-        float front = 0.05 + bt * 0.34;
-        float ring = exp(-pow((dist - front) / 0.11, 2.0));
-        float zone = exp(-pow(dist / 0.17, 2.0));
-        float life = smoothstep(0.0, 0.16, bt) * (1.0 - smoothstep(0.55, 1.5, bt));
-        float push = (0.9 * zone + 0.45 * ring) * life * (0.5 + aRand.z * 0.9);
-        acc += dir * push * 0.17;
-        acc += (aRand.xy - 0.5) * zone * life * 0.14;
-        glow += (0.6 * zone + 0.3 * ring) * life;
+        float flyer = step(fract(aRand.x * 11.3 + aRand.y * 5.7), 0.48);
+        float zone = exp(-pow(dist / 0.24, 2.0));
+        float outT = clamp(bt / 0.75, 0.0, 1.0);
+        float outE = 1.0 - pow(1.0 - outT, 4.0);
+        float backT = clamp((bt - 0.75) / 1.35, 0.0, 1.0);
+        float backE = backT * backT * (3.0 - 2.0 * backT);
+        float env = outE * (1.0 - backE);
+        vec2 dir = normalize(dn + (aRand.xy - 0.5) * 1.3 + vec2(0.0001));
+        float mag = zone * env * mix(0.25, 1.0, flyer) * (0.55 + aRand.z * 0.9);
+        acc += dir * mag * 0.34;
+        glow += zone * env * flyer * 0.5;
       }
     }
 

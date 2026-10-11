@@ -5,9 +5,9 @@
       <h2 id="proof-title" class="title">Problemas reales<br />que ya resolvimos.</h2>
     </header>
 
-    <ul class="grid">
-      @for (r of results; track r.title; let i = $index) {
-        <li class="item" [appReveal]="i * 90">
+    <ul class="grid" appReveal>
+      @for (r of results; track r.title) {
+        <li class="item">
           <span class="item__v">{{ r.value }}</span>
           <span class="item__t">{{ r.title }}</span>
           <span class="item__l">{{ r.line }}</span>

@@ -501,9 +501,9 @@ body {
   font-weight: 600;
 }
 .im-title--xl {
-  font-size: clamp(2.8rem, 7.5vw, 6rem);
-  line-height: 0.96;
-  letter-spacing: -0.05em;
+  font-size: clamp(2.2rem, 5vw, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
 }
 .im-lead {
   margin: 1.5rem 0 0;

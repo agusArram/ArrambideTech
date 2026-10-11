@@ -40,6 +40,24 @@ Feedback sobre la v6: la animación nueva no gustó y era lenta. Cambios:
 3. **Campo del mouse (escritorio):** los puntos cercanos al cursor se apartan con una distorsión aleatoria (empuje radial + torsión + ruido por punto), más amplio que en la v6.
 4. **Hero:** se restituyó la frase completa: “Sistemas que le ahorran tiempo a tu empresa: controlan quién entra, cobran solos y responden con inteligencia artificial.”
 
+## Explosión al estilo Apple (v9)
+
+Feedback: la explosión “se expande demasiado rápido, frena en seco y vuelve”. Ahora tiene una física más pausada:
+
+- **Menos puntos, más lejos:** solo ~48 % de los puntos de la zona salen disparados; el resto se mueve apenas un cuarto. Se dispersan más.
+- **Freno suave:** salida de 0,75 s con *ease-out quart* (la velocidad cae de forma gradual, sin tope).
+- **Vuelta suave:** 1,35 s con *smoothstep*. Total ≈ 2,1 s.
+- La aparición inicial usa *ease-out quint*, con aterrizaje más suave.
+- El círculo del mouse quedó como estaba (aprobado).
+
+## Resultados: grid sin líneas rotas (v9)
+
+La cruz se rompía entre tablet y móvil por especificidad de CSS (los bordes izquierdos de `.item + .item` ganaban a `:nth-child`). Ahora las líneas son el *gap* de un grid sobre fondo de color, con columnas `auto-fit`: 4 en escritorio, 2×2 en tablet, 1 en móvil, sin reglas por ancho. La caja entera hace la aparición (no celda por celda, para que el fondo no se asome).
+
+## Tamaños (v9)
+
+Casos (home) y las páginas de Casos y Capacidades bajaron de escala: títulos de caso ~2,2 rem, citas ~1,2 rem, cifras ~2,9 rem y padding vertical de sección reducido.
+
 ## Mouse y toque, dos efectos distintos (v8)
 
 Feedback: en la v7 el campo del mouse y la explosión se mezclaban. Ahora son dos efectos con escala propia:

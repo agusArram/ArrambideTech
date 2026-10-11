@@ -375,3 +375,23 @@
     font-size: 1.6rem;
   }
 }
+
+/* Tamaños contenidos */
+.case__head .im-title {
+  font-size: clamp(1.55rem, 2.6vw, 2.2rem);
+  line-height: 1.08;
+}
+.case__metrics dd {
+  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+}
+.case__text,
+.case__list li {
+  font-size: 0.93rem;
+}
+.cases__index a {
+  font-size: 0.92rem;
+}
+.case.im-section,
+.works.im-section {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
