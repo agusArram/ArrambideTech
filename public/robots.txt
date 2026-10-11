@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /mediapipe/
 
 Sitemap: https://arrambidetech.com/sitemap.xml

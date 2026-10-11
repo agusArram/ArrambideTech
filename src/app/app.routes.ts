@@ -10,7 +10,7 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Arrambide Tech · Reconocen. Deciden. Cobran.',
+    title: 'Arrambide Tech · Reconocimiento facial, pagos e IA aplicada',
     data: {
       description:
         'Reconocimiento facial sobre hardware Hikvision, pagos integrados con Mercado Pago e inteligencia artificial aplicada. Sistemas que ya funcionan en producción.',
@@ -19,7 +19,7 @@ export const routes: Routes = [
   {
     path: 'servicios',
     component: ServiciosComponent,
-    title: 'Capacidades · Arrambide Tech',
+    title: 'Capacidades: control de acceso, pagos e IA · Arrambide Tech',
     data: {
       description:
         'Qué construimos: sistemas que reconocen a las personas, deciden con inteligencia artificial y cobran sin que nadie persiga pagos.',

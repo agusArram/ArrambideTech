@@ -36,7 +36,7 @@ export class App implements AfterViewInit {
     while (snap.firstChild) snap = snap.firstChild;
     const data = snap.data as { description?: string; noindex?: boolean };
     const path = this.router.url.split(/[?#]/)[0];
-    const url = 'https://arrambidetech.com' + (path === '/' ? '/' : path.replace(/\/$/, ''));
+    const url = 'https://arrambidetech.com' + (path === '/' ? '/' : path.replace(/\/$/, '') + '/');
     const title = this.doc.title;
 
     if (data.description) {

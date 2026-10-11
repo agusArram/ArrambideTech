@@ -1,24 +1,20 @@
 <!doctype html>
-<html lang="es" style="background:#050506;color-scheme:dark">
+<html lang="es-AR" style="background:#050506;color-scheme:dark">
 
 <head>
   <meta charset="utf-8">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#050506">
 
-  <title>Arrambide Tech · Reconocimiento facial, pagos integrados e IA aplicada</title>
+  <title>Arrambide Tech · Reconocimiento facial, pagos e IA aplicada</title>
 
-  <meta name="title" content="Arrambide Tech · Reconocen. Deciden. Cobran.">
+  <meta name="title" content="Arrambide Tech · Reconocimiento facial, pagos e IA aplicada">
 
   <meta name="description" content="Ingeniería de sistemas críticos: control de acceso con reconocimiento facial sobre hardware Hikvision, pagos integrados con Mercado Pago y automatización con IA (n8n). En producción.">
 
-  <meta name="keywords"
-    content="Arrambide Tech, AccessCore, TimeSync, SortProject, sistema saas, biometría, control de accesos, desarrollo web">
-
   <meta name="author" content="Agustín Arrambide - Arrambide Tech">
 
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="Spanish">
+  <meta name="robots" content="index, follow, max-image-preview:large">
 
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +23,7 @@
 
   <meta property="og:url" content="https://arrambidetech.com/">
 
-  <meta property="og:title" content="Arrambide Tech · Reconocen. Deciden. Cobran.">
+  <meta property="og:title" content="Arrambide Tech · Reconocimiento facial, pagos e IA aplicada">
 
   <meta property="og:description" content="Reconocimiento facial integrado a hardware real, pagos que nadie puede alterar e IA que consulta sin inventar. Sistemas en producción.">
 
@@ -35,8 +31,9 @@
 
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Arrambide Tech: Reconocen. Deciden. Cobran.">
 
-  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale" content="es_AR">
 
   <meta property="og:site_name" content="Arrambide Tech">
 
@@ -44,7 +41,7 @@
 
   <meta name="twitter:url" content="https://arrambidetech.com/">
 
-  <meta name="twitter:title" content="Arrambide Tech · Reconocen. Deciden. Cobran.">
+  <meta name="twitter:title" content="Arrambide Tech · Reconocimiento facial, pagos e IA aplicada">
 
   <meta name="twitter:description" content="Reconocimiento facial, pagos integrados e IA aplicada, en producción.">
 
@@ -56,6 +53,7 @@
   <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/icon-96.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <link rel="canonical" href="https://arrambidetech.com/">
@@ -88,10 +86,21 @@
           ]
         },
         {
+          "@type": "ProfessionalService",
+          "@id": "https://arrambidetech.com/#service",
+          "name": "Arrambide Tech",
+          "url": "https://arrambidetech.com",
+          "image": "https://arrambidetech.com/assets/og-image.png",
+          "areaServed": { "@type": "Country", "name": "Argentina" },
+          "knowsAbout": ["Reconocimiento facial", "Control de acceso", "Pagos integrados con Mercado Pago", "Automatización con IA", "Desarrollo de software a medida"],
+          "parentOrganization": { "@id": "https://arrambidetech.com/#organization" }
+        },
+        {
           "@type": "WebSite",
           "@id": "https://arrambidetech.com/#website",
           "url": "https://arrambidetech.com",
           "name": "Arrambide Tech",
+          "inLanguage": "es-AR",
           "publisher": { "@id": "https://arrambidetech.com/#organization" }
         },
         {
@@ -134,35 +143,6 @@
           "operatingSystem": "Windows, macOS, Linux",
           "description": "Sistema de gestión de inventario, ventas y precios para pequeños y medianos comercios.",
           "provider": { "@id": "https://arrambidetech.com/#organization" }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "¿Ofrecen soporte técnico?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Así es, ofrecemos soporte técnico completo por WhatsApp y brindamos documentación detallada por email para todos nuestros productos como SortProject."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Puedo solicitar nuevas funcionalidades?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Claro que sí. Valoramos mucho las ideas de nuestros clientes y trabajamos constantemente en mejorar nuestros servicios basándonos en su feedback."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Cuánto tiempo tarda la respuesta?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Nuestro compromiso es responder todas las consultas en menos de 24 horas hábiles por cualquiera de nuestros canales de contacto."
-              }
-            }
-          ]
         }
       ]
     }

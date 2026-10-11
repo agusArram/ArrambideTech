@@ -20,6 +20,14 @@
   RewriteCond %{REQUEST_URI} !^/HyderLipy/
   RewriteRule ^(.*)$ /HyderLipy/$1 [L]
 
+  # 1b. Un solo dominio canónico: sin www y con HTTPS (solo arrambidetech.com)
+  RewriteCond %{HTTP_HOST} ^www\.arrambidetech\.com$ [NC]
+  RewriteRule ^(.*)$ https://arrambidetech.com/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^arrambidetech\.com$ [NC]
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+  RewriteRule ^(.*)$ https://arrambidetech.com/$1 [R=301,L]
+
   # 2. Reglas de Angular PARA EL PORTFOLIO PRINCIPAL
   # CRÍTICO: Excluimos la carpeta HyderLipy para que no secuestre sus rutas
   # Solo las rutas reales devuelven la app con estado 200; cualquier otra cae en
@@ -28,7 +36,7 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
-  RewriteRule ^(servicios|soluciones|contacto)/?$ index.html [NC,L]
+  RewriteRule ^(servicios|soluciones|contacto)/?$ $1/index.html [NC,L]
 </IfModule>
 
-ErrorDocument 404 /index.html
+ErrorDocument 404 /404.html
