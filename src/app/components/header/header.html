@@ -33,8 +33,8 @@
     @for (l of links; track l.path; let i = $index) {
       <a [routerLink]="l.path" routerLinkActive="is-active" [style.--i]="i" [attr.tabindex]="open() ? 0 : -1" (click)="$event.stopPropagation(); setOpen(false)">{{ l.label }}</a>
     }
-    <a routerLink="/" fragment="demo" [style.--i]="3" [attr.tabindex]="open() ? 0 : -1" (click)="$event.stopPropagation(); setOpen(false)">Demo</a>
-    <a routerLink="/contacto" class="ov__cta" [style.--i]="4" [attr.tabindex]="open() ? 0 : -1" (click)="$event.stopPropagation(); setOpen(false)">Agendar conversación</a>
+    <a routerLink="/" fragment="demo" [style.--i]="2" [attr.tabindex]="open() ? 0 : -1" (click)="$event.stopPropagation(); setOpen(false)">Demo</a>
+    <a routerLink="/contacto" class="ov__cta" [style.--i]="3" [attr.tabindex]="open() ? 0 : -1" (click)="$event.stopPropagation(); setOpen(false)">Agendar conversación</a>
   </nav>
   <p class="ov__hint">Tocá fuera para cerrar</p>
 </div>

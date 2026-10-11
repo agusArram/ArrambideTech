@@ -30,7 +30,6 @@ export class HeaderComponent implements OnDestroy {
   protected readonly links = [
     { label: 'Capacidades', path: '/servicios' },
     { label: 'Casos', path: '/soluciones' },
-    { label: 'Contacto', path: '/contacto' },
   ];
 
   constructor() {

@@ -3,14 +3,18 @@
     <header appReveal>
       <p class="eyebrow"><span class="eyebrow__n">02</span> Resultados</p>
       <h2 id="proof-title" class="title">Problemas reales<br />que ya resolvimos.</h2>
+      <p class="lead">
+        Resultados del sistema de acceso con reconocimiento facial que opera en <strong>Marinas del Paraná Guazú</strong>,
+        donde dos empresas comparten los mismos equipos.
+      </p>
     </header>
 
     <ul class="grid" appReveal>
-      @for (r of results; track r.title) {
+      @for (r of results; track r.topic) {
         <li class="item">
+          <span class="item__k">{{ r.topic }}</span>
           <span class="item__v">{{ r.value }}</span>
-          <span class="item__t">{{ r.title }}</span>
-          <span class="item__l">{{ r.line }}</span>
+          <span class="item__l">{{ r.meaning }}</span>
         </li>
       }
     </ul>

@@ -57,6 +57,24 @@
   background: var(--im-bg);
   min-width: 0;
 }
+.lead {
+  margin: 1.1rem 0 0;
+  max-width: 38rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #b9b9c1;
+}
+.lead strong {
+  color: var(--im-fg);
+  font-weight: 500;
+}
+.item__k {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--im-muted);
+}
 .item__v {
   font-size: clamp(1.5rem, 2.3vw, 2.15rem);
   font-weight: 600;
@@ -66,14 +84,10 @@
   font-variant-numeric: tabular-nums;
   overflow-wrap: anywhere;
 }
-.item__t {
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.35;
-}
 .item__l {
-  font-size: 0.84rem;
-  color: var(--im-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--im-soft);
 }
 .proof__more {
   margin: 1.75rem 0 0;

@@ -198,3 +198,9 @@ Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica
 - **Zona de la animación:** el giro por arrastre, el toque (onda) y el gesto horizontal del trackpad viven en un área propia (`.story__zone`): la mitad derecha en escritorio y el 52 % superior en móvil, debajo del texto y de los controles. Todo lo demás es scroll normal.
 - **Gesto horizontal:** solo se intercepta si es claramente horizontal (|ΔX| > 1,8·|ΔY|) y dentro de la zona; un gesto vertical o diagonal nunca se cancela. Comprobado por script: zona/horizontal → cancelado; zona/vertical, zona/diagonal, panel y escenario → no.
 - **Sin destello blanco:** en desarrollo el primer pintado ocurría a los 336 ms porque el navegador estaba ocupado ejecutando el bundle; hasta entonces mostraba blanco. Ahora Angular arranca después del primer pintado (`requestAnimationFrame` + `setTimeout`) y el primer pintado baja a ~76 ms con el fondo oscuro ya aplicado.
+
+## Contexto, confianza y navegación (v13)
+
+- **Demo:** el desplegable “¿Qué es real y qué es de ejemplo?” se reemplazó por una **franja de tres ítems con ícono**, siempre visible: *Todo pasa en tu equipo*, *No se envía ni se guarda nada*, *La regla de acceso es de ejemplo*.
+- **Resultados:** se agregó el contexto que faltaba (“del sistema de acceso con reconocimiento facial que opera en Marinas del Paraná Guazú, donde dos empresas comparten los mismos equipos”). Cada caja tiene tres capas: *qué parte de la operación mejoró* → *el número* → *qué significa, en una oración*. Un lector sin contexto entiende qué se midió.
+- **Navegación:** se quitó “Contacto” del menú: la acción de contacto es el botón **Agendar conversación**. Menú: Capacidades · Casos · Demo + botón. El pie conserva el enlace a Contacto.
