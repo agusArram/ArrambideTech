@@ -203,4 +203,4 @@ Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica
 
 - **Demo:** el desplegable “¿Qué es real y qué es de ejemplo?” se reemplazó por una **franja de tres ítems con ícono**, siempre visible: *Todo pasa en tu equipo*, *No se envía ni se guarda nada*, *La regla de acceso es de ejemplo*.
 - **Resultados:** se agregó el contexto que faltaba (“del sistema de acceso con reconocimiento facial que opera en Marinas del Paraná Guazú, donde dos empresas comparten los mismos equipos”). Cada caja tiene tres capas: *qué parte de la operación mejoró* → *el número* → *qué significa, en una oración*. Un lector sin contexto entiende qué se midió.
-- **Navegación:** se quitó “Contacto” del menú: la acción de contacto es el botón **Agendar conversación**. Menú: Capacidades · Casos · Demo + botón. El pie conserva el enlace a Contacto.
+- **Navegación:** se quitó “Contacto” del menú: la acción de contacto es el botón **Agendar conversación**. Menú: Capacidades · Casos + botón **Agendar conversación** (se quitó también “Demo”, porque el ancla interfería con el scroll). El pie conserva Capacidades, Casos y Contacto.
