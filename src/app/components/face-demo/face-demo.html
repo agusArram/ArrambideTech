@@ -52,14 +52,14 @@
                 <span class="stage__detail">
                   @switch (s.id) {
                     @case (2) {
-                      {{ stageDone() >= 2 ? landmarkCount() + ' puntos detectados' : s.detail }}
+                      {{ stageDone() >= 2 ? 'Rostro mapeado: ' + landmarkCount() + ' puntos' : s.detail }}
                     }
                     @case (3) {
-                      {{ signature() ? 'sig · ' + signature() + '…' : s.detail }}
+                      {{ signature() ? 'Huella: ' + signature() + '…' : s.detail }}
                     }
                     @case (4) {
                       @if (cipher(); as c) {
-                        {{ c.plain | number }} B → {{ c.bytes | number }} B · IV {{ c.iv.slice(0, 8) }}…
+                        Imagen protegida ({{ c.bytes | number }} bytes)
                       } @else {
                         {{ s.detail }}
                       }
@@ -76,7 +76,7 @@
 
         @if (state() === 'ready') {
           <div class="decide">
-            <p class="decide__label">Perfil de ejemplo</p>
+            <p class="decide__label">Caso de ejemplo</p>
             <div class="decide__options">
               @for (p of profiles; track p.id) {
                 <button
@@ -101,10 +101,10 @@
                 </span>
                 <span class="verdict__reason">{{ r.profile.reason }}</span>
                 <code class="verdict__log">
-                  {{ r.at }} · {{ r.profile.decision }} · {{ r.profile.unit }} · sig:{{ signature() }}
+                  {{ r.at }} · {{ r.profile.unit }} · huella {{ signature() }}
                 </code>
                 <span class="verdict__meta">
-                  Pipeline local medido: {{ pipelineMs() }} ms · Datos de ejemplo
+                  Tardó {{ pipelineMs() }} ms en tu equipo · Datos de ejemplo
                 </span>
               </div>
             }
@@ -123,11 +123,11 @@
     </div>
 
     <details class="honest">
-      <summary>¿Qué es real y qué es simulado?</summary>
+      <summary>¿Qué es real y qué es de ejemplo?</summary>
       <ul>
-        <li><strong>Real:</strong> cámara, detección de 478 puntos (modelo local), firma SHA-256 de proporciones, cifrado AES-256-GCM con clave no exportable y descarte posterior.</li>
-        <li><strong>Simulado:</strong> la regla de acceso (perfiles de ejemplo). En producción la valida un terminal Hikvision por ISAPI y la deuda se calcula en el servidor.</li>
-        <li><strong>No existe:</strong> ningún envío de imagen, firma o puntos a un servidor. Podés verificarlo en la pestaña Red de tu navegador.</li>
+        <li><strong>Real:</strong> la cámara, el reconocimiento del rostro, la huella y la protección de la imagen. Todo ocurre en tu equipo.</li>
+        <li><strong>De ejemplo:</strong> la regla de acceso. En un cliente real la valida el equipo instalado en la puerta y la deuda se calcula en el sistema.</li>
+        <li><strong>Nunca:</strong> no se envía ni se guarda ninguna imagen. Tu navegador lo puede confirmar.</li>
       </ul>
     </details>
   </div>

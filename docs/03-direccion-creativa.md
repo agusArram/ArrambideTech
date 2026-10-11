@@ -27,7 +27,18 @@ La transformación no es un corte: las partículas viajan de una forma a otra (m
 - **Arrastrar** (mouse o dedo) sobre la escena gira el objeto; tiene inercia y vuelve solo a su posición tras ~3,5 s sin tocar.
 - **Gesto horizontal del trackpad** (dos dedos hacia los costados) gira; el gesto vertical sigue siendo scroll normal y no se intercepta. Solo se captura cuando el movimiento es claramente horizontal, lo que además evita el “atrás” del navegador sobre la escena.
 - En móvil, `touch-action: pan-y` deja el scroll vertical al navegador y el horizontal a la escena.
-- Aviso “Arrastrá o deslizá para girar” que desaparece tras la primera interacción.
+- **Tocar o hacer click** sobre los puntos dispara una mini explosión: una onda de choque en pantalla empuja los puntos cercanos, se iluminan y vuelven solos en ~1,5 s. Se resuelve en el vertex shader (un uniform de posición y tiempo), sin costo adicional de geometría. Se desactiva con `prefers-reduced-motion`.
+- Aviso “Arrastrá para girar · tocá los puntos” que desaparece tras la primera interacción.
+
+## Lenguaje (v5)
+
+Regla: el sitio habla con quien **decide y paga**, no con quien programa.
+
+1. Se vende **tiempo ahorrado, errores evitados y control**, no tecnología.
+2. Sin siglas ni nombres de librerías en el primer nivel (nada de ISAPI, AES-256-GCM, PKCE, Edge Functions, tokens, polling).
+3. Lo técnico existe, pero **plegado y rotulado “Para tu equipo técnico”**, por si lo lee el responsable de sistemas del cliente.
+4. Las cifras se explican con su consecuencia (“350 movimientos recuperados tras dos semanas sin conexión”) y no como dato suelto.
+5. Cada caso sigue la secuencia: *el problema → qué hicimos → qué cambió*.
 
 ## Densidad de información (v3)
 

@@ -67,24 +67,24 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
   protected readonly pillars: Pillar[] = [
     {
       verb: 'Reconoce',
-      title: 'Acceso facial que sobrevive a la realidad.',
-      lead: 'Terminales Hikvision integrados a software propio. En producción con dos empresas sobre el mismo terminal.',
+      title: 'Que entre solo quien debe entrar.',
+      lead: 'Control de acceso con reconocimiento facial: sabe quién es, si está al día y deja todo registrado. Funcionando hoy en una marina con dos empresas.',
       caseId: 'acceso',
-      metric: { value: '26.500 → 560', label: 'registros por importación de saldos' },
+      metric: { value: '2 en 1', label: 'dos empresas comparten un mismo equipo sin mezclar un solo dato' },
     },
     {
       verb: 'Cobra',
-      title: 'Pagos que nadie puede alterar.',
-      lead: 'Mercado Pago de punta a punta: el monto lo decide el servidor, nunca el navegador.',
+      title: 'Cobrá sin perseguir pagos.',
+      lead: 'El cliente paga en el momento y el dinero va directo a tu cuenta. El importe lo fija el sistema: nadie puede alterarlo.',
       caseId: 'pagos',
-      metric: { value: '0 %', label: 'comisión por transacción' },
+      metric: { value: '0 %', label: 'de comisión por cada cobro' },
     },
     {
       verb: 'Decide',
-      title: 'IA que consulta, no que inventa.',
-      lead: 'Agentes con n8n que consultan datos sensibles reales, con control de acceso y auditoría. En producción en el Hospital Central de Pilar.',
+      title: 'Tu equipo pregunta, el sistema responde.',
+      lead: 'Un asistente de inteligencia artificial que contesta por chat con tus datos reales y deja registro de cada consulta. En uso en el Hospital Central de Pilar.',
       caseId: 'ia',
-      metric: { value: '~8.000', label: 'tokens por consulta, frente a más de 1.500.000 sin límites' },
+      metric: { value: '100 %', label: 'de las consultas quedan registradas y se pueden auditar' },
     },
   ];
 
@@ -158,6 +158,10 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
   private stage: HTMLElement | null = null;
   private dragId: number | null = null;
   private lastX = 0;
+  private downX = 0;
+  private downY = 0;
+  private downAt = 0;
+  private moved = 0;
 
   private markTouched(): void {
     if (this.touched()) return;
@@ -171,7 +175,15 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     this.dragId = e.pointerId;
     this.lastX = e.clientX;
-    this.stage?.setPointerCapture(e.pointerId);
+    this.downX = e.clientX;
+    this.downY = e.clientY;
+    this.downAt = performance.now();
+    this.moved = 0;
+    try {
+      this.stage?.setPointerCapture(e.pointerId);
+    } catch {
+      /* puntero ya liberado */
+    }
     this.scene?.beginDrag();
     this.zone.run(() => this.dragging.set(true));
   };
@@ -180,6 +192,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     if (this.dragId !== e.pointerId) return;
     const dx = e.clientX - this.lastX;
     this.lastX = e.clientX;
+    this.moved += Math.abs(dx) + Math.abs(e.clientY - this.downY) * 0;
     if (dx !== 0) {
       this.scene?.rotateBy(dx * 0.0085);
       this.markTouched();
@@ -190,6 +203,15 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     if (this.dragId !== e.pointerId) return;
     this.dragId = null;
     this.scene?.endDrag();
+    // Un toque corto (sin arrastre) dispara la explosión en ese punto.
+    const quick = performance.now() - this.downAt < 380;
+    if (e.type === 'pointerup' && quick && this.moved < 8 && this.canvas) {
+      const r = this.canvas.nativeElement.getBoundingClientRect();
+      const nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      const ny = -(((e.clientY - r.top) / r.height) * 2 - 1);
+      this.scene?.blast(nx, ny);
+      this.markTouched();
+    }
     this.zone.run(() => this.dragging.set(false));
   };
 

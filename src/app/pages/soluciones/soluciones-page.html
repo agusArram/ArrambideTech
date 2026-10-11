@@ -5,8 +5,7 @@
     <p class="im-eyebrow">Casos</p>
     <h1 class="im-title im-title--xl">Sistemas que ya operan.</h1>
     <p class="im-lead">
-      Cada caso nace de un problema real, con una restricción real. Esto es lo que construimos, cómo está resuelto y qué
-      se midió.
+      Cada caso nace de un problema real de una empresa o institución. Esto es lo que resolvimos y qué cambió.
     </p>
     <nav class="cases__index" aria-label="Casos">
       @for (c of cases; track c.id) {
@@ -33,7 +32,7 @@
           <p class="case__client">{{ c.client }}</p>
           <p><span class="im-pill im-pill--live">{{ c.status }}</span></p>
 
-          <h3 class="case__h">El desafío</h3>
+          <h3 class="case__h">El problema</h3>
           <p class="case__text">{{ c.challenge }}</p>
 
           @if (c.validation) {
@@ -62,29 +61,26 @@
             }
           </dl>
 
-          <h3 class="case__h">La solución</h3>
+          <h3 class="case__h">Qué hicimos</h3>
           <ul class="case__list">
-            @for (s of c.solution.slice(0, 3); track s) {
+            @for (s of c.plain; track s) {
               <li>{{ s }}</li>
             }
           </ul>
 
-          @if (c.solution.length > 3) {
-            <details class="case__more">
-              <summary>Ver detalle técnico ({{ c.solution.length - 3 }} puntos más)</summary>
-              <ul class="case__list">
-                @for (s of c.solution.slice(3); track s) {
-                  <li>{{ s }}</li>
-                }
-              </ul>
-            </details>
-          }
-
-          <ul class="case__stack" aria-label="Tecnologías">
-            @for (t of c.stack; track t) {
-              <li class="im-pill">{{ t }}</li>
-            }
-          </ul>
+          <details class="case__more">
+            <summary>Para tu equipo técnico</summary>
+            <ul class="case__list">
+              @for (s of c.tech; track s) {
+                <li>{{ s }}</li>
+              }
+            </ul>
+            <ul class="case__stack" aria-label="Tecnologías">
+              @for (t of c.stack; track t) {
+                <li class="im-pill">{{ t }}</li>
+              }
+            </ul>
+          </details>
         </div>
       </div>
     </article>
@@ -92,21 +88,35 @@
 
   <section class="works im-section" aria-labelledby="works-title">
     <div class="im-wrap">
-      <p class="im-eyebrow">Más trabajo</p>
-      <h2 id="works-title" class="im-title">Y el resto del ecosistema.</h2>
+      <div appReveal>
+        <p class="im-eyebrow">Más trabajo</p>
+        <h2 id="works-title" class="im-title">Y el resto de lo que construimos.</h2>
+      </div>
 
       <div class="works__grid">
         @for (w of works; track w.name; let i = $index) {
-          <article class="work" [appReveal]="(i % 3) * 90">
+          <article class="work" [class.has-link]="!!w.url" [appReveal]="(i % 3) * 110">
             <div class="work__media">
               <img [src]="w.image" [alt]="'Vista de ' + w.name" loading="lazy" width="640" height="400" />
+              <span class="work__idx" aria-hidden="true">0{{ i + 1 }}</span>
+              @if (w.url) {
+                <span class="work__cta" aria-hidden="true">
+                  Visitar
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </span>
+              }
             </div>
-            <p class="work__kind">{{ w.kind }}</p>
-            <h3 class="work__name">{{ w.name }}</h3>
-            <p class="work__text">{{ w.text }}</p>
-            @if (w.url) {
-              <a [href]="w.url" target="_blank" rel="noopener noreferrer" class="work__link">Visitar ↗</a>
-            }
+            <div class="work__meta">
+              <h3 class="work__name">
+                @if (w.url) {
+                  <a [href]="w.url" target="_blank" rel="noopener noreferrer" class="work__link">{{ w.name }}</a>
+                } @else {
+                  {{ w.name }}
+                }
+              </h3>
+              <p class="work__kind">{{ w.kind }}</p>
+              <p class="work__short">{{ w.short }}</p>
+            </div>
           </article>
         }
       </div>

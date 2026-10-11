@@ -70,34 +70,34 @@ export class FaceDemoComponent implements OnDestroy {
   protected readonly cameraOn = computed(() => this.state() === 'scanning' || this.state() === 'ready');
 
   protected readonly stages: Stage[] = [
-    { id: 1, label: 'Captura', detail: 'Cámara local' },
-    { id: 2, label: 'Detección', detail: 'Malla facial · 478 puntos' },
-    { id: 3, label: 'Firma geométrica', detail: 'SHA-256 de proporciones' },
-    { id: 4, label: 'Cifrado', detail: 'AES-256-GCM · clave no exportable' },
-    { id: 5, label: 'Decisión', detail: 'Reglas de acceso' },
+    { id: 1, label: 'Ve a la persona', detail: 'La cámara de tu equipo' },
+    { id: 2, label: 'Reconoce el rostro', detail: 'Mapa de 478 puntos' },
+    { id: 3, label: 'Crea una huella única', detail: 'Un código que identifica el rostro' },
+    { id: 4, label: 'La guarda protegida', detail: 'Cifrado de nivel bancario (AES-256)' },
+    { id: 5, label: 'Decide si pasa', detail: 'Según las reglas de cada persona' },
   ];
 
   protected readonly profiles: Profile[] = [
     {
       id: 'owner',
-      label: 'Propietario al día',
-      unit: 'Unidad 14 · Categoría Premium',
+      label: 'Cliente al día',
+      unit: 'Unidad 14',
       decision: 'granted',
-      reason: 'Cuenta al día · horario habilitado',
+      reason: 'Cuenta al día y horario habilitado',
     },
     {
       id: 'debt',
-      label: 'Cuenta con deuda',
-      unit: 'Unidad 27 · Categoría Estándar',
+      label: 'Cliente con deuda',
+      unit: 'Unidad 27',
       decision: 'denied_debt',
-      reason: 'Saldo vencido · acceso restringido',
+      reason: 'Tiene saldo vencido',
     },
     {
       id: 'staff',
-      label: 'Personal fuera de turno',
-      unit: 'Staff · Plantilla 1',
+      label: 'Personal fuera de horario',
+      unit: 'Personal',
       decision: 'manual_override',
-      reason: 'Fuera de horario · requiere autorización',
+      reason: 'Fuera de horario: requiere autorización',
     },
   ];
 
@@ -150,7 +150,7 @@ export class FaceDemoComponent implements OnDestroy {
 
       this.state.set('scanning');
       this.stageDone.set(1);
-      this.hint.set('Centrá tu rostro en el encuadre');
+      this.hint.set('Mirá a la cámara y centrá tu rostro');
       this.zone.runOutsideAngular(() => (this.raf = requestAnimationFrame(this.loop)));
     } catch (e) {
       this.teardown();
@@ -182,7 +182,7 @@ export class FaceDemoComponent implements OnDestroy {
     this.cipher.set(null);
     this.signature.set('');
     this.state.set('scanning');
-    this.hint.set('Centrá tu rostro en el encuadre');
+    this.hint.set('Mirá a la cámara y centrá tu rostro');
   }
 
   decide(profile: Profile): void {
@@ -238,7 +238,7 @@ export class FaceDemoComponent implements OnDestroy {
           this.evaluate(face, video);
         } else {
           this.stable = 0;
-          this.setHint('No detecto un rostro. Mirá a la cámara.');
+          this.setHint('No veo un rostro. Mirá a la cámara.');
         }
       }
     }
@@ -285,14 +285,14 @@ export class FaceDemoComponent implements OnDestroy {
       this.zone.run(() => {
         this.landmarkCount.set(face.length);
         this.stageDone.set(2);
-        this.hint.set('Firma geométrica…');
+        this.hint.set('Creando la huella…');
       });
 
       const sig = await this.signatureOf(face);
       this.zone.run(() => {
         this.signature.set(sig);
         this.stageDone.set(3);
-        this.hint.set('Cifrando instantánea…');
+        this.hint.set('Protegiendo la imagen…');
       });
 
       const jpeg = await this.snapshot(video);
@@ -305,7 +305,7 @@ export class FaceDemoComponent implements OnDestroy {
         this.pipelineMs.set(ms);
         this.stageDone.set(4);
         this.state.set('ready');
-        this.hint.set('Elegí un perfil de ejemplo para ver la decisión');
+        this.hint.set('Elegí un caso de ejemplo para ver la decisión');
       });
     } catch {
       this.capturing = false;

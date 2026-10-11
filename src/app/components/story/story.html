@@ -7,7 +7,7 @@
     <div class="panel panel--hero" data-panel>
       <p class="eyebrow">Arrambide Tech · Ingeniería de sistemas críticos</p>
       <h1 class="display">Reconoce.<br />Cobra.<br />Decide.</h1>
-      <p class="lead">Sistemas que ya operan: reconocimiento facial, pagos e IA integrados a hardware real.</p>
+      <p class="lead">Sistemas que le ahorran tiempo a tu empresa: controlan quién entra, cobran solos y responden con inteligencia artificial.</p>
       <div class="actions">
         <a class="btn btn--primary" href="#demo" (click)="go('demo', $event)">Ver demostración en vivo</a>
         <a class="btn btn--ghost" href="#contacto" (click)="go('contacto', $event)">Agendar una conversación</a>
@@ -26,7 +26,7 @@
           <span class="metric__v">{{ p.metric.value }}</span>
           <span class="metric__l">{{ p.metric.label }}</span>
         </div>
-        <a class="more" routerLink="/soluciones" [fragment]="p.caseId">Ver cómo está resuelto <span aria-hidden="true">→</span></a>
+        <a class="more" routerLink="/soluciones" [fragment]="p.caseId">Ver el caso <span aria-hidden="true">→</span></a>
       </article>
     }
 
@@ -52,7 +52,7 @@
 
     <p class="grab" [class.is-gone]="touched()" aria-hidden="true">
       <span class="grab__arrows">← →</span>
-      <span class="grab__txt">Arrastrá o deslizá para girar</span>
+      <span class="grab__txt">Arrastrá para girar · tocá los puntos</span>
     </p>
 
     <div class="hint" aria-hidden="true">

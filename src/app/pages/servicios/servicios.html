@@ -3,10 +3,10 @@
 <main class="im-page svc">
   <header class="svc__hero im-wrap">
     <p class="im-eyebrow">Capacidades</p>
-    <h1 class="im-title im-title--xl">Tres sistemas que resolvemos de punta a punta.</h1>
+    <h1 class="im-title im-title--xl">Tres cosas que le resolvemos a tu empresa.</h1>
     <p class="im-lead">
-      Diseñamos, construimos y operamos el software y el hardware que sostienen un proceso crítico. Estas son las tres
-      capacidades que hoy corren en producción.
+      Diseñamos, construimos y ponemos a funcionar lo que tu empresa necesita para ahorrar tiempo y evitar errores. Estas tres ya
+      funcionan en clientes reales.
     </p>
   </header>
 
@@ -19,13 +19,13 @@
           <p class="im-lead">{{ c.intro }}</p>
           <p class="cap__fit"><span>Ideal para</span>{{ c.fit }}</p>
           <p>
-            <a class="im-btn im-btn--ghost" routerLink="/soluciones" [fragment]="c.caseId">Ver el caso en producción</a>
+            <a class="im-btn im-btn--ghost" routerLink="/soluciones" [fragment]="c.caseId">Ver el caso real</a>
           </p>
         </div>
 
         <div class="cap__cols" [appReveal]="100">
           <div>
-            <h3 class="cap__h">Qué construimos</h3>
+            <h3 class="cap__h">Qué hace</h3>
             <ul class="cap__list">
               @for (b of c.builds; track b) {
                 <li>{{ b }}</li>
@@ -33,7 +33,7 @@
             </ul>
           </div>
           <details class="cap__how">
-            <summary>Cómo está resuelto</summary>
+            <summary>Para tu equipo técnico</summary>
             <ul class="cap__list">
               @for (h of c.how; track h) {
                 <li>{{ h }}</li>
@@ -48,7 +48,7 @@
   <section class="im-section">
     <div class="im-wrap">
       <p class="im-eyebrow">También construimos</p>
-      <h2 class="im-title">Lo que rodea a un sistema crítico.</h2>
+      <h2 class="im-title">También construimos.</h2>
       <div class="rows">
         @for (o of others; track o.t; let i = $index) {
           <div class="row" [appReveal]="i * 80">
@@ -78,7 +78,7 @@
 
   <section class="im-section">
     <div class="im-wrap">
-      <p class="im-eyebrow">Principios</p>
+      <p class="im-eyebrow">Compromisos</p>
       <h2 class="im-title">Lo que no negociamos.</h2>
       <div class="rows rows--2">
         @for (p of principles; track p.t) {

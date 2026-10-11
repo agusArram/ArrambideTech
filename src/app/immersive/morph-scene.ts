@@ -16,6 +16,9 @@ const VERTEX = /* glsl */ `
   uniform float uScan;
   uniform float uPixelRatio;
   uniform float uSize;
+  uniform vec2 uBlast;
+  uniform float uBlastT;
+  uniform float uAspect;
   attribute vec3 positionB;
   attribute vec3 positionC;
   attribute vec3 positionD;
@@ -46,6 +49,24 @@ const VERTEX = /* glsl */ `
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
 
+    // Mini explosión: onda de choque en pantalla que empuja los puntos y vuelven solos.
+    float blast = 0.0;
+    if (uBlastT < 2.4) {
+      vec2 ndc = gl_Position.xy / gl_Position.w;
+      vec2 d = ndc - uBlast;
+      vec2 dn = vec2(d.x * uAspect, d.y);
+      float dist = length(dn);
+      vec2 dir = normalize(dn + (aRand.xy - 0.5) * 0.7 + vec2(0.0001));
+      float front = uBlastT * 1.9;
+      float ring = exp(-pow((dist - front) / 0.22, 2.0));
+      float near = exp(-dist * 2.4);
+      float life = uBlastT * exp(-uBlastT * 3.1) * 8.6;
+      float push = (0.55 * near + 0.9 * ring) * life * (0.55 + aRand.z * 0.8);
+      gl_Position.xy += vec2(dir.x / uAspect, dir.y) * push * 0.34 * gl_Position.w;
+      blast = clamp(ring * life, 0.0, 1.0);
+    }
+
+    vGlow = clamp(vGlow + blast, 0.0, 1.0);
     float size = aSize * (1.0 + vGlow * 1.8) * uSize;
     gl_PointSize = size * uPixelRatio * (1.0 / -mv.z);
     vDepth = clamp(1.25 - (-mv.z - 3.0) * 0.25, 0.25, 1.0);
@@ -89,6 +110,7 @@ export class MorphScene {
   private dragging = false;
   private lastTouch = 0;
   private lastFrame = 0;
+  private blastAt = -1;
   private readonly pointer = { x: 0, y: 0, cx: 0, cy: 0 };
   private readonly cleanups: Array<() => void> = [];
 
@@ -165,6 +187,9 @@ export class MorphScene {
         uPixelRatio: { value: 1 },
         uSize: { value: 6.5 },
         uColor: { value: new THREE.Color('#6ee7b7') },
+        uBlast: { value: new THREE.Vector2(0, 0) },
+        uBlastT: { value: 99 },
+        uAspect: { value: 1 },
       },
     });
 
@@ -204,6 +229,14 @@ export class MorphScene {
     this.yawVel = dYaw;
     this.lastTouch = performance.now();
     if (!this.opts.animate) this.renderOnce();
+  }
+
+  /** Mini explosión en un punto de la pantalla (coordenadas NDC, -1..1). */
+  blast(ndcX: number, ndcY: number): void {
+    if (this.disposed || !this.opts.animate) return;
+    const u = this.material.uniforms;
+    u['uBlast'].value.set(ndcX, ndcY);
+    this.blastAt = performance.now();
   }
 
   endDrag(): void {
@@ -263,6 +296,7 @@ export class MorphScene {
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
     this.material.uniforms['uPixelRatio'].value = this.renderer.getPixelRatio();
+    this.material.uniforms['uAspect'].value = w / h;
 
     if (w > 900) {
       this.group.position.set(1.0, -0.05, 0);
@@ -284,6 +318,7 @@ export class MorphScene {
     this.pointer.cy += (this.pointer.y - this.pointer.cy) * 0.05;
 
     u['uMorph'].value = this.morph;
+    u['uBlastT'].value = this.blastAt < 0 ? 99 : (now - this.blastAt) / 1000;
     u['uTime'].value = t;
     u['uScan'].value = ((t % 6) / 6) * 3.4 - 1.7;
     const dt = Math.min(0.05, Math.max(0, (now - (this.lastFrame || now)) / 1000));
