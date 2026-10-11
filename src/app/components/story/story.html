@@ -2,6 +2,8 @@
   <div class="story__stage" [class.is-dragging]="dragging()">
     <canvas #canvas class="story__canvas" [class.is-ready]="sceneReady()" aria-hidden="true"></canvas>
     <div class="story__vignette" aria-hidden="true"></div>
+    <!-- Zona de interacción: solo acá se gira, se toca o se arrastra. El resto de la pantalla es scroll normal. -->
+    <div #zone class="story__zone" aria-hidden="true"></div>
 
     <!-- 0 · Hero -->
     <div class="panel panel--hero" data-panel>

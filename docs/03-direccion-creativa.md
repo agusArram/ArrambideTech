@@ -192,3 +192,9 @@ Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica
 - **Trackpad:** `overscroll-behavior-x: none` y un “enganche” del gesto horizontal (260 ms) evitan que girar el logo con dos dedos dispare *atrás* del navegador.
 - **Primer pixel oscuro:** `<html>`/`<body>` con fondo inline, `color-scheme` y `theme-color` para eliminar el destello blanco al recargar.
 - **Onda:** ataque suave (`smoothstep` 0,45 s), frente más lento (0,36 u/s) y decaimiento más largo.
+
+## Interacción acotada y primer pintado (v12)
+
+- **Zona de la animación:** el giro por arrastre, el toque (onda) y el gesto horizontal del trackpad viven en un área propia (`.story__zone`): la mitad derecha en escritorio y el 52 % superior en móvil, debajo del texto y de los controles. Todo lo demás es scroll normal.
+- **Gesto horizontal:** solo se intercepta si es claramente horizontal (|ΔX| > 1,8·|ΔY|) y dentro de la zona; un gesto vertical o diagonal nunca se cancela. Comprobado por script: zona/horizontal → cancelado; zona/vertical, zona/diagonal, panel y escenario → no.
+- **Sin destello blanco:** en desarrollo el primer pintado ocurría a los 336 ms porque el navegador estaba ocupado ejecutando el bundle; hasta entonces mostraba blanco. Ahora Angular arranca después del primer pintado (`requestAnimationFrame` + `setTimeout`) y el primer pintado baja a ~76 ms con el fondo oscuro ya aplicado.

@@ -47,6 +47,7 @@ const smooth = (v: number): number => {
 export class StoryComponent implements AfterViewInit, OnDestroy {
   @ViewChild('canvas', { static: true }) private canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('section', { static: true }) private section!: ElementRef<HTMLElement>;
+  @ViewChild('zone', { static: true }) private hitZone!: ElementRef<HTMLElement>;
 
   private readonly zone = inject(NgZone);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
@@ -118,15 +119,13 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
 
     window.addEventListener('scroll', this.onScroll, { passive: true });
     window.addEventListener('resize', this.onScroll, { passive: true });
-    const stage = root.querySelector<HTMLElement>('.story__stage');
-    this.stage = stage;
-    if (stage) {
-      stage.addEventListener('pointerdown', this.onDown);
-      stage.addEventListener('pointermove', this.onMove);
-      stage.addEventListener('pointerup', this.onUp);
-      stage.addEventListener('pointercancel', this.onUp);
-      stage.addEventListener('wheel', this.onWheel, { passive: false });
-    }
+    const zone = this.hitZone.nativeElement;
+    this.stage = zone;
+    zone.addEventListener('pointerdown', this.onDown);
+    zone.addEventListener('pointermove', this.onMove);
+    zone.addEventListener('pointerup', this.onUp);
+    zone.addEventListener('pointercancel', this.onUp);
+    zone.addEventListener('wheel', this.onWheel, { passive: false });
     this.onScroll();
     this.shown = this.target;
     this.apply();
@@ -174,8 +173,6 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
 
   /** Arrastre con mouse o dedo sobre la escena (no sobre el texto ni los controles). */
   private onDown = (e: PointerEvent): void => {
-    const target = e.target as HTMLElement;
-    if (target.closest('a, button, .panel, .rail')) return;
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     this.dragId = e.pointerId;
     this.lastX = e.clientX;
@@ -221,20 +218,18 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
 
   /** Gesto horizontal del trackpad: gira. El vertical sigue siendo scroll normal. */
   private onWheel = (e: WheelEvent): void => {
+    // Solo dentro de la zona de la animación y solo si el gesto es claramente horizontal.
+    // Un gesto vertical (scroll) nunca se intercepta.
     const now = performance.now();
     const ax = Math.abs(e.deltaX);
     const ay = Math.abs(e.deltaY);
-    // Una vez que el gesto es horizontal, se mantiene "enganchado" hasta que termina,
-    // para que el navegador no lo interprete como "volver atrás" a mitad de camino.
-    const latched = now - this.hLatch < 260;
-    const horizontal = ax > 0.5 && ax >= ay * 0.9;
-    if (!horizontal && !latched) return;
+    const clearlyHorizontal = ax > 1 && ax > ay * 1.8;
+    const continuing = now - this.hLatch < 90 && ax >= ay;
+    if (!clearlyHorizontal && !continuing) return;
     e.preventDefault();
     this.hLatch = now;
-    if (ax > 0) {
-      this.scene?.rotateBy(-e.deltaX * 0.0045);
-      this.markTouched();
-    }
+    this.scene?.rotateBy(-e.deltaX * 0.0045);
+    this.markTouched();
   };
   private hLatch = 0;
 

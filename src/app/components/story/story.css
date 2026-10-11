@@ -15,10 +15,6 @@
 }
 
 .story__stage {
-  cursor: grab;
-  touch-action: pan-y;
-  user-select: none;
-  -webkit-user-select: none;
   position: sticky;
   top: 0;
   height: 100vh;
@@ -188,8 +184,27 @@
   color: var(--im-muted);
 }
 
-.story__stage.is-dragging {
+.story__zone {
+  position: absolute;
+  top: 68px;
+  right: 0;
+  bottom: 0;
+  width: 58%;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.story__stage.is-dragging .story__zone {
   cursor: grabbing;
+}
+@media (max-width: 900px) {
+  .story__zone {
+    left: 0;
+    width: auto;
+    bottom: auto;
+    height: 52%;
+  }
 }
 .panel {
   cursor: auto;
