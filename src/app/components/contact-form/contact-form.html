@@ -1,7 +1,7 @@
 <section id="contacto" class="cf im-section">
   <div class="im-wrap cf__grid">
     <div class="cf__intro" appReveal>
-      <p class="im-eyebrow"><b>04</b> Conversemos</p>
+      <p class="im-eyebrow"><b>05</b> Conversemos</p>
       <h2 class="im-title">Si el proceso es crítico, no lo resuelve una plantilla.</h2>
       <p class="im-lead">
         Contanos qué necesitás reconocer, cobrar o automatizar. Respondemos con una evaluación técnica preliminar,
@@ -27,11 +27,7 @@
     <div class="cf__form-wrap" [appReveal]="120">
       @if (enviado()) {
         <div class="cf__done" role="status" aria-live="polite">
-          <span class="cf__check" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
+          <app-particle-check />
           <h3>Mensaje recibido.</h3>
           <p>
             Te respondemos con una evaluación técnica preliminar en menos de 24 horas hábiles. Si es urgente, escribinos

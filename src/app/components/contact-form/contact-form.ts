@@ -1,11 +1,12 @@
 import { Component, signal, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { ParticleCheckComponent } from '../particle-check/particle-check';
 
 @Component({
   selector: 'app-contact-form',
   standalone: true,
-  imports: [CommonModule, RevealDirective],
+  imports: [CommonModule, RevealDirective, ParticleCheckComponent],
   templateUrl: './contact-form.html',
   styleUrl: './contact-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush

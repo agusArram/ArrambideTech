@@ -19,6 +19,8 @@ interface CaseStudy {
   challenge: string;
   /** Qué hicimos, en lenguaje de negocio. */
   plain: string[];
+  /** Recorrido del dato, de punta a punta (se dibuja al hacer scroll). */
+  flow: string[];
   metrics: Metric[];
   validation?: string[];
   /** Detalle para el equipo de sistemas del cliente (plegado). */
@@ -61,6 +63,7 @@ export class SolucionesPageComponent {
         'Las fotos se guardan protegidas, con cifrado de nivel bancario.',
         'Un tablero muestra horas pico, perfil de clientes y deudas.',
       ],
+      flow: ['Persona frente a la puerta', 'Equipo con reconocimiento facial', 'Sistema de la empresa', 'Respaldo protegido en la nube', 'Decisión: abre o niega'],
       metrics: [
         { value: '26.500 → 560', label: 'registros por actualización de saldos' },
         { value: '350', label: 'movimientos recuperados tras dos semanas sin conexión' },
@@ -97,6 +100,7 @@ export class SolucionesPageComponent {
         'La IA no inventa: la respuesta sale siempre de la base de datos de la institución.',
         'El costo por consulta es acotado y predecible.',
       ],
+      flow: ['Pregunta por chat', 'Control de acceso', 'La IA traduce la pregunta', 'Base de datos de la institución', 'Respuesta y registro'],
       metrics: [
         { value: '100 %', label: 'de las consultas quedan registradas' },
         { value: '~8.000', label: 'unidades de consumo por consulta, frente a más de 1.500.000 sin controles' },
@@ -130,6 +134,7 @@ export class SolucionesPageComponent {
         'El importe lo fija el sistema: nadie puede modificarlo desde el navegador.',
         'Si se suspende por lluvia, el saldo queda a favor del cliente para su próxima reserva.',
       ],
+      flow: ['El cliente reserva', 'El servidor fija el importe', 'Mercado Pago cobra', 'El dinero va al comercio', 'Turno confirmado'],
       metrics: [
         { value: '0 %', label: 'de comisión por cada cobro' },
         { value: '100 %', label: 'de la lógica de cobro protegida en el servidor' },
@@ -160,6 +165,7 @@ export class SolucionesPageComponent {
         'Cada módulo es independiente: si uno falla, los demás siguen funcionando.',
         'Funciona en el servidor de la propia institución y todo está documentado.',
       ],
+      flow: ['Persona de la institución', 'Cuenta única', 'Tablero principal', 'Módulos independientes', 'Base central'],
       metrics: [{ value: '4', label: 'módulos independientes sobre una base central' }],
       validation: ['En producción, operada desde el servidor de la propia institución.'],
       tech: [

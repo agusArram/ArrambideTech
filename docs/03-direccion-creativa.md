@@ -216,3 +216,30 @@ Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica
 - **Tipografía:** Inter es variable; el titular se parte por letra y el **grosor se “llena”** de 140 a 620 con un retardo de 34 ms por letra (1 s, ease-out). La última palabra, *Cobran.*, va en el color de acento como cierre. Con `prefers-reduced-motion` no se anima. El texto accesible se conserva con `aria-label`.
 - Paso 03: “Se cobra solo, sin perseguir pagos.” (antes en voseo).
 - Menú lateral: aprobado.
+
+## Detalles que suman (v16)
+
+| Pieza | Qué hace | Notas |
+|---|---|---|
+| **Transiciones entre páginas** | View Transitions: fundido corto con leve ascenso; el header permanece (`view-transition-name`) | Se desactiva con `prefers-reduced-motion` |
+| **Línea de progreso** | 2 px en el color de acento que avanza con el scroll | `ExtrasComponent`, un listener con `rAF` |
+| **Odómetro** | En el selector de dolores, los dígitos giran al cambiar de frase | `OdometerComponent`; la tarjeta es persistente para que el giro se vea |
+| **Monitor en vivo (de ejemplo)** | Eventos con ritmo irregular (2–6 s), mismas categorías de estado que el sistema real, contadores que suben | Se pausa fuera de pantalla y con la pestaña oculta; rotulado “Datos de ejemplo” |
+| **Recorrido** | En cada caso, 5 nodos conectados que se dibujan al entrar en pantalla, con un destello que recorre el trayecto | Vertical en móvil |
+| **✓ de partículas** | Al enviar el formulario, ~560 partículas forman un aro con un tilde; se apartan del mouse y responden al toque | Canvas 2D, sin dependencias; `prefers-reduced-motion` la muestra ya formada |
+| **Botones magnéticos** | Los botones se acercan ≤ 4 px al cursor | Solo mouse; interpolado por `rAF` |
+| **Cosas escondidas** | Cinco, con contador “n / 5” y aviso. Persisten en `localStorage` | Ver tabla siguiente |
+
+### Cosas escondidas
+
+| # | Cómo se activa | Qué pasa |
+|---|---|---|
+| 1 | Doble clic en el logo del header | Onda en pantalla y en la escena 3D |
+| 2 | Escribir la palabra “puntos” | Tres ondas en el hero |
+| 3 | Tres clics seguidos en el punto verde del logo | “Sí, ese punto verde está en vivo” |
+| 4 | Código clásico (↑ ↑ ↓ ↓ ← → ← → B A) | El color de acento recorre el arcoíris 6 s |
+| 5 | Cinco clics en la línea “Fundada por…” del pie | “Hola, soy Agustín…” |
+
+Al encontrar la quinta aparece un aviso con un enlace a “Hablemos”. A los 7 s de la primera visita en la portada, una única pista (“Esta web esconde cinco cosas”) que no vuelve a mostrarse.
+
+No se hizo la cronología de versiones (pieza 7): se descartó porque ya no se muestran las versiones.

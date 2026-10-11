@@ -61,6 +61,16 @@
             }
           </dl>
 
+          <h3 class="case__h">El recorrido</h3>
+          <ol class="flow" appReveal aria-label="Recorrido del dato">
+            @for (n of c.flow; track n; let i = $index) {
+              <li class="flow__n" [style.--i]="i">
+                <span class="flow__dot" aria-hidden="true"></span>
+                <span class="flow__t">{{ n }}</span>
+              </li>
+            }
+          </ol>
+
           <h3 class="case__h">Qué hicimos</h3>
           <ul class="case__list">
             @for (s of c.plain; track s) {
