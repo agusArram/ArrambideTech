@@ -125,12 +125,15 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
       });
       if (!scene) return;
       this.scene = scene;
+      this.fitScene();
+      void document.fonts?.ready.then(() => this.fitScene());
       this.zone.run(() => this.sceneReady.set(true));
       this.apply();
     });
 
     window.addEventListener('scroll', this.onScroll, { passive: true });
     window.addEventListener('resize', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.fitScene, { passive: true });
     window.addEventListener('at:blast', this.onExternalBlast as EventListener);
     const zone = this.hitZone.nativeElement;
     this.stage = zone;
@@ -148,6 +151,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     if (!this.isBrowser) return;
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onScroll);
+    window.removeEventListener('resize', this.fitScene);
     window.removeEventListener('at:blast', this.onExternalBlast as EventListener);
     this.rail?.removeEventListener('pointermove', this.onRailMove);
     this.rail?.removeEventListener('pointerleave', this.onRailLeave);
@@ -190,6 +194,18 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
 
   private onRailLeave = (): void => {
     this.rail?.querySelectorAll<HTMLElement>('.rail__btn').forEach((b) => b.style.setProperty('--prox', '0'));
+  };
+
+  /** En celular el objeto 3D ocupa solo el espacio que deja libre el bloque de texto (varía con el alto de pantalla). */
+  private fitScene = (): void => {
+    if (!this.scene) return;
+    const hero = this.panels[0];
+    const stage = this.canvas.nativeElement.parentElement;
+    if (!hero || !stage) return;
+    const mobile = window.innerWidth <= 800;
+    // offsetTop ignora las transformaciones de scroll: mide el bloque en reposo.
+    const textTop = hero.offsetTop;
+    this.scene.setSafeArea(76, mobile ? Math.max(0, stage.clientHeight - textTop + 14) : 0);
   };
 
   /** Ondas pedidas desde afuera (cosas escondidas): coordenadas de pantalla → NDC del canvas. */

@@ -461,3 +461,10 @@
     animation: none;
   }
 }
+
+/* Celulares de poca altura: se esconde la bajada del inicio para que la marca 3D tenga lugar y se lea. */
+@media (max-width: 800px) and (max-height: 700px) {
+  .panel--hero .lead {
+    display: none;
+  }
+}

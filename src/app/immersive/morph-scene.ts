@@ -337,6 +337,15 @@ export class MorphScene {
     }
   }
 
+  /** Alto (px) que el texto ocupa desde abajo y margen superior (header): en retrato el objeto cabe en lo que sobra. */
+  private safe = { top: 76, bottom: 0 };
+
+  setSafeArea(topPx: number, bottomPx: number): void {
+    if (this.disposed) return;
+    this.safe = { top: topPx, bottom: bottomPx };
+    this.layout();
+  }
+
   private layout(): void {
     const parent = this.canvas.parentElement ?? this.canvas;
     const w = Math.max(1, parent.clientWidth);
@@ -361,8 +370,13 @@ export class MorphScene {
         this.group.position.set(0, visibleH * 0.2, 0);
         this.group.scale.setScalar(Math.min(0.9, fit));
       } else {
-        this.group.position.set(0, 0.8, 0);
-        this.group.scale.setScalar(Math.min(0.9, visibleW / 2.9));
+        const worldPerPx = visibleH / h;
+        const freePx = Math.max(120, h - this.safe.top - this.safe.bottom);
+        const centerPx = this.safe.bottom > 0 ? this.safe.top + freePx / 2 : h * 0.3;
+        // El objeto (con sus órbitas) mide ~2.9 unidades: debe entrar a lo ancho y en el alto libre.
+        const fit = Math.min(0.9, visibleW / 2.9, (freePx * worldPerPx) / 3.1);
+        this.group.position.set(0, (0.5 - centerPx / h) * visibleH, 0);
+        this.group.scale.setScalar(fit);
       }
     }
     if (!this.opts.animate) this.renderOnce();
