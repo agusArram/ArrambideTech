@@ -41,11 +41,39 @@ export class ContactFormComponent {
   toggleDropdown(): void {
     if (this.enviando()) return;
     this.isDropdownOpen.update(v => !v);
+    if (this.isDropdownOpen()) {
+      // Que se vea la lista completa sin tener que deslizar.
+      setTimeout(() => this.root().querySelector('.cf__select')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60);
+    }
   }
 
   selectOption(option: string): void {
     this.selectedChallenge.set(option);
     this.isDropdownOpen.set(false);
+    // Sigue el recorrido: después de elegir, el cursor pasa al mensaje.
+    setTimeout(() => this.root().querySelector<HTMLTextAreaElement>('textarea')?.focus(), 60);
+  }
+
+  private root(): HTMLElement {
+    return this.el.nativeElement as HTMLElement;
+  }
+
+  /** Al tocar un campo, se lo acomoda en el centro de la pantalla (así el teclado no lo tapa). */
+  @HostListener('focusin', ['$event'])
+  onFocusIn(event: FocusEvent): void {
+    const t = event.target as HTMLElement;
+    if (!(t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement) || t.type === 'hidden') return;
+    setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'center' }), 280);
+  }
+
+  /** Enter en un campo de una línea pasa al siguiente en lugar de enviar el formulario. */
+  nextField(event: Event, next: 'empresa' | 'contacto' | 'select'): void {
+    event.preventDefault();
+    if (next === 'select') {
+      if (!this.isDropdownOpen()) this.toggleDropdown();
+      return;
+    }
+    this.root().querySelector<HTMLInputElement>(`input[name="${next}"]`)?.focus();
   }
 
   async enviarFormulario(event: Event): Promise<void> {
@@ -76,6 +104,8 @@ export class ContactFormComponent {
         this.selectedChallenge.set('');
         this.mensajeEstado.set(null);
         this.enviado.set(true);
+        // La página se acorta al reemplazar el formulario: se lleva la vista a la confirmación.
+        setTimeout(() => this.root().querySelector('.cf__done')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
       } else {
         throw new Error(data.message || 'Error al enviar la solicitud');
       }

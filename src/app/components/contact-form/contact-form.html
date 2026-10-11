@@ -45,17 +45,17 @@
           <div class="cf__row">
             <label class="cf__field">
               <span>Nombre</span>
-              <input type="text" name="nombre" autocomplete="name" required />
+              <input type="text" name="nombre" autocomplete="name" enterkeyhint="next" required (keydown.enter)="nextField($event, 'empresa')" />
             </label>
             <label class="cf__field">
               <span>Empresa u organización</span>
-              <input type="text" name="empresa" autocomplete="organization" required />
+              <input type="text" name="empresa" autocomplete="organization" enterkeyhint="next" required (keydown.enter)="nextField($event, 'contacto')" />
             </label>
           </div>
 
           <label class="cf__field">
             <span>Email o WhatsApp</span>
-            <input type="text" name="contacto" autocomplete="email" required />
+            <input type="text" name="contacto" autocomplete="email" enterkeyhint="next" required (keydown.enter)="nextField($event, 'select')" />
           </label>
 
           <div class="cf__field">

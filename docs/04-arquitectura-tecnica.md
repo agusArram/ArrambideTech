@@ -39,7 +39,7 @@ src/app/
 ### 2. Carga diferida
 - `three` y la escena se importan dentro de `ngAfterViewInit`, solo en navegador.
 - MediaPipe se importa al iniciar la demo.
-- El *wasm* (13 MB) se sirve desde `/mediapipe/` y se copia en build desde `node_modules` (ver `angular.json`); no se commitea. **No lo descarga nadie que no pulse el botón.**
+- El *wasm* (13 MB) se carga desde la CDN de jsDelivr (`WASM_BASE` en `face-demo.ts`, versión fijada igual a la del paquete): no se aloja en el hosting, así el build pesa ~4 MB y se sube en segundos. **No lo descarga nadie que no pulse el botón.** Si se actualiza `@mediapipe/tasks-vision`, cambiar también la versión de esa URL.
 - El modelo `face_landmarker.task` (~4 MB) se descarga desde el CDN oficial de Google al iniciar. Alternativa para producción: alojarlo en `public/mediapipe/` (ver [06](06-roadmap-y-pendientes.md)).
 
 ### 3. Degradación

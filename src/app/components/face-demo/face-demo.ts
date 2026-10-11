@@ -34,7 +34,8 @@ interface Stage {
 
 const MODEL_URL =
   'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
-const WASM_BASE = '/mediapipe';
+// Se sirve desde la CDN (misma versión que el paquete): evita alojar ~13 MB de WebAssembly propio.
+const WASM_BASE = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.1.0/wasm';
 const STABLE_FRAMES = 28;
 /** Puntos clave para la firma geométrica de ejemplo. */
 const KEY_POINTS = [33, 263, 1, 61, 291, 199, 10, 152, 234, 454, 168, 6];

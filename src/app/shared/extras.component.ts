@@ -65,7 +65,7 @@ interface Wave {
           </div>
         }
       </div>
-      @if (found().length > 0) {
+      @if (found().length > 0 && countVisible()) {
         <div class="eg__count" [title]="'Cosas escondidas encontradas'">{{ found().length }} / {{ total }}</div>
       }
     </div>
@@ -199,6 +199,9 @@ export class ExtrasComponent implements OnInit, OnDestroy {
 
   protected readonly total = EGGS.length;
   protected readonly found = signal<string[]>([]);
+  /** El contador aparece unos segundos al descubrir algo y se va (no queda tapando contenido). */
+  protected readonly countVisible = signal(false);
+  private countTimer = 0;
   protected readonly toast = signal<{ text: string; hint?: boolean; link?: boolean } | null>(null);
   protected readonly waves = signal<Wave[]>([]);
 
@@ -391,6 +394,9 @@ export class ExtrasComponent implements OnInit, OnDestroy {
     const egg = EGGS.find((e) => e.id === id);
     if (!egg) return;
     this.zone.run(() => {
+      this.countVisible.set(true);
+      clearTimeout(this.countTimer);
+      this.countTimer = window.setTimeout(() => this.zone.run(() => this.countVisible.set(false)), 4500);
       const wasNew = !this.found().includes(id);
       if (wasNew) {
         const next = [...this.found(), id];
