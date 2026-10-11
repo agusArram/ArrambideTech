@@ -131,6 +131,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
 
     window.addEventListener('scroll', this.onScroll, { passive: true });
     window.addEventListener('resize', this.onScroll, { passive: true });
+    window.addEventListener('at:blast', this.onExternalBlast as EventListener);
     const zone = this.hitZone.nativeElement;
     this.stage = zone;
     zone.addEventListener('pointerdown', this.onDown);
@@ -147,6 +148,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     if (!this.isBrowser) return;
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onScroll);
+    window.removeEventListener('at:blast', this.onExternalBlast as EventListener);
     this.rail?.removeEventListener('pointermove', this.onRailMove);
     this.rail?.removeEventListener('pointerleave', this.onRailLeave);
     if (this.stage) {
@@ -188,6 +190,15 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
 
   private onRailLeave = (): void => {
     this.rail?.querySelectorAll<HTMLElement>('.rail__btn').forEach((b) => b.style.setProperty('--prox', '0'));
+  };
+
+  /** Ondas pedidas desde afuera (cosas escondidas): coordenadas de pantalla → NDC del canvas. */
+  private onExternalBlast = (ev: Event): void => {
+    const d = (ev as CustomEvent<{ x: number; y: number }>).detail;
+    if (!d || !this.scene) return;
+    const r = this.canvas.nativeElement.getBoundingClientRect();
+    if (d.y < r.top || d.y > r.bottom) return; // el hero no está a la vista
+    this.scene.blast(((d.x - r.left) / r.width) * 2 - 1, -(((d.y - r.top) / r.height) * 2 - 1));
   };
 
   private stage: HTMLElement | null = null;

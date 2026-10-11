@@ -54,6 +54,17 @@ export class HeaderComponent implements OnDestroy {
     this.setOpen(false);
   }
 
+  /** Cosas escondidas: ver ExtrasComponent. */
+  logoEgg(e: MouseEvent): void {
+    window.dispatchEvent(new CustomEvent('at:egg', { detail: { id: 'logo', x: e.clientX, y: e.clientY } }));
+  }
+
+  dotEgg(e: Event): void {
+    e.preventDefault();
+    e.stopPropagation();
+    window.dispatchEvent(new CustomEvent('at:egg', { detail: { id: 'dot' } }));
+  }
+
   toggle(): void {
     this.setOpen(!this.open());
   }

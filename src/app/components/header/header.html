@@ -1,7 +1,7 @@
 <header class="hd" [class.is-solid]="solid() && !open()" [class.is-open]="open()">
   <div class="hd__bar im-wrap">
-    <a routerLink="/" class="hd__brand" aria-label="Arrambide Tech, inicio">
-      Arrambide<span>Tech</span><i class="hd__dot" aria-hidden="true"></i>
+    <a routerLink="/" class="hd__brand" aria-label="Arrambide Tech, inicio" (dblclick)="logoEgg($event)">
+      Arrambide<span>Tech</span><i class="hd__dot" aria-hidden="true" (click)="dotEgg($event)"></i>
     </a>
 
     <nav class="hd__nav" aria-label="Principal">

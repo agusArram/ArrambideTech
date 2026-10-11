@@ -599,3 +599,30 @@ body {
   -webkit-text-stroke-width: calc(var(--p, 0) * 0.017em);
   transition: -webkit-text-stroke-width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Transiciones entre páginas (View Transitions): fundido corto con leve ascenso; el header permanece. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-out 0.16s ease both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hd {
+    view-transition-name: site-header;
+  }
+}
+::view-transition-group(site-header) {
+  animation-duration: 0s;
+}
+@keyframes vt-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+}

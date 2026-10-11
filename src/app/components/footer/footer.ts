@@ -11,4 +11,9 @@ import { RouterLink } from '@angular/router';
 })
 export class FooterComponent {
   protected readonly currentYear = new Date().getFullYear();
+
+  /** Cosa escondida: cinco toques seguidos. */
+  protected founderEgg(): void {
+    window.dispatchEvent(new CustomEvent('at:egg', { detail: { id: 'founder' } }));
+  }
 }

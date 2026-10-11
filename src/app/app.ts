@@ -1,11 +1,12 @@
 import { Component, AfterViewInit, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { ExtrasComponent } from './shared/extras.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ExtrasComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
