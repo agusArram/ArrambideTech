@@ -48,7 +48,7 @@ export class SolucionesPageComponent {
     {
       id: 'acceso',
       index: '01',
-      pillar: 'Reconoce',
+      pillar: 'Reconocé',
       title: 'Control de acceso para dos empresas con un mismo equipo',
       client: 'Marinas del Paraná Guazú · Guazú Entre Ríos SRL',
       status: 'En producción',
@@ -85,7 +85,7 @@ export class SolucionesPageComponent {
     {
       id: 'ia',
       index: '02',
-      pillar: 'Decide',
+      pillar: 'Decidí',
       title: 'Un asistente de IA que responde sobre tus datos',
       client: 'Hospital Central de Pilar · Secretaría de Salud, Municipalidad de Pilar',
       status: 'En producción',
@@ -118,7 +118,7 @@ export class SolucionesPageComponent {
     {
       id: 'pagos',
       index: '03',
-      pillar: 'Cobra',
+      pillar: 'Cobrá',
       title: 'Reservas con cobro online, sin comisión por operación',
       client: 'La Ñata · Demode',
       status: 'En producción',
@@ -148,7 +148,7 @@ export class SolucionesPageComponent {
     {
       id: 'plataforma',
       index: '04',
-      pillar: 'Decide',
+      pillar: 'Decidí',
       title: 'Un solo lugar para los sistemas de toda la institución',
       client: 'Municipalidad de Pilar',
       status: 'En producción',

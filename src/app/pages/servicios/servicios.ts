@@ -30,7 +30,7 @@ export class ServiciosComponent {
     {
       id: 'reconoce',
       index: '01',
-      verb: 'Reconoce',
+      verb: 'Reconocé',
       title: 'Control de acceso con reconocimiento facial',
       intro: 'Sabés quién entra, cuándo y si está al día, sin guardias ni planillas.',
       builds: [
@@ -51,7 +51,7 @@ export class ServiciosComponent {
     {
       id: 'decide',
       index: '02',
-      verb: 'Decide',
+      verb: 'Decidí',
       title: 'Asistentes de inteligencia artificial para tu operación',
       intro: 'Tu equipo pregunta por chat y recibe la respuesta de tus propios datos, con registro de cada consulta.',
       builds: [
@@ -72,7 +72,7 @@ export class ServiciosComponent {
     {
       id: 'cobra',
       index: '03',
-      verb: 'Cobra',
+      verb: 'Cobrá',
       title: 'Cobros automáticos dentro de tu sistema',
       intro: 'El cliente paga en el momento y vos dejás de conciliar pagos a mano.',
       builds: [

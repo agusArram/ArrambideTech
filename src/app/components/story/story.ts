@@ -68,7 +68,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
 
   protected readonly pillars: Pillar[] = [
     {
-      verb: 'Reconoce',
+      verb: 'Reconocé',
       where: 'Marinas del Paraná Guazú',
       title: 'Que entre solo quien debe entrar.',
       lead: 'Reconoce a cada persona y abre solo a quien corresponde.',
@@ -76,7 +76,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
       metric: { value: '2 en 1', label: 'dos empresas, un solo equipo, cero datos mezclados' },
     },
     {
-      verb: 'Decide',
+      verb: 'Decidí',
       where: 'Hospital Central de Pilar',
       title: 'Tu equipo pregunta, el sistema responde.',
       lead: 'Un asistente de IA que contesta por chat con tus datos reales.',
@@ -84,7 +84,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
       metric: { value: '100 %', label: 'de las consultas quedan registradas' },
     },
     {
-      verb: 'Cobra',
+      verb: 'Cobrá',
       where: 'La Ñata · Demode',
       title: 'Cobrá sin perseguir pagos.',
       lead: 'El cliente paga en el momento y el dinero va directo a tu cuenta.',
@@ -93,7 +93,7 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     },
   ];
 
-  protected readonly railItems = ['Inicio', 'Reconoce', 'Decide', 'Cobra'];
+  protected readonly railItems = ['Inicio', 'Reconocé', 'Decidí', 'Cobrá'];
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) return;
@@ -103,6 +103,8 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     const root = this.section.nativeElement;
     this.panels = Array.from(root.querySelectorAll<HTMLElement>('[data-panel]'));
     this.rail = root.querySelector<HTMLElement>('[data-rail]');
+    this.rail?.addEventListener('pointermove', this.onRailMove);
+    this.rail?.addEventListener('pointerleave', this.onRailLeave);
 
     this.zone.runOutsideAngular(async () => {
       const { MorphScene } = await import('../../immersive/morph-scene');
@@ -135,6 +137,8 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     if (!this.isBrowser) return;
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onScroll);
+    this.rail?.removeEventListener('pointermove', this.onRailMove);
+    this.rail?.removeEventListener('pointerleave', this.onRailLeave);
     if (this.stage) {
       this.stage.removeEventListener('pointerdown', this.onDown);
       this.stage.removeEventListener('pointermove', this.onMove);
@@ -157,6 +161,24 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
     event.preventDefault();
     document.getElementById(id)?.scrollIntoView({ behavior: this.reduce ? 'auto' : 'smooth', block: 'start' });
   }
+
+  /**
+   * Efecto de cercanía del riel: cada ítem recibe `--prox` (0..1) según la distancia vertical
+   * del puntero a su centro. El más cercano se abre por completo y los vecinos, algo.
+   */
+  private onRailMove = (e: PointerEvent): void => {
+    if (!this.rail) return;
+    const buttons = this.rail.querySelectorAll<HTMLElement>('.rail__btn');
+    buttons.forEach((b) => {
+      const r = b.getBoundingClientRect();
+      const d = Math.abs(e.clientY - (r.top + r.height / 2)) / r.height;
+      b.style.setProperty('--prox', Math.exp(-(d * d) / 0.8).toFixed(3));
+    });
+  };
+
+  private onRailLeave = (): void => {
+    this.rail?.querySelectorAll<HTMLElement>('.rail__btn').forEach((b) => b.style.setProperty('--prox', '0'));
+  };
 
   private stage: HTMLElement | null = null;
   private dragId: number | null = null;

@@ -247,16 +247,18 @@
   50% { transform: translateX(3px); }
 }
 
-/* Riel de progreso */
+/* Riel de progreso: el ítem más cercano al mouse se abre; los vecinos, un poco. Sin saltos de layout. */
 .rail {
   --p: 0;
   position: absolute;
-  right: max(18px, 2.6vw);
+  right: max(10px, 1.6vw);
   top: 50%;
   transform: translateY(-50%);
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: stretch;
+  /* área de captura amplia alrededor de los ítems */
+  padding: 22px 10px 22px 44px;
 }
 .rail__bar {
   position: relative;
@@ -276,41 +278,63 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 22px;
 }
 .rail__btn {
-  display: block;
-  padding: 2px 0;
+  --prox: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  min-width: 112px;
+  padding: 0;
   border: 0;
   background: none;
   color: var(--im-muted);
   font: inherit;
+  cursor: pointer;
+}
+.rail__tick {
+  flex: none;
+  width: calc(8px + var(--prox) * 16px);
+  height: 1px;
+  background: currentColor;
+  opacity: calc(0.45 + var(--prox) * 0.55);
+  transition:
+    width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease;
+}
+.rail__label {
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  cursor: pointer;
-  opacity: 0.55;
-  transition: opacity 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+  opacity: var(--prox);
+  transform: translateX(calc((1 - var(--prox)) * -8px));
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.25s ease;
 }
 .rail__btn:hover,
-.rail__btn.is-on {
-  opacity: 1;
+.rail__btn:focus-visible {
   color: var(--im-fg);
 }
-.rail__btn:not(.is-on):not(:hover):not(:focus-visible) .rail__label {
-  display: none;
+.rail__btn.is-on {
+  color: var(--im-fg);
 }
-.rail__btn:not(.is-on):not(:hover):not(:focus-visible)::before {
-  content: '';
-  display: block;
-  width: 14px;
-  height: 1px;
-  margin: 0.5rem 0;
-  background: currentColor;
+.rail__btn.is-on .rail__tick {
+  width: 26px;
+  opacity: 1;
+  background: var(--im-accent);
+}
+.rail__btn.is-on .rail__label {
+  opacity: 1;
+  transform: none;
 }
 .rail__btn:focus-visible {
   outline: 2px solid var(--im-accent);
-  outline-offset: 3px;
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
 .hint {

@@ -7,7 +7,7 @@
 
     <!-- 0 · Hero -->
     <div class="panel panel--hero" data-panel>
-      <h1 class="display">Reconoce.<br />Decide.<br />Cobra.</h1>
+      <h1 class="display">Reconocé.<br />Decidí.<br />Cobrá.</h1>
       <p class="lead">
         Sistemas que le ahorran tiempo a tu empresa: controlan quién entra, responden con inteligencia artificial y
         cobran solos.
@@ -47,6 +47,7 @@
               [attr.aria-current]="active() === i ? 'step' : null"
               (click)="goPanel(i)"
             >
+              <span class="rail__tick" aria-hidden="true"></span>
               <span class="rail__label">{{ item }}</span>
             </button>
           </li>

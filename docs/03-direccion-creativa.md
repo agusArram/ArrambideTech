@@ -6,7 +6,7 @@ Un único objeto 3D —una nube de ~9.000 partículas— es el protagonista de t
 
 | Escena | Forma | Mensaje | Metáfora |
 |---|---|---|---|
-| 0 · Hero | **El logo de Arrambide Tech hecho de puntos** (muestreado del archivo real del logo), con dos órbitas inclinadas, satélites y polvo | *Reconoce. Decide. Cobra.* | La marca como sistema |
+| 0 · Hero | **El logo de Arrambide Tech hecho de puntos** (muestreado del archivo real del logo), con dos órbitas inclinadas, satélites y polvo | *Reconocé. Decidí. Cobrá.* | La marca como sistema |
 | 1 · Reconoce | **Terminal de acceso facial** (tablet de pared con módulo de cámara, pantalla en líneas de barrido, visor con esquinas y halos de detección) | Acceso facial real, cifrado, auditable | El punto de entrada |
 | 2 · Decide | **Red de 22 nodos** con hub central y vínculos entre vecinos | IA que consulta, no inventa | El cerebro operativo |
 | 3 · Cobra | **Tarjeta** con chip y numeración | El monto lo decide el servidor | El dinero |
@@ -167,7 +167,7 @@ Todo bloque relevante entra con `appReveal`: opacidad + desplazamiento de 26 px 
 ## Copy base (borrador)
 
 **Hero**
-> Reconoce. Decide. Cobra.
+> Reconocé. Decidí. Cobrá.
 > Ingeniería de sistemas que ya operan: reconocimiento facial integrado a hardware real, pagos que nadie puede alterar e IA que consulta sin inventar.
 
 **CTA principal:** “Ver demostración en vivo” · **Secundario:** “Agendar una conversación”.
@@ -188,7 +188,7 @@ Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica
 
 ## Orden de los verbos y gesto del trackpad (v11)
 
-- **Reconoce. Decide. Cobra.** reemplaza a “Reconoce. Cobra. Decide.”: sigue la secuencia lógica (reconozco → decido → cobro) y termina en la plata. Las formas siguen el mismo orden: marca → terminal → red → tarjeta. Casos, Capacidades y el selector de dolores usan el mismo orden.
+- **Reconocé. Decidí. Cobrá.** reemplaza a “Reconoce. Cobra. Decide.”: sigue la secuencia lógica (reconozco → decido → cobro) y termina en la plata. Las formas siguen el mismo orden: marca → terminal → red → tarjeta. Casos, Capacidades y el selector de dolores usan el mismo orden.
 - **Trackpad:** `overscroll-behavior-x: none` y un “enganche” del gesto horizontal (260 ms) evitan que girar el logo con dos dedos dispare *atrás* del navegador.
 - **Primer pixel oscuro:** `<html>`/`<body>` con fondo inline, `color-scheme` y `theme-color` para eliminar el destello blanco al recargar.
 - **Onda:** ataque suave (`smoothstep` 0,45 s), frente más lento (0,36 u/s) y decaimiento más largo.
@@ -204,3 +204,8 @@ Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica
 - **Demo:** el desplegable “¿Qué es real y qué es de ejemplo?” se reemplazó por una **franja de tres ítems con ícono**, siempre visible: *Todo pasa en tu equipo*, *No se envía ni se guarda nada*, *La regla de acceso es de ejemplo*.
 - **Resultados:** se agregó el contexto que faltaba (“del sistema de acceso con reconocimiento facial que opera en Marinas del Paraná Guazú, donde dos empresas comparten los mismos equipos”). Cada caja tiene tres capas: *qué parte de la operación mejoró* → *el número* → *qué significa, en una oración*. Un lector sin contexto entiende qué se midió.
 - **Navegación:** se quitó “Contacto” del menú: la acción de contacto es el botón **Agendar conversación**. Menú: Capacidades · Casos + botón **Agendar conversación** (se quitó también “Demo”, porque el ancla interfería con el scroll). El pie conserva Capacidades, Casos y Contacto.
+
+## Voseo y menú lateral (v14)
+
+- **Titular en voseo:** *Reconocé. Decidí. Cobrá.* Le habla directo a quien visita (él es el protagonista) y es consistente con el resto del sitio (“Cobrá sin perseguir pagos”, “Probalo ahora”). La frase de apoyo queda en tercera persona, describiendo lo que hacen los sistemas. Mismo criterio en los rótulos de cada paso y de los casos.
+- **Menú lateral por cercanía:** cada ítem recibe `--prox` (0–1) según la distancia vertical del puntero (`exp(−d²/0,8)`): el más cercano abre su etiqueta por completo, los vecinos un 30 %, el resto nada. Antes las etiquetas inactivas usaban `display: none`, y al aparecer movían el layout bajo el mouse (el “bug”). Ahora el layout es fijo (40 px por ítem) y solo cambian opacidad, ancho de la marca y desplazamiento. Área de captura ampliada alrededor.

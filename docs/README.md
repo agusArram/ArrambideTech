@@ -19,7 +19,7 @@ Documentación de la reconstrucción de arrambidetech.com. Objetivo: pasar de un
 
 ## Resumen en 30 segundos
 
-- **Idea central:** *Reconoce. Decide. Cobra.* — tres verbos = los tres pilares que más han vendido: reconocimiento facial, pagos integrados y automatización con IA (n8n).
+- **Idea central:** *Reconocé. Decidí. Cobrá.* — tres verbos = los tres pilares que más han vendido: reconocimiento facial, pagos integrados y automatización con IA (n8n).
 - **Forma:** una sola escena 3D (nube de partículas) que **se transforma** de terminal de acceso facial → red de decisión → tarjeta de pago, con scroll continuo, seguida de una **demo real** de reconocimiento facial con la cámara del visitante (todo local). Casos, capacidades y contacto fueron rehechos con el mismo sistema visual.
 - **Principio rector:** cada afirmación del sitio tiene respaldo en algo construido y documentado (ver 02). Nada de métricas inventadas.
 - **Cómo correrlo:** `npm install && npm start` en la rama `rediseno-3d`.
