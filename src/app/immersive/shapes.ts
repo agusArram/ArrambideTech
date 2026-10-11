@@ -364,7 +364,7 @@ export async function sampleLogoPoints(url: string, want = 9000): Promise<Float3
  * Intro de marca: el logo (A con flecha de crecimiento) hecho de puntos, con dos
  * órbitas inclinadas, satélites y polvo de partículas alrededor.
  */
-export function brandShape(count: number, rnd: Rng, logo: Float32Array): Float32Array {
+export function brandShape(count: number, rnd: Rng, logo: Float32Array, kinds?: Float32Array): Float32Array {
   const out = new Float32Array(count * 3);
   const nLogo = logo.length / 2;
   const SCALE = 2.5;
@@ -391,6 +391,7 @@ export function brandShape(count: number, rnd: Rng, logo: Float32Array): Float32
     let x: number;
     let y: number;
     let z: number;
+    let kind = 0;
 
     if (k < 0.72 && nLogo > 0) {
       const j = Math.floor(rnd() * nLogo);
@@ -398,13 +399,16 @@ export function brandShape(count: number, rnd: Rng, logo: Float32Array): Float32
       y = logo[j * 2 + 1] * SCALE + (rnd() - 0.5) * 0.012;
       z = (Math.floor(rnd() * 3) - 1) * 0.07 + (rnd() - 0.5) * 0.02;
     } else if (k < 0.84) {
+      kind = 1;
       [x, y, z] = orbit(1.55, 1.15, 0.35, rnd() * Math.PI * 2);
     } else if (k < 0.92) {
+      kind = 2;
       [x, y, z] = orbit(1.18, -0.9, -0.5, rnd() * Math.PI * 2);
     } else if (k < 0.96) {
       // Satélites sobre las órbitas
       const sat = Math.floor(rnd() * 5);
       const a = (sat / 5) * Math.PI * 2 + 0.4;
+      kind = sat % 2 ? 1 : 2;
       const [ox, oy, oz] = orbit(sat % 2 ? 1.55 : 1.18, sat % 2 ? 1.15 : -0.9, sat % 2 ? 0.35 : -0.5, a);
       x = ox + (rnd() - 0.5) * 0.09;
       y = oy + (rnd() - 0.5) * 0.09;
@@ -423,6 +427,7 @@ export function brandShape(count: number, rnd: Rng, logo: Float32Array): Float32
     out[i * 3] = x;
     out[i * 3 + 1] = y;
     out[i * 3 + 2] = z;
+    if (kinds) kinds[i] = kind;
   }
   return out;
 }

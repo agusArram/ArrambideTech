@@ -381,3 +381,13 @@
 .panel .lead {
   max-width: 28rem;
 }
+
+.eyebrow__where {
+  color: var(--im-muted);
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+.panel--hero .lead {
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  margin-top: 1.25rem;
+}

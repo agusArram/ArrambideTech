@@ -27,8 +27,19 @@ La transformación no es un corte: las partículas viajan de una forma a otra (m
 - **Arrastrar** (mouse o dedo) sobre la escena gira el objeto; tiene inercia y vuelve solo a su posición tras ~3,5 s sin tocar.
 - **Gesto horizontal del trackpad** (dos dedos hacia los costados) gira; el gesto vertical sigue siendo scroll normal y no se intercepta. Solo se captura cuando el movimiento es claramente horizontal, lo que además evita el “atrás” del navegador sobre la escena.
 - En móvil, `touch-action: pan-y` deja el scroll vertical al navegador y el horizontal a la escena.
-- **Tocar o hacer click** sobre los puntos dispara una mini explosión: una onda de choque en pantalla empuja los puntos cercanos, se iluminan y vuelven solos en ~1,5 s. Se resuelve en el vertex shader (un uniform de posición y tiempo), sin costo adicional de geometría. Se desactiva con `prefers-reduced-motion`.
+- **Tocar o hacer click** sobre los puntos “rompe” esa zona: los puntos se separan con suavidad, se mantienen abiertos ~0,6 s y vuelven solos hasta completar ~1,5 s. Son **acumulables hasta 3** a la vez; la cuarta reemplaza a la más antigua. Se resuelve en el vertex shader (`uniform vec3 uB[3]`), sin geometría adicional. Se desactiva con `prefers-reduced-motion`.
+- **Campo del puntero (solo escritorio):** al mover el mouse, los puntos cercanos se apartan y brillan levemente; se apaga solo al dejar de moverlo.
 - Aviso “Arrastrá para girar · tocá los puntos” que desaparece tras la primera interacción.
+
+## Intro (v6)
+
+El intro dejó de ser una forma estática. Ahora tiene tres capas de vida:
+
+1. **Ensamblado:** al cargar, los puntos llegan desde el espacio con un giro y se acomodan en el logo, cada uno a su ritmo (~2,8 s).
+2. **Órbitas que precesan:** los dos anillos y sus satélites giran lentamente alrededor del logo.
+3. **Pulso de crecimiento:** una banda de luz recorre el logo en diagonal, siguiendo la dirección de la flecha.
+
+El hero queda en un titular, una frase y dos botones; el resto del contexto aparece al avanzar.
 
 ## Lenguaje (v5)
 

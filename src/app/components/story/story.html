@@ -5,12 +5,11 @@
 
     <!-- 0 · Hero -->
     <div class="panel panel--hero" data-panel>
-      <p class="eyebrow">Arrambide Tech · Ingeniería de sistemas críticos</p>
       <h1 class="display">Reconoce.<br />Cobra.<br />Decide.</h1>
-      <p class="lead">Sistemas que le ahorran tiempo a tu empresa: controlan quién entra, cobran solos y responden con inteligencia artificial.</p>
+      <p class="lead">Sistemas que le ahorran tiempo a tu empresa.</p>
       <div class="actions">
-        <a class="btn btn--primary" href="#demo" (click)="go('demo', $event)">Ver demostración en vivo</a>
-        <a class="btn btn--ghost" href="#contacto" (click)="go('contacto', $event)">Agendar una conversación</a>
+        <a class="btn btn--primary" href="#demo" (click)="go('demo', $event)">Probalo ahora</a>
+        <a class="btn btn--ghost" href="#contacto" (click)="go('contacto', $event)">Hablemos</a>
       </div>
     </div>
 
@@ -18,7 +17,7 @@
     @for (p of pillars; track p.verb; let i = $index) {
       <article class="panel" data-panel>
         <p class="eyebrow">
-          <span class="eyebrow__n">0{{ i + 1 }}</span> {{ p.verb }}
+          <span class="eyebrow__n">0{{ i + 1 }}</span> {{ p.verb }}<span class="eyebrow__where"> · {{ p.where }}</span>
         </p>
         <h2 class="title">{{ p.title }}</h2>
         <p class="lead">{{ p.lead }}</p>
@@ -52,7 +51,7 @@
 
     <p class="grab" [class.is-gone]="touched()" aria-hidden="true">
       <span class="grab__arrows">← →</span>
-      <span class="grab__txt">Arrastrá para girar · tocá los puntos</span>
+      <span class="grab__txt">Tocá o arrastrá</span>
     </p>
 
     <div class="hint" aria-hidden="true">

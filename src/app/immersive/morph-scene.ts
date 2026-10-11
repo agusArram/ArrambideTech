@@ -16,14 +16,17 @@ const VERTEX = /* glsl */ `
   uniform float uScan;
   uniform float uPixelRatio;
   uniform float uSize;
-  uniform vec2 uBlast;
-  uniform float uBlastT;
+  uniform float uIntro;
   uniform float uAspect;
+  uniform vec2 uPointer;
+  uniform float uPointerOn;
+  uniform vec3 uB[3];
   attribute vec3 positionB;
   attribute vec3 positionC;
   attribute vec3 positionD;
   attribute vec3 aRand;
   attribute float aSize;
+  attribute float aKind;
   varying float vGlow;
   varying float vDepth;
 
@@ -35,7 +38,15 @@ const VERTEX = /* glsl */ `
     float e2 = m2 * m2 * (3.0 - 2.0 * m2);
     float e3 = m3 * m3 * (3.0 - 2.0 * m3);
 
-    vec3 p = mix(position, positionB, e1);
+    // Las órbitas del logo precesan lentamente (solo mientras la forma es la marca).
+    vec3 pa = position;
+    float spin = aKind > 1.5 ? -uTime * 0.38 : (aKind > 0.5 ? uTime * 0.28 : 0.0);
+    spin *= (1.0 - e1);
+    float cs = cos(spin);
+    float sn = sin(spin);
+    pa.xy = vec2(pa.x * cs - pa.y * sn, pa.x * sn + pa.y * cs);
+
+    vec3 p = mix(pa, positionB, e1);
     p = mix(p, positionC, e2);
     p = mix(p, positionD, e3);
 
@@ -43,31 +54,61 @@ const VERTEX = /* glsl */ `
     p += (aRand - 0.5) * 1.8 * turb;
     p += (aRand - 0.5) * 0.014 * sin(uTime * 1.3 + aRand.x * 30.0);
 
+    // Ensamblado inicial: los puntos llegan desde el espacio, cada uno a su ritmo.
+    float it = clamp(uIntro * 1.45 - aRand.x * 0.45, 0.0, 1.0);
+    float ie = 1.0 - pow(1.0 - it, 4.0);
+    vec3 far = normalize(aRand - 0.5 + vec3(0.0001)) * (2.6 + aRand.y * 3.2);
+    far.xy = vec2(far.x * cos(2.4 * (1.0 - ie)) - far.y * sin(2.4 * (1.0 - ie)),
+                  far.x * sin(2.4 * (1.0 - ie)) + far.y * cos(2.4 * (1.0 - ie)));
+    p = mix(far, p, ie);
+
     float d = abs(p.y - uScan);
     vGlow = smoothstep(0.1, 0.0, d);
 
+    // Pulso de crecimiento a lo largo de la flecha del logo.
+    float diag = dot(p.xy, vec2(0.7071, 0.7071));
+    float pulse = mod(uTime * 0.55, 3.4) * 1.0 - 1.1;
+    vGlow = max(vGlow, smoothstep(0.16, 0.0, abs(diag - pulse)) * (1.0 - e1) * 0.9);
+    vGlow *= ie;
+
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
+    vec2 ndc = gl_Position.xy / gl_Position.w;
 
-    // Mini explosión: onda de choque en pantalla que empuja los puntos y vuelven solos.
-    float blast = 0.0;
-    if (uBlastT < 2.4) {
-      vec2 ndc = gl_Position.xy / gl_Position.w;
-      vec2 d = ndc - uBlast;
-      vec2 dn = vec2(d.x * uAspect, d.y);
-      float dist = length(dn);
-      vec2 dir = normalize(dn + (aRand.xy - 0.5) * 0.7 + vec2(0.0001));
-      float front = uBlastT * 1.9;
-      float ring = exp(-pow((dist - front) / 0.22, 2.0));
-      float near = exp(-dist * 2.4);
-      float life = uBlastT * exp(-uBlastT * 3.1) * 8.6;
-      float push = (0.55 * near + 0.9 * ring) * life * (0.55 + aRand.z * 0.8);
-      gl_Position.xy += vec2(dir.x / uAspect, dir.y) * push * 0.34 * gl_Position.w;
-      blast = clamp(ring * life, 0.0, 1.0);
+    vec2 acc = vec2(0.0);
+    float glow = 0.0;
+
+    // Explosiones suaves (hasta 3 a la vez): rompen la zona tocada, se sostienen y vuelven.
+    for (int i = 0; i < 3; i++) {
+      float bt = uB[i].z;
+      if (bt < 2.2) {
+        vec2 dv = ndc - uB[i].xy;
+        vec2 dn = vec2(dv.x * uAspect, dv.y);
+        float dist = length(dn);
+        vec2 dir = normalize(dn + (aRand.xy - 0.5) * 0.9 + vec2(0.0001));
+        float front = 0.12 + bt * 0.6;
+        float ring = exp(-pow((dist - front) / 0.3, 2.0));
+        float zone = exp(-pow(dist / 0.34, 2.0));
+        float life = smoothstep(0.0, 0.28, bt) * (1.0 - smoothstep(0.85, 1.9, bt));
+        float push = (0.85 * zone + 0.5 * ring) * life * (0.5 + aRand.z * 0.9);
+        acc += dir * push * 0.2;
+        glow += (0.7 * zone + 0.4 * ring) * life;
+      }
     }
 
-    vGlow = clamp(vGlow + blast, 0.0, 1.0);
-    float size = aSize * (1.0 + vGlow * 1.8) * uSize;
+    // Campo suave alrededor del puntero (solo escritorio).
+    if (uPointerOn > 0.001) {
+      vec2 pv = vec2((ndc.x - uPointer.x) * uAspect, ndc.y - uPointer.y);
+      float pr = length(pv);
+      float f = exp(-pr * pr / 0.05) * uPointerOn;
+      acc += normalize(pv + vec2(0.0001)) * f * 0.1;
+      glow += f * 0.45;
+    }
+
+    gl_Position.xy += vec2(acc.x / uAspect, acc.y) * gl_Position.w;
+    vGlow = clamp(vGlow + glow, 0.0, 1.0);
+
+    float size = aSize * (1.0 + vGlow * 1.8) * uSize * mix(0.4, 1.0, ie);
     gl_PointSize = size * uPixelRatio * (1.0 / -mv.z);
     vDepth = clamp(1.25 - (-mv.z - 3.0) * 0.25, 0.25, 1.0);
   }
@@ -110,7 +151,10 @@ export class MorphScene {
   private dragging = false;
   private lastTouch = 0;
   private lastFrame = 0;
-  private blastAt = -1;
+  private readonly blasts: Array<{ x: number; y: number; at: number }> = [];
+  private bornAt = 0;
+  private pointerOn = 0;
+  private pointerAt = 0;
   private readonly pointer = { x: 0, y: 0, cx: 0, cy: 0 };
   private readonly cleanups: Array<() => void> = [];
 
@@ -152,7 +196,8 @@ export class MorphScene {
 
     const rnd = mulberry32(20260610);
     const n = opts.count;
-    const a = brandShape(n, rnd, logo);
+    const kinds = new Float32Array(n);
+    const a = brandShape(n, rnd, logo, kinds);
     const b = terminalShape(n, rnd);
     const c = cardShape(n, rnd);
     const d = networkShape(n, rnd);
@@ -172,6 +217,7 @@ export class MorphScene {
     this.geometry.setAttribute('positionD', new THREE.BufferAttribute(d, 3));
     this.geometry.setAttribute('aRand', new THREE.BufferAttribute(rand, 3));
     this.geometry.setAttribute('aSize', new THREE.BufferAttribute(size, 1));
+    this.geometry.setAttribute('aKind', new THREE.BufferAttribute(kinds, 1));
     this.geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 5);
 
     this.material = new THREE.ShaderMaterial({
@@ -187,9 +233,13 @@ export class MorphScene {
         uPixelRatio: { value: 1 },
         uSize: { value: 6.5 },
         uColor: { value: new THREE.Color('#6ee7b7') },
-        uBlast: { value: new THREE.Vector2(0, 0) },
-        uBlastT: { value: 99 },
         uAspect: { value: 1 },
+        uIntro: { value: opts.animate ? 0 : 1 },
+        uPointer: { value: new THREE.Vector2(9, 9) },
+        uPointerOn: { value: 0 },
+        uB: {
+          value: [new THREE.Vector3(0, 0, 99), new THREE.Vector3(0, 0, 99), new THREE.Vector3(0, 0, 99)],
+        },
       },
     });
 
@@ -231,12 +281,20 @@ export class MorphScene {
     if (!this.opts.animate) this.renderOnce();
   }
 
-  /** Mini explosión en un punto de la pantalla (coordenadas NDC, -1..1). */
+  /**
+   * Mini explosión en un punto de la pantalla (NDC, -1..1).
+   * Se acumulan hasta 3: la cuarta reemplaza a la más antigua.
+   */
   blast(ndcX: number, ndcY: number): void {
     if (this.disposed || !this.opts.animate) return;
-    const u = this.material.uniforms;
-    u['uBlast'].value.set(ndcX, ndcY);
-    this.blastAt = performance.now();
+    const now = performance.now();
+    const entry = { x: ndcX, y: ndcY, at: now };
+    if (this.blasts.length < 3) this.blasts.push(entry);
+    else {
+      let oldest = 0;
+      for (let i = 1; i < this.blasts.length; i++) if (this.blasts[i].at < this.blasts[oldest].at) oldest = i;
+      this.blasts[oldest] = entry;
+    }
   }
 
   endDrag(): void {
@@ -281,6 +339,7 @@ export class MorphScene {
       const onMove = (e: PointerEvent): void => {
         this.pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
         this.pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+        this.pointerAt = performance.now();
       };
       window.addEventListener('pointermove', onMove, { passive: true });
       this.cleanups.push(() => window.removeEventListener('pointermove', onMove));
@@ -318,7 +377,20 @@ export class MorphScene {
     this.pointer.cy += (this.pointer.y - this.pointer.cy) * 0.05;
 
     u['uMorph'].value = this.morph;
-    u['uBlastT'].value = this.blastAt < 0 ? 99 : (now - this.blastAt) / 1000;
+    const uB = u['uB'].value as ThreeNS.Vector3[];
+    for (let i = 0; i < 3; i++) {
+      const b = this.blasts[i];
+      if (b) uB[i].set(b.x, b.y, (now - b.at) / 1000);
+      else uB[i].set(0, 0, 99);
+    }
+    if (!this.bornAt) this.bornAt = now;
+    u['uIntro'].value = Math.min(1, (now - this.bornAt) / 2800);
+    // El campo del puntero aparece al mover el mouse y se apaga solo.
+    const idle = now - this.pointerAt;
+    const target = this.opts.parallax && idle < 1800 ? 1 : 0;
+    this.pointerOn += (target - this.pointerOn) * 0.08;
+    u['uPointerOn'].value = this.pointerOn;
+    u['uPointer'].value.set(this.pointer.cx, -this.pointer.cy);
     u['uTime'].value = t;
     u['uScan'].value = ((t % 6) / 6) * 3.4 - 1.7;
     const dt = Math.min(0.05, Math.max(0, (now - (this.lastFrame || now)) / 1000));

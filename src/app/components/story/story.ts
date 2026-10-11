@@ -16,6 +16,7 @@ import type { MorphScene } from '../../immersive/morph-scene';
 
 interface Pillar {
   verb: string;
+  where: string;
   title: string;
   lead: string;
   caseId: string;
@@ -67,24 +68,27 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
   protected readonly pillars: Pillar[] = [
     {
       verb: 'Reconoce',
+      where: 'Marinas del Paraná Guazú',
       title: 'Que entre solo quien debe entrar.',
-      lead: 'Control de acceso con reconocimiento facial: sabe quién es, si está al día y deja todo registrado. Funcionando hoy en una marina con dos empresas.',
+      lead: 'Reconoce a cada persona y abre solo a quien corresponde.',
       caseId: 'acceso',
-      metric: { value: '2 en 1', label: 'dos empresas comparten un mismo equipo sin mezclar un solo dato' },
+      metric: { value: '2 en 1', label: 'dos empresas, un solo equipo, cero datos mezclados' },
     },
     {
       verb: 'Cobra',
+      where: 'La Ñata · Demode',
       title: 'Cobrá sin perseguir pagos.',
-      lead: 'El cliente paga en el momento y el dinero va directo a tu cuenta. El importe lo fija el sistema: nadie puede alterarlo.',
+      lead: 'El cliente paga en el momento y el dinero va directo a tu cuenta.',
       caseId: 'pagos',
       metric: { value: '0 %', label: 'de comisión por cada cobro' },
     },
     {
       verb: 'Decide',
+      where: 'Hospital Central de Pilar',
       title: 'Tu equipo pregunta, el sistema responde.',
-      lead: 'Un asistente de inteligencia artificial que contesta por chat con tus datos reales y deja registro de cada consulta. En uso en el Hospital Central de Pilar.',
+      lead: 'Un asistente de IA que contesta por chat con tus datos reales.',
       caseId: 'ia',
-      metric: { value: '100 %', label: 'de las consultas quedan registradas y se pueden auditar' },
+      metric: { value: '100 %', label: 'de las consultas quedan registradas' },
     },
   ];
 
