@@ -421,6 +421,7 @@ export class ExtrasComponent implements OnInit, OnDestroy {
           const px = w * (0.55 + 0.15 * (i - 1)) + Math.random() * 40;
           const py = h * (0.4 + 0.12 * i);
           this.blast(px, py);
+          this.burst(px, py);
         }, delay),
       );
     } else if (id === 'konami') {
@@ -432,6 +433,43 @@ export class ExtrasComponent implements OnInit, OnDestroy {
     const id = ++this.waveId;
     this.zone.run(() => this.waves.update((l) => [...l, { id, x, y }]));
     setTimeout(() => this.zone.run(() => this.waves.update((l) => l.filter((v) => v.id !== id))), 1700);
+  }
+
+  /** Estallido de puntitos en el DOM: se ve en cualquier página, haya o no escena 3D. */
+  private burst(x: number, y: number): void {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const layer = document.createElement('div');
+    Object.assign(layer.style, { position: 'fixed', inset: '0', pointerEvents: 'none', zIndex: '9998', overflow: 'hidden' });
+    layer.setAttribute('aria-hidden', 'true');
+    const n = 26;
+    for (let i = 0; i < n; i++) {
+      const dot = document.createElement('span');
+      const size = 3 + Math.random() * 3;
+      Object.assign(dot.style, {
+        position: 'absolute',
+        left: `${x}px`,
+        top: `${y}px`,
+        width: `${size}px`,
+        height: `${size}px`,
+        marginLeft: `${-size / 2}px`,
+        marginTop: `${-size / 2}px`,
+        borderRadius: '50%',
+        background: Math.random() < 0.35 ? '#fff' : 'var(--im-accent, #6ee7b7)',
+        opacity: '0',
+      });
+      const a = (i / n) * Math.PI * 2 + Math.random() * 0.4;
+      const d = 60 + Math.random() * 120;
+      dot.animate(
+        [
+          { transform: 'translate(0,0) scale(0.4)', opacity: 0.95 },
+          { transform: `translate(${Math.cos(a) * d}px, ${Math.sin(a) * d}px) scale(1)`, opacity: 0 },
+        ],
+        { duration: 900 + Math.random() * 500, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' },
+      );
+      layer.appendChild(dot);
+    }
+    document.body.appendChild(layer);
+    setTimeout(() => layer.remove(), 1600);
   }
 
   /** Avisa a la escena 3D (si hay una en pantalla) para que dispare una onda en ese punto. */

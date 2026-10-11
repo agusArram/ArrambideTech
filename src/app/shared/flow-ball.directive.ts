@@ -23,6 +23,20 @@ export class FlowBallDirective implements AfterViewInit, OnDestroy {
 
     this.ball = document.createElement('span');
     this.ball.className = 'flow__ball';
+    // Estilos en línea: el elemento se crea a mano y no recibe los atributos de encapsulación de Angular.
+    Object.assign(this.ball.style, {
+      position: 'absolute',
+      left: '0',
+      top: '0',
+      width: '9px',
+      height: '9px',
+      borderRadius: '50%',
+      background: '#fff',
+      boxShadow: '0 0 0 3px rgba(110,231,183,.25), 0 0 14px 2px rgba(110,231,183,.65)',
+      zIndex: '2',
+      pointerEvents: 'none',
+      opacity: '0',
+    });
     this.ball.setAttribute('aria-hidden', 'true');
     this.host.appendChild(this.ball);
 
