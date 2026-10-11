@@ -1,7 +1,7 @@
 <section id="casos" class="pp im-section" aria-labelledby="pp-title">
   <div class="im-wrap">
     <div appReveal>
-      <p class="im-eyebrow"><b>03</b> Casos</p>
+      <p class="im-eyebrow"><b>04</b> Casos</p>
       <h2 id="pp-title" class="pp__title" appProximity>¿Qué te está costando tiempo hoy?</h2>
     </div>
 
@@ -26,18 +26,20 @@
       </ul>
 
       <div class="pp__panel" aria-live="polite">
-        @for (p of pains; track p.id; let i = $index) {
-          @if (current() === i) {
-            <article class="pp__card">
-              <p class="pp__lbl">Ya lo resolvimos en <strong>{{ p.where }}</strong></p>
-              <p class="pp__value">{{ p.value }}</p>
-              <p class="pp__unit">{{ p.unit }}</p>
-              <h3 class="pp__sys">{{ p.system }}</h3>
-              <p class="pp__text">{{ p.text }}</p>
-              <a class="im-btn im-btn--ghost" routerLink="/soluciones" [fragment]="p.id">Ver el caso →</a>
-            </article>
+        <article class="pp__card">
+          @for (k of [current()]; track k) {
+            <p class="pp__lbl swap">Ya lo resolvimos en <strong>{{ pains[k].where }}</strong></p>
           }
-        }
+          <p class="pp__value"><app-odometer [value]="pains[current()].value" /></p>
+          @for (k of [current()]; track k) {
+            <div class="pp__txt swap">
+              <p class="pp__unit">{{ pains[k].unit }}</p>
+              <h3 class="pp__sys">{{ pains[k].system }}</h3>
+              <p class="pp__text">{{ pains[k].text }}</p>
+              <a class="im-btn im-btn--ghost" routerLink="/soluciones" [fragment]="pains[k].id">Ver el caso →</a>
+            </div>
+          }
+        </article>
       </div>
     </div>
   </div>

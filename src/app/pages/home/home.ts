@@ -6,6 +6,7 @@ import { StoryComponent } from '../../components/story/story';
 import { FaceDemoComponent } from '../../components/face-demo/face-demo';
 import { ProofComponent } from '../../components/proof/proof';
 import { PainPickerComponent } from '../../components/pain-picker/pain-picker';
+import { LiveMonitorComponent } from '../../components/live-monitor/live-monitor';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ import { PainPickerComponent } from '../../components/pain-picker/pain-picker';
     FaceDemoComponent,
     ProofComponent,
     PainPickerComponent,
+    LiveMonitorComponent,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',

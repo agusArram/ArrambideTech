@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { ProximityDirective } from '../../shared/proximity.directive';
+import { OdometerComponent } from '../odometer/odometer';
 
 interface Pain {
   id: string;
@@ -17,7 +18,7 @@ interface Pain {
 @Component({
   selector: 'app-pain-picker',
   standalone: true,
-  imports: [RouterLink, RevealDirective, ProximityDirective],
+  imports: [RouterLink, RevealDirective, ProximityDirective, OdometerComponent],
   templateUrl: './pain-picker.html',
   styleUrl: './pain-picker.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,33 @@
+<section #root class="lm" aria-labelledby="lm-title">
+  <div class="lm__inner">
+    <header appReveal>
+      <p class="eyebrow"><span class="eyebrow__n">02</span> En tu panel</p>
+      <h2 id="lm-title" class="title" appProximity>Lo que ve tu equipo, en vivo.</h2>
+    </header>
+
+    <div class="mon" appReveal>
+      <div class="mon__bar">
+        <span class="mon__live"><i class="mon__dot" aria-hidden="true"></i> Monitor en vivo</span>
+        <span class="mon__stats">
+          <span><b>{{ granted() }}</b> accesos hoy</span>
+          <span><b class="mon__warn">{{ denied() }}</b> denegados</span>
+        </span>
+        <span class="mon__tag">Datos de ejemplo</span>
+      </div>
+
+      <ol class="mon__list" aria-live="off">
+        @for (e of events(); track e.id) {
+          <li class="ev" [attr.data-status]="e.status">
+            <div class="ev__in">
+              <span class="ev__time">{{ e.time }}</span>
+              <span class="ev__chip">{{ e.label }}</span>
+              <span class="ev__who">{{ e.who }}</span>
+              <span class="ev__door">{{ e.door }}</span>
+              <span class="ev__ms">{{ e.ms }} s</span>
+            </div>
+          </li>
+        }
+      </ol>
+    </div>
+  </div>
+</section>

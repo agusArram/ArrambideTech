@@ -4,7 +4,6 @@
   --im-fg: #f4f4f2;
   --im-muted: #8b8b94;
   --im-line: rgba(255, 255, 255, 0.09);
-  --im-accent: #6ee7b7;
   background: var(--im-bg);
   color: var(--im-fg);
 }

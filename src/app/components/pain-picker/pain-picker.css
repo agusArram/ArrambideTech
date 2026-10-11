@@ -81,6 +81,12 @@
   align-content: start;
   gap: 0.45rem;
   padding: clamp(1.25rem, 2.4vw, 1.75rem);
+}
+.pp__txt {
+  display: grid;
+  gap: 0.45rem;
+}
+.swap {
   animation: pp-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 @keyframes pp-in {
