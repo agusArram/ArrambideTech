@@ -66,18 +66,19 @@ const VERTEX = /* glsl */ `
     // Onda expansiva (hasta 3 a la vez): un frente que sale del toque y empuja los puntos que cruza.
     for (int i = 0; i < 3; i++) {
       float bt = uB[i].z;
-      if (bt < 2.6) {
+      if (bt < 3.2) {
         vec2 dv = ndc - uB[i].xy;
         vec2 dn = vec2(dv.x * uAspect, dv.y);
         float dist = length(dn);
         float flyer = step(fract(aRand.x * 11.3 + aRand.y * 5.7), 0.34);
-        float front = 0.015 + bt * 0.52;
-        float pulse = exp(-pow((dist - front) / 0.12, 2.0));
-        float decay = exp(-bt * 1.25);
+        float attack = smoothstep(0.0, 0.45, bt);
+        float front = 0.02 + bt * 0.36;
+        float pulse = exp(-pow((dist - front) / 0.13, 2.0));
+        float decay = exp(-bt * 0.95);
         vec2 dir = normalize(dn + (aRand.xy - 0.5) * 0.45 + vec2(0.0001));
-        float mag = pulse * decay * mix(0.3, 1.0, flyer) * (0.6 + aRand.z * 0.8);
-        acc += dir * mag * 0.17;
-        glow += pulse * decay * flyer * 0.45;
+        float mag = pulse * decay * attack * mix(0.3, 1.0, flyer) * (0.6 + aRand.z * 0.8);
+        acc += dir * mag * 0.15;
+        glow += pulse * decay * attack * flyer * 0.4;
       }
     }
 
@@ -190,8 +191,8 @@ export class MorphScene {
     const n = opts.count;
     const a = brandShape(n, rnd, logo);
     const b = terminalShape(n, rnd);
-    const c = cardShape(n, rnd);
-    const d = networkShape(n, rnd);
+    const c = networkShape(n, rnd);
+    const d = cardShape(n, rnd);
     const rand = new Float32Array(n * 3);
     const size = new Float32Array(n);
     for (let i = 0; i < n; i++) {

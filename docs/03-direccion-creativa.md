@@ -6,10 +6,10 @@ Un único objeto 3D —una nube de ~9.000 partículas— es el protagonista de t
 
 | Escena | Forma | Mensaje | Metáfora |
 |---|---|---|---|
-| 0 · Hero | **El logo de Arrambide Tech hecho de puntos** (muestreado del archivo real del logo), con dos órbitas inclinadas, satélites y polvo | *Reconoce. Cobra. Decide.* | La marca como sistema |
+| 0 · Hero | **El logo de Arrambide Tech hecho de puntos** (muestreado del archivo real del logo), con dos órbitas inclinadas, satélites y polvo | *Reconoce. Decide. Cobra.* | La marca como sistema |
 | 1 · Reconoce | **Terminal de acceso facial** (tablet de pared con módulo de cámara, pantalla en líneas de barrido, visor con esquinas y halos de detección) | Acceso facial real, cifrado, auditable | El punto de entrada |
-| 2 · Cobra | **Tarjeta** con chip y numeración | El monto lo decide el servidor | El dinero |
-| 3 · Decide | **Red de 22 nodos** con hub central y vínculos entre vecinos | IA que consulta, no inventa | El cerebro operativo |
+| 2 · Decide | **Red de 22 nodos** con hub central y vínculos entre vecinos | IA que consulta, no inventa | El cerebro operativo |
+| 3 · Cobra | **Tarjeta** con chip y numeración | El monto lo decide el servidor | El dinero |
 
 La transformación no es un corte: las partículas viajan de una forma a otra (morph en shader), como si el sistema “pensara” de un pilar al siguiente. Ese mismo concepto se repite en el producto real: un dato entra por un lado, cambia de forma y sale como decisión.
 
@@ -167,7 +167,7 @@ Todo bloque relevante entra con `appReveal`: opacidad + desplazamiento de 26 px 
 ## Copy base (borrador)
 
 **Hero**
-> Reconoce. Cobra. Decide.
+> Reconoce. Decide. Cobra.
 > Ingeniería de sistemas que ya operan: reconocimiento facial integrado a hardware real, pagos que nadie puede alterar e IA que consulta sin inventar.
 
 **CTA principal:** “Ver demostración en vivo” · **Secundario:** “Agendar una conversación”.
@@ -185,3 +185,10 @@ Todo bloque relevante entra con `appReveal`: opacidad + desplazamiento de 26 px 
 ## Referencias de nivel (no de estilo a copiar)
 
 Linear, Stripe, Vercel (rigor y contención), Apple (ritmo y escala tipográfica), Active Theory / Resn (calidad de 3D en web).
+
+## Orden de los verbos y gesto del trackpad (v11)
+
+- **Reconoce. Decide. Cobra.** reemplaza a “Reconoce. Cobra. Decide.”: sigue la secuencia lógica (reconozco → decido → cobro) y termina en la plata. Las formas siguen el mismo orden: marca → terminal → red → tarjeta. Casos, Capacidades y el selector de dolores usan el mismo orden.
+- **Trackpad:** `overscroll-behavior-x: none` y un “enganche” del gesto horizontal (260 ms) evitan que girar el logo con dos dedos dispare *atrás* del navegador.
+- **Primer pixel oscuro:** `<html>`/`<body>` con fondo inline, `color-scheme` y `theme-color` para eliminar el destello blanco al recargar.
+- **Onda:** ataque suave (`smoothstep` 0,45 s), frente más lento (0,36 u/s) y decaimiento más largo.

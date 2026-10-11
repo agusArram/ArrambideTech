@@ -49,29 +49,8 @@ export class ServiciosComponent {
       caseId: 'acceso',
     },
     {
-      id: 'cobra',
-      index: '02',
-      verb: 'Cobra',
-      title: 'Cobros automáticos dentro de tu sistema',
-      intro: 'El cliente paga en el momento y vos dejás de conciliar pagos a mano.',
-      builds: [
-        'Cobro de señas y de pagos completos con Mercado Pago.',
-        'El dinero va directo a tu cuenta.',
-        'Si hay que cancelar, el saldo queda a favor del cliente.',
-        'Avisos y comprobantes automáticos por email.',
-      ],
-      how: [
-        'El importe lo calcula el servidor: nadie puede cambiarlo desde el navegador.',
-        'Toda la lógica de cobro corre protegida en el backend.',
-        'Cada comercio opera con su propia cuenta, aislado de los demás.',
-        'Tolera reintentos y notificaciones duplicadas sin cobrar dos veces.',
-      ],
-      fit: 'Reservas, suscripciones, plataformas con varios comercios y negocios que hoy concilian pagos manualmente.',
-      caseId: 'pagos',
-    },
-    {
       id: 'decide',
-      index: '03',
+      index: '02',
       verb: 'Decide',
       title: 'Asistentes de inteligencia artificial para tu operación',
       intro: 'Tu equipo pregunta por chat y recibe la respuesta de tus propios datos, con registro de cada consulta.',
@@ -89,6 +68,27 @@ export class ServiciosComponent {
       ],
       fit: 'Áreas de RRHH, atención y administración que pierden horas buscando, copiando y cruzando información.',
       caseId: 'ia',
+    },
+    {
+      id: 'cobra',
+      index: '03',
+      verb: 'Cobra',
+      title: 'Cobros automáticos dentro de tu sistema',
+      intro: 'El cliente paga en el momento y vos dejás de conciliar pagos a mano.',
+      builds: [
+        'Cobro de señas y de pagos completos con Mercado Pago.',
+        'El dinero va directo a tu cuenta.',
+        'Si hay que cancelar, el saldo queda a favor del cliente.',
+        'Avisos y comprobantes automáticos por email.',
+      ],
+      how: [
+        'El importe lo calcula el servidor: nadie puede cambiarlo desde el navegador.',
+        'Toda la lógica de cobro corre protegida en el backend.',
+        'Cada comercio opera con su propia cuenta, aislado de los demás.',
+        'Tolera reintentos y notificaciones duplicadas sin cobrar dos veces.',
+      ],
+      fit: 'Reservas, suscripciones, plataformas con varios comercios y negocios que hoy concilian pagos manualmente.',
+      caseId: 'pagos',
     },
   ];
 

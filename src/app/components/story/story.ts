@@ -75,14 +75,6 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
       metric: { value: '2 en 1', label: 'dos empresas, un solo equipo, cero datos mezclados' },
     },
     {
-      verb: 'Cobra',
-      where: 'La Ñata · Demode',
-      title: 'Cobrá sin perseguir pagos.',
-      lead: 'El cliente paga en el momento y el dinero va directo a tu cuenta.',
-      caseId: 'pagos',
-      metric: { value: '0 %', label: 'de comisión por cada cobro' },
-    },
-    {
       verb: 'Decide',
       where: 'Hospital Central de Pilar',
       title: 'Tu equipo pregunta, el sistema responde.',
@@ -90,9 +82,17 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
       caseId: 'ia',
       metric: { value: '100 %', label: 'de las consultas quedan registradas' },
     },
+    {
+      verb: 'Cobra',
+      where: 'La Ñata · Demode',
+      title: 'Cobrá sin perseguir pagos.',
+      lead: 'El cliente paga en el momento y el dinero va directo a tu cuenta.',
+      caseId: 'pagos',
+      metric: { value: '0 %', label: 'de comisión por cada cobro' },
+    },
   ];
 
-  protected readonly railItems = ['Inicio', 'Reconoce', 'Cobra', 'Decide'];
+  protected readonly railItems = ['Inicio', 'Reconoce', 'Decide', 'Cobra'];
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) return;
@@ -221,13 +221,22 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
 
   /** Gesto horizontal del trackpad: gira. El vertical sigue siendo scroll normal. */
   private onWheel = (e: WheelEvent): void => {
+    const now = performance.now();
     const ax = Math.abs(e.deltaX);
     const ay = Math.abs(e.deltaY);
-    if (ax < 2 || ax < ay * 1.3) return;
+    // Una vez que el gesto es horizontal, se mantiene "enganchado" hasta que termina,
+    // para que el navegador no lo interprete como "volver atrás" a mitad de camino.
+    const latched = now - this.hLatch < 260;
+    const horizontal = ax > 0.5 && ax >= ay * 0.9;
+    if (!horizontal && !latched) return;
     e.preventDefault();
-    this.scene?.rotateBy(-e.deltaX * 0.0045);
-    this.markTouched();
+    this.hLatch = now;
+    if (ax > 0) {
+      this.scene?.rotateBy(-e.deltaX * 0.0045);
+      this.markTouched();
+    }
   };
+  private hLatch = 0;
 
   private onScroll = (): void => {
     const rect = this.section.nativeElement.getBoundingClientRect();

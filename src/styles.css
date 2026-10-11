@@ -581,3 +581,9 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* El gesto horizontal del trackpad (girar la escena) no dispara "atrás/adelante" del navegador. */
+html,
+body {
+  overscroll-behavior-x: none;
+}

@@ -33,15 +33,6 @@ export class PainPickerComponent {
       text: 'Cada persona entra según sus reglas y cada empresa ve solo lo suyo.',
     },
     {
-      id: 'pagos',
-      pain: 'Pierdo horas cobrando y conciliando pagos.',
-      system: 'Reservas con cobro online',
-      where: 'La Ñata · Demode',
-      value: '0 %',
-      unit: 'de comisión por cada cobro',
-      text: 'El cliente paga al reservar y el dinero va directo a tu cuenta.',
-    },
-    {
       id: 'ia',
       pain: 'Mi equipo busca datos en planillas todo el día.',
       system: 'Asistente de IA por chat',
@@ -49,6 +40,15 @@ export class PainPickerComponent {
       value: '100 %',
       unit: 'de las consultas quedan registradas',
       text: 'Se pregunta por chat y responde con tus datos reales, sin inventar.',
+    },
+    {
+      id: 'pagos',
+      pain: 'Pierdo horas cobrando y conciliando pagos.',
+      system: 'Reservas con cobro online',
+      where: 'La Ñata · Demode',
+      value: '0 %',
+      unit: 'de comisión por cada cobro',
+      text: 'El cliente paga al reservar y el dinero va directo a tu cuenta.',
     },
     {
       id: 'plataforma',
