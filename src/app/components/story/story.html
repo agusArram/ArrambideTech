@@ -52,7 +52,7 @@
       </ol>
     </nav>
 
-    <p class="grab" [class.is-gone]="touched()" aria-hidden="true">
+    <p class="grab" [class.is-on]="sceneReady() && !touched()" aria-hidden="true">
       <span class="grab__arrows">← →</span>
       <span class="grab__txt">Tocá o arrastrá</span>
     </p>

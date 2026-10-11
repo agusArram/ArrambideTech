@@ -33,7 +33,7 @@
   height: 100%;
   display: block;
   opacity: 0;
-  transition: opacity 1.2s ease;
+  transition: opacity 0.35s ease;
 }
 .story__canvas.is-ready {
   opacity: 1;
@@ -212,8 +212,12 @@
   pointer-events: none;
   transition: opacity 0.6s ease;
 }
-.grab.is-gone {
+.grab:not(.is-on) {
   opacity: 0;
+}
+.grab.is-on {
+  opacity: 1;
+  transition-delay: 1.4s;
 }
 .grab__arrows {
   display: inline-block;

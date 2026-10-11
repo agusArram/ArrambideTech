@@ -71,27 +71,26 @@ const VERTEX = /* glsl */ `
         vec2 dn = vec2(dv.x * uAspect, dv.y);
         float dist = length(dn);
         vec2 dir = normalize(dn + (aRand.xy - 0.5) * 1.1 + vec2(0.0001));
-        float front = 0.04 + bt * 0.26;
-        float ring = exp(-pow((dist - front) / 0.1, 2.0));
-        float zone = exp(-pow(dist / 0.13, 2.0));
+        float front = 0.05 + bt * 0.34;
+        float ring = exp(-pow((dist - front) / 0.11, 2.0));
+        float zone = exp(-pow(dist / 0.17, 2.0));
         float life = smoothstep(0.0, 0.16, bt) * (1.0 - smoothstep(0.55, 1.5, bt));
         float push = (0.9 * zone + 0.45 * ring) * life * (0.5 + aRand.z * 0.9);
-        acc += dir * push * 0.14;
-        acc += (aRand.xy - 0.5) * zone * life * 0.12;
+        acc += dir * push * 0.17;
+        acc += (aRand.xy - 0.5) * zone * life * 0.14;
         glow += (0.6 * zone + 0.3 * ring) * life;
       }
     }
 
-    // Campo del puntero (escritorio): empuja y distorsiona de forma aleatoria alrededor del mouse.
+    // Campo del puntero (escritorio): círculo sutil, un poco más grande que el cursor.
     if (uPointerOn > 0.001) {
       vec2 pv = vec2((ndc.x - uPointer.x) * uAspect, ndc.y - uPointer.y);
       float pr = length(pv);
-      float f = exp(-pr * pr / 0.085) * uPointerOn;
+      float f = exp(-pr * pr / 0.0075) * uPointerOn;
       vec2 radial = normalize(pv + vec2(0.0001));
-      vec2 tang = vec2(-radial.y, radial.x);
-      float wob = sin(uTime * 2.6 + aRand.x * 40.0);
-      acc += (radial * (0.6 + aRand.z * 0.9) + tang * (aRand.y - 0.5) * 1.8 + (aRand.xy - 0.5) * wob) * f * 0.2;
-      glow += f * 0.5;
+      float wob = sin(uTime * 2.2 + aRand.x * 40.0);
+      acc += (radial * (0.6 + aRand.z * 0.8) + (aRand.xy - 0.5) * (0.5 + 0.5 * wob)) * f * 0.09;
+      glow += f * 0.22;
     }
 
     gl_Position.xy += vec2(acc.x / uAspect, acc.y) * gl_Position.w;

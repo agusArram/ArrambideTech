@@ -40,6 +40,17 @@ Feedback sobre la v6: la animación nueva no gustó y era lenta. Cambios:
 3. **Campo del mouse (escritorio):** los puntos cercanos al cursor se apartan con una distorsión aleatoria (empuje radial + torsión + ruido por punto), más amplio que en la v6.
 4. **Hero:** se restituyó la frase completa: “Sistemas que le ahorran tiempo a tu empresa: controlan quién entra, cobran solos y responden con inteligencia artificial.”
 
+## Mouse y toque, dos efectos distintos (v8)
+
+Feedback: en la v7 el campo del mouse y la explosión se mezclaban. Ahora son dos efectos con escala propia:
+
+| Efecto | Dónde | Tamaño | Carácter |
+|---|---|---|---|
+| **Círculo del mouse** | Solo escritorio | Apenas mayor que el cursor (σ ≈ 0,09 del alto de pantalla) | Sutil: aparta levemente los puntos y los ilumina poco |
+| **Micro-explosión** | Click o toque | Algo mayor que el círculo (zona σ ≈ 0,17 + anillo que se expande) | Rompe la zona con distorsión aleatoria; dura ~1,5 s; acumulable hasta 3 |
+
+El aviso “Tocá o arrastrá” entra junto con la escena (no antes) para que no aparezca solo mientras carga.
+
 ## Casos desde el dolor del cliente (v7)
 
 La sección “Tres sistemas, tres entornos reales” se reemplazó por **“¿Qué te está costando tiempo hoy?”**: cuatro frases en primera persona (“No sé quién entra ni si debía entrar”, “Pierdo horas cobrando y conciliando pagos”, “Mi equipo busca datos en planillas todo el día”, “Tengo sistemas que no se hablan entre sí”). Al elegir una (hover, foco o toque) aparece dónde ya se resolvió, con una cifra grande y el enlace al caso. Parte del problema del visitante, no del catálogo del proveedor.
