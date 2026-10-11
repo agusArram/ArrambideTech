@@ -1,0 +1,138 @@
+:host {
+  display: block;
+  background: var(--im-bg);
+}
+.pp__grid {
+  margin-top: clamp(2rem, 4vw, 3.25rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: stretch;
+}
+.pp__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--im-line);
+}
+.pp__btn {
+  width: 100%;
+  display: flex;
+  gap: 1.1rem;
+  align-items: baseline;
+  padding: 1.35rem 0.25rem;
+  border: 0;
+  border-bottom: 1px solid var(--im-line);
+  background: none;
+  color: var(--im-muted);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    color 0.35s ease,
+    padding 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pp__btn:hover,
+.pp__btn.is-on {
+  color: var(--im-fg);
+  padding-left: 0.9rem;
+}
+.pp__btn:focus-visible {
+  outline: 2px solid var(--im-accent);
+  outline-offset: -2px;
+}
+.pp__n {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  color: var(--im-muted);
+  transition: color 0.3s ease;
+}
+.pp__btn.is-on .pp__n {
+  color: var(--im-accent);
+}
+.pp__pain {
+  font-size: clamp(1.15rem, 2.1vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.pp__panel {
+  position: relative;
+  min-height: 21rem;
+  border: 1px solid var(--im-line);
+  border-radius: 20px;
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgba(110, 231, 183, 0.07), transparent 60%), var(--im-bg-2);
+  overflow: hidden;
+}
+.pp__card {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  animation: pp-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes pp-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+}
+.pp__lbl {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--im-muted);
+}
+.pp__lbl strong {
+  color: var(--im-fg);
+  font-weight: 500;
+}
+.pp__value {
+  margin: 0.6rem 0 0;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--im-accent);
+  font-variant-numeric: tabular-nums;
+}
+.pp__unit {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--im-soft);
+}
+.pp__sys {
+  margin: 1.4rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.pp__text {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--im-soft);
+}
+.pp__card .im-btn {
+  justify-self: start;
+}
+
+@media (max-width: 860px) {
+  .pp__grid {
+    grid-template-columns: 1fr;
+  }
+  .pp__panel {
+    min-height: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pp__card {
+    animation: none;
+  }
+  .pp__btn {
+    transition: none;
+  }
+}

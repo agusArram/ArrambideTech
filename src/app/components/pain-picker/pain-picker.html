@@ -1,0 +1,44 @@
+<section id="casos" class="pp im-section" aria-labelledby="pp-title">
+  <div class="im-wrap">
+    <div appReveal>
+      <p class="im-eyebrow"><b>03</b> Casos</p>
+      <h2 id="pp-title" class="im-title">¿Qué te está costando tiempo hoy?</h2>
+    </div>
+
+    <div class="pp__grid" appReveal>
+      <ul class="pp__list" role="list">
+        @for (p of pains; track p.id; let i = $index) {
+          <li>
+            <button
+              type="button"
+              class="pp__btn"
+              [class.is-on]="current() === i"
+              [attr.aria-pressed]="current() === i"
+              (click)="pick(i)"
+              (mouseenter)="pick(i)"
+              (focus)="pick(i)"
+            >
+              <span class="pp__n">0{{ i + 1 }}</span>
+              <span class="pp__pain">“{{ p.pain }}”</span>
+            </button>
+          </li>
+        }
+      </ul>
+
+      <div class="pp__panel" aria-live="polite">
+        @for (p of pains; track p.id; let i = $index) {
+          @if (current() === i) {
+            <article class="pp__card">
+              <p class="pp__lbl">Ya lo resolvimos en <strong>{{ p.where }}</strong></p>
+              <p class="pp__value">{{ p.value }}</p>
+              <p class="pp__unit">{{ p.unit }}</p>
+              <h3 class="pp__sys">{{ p.system }}</h3>
+              <p class="pp__text">{{ p.text }}</p>
+              <a class="im-btn im-btn--ghost" routerLink="/soluciones" [fragment]="p.id">Ver el caso →</a>
+            </article>
+          }
+        }
+      </div>
+    </div>
+  </div>
+</section>

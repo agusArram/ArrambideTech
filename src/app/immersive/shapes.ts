@@ -307,7 +307,7 @@ export function networkShape(count: number, rnd: Rng): Float32Array {
  * pares (x, y) normalizados en [-0.5, 0.5]. Si no se puede cargar, usa una "A"
  * dibujada con tipografía como respaldo.
  */
-export async function sampleLogoPoints(url: string, want = 9000): Promise<Float32Array> {
+export async function sampleLogoPoints(url: string, want = 4500): Promise<Float32Array> {
   const size = 320;
   const canvas = document.createElement('canvas');
   canvas.width = size;
@@ -393,18 +393,18 @@ export function brandShape(count: number, rnd: Rng, logo: Float32Array, kinds?: 
     let z: number;
     let kind = 0;
 
-    if (k < 0.72 && nLogo > 0) {
+    if (k < 0.78 && nLogo > 0) {
       const j = Math.floor(rnd() * nLogo);
       x = logo[j * 2] * SCALE + (rnd() - 0.5) * 0.012;
       y = logo[j * 2 + 1] * SCALE + (rnd() - 0.5) * 0.012;
       z = (Math.floor(rnd() * 3) - 1) * 0.07 + (rnd() - 0.5) * 0.02;
-    } else if (k < 0.84) {
+    } else if (k < 0.88) {
       kind = 1;
       [x, y, z] = orbit(1.55, 1.15, 0.35, rnd() * Math.PI * 2);
-    } else if (k < 0.92) {
+    } else if (k < 0.94) {
       kind = 2;
       [x, y, z] = orbit(1.18, -0.9, -0.5, rnd() * Math.PI * 2);
-    } else if (k < 0.96) {
+    } else if (k < 0.97) {
       // Satélites sobre las órbitas
       const sat = Math.floor(rnd() * 5);
       const a = (sat / 5) * Math.PI * 2 + 0.4;

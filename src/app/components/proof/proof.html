@@ -1,35 +1,19 @@
 <section id="pruebas" class="proof" aria-labelledby="proof-title">
   <div class="proof__inner">
-    <header class="proof__head" appReveal>
+    <header appReveal>
       <p class="eyebrow"><span class="eyebrow__n">02</span> Resultados</p>
       <h2 id="proof-title" class="title">Problemas reales<br />que ya resolvimos.</h2>
-      <p class="lead">Cada mejora nace de algo que le pasó a un cliente de verdad.</p>
     </header>
 
-    <div class="grid">
-      @for (p of problems; track p.tag; let i = $index) {
-        <article class="card" [appReveal]="i * 90">
-          <p class="card__tag"><span>{{ p.tag }}</span></p>
-          <h3 class="card__title">{{ p.title }}</h3>
-
-          <dl class="card__story">
-            <div>
-              <dt>Antes</dt>
-              <dd>{{ p.before }}</dd>
-            </div>
-            <div>
-              <dt>Ahora</dt>
-              <dd>{{ p.after }}</dd>
-            </div>
-          </dl>
-
-          <p class="card__metric">
-            <span class="card__v">{{ p.value }}</span>
-            <span class="card__u">{{ p.unit }}</span>
-          </p>
-        </article>
+    <ul class="grid">
+      @for (r of results; track r.title; let i = $index) {
+        <li class="item" [appReveal]="i * 90">
+          <span class="item__v">{{ r.value }}</span>
+          <span class="item__t">{{ r.title }}</span>
+          <span class="item__l">{{ r.line }}</span>
+        </li>
       }
-    </div>
+    </ul>
 
     <p class="proof__more" appReveal>
       <a routerLink="/soluciones" fragment="acceso">Ver el caso completo →</a>

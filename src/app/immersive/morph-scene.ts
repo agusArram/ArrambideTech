@@ -26,7 +26,6 @@ const VERTEX = /* glsl */ `
   attribute vec3 positionD;
   attribute vec3 aRand;
   attribute float aSize;
-  attribute float aKind;
   varying float vGlow;
   varying float vDepth;
 
@@ -38,15 +37,7 @@ const VERTEX = /* glsl */ `
     float e2 = m2 * m2 * (3.0 - 2.0 * m2);
     float e3 = m3 * m3 * (3.0 - 2.0 * m3);
 
-    // Las órbitas del logo precesan lentamente (solo mientras la forma es la marca).
-    vec3 pa = position;
-    float spin = aKind > 1.5 ? -uTime * 0.38 : (aKind > 0.5 ? uTime * 0.28 : 0.0);
-    spin *= (1.0 - e1);
-    float cs = cos(spin);
-    float sn = sin(spin);
-    pa.xy = vec2(pa.x * cs - pa.y * sn, pa.x * sn + pa.y * cs);
-
-    vec3 p = mix(pa, positionB, e1);
+    vec3 p = mix(position, positionB, e1);
     p = mix(p, positionC, e2);
     p = mix(p, positionD, e3);
 
@@ -54,21 +45,15 @@ const VERTEX = /* glsl */ `
     p += (aRand - 0.5) * 1.8 * turb;
     p += (aRand - 0.5) * 0.014 * sin(uTime * 1.3 + aRand.x * 30.0);
 
-    // Ensamblado inicial: los puntos llegan desde el espacio, cada uno a su ritmo.
-    float it = clamp(uIntro * 1.45 - aRand.x * 0.45, 0.0, 1.0);
-    float ie = 1.0 - pow(1.0 - it, 4.0);
-    vec3 far = normalize(aRand - 0.5 + vec3(0.0001)) * (2.6 + aRand.y * 3.2);
-    far.xy = vec2(far.x * cos(2.4 * (1.0 - ie)) - far.y * sin(2.4 * (1.0 - ie)),
-                  far.x * sin(2.4 * (1.0 - ie)) + far.y * cos(2.4 * (1.0 - ie)));
+    // Aparición inicial rápida: los puntos llegan y se acomodan.
+    float it = clamp(uIntro * 1.3 - aRand.x * 0.3, 0.0, 1.0);
+    float ie = 1.0 - pow(1.0 - it, 3.0);
+    vec3 far = normalize(aRand - 0.5 + vec3(0.0001)) * (1.8 + aRand.y * 1.6);
     p = mix(far, p, ie);
 
     float d = abs(p.y - uScan);
     vGlow = smoothstep(0.1, 0.0, d);
 
-    // Pulso de crecimiento a lo largo de la flecha del logo.
-    float diag = dot(p.xy, vec2(0.7071, 0.7071));
-    float pulse = mod(uTime * 0.55, 3.4) * 1.0 - 1.1;
-    vGlow = max(vGlow, smoothstep(0.16, 0.0, abs(diag - pulse)) * (1.0 - e1) * 0.9);
     vGlow *= ie;
 
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
@@ -78,31 +63,35 @@ const VERTEX = /* glsl */ `
     vec2 acc = vec2(0.0);
     float glow = 0.0;
 
-    // Explosiones suaves (hasta 3 a la vez): rompen la zona tocada, se sostienen y vuelven.
+    // Micro explosiones (hasta 3 a la vez): rompen un punto y distorsionan un poco alrededor.
     for (int i = 0; i < 3; i++) {
       float bt = uB[i].z;
-      if (bt < 2.2) {
+      if (bt < 1.7) {
         vec2 dv = ndc - uB[i].xy;
         vec2 dn = vec2(dv.x * uAspect, dv.y);
         float dist = length(dn);
-        vec2 dir = normalize(dn + (aRand.xy - 0.5) * 0.9 + vec2(0.0001));
-        float front = 0.12 + bt * 0.6;
-        float ring = exp(-pow((dist - front) / 0.3, 2.0));
-        float zone = exp(-pow(dist / 0.34, 2.0));
-        float life = smoothstep(0.0, 0.28, bt) * (1.0 - smoothstep(0.85, 1.9, bt));
-        float push = (0.85 * zone + 0.5 * ring) * life * (0.5 + aRand.z * 0.9);
-        acc += dir * push * 0.2;
-        glow += (0.7 * zone + 0.4 * ring) * life;
+        vec2 dir = normalize(dn + (aRand.xy - 0.5) * 1.1 + vec2(0.0001));
+        float front = 0.04 + bt * 0.26;
+        float ring = exp(-pow((dist - front) / 0.1, 2.0));
+        float zone = exp(-pow(dist / 0.13, 2.0));
+        float life = smoothstep(0.0, 0.16, bt) * (1.0 - smoothstep(0.55, 1.5, bt));
+        float push = (0.9 * zone + 0.45 * ring) * life * (0.5 + aRand.z * 0.9);
+        acc += dir * push * 0.14;
+        acc += (aRand.xy - 0.5) * zone * life * 0.12;
+        glow += (0.6 * zone + 0.3 * ring) * life;
       }
     }
 
-    // Campo suave alrededor del puntero (solo escritorio).
+    // Campo del puntero (escritorio): empuja y distorsiona de forma aleatoria alrededor del mouse.
     if (uPointerOn > 0.001) {
       vec2 pv = vec2((ndc.x - uPointer.x) * uAspect, ndc.y - uPointer.y);
       float pr = length(pv);
-      float f = exp(-pr * pr / 0.05) * uPointerOn;
-      acc += normalize(pv + vec2(0.0001)) * f * 0.1;
-      glow += f * 0.45;
+      float f = exp(-pr * pr / 0.085) * uPointerOn;
+      vec2 radial = normalize(pv + vec2(0.0001));
+      vec2 tang = vec2(-radial.y, radial.x);
+      float wob = sin(uTime * 2.6 + aRand.x * 40.0);
+      acc += (radial * (0.6 + aRand.z * 0.9) + tang * (aRand.y - 0.5) * 1.8 + (aRand.xy - 0.5) * wob) * f * 0.2;
+      glow += f * 0.5;
     }
 
     gl_Position.xy += vec2(acc.x / uAspect, acc.y) * gl_Position.w;
@@ -196,8 +185,7 @@ export class MorphScene {
 
     const rnd = mulberry32(20260610);
     const n = opts.count;
-    const kinds = new Float32Array(n);
-    const a = brandShape(n, rnd, logo, kinds);
+    const a = brandShape(n, rnd, logo);
     const b = terminalShape(n, rnd);
     const c = cardShape(n, rnd);
     const d = networkShape(n, rnd);
@@ -217,7 +205,6 @@ export class MorphScene {
     this.geometry.setAttribute('positionD', new THREE.BufferAttribute(d, 3));
     this.geometry.setAttribute('aRand', new THREE.BufferAttribute(rand, 3));
     this.geometry.setAttribute('aSize', new THREE.BufferAttribute(size, 1));
-    this.geometry.setAttribute('aKind', new THREE.BufferAttribute(kinds, 1));
     this.geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 5);
 
     this.material = new THREE.ShaderMaterial({
@@ -384,10 +371,10 @@ export class MorphScene {
       else uB[i].set(0, 0, 99);
     }
     if (!this.bornAt) this.bornAt = now;
-    u['uIntro'].value = Math.min(1, (now - this.bornAt) / 2800);
+    u['uIntro'].value = Math.min(1, (now - this.bornAt) / 1300);
     // El campo del puntero aparece al mover el mouse y se apaga solo.
     const idle = now - this.pointerAt;
-    const target = this.opts.parallax && idle < 1800 ? 1 : 0;
+    const target = this.opts.parallax && idle < 1500 ? 1 : 0;
     this.pointerOn += (target - this.pointerOn) * 0.08;
     u['uPointerOn'].value = this.pointerOn;
     u['uPointer'].value.set(this.pointer.cx, -this.pointer.cy);

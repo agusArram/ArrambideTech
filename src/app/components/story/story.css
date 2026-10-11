@@ -388,6 +388,6 @@
   letter-spacing: 0.04em;
 }
 .panel--hero .lead {
-  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
   margin-top: 1.25rem;
 }

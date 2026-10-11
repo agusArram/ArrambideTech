@@ -31,15 +31,22 @@ La transformación no es un corte: las partículas viajan de una forma a otra (m
 - **Campo del puntero (solo escritorio):** al mover el mouse, los puntos cercanos se apartan y brillan levemente; se apaga solo al dejar de moverlo.
 - Aviso “Arrastrá para girar · tocá los puntos” que desaparece tras la primera interacción.
 
-## Intro (v6)
+## Intro y respuesta al toque (v7)
 
-El intro dejó de ser una forma estática. Ahora tiene tres capas de vida:
+Feedback sobre la v6: la animación nueva no gustó y era lenta. Cambios:
 
-1. **Ensamblado:** al cargar, los puntos llegan desde el espacio con un giro y se acomodan en el logo, cada uno a su ritmo (~2,8 s).
-2. **Órbitas que precesan:** los dos anillos y sus satélites giran lentamente alrededor del logo.
-3. **Pulso de crecimiento:** una banda de luz recorre el logo en diagonal, siguiendo la dirección de la flecha.
+1. **Aparición rápida:** los puntos llegan al logo en **1,3 s** (antes 2,8 s). Se quitó la precesión de las órbitas y el pulso diagonal: el logo queda como en la v5, denso y brillante.
+2. **Micro-explosión puntual:** radio chico (~13 % del alto), rompe solo la zona tocada y distorsiona levemente alrededor; dura ~1,5 s y se acumula hasta 3.
+3. **Campo del mouse (escritorio):** los puntos cercanos al cursor se apartan con una distorsión aleatoria (empuje radial + torsión + ruido por punto), más amplio que en la v6.
+4. **Hero:** se restituyó la frase completa: “Sistemas que le ahorran tiempo a tu empresa: controlan quién entra, cobran solos y responden con inteligencia artificial.”
 
-El hero queda en un titular, una frase y dos botones; el resto del contexto aparece al avanzar.
+## Casos desde el dolor del cliente (v7)
+
+La sección “Tres sistemas, tres entornos reales” se reemplazó por **“¿Qué te está costando tiempo hoy?”**: cuatro frases en primera persona (“No sé quién entra ni si debía entrar”, “Pierdo horas cobrando y conciliando pagos”, “Mi equipo busca datos en planillas todo el día”, “Tengo sistemas que no se hablan entre sí”). Al elegir una (hover, foco o toque) aparece dónde ya se resolvió, con una cifra grande y el enlace al caso. Parte del problema del visitante, no del catálogo del proveedor.
+
+## Resultados (v7)
+
+Cuatro cifras grandes con un título y una línea cada una. Sin bloques “antes/ahora”.
 
 ## Lenguaje (v5)
 
