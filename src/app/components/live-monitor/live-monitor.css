@@ -195,3 +195,10 @@
     animation: none;
   }
 }
+
+/* En celular esta vista no aplica (el panel se usa desde una computadora): se oculta. */
+@media (max-width: 760px) {
+  :host {
+    display: none;
+  }
+}
