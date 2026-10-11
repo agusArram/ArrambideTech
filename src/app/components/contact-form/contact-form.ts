@@ -46,7 +46,7 @@ export class ContactFormComponent {
   toggleDropdown(): void {
     if (this.enviando()) return;
     this.isDropdownOpen.update(v => !v);
-    if (this.isDropdownOpen()) {
+    if (this.isDropdownOpen() && this.esCelular()) {
       // Que se vea la lista completa sin tener que deslizar.
       setTimeout(() => this.root().querySelector('.cf__select')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60);
     }
@@ -59,15 +59,21 @@ export class ContactFormComponent {
     setTimeout(() => this.root().querySelector<HTMLTextAreaElement>('textarea')?.focus(), 60);
   }
 
+  /** Los acomodos de scroll al tocar un campo son solo para celular: en computadora se sienten raros. */
+  private esCelular(): boolean {
+    return window.matchMedia('(max-width: 800px)').matches;
+  }
+
   private root(): HTMLElement {
     return this.el.nativeElement as HTMLElement;
   }
 
-  /** Al tocar un campo, se lo acomoda en el centro de la pantalla (así el teclado no lo tapa). */
+  /** En celular, al tocar un campo se lo acomoda en el centro de la pantalla (así el teclado no lo tapa). */
   @HostListener('focusin', ['$event'])
   onFocusIn(event: FocusEvent): void {
     const t = event.target as HTMLElement;
     if (!(t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement) || t.type === 'hidden') return;
+    if (!this.esCelular()) return;
     setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'center' }), 280);
   }
 
