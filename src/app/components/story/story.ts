@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ProximityDirective } from '../../shared/proximity.directive';
 import type { MorphScene } from '../../immersive/morph-scene';
 
 interface Pillar {
@@ -39,7 +40,7 @@ const smooth = (v: number): number => {
 @Component({
   selector: 'app-story',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ProximityDirective],
   templateUrl: './story.html',
   styleUrl: './story.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { ProximityDirective } from '../../shared/proximity.directive';
 
 interface Result {
   /** Qué parte de la operación mejoró (en palabras de negocio). */
@@ -13,7 +14,7 @@ interface Result {
 @Component({
   selector: 'app-proof',
   standalone: true,
-  imports: [RouterLink, RevealDirective],
+  imports: [RouterLink, RevealDirective, ProximityDirective],
   templateUrl: './proof.html',
   styleUrl: './proof.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

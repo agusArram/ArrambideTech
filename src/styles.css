@@ -587,3 +587,15 @@ html,
 body {
   overscroll-behavior-x: none;
 }
+
+/* Efecto de cercanía en títulos (directiva appProximity): contorno finísimo, no cambia el ancho. */
+.prox-w {
+  display: inline-block;
+  white-space: nowrap;
+}
+.prox-c,
+.display__c {
+  -webkit-text-stroke-color: currentColor;
+  -webkit-text-stroke-width: calc(var(--p, 0) * 0.017em);
+  transition: -webkit-text-stroke-width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
