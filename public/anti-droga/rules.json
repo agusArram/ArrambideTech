@@ -1,11 +1,11 @@
 {
-  "version": 3,
+  "version": 4,
   "updated": "2026-11-21",
   "notes": "Reglas de Anti droga digital. Se publica en arrambidetech.com/anti-droga/rules.json. Subir 'version' en cada cambio: la app solo toma una versión mayor a la que tiene.",
 
   "app": {
-    "latestVersionCode": 2,
-    "latestVersionName": "1.0"
+    "latestVersionCode": 3,
+    "latestVersionName": "1.1"
   },
 
   "common": {
