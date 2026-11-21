@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "updated": "2026-11-21",
+  "notes": "Reglas de Anti droga digital. Se publica en arrambidetech.com/anti-droga/rules.json. Subir 'version' en cada cambio: la app solo toma una versión mayor a la que tiene.",
+
+  "common": {
+    "backLabels": ["Atrás", "Volver", "Navegar hacia arriba", "Back", "Navigate up", "Voltar", "Navegar para cima"]
+  },
+
+  "instagram": {
+    "package": "com.instagram.android",
+    "tabs": {
+      "feed": "feed_tab",
+      "search": "search_tab",
+      "reels": "clips_tab",
+      "direct": "direct_tab",
+      "profile": "profile_tab"
+    },
+    "reelsViewerIds": ["clips_viewer_view_pager"],
+    "feedListIds": ["android:id/list"],
+    "storiesTrayIds": ["reels_tray_container"],
+    "storiesTrayLabels": ["bandeja de reels", "reels tray", "bandeja de historias", "stories tray", "bandeja de stories"],
+    "messageLabels": ["Mensaje", "Mensajes", "Message", "Messages", "Direct", "Mensagem", "Mensagens"],
+    "peekMenuLabels": ["No me interesa", "Not interested", "Não tenho interesse"],
+    "peekMenuConfirmLabels": ["Ver perfil", "View profile", "Ver perfil"]
+  },
+
+  "youtube": {
+    "package": "com.google.android.youtube",
+    "shortsIds": ["reel_recycler", "reel_player_page_container", "reel_watch_player", "reel_progress_bar", "reel_time_bar", "reel_player_overlay_container", "reel_player_underlay"],
+    "shortsIdPrefixes": ["reel_"],
+    "shortsLabels": ["Shorts"],
+    "homeLabels": ["Principal", "Inicio", "Home", "Início"]
+  },
+
+  "tiktok": {
+    "packages": ["com.zhiliaoapp.musically", "com.ss.android.ugc.trill"],
+    "feedPagerIds": ["viewpager"],
+    "homeLabels": ["Inicio", "Home", "Início", "Para ti", "For You"],
+    "profileLabels": ["Perfil", "Profile", "Yo", "Me", "Eu"],
+    "inboxLabels": ["Bandeja de entrada", "Bandeja", "Mensajes", "Inbox", "Messages", "Caixa de entrada", "Mensagens"]
+  },
+
+  "guard": {
+    "packages": [
+      "com.android.settings",
+      "com.samsung.accessibility",
+      "com.google.android.packageinstaller",
+      "com.android.packageinstaller",
+      "com.samsung.android.packageinstaller",
+      "com.google.android.permissioncontroller",
+      "com.samsung.android.lool",
+      "com.miui.securitycenter",
+      "com.coloros.safecenter"
+    ],
+    "dangerWords": [
+      "Desinstalar", "Forzar detención", "Forzar cierre", "Desactivar", "Detener", "administración",
+      "Uninstall", "Force stop", "Deactivate", "Disable", "Turn off", "admin",
+      "Desativar", "Forçar parada", "Forçar interrupção", "Parar"
+    ]
+  }
+}
